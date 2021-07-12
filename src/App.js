@@ -21,9 +21,6 @@ function App() {
             {listButton()}
           </div>
         </div>
-        {/*<ul>*/}
-        {/*  {getList()}*/}
-        {/*</ul>*/}
       </header>
     </div>
   );

@@ -12,7 +12,7 @@ export function getToDos() {
       render()
     })
     .catch(() => {
-      console.log("error!!")
+      alert("error get list")
     })
 }
 
@@ -26,10 +26,7 @@ export function getList() {
 let stateButton = true;
 
 export function listButton() {
-  // debugger
-  console.log("workbitch")
   if (stateButton) {
-    // return (<div className={"form-popup"}>
     return (
       <button onClick={getToDos} className={'open-button'}> Get list </button>
     );

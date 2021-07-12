@@ -1,7 +1,8 @@
 import "./App.css";
 import {makeFire} from "./logoGoose/images.js"
 import {myImg} from "./logoGoose/images.js";
-import {getList, getToDos} from "./axios/toDoList.js";
+import {listButton} from "./axios/toDoList.js";
+import "./axios/windowList.css"
 
 function App() {
   return (
@@ -17,14 +18,12 @@ function App() {
             Activate Lasers
           </button>
           <div>
-          <button onClick={getToDos}>
-            Get todos
-          </button>
+            {listButton()}
           </div>
         </div>
-        <ul>
-          {getList()}
-        </ul>
+        {/*<ul>*/}
+        {/*  {getList()}*/}
+        {/*</ul>*/}
       </header>
     </div>
   );

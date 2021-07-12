@@ -23,7 +23,6 @@ export function makeFire() {
         key: Math.random()
     };
     buffer.push(blaster);
-    console.log(buffer);
     render();
     setTimeout(() => {
         buffer.pop()

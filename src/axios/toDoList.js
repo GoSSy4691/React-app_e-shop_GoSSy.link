@@ -20,14 +20,19 @@ export function getToDos() {
 export function getList() {
   let list = toDos.map(p => <li key={Math.random()} className={"list"}>{p.title}</li>);
   return <div className={"form-popup"}>
-      <img src={closeButton} className={"closeButton"} alt={"closeButtonInToDoList"}/>
+    <img
+      onClick={() => closeList()}
+      src={closeButton}
+      className={"closeButton"}
+      alt={"closeButtonInToDoList"}
+    />
     <form className={"form-container"}>{list}</form>
   </div>
 }
 
 let stateButton = true;
 
-export function listButton() {
+export function showList() {
   if (stateButton) {
     return (
       <button onClick={getToDos} className={"open-button"}> Get list </button>
@@ -35,4 +40,10 @@ export function listButton() {
   } else {
     return (getList());
   }
+}
+
+function closeList() {
+  stateButton = true
+  showList()
+  render()
 }

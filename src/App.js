@@ -1,7 +1,7 @@
 import "./App.css";
 import {makeFire} from "./logoGoose/images.js"
 import {myImg} from "./logoGoose/images.js";
-import {listButton} from "./axios/toDoList.js";
+import {showList} from "./axios/toDoList.js";
 import "./axios/windowList.css"
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
             Activate Lasers
           </button>
           <div>
-            {listButton()}
+            {showList()}
           </div>
         </div>
       </header>

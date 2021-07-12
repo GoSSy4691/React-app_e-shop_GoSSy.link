@@ -4,12 +4,15 @@ import "./windowList.css"
 import closeButton from "../files/closeButton.png"
 
 let toDos = [];
+let stateButton = "close";
 
 export function getToDos() {
-  stateButton = false
+  stateButton = "wait"
+  render()
   axios.get("https://jsonplaceholder.typicode.com/todos/")
     .then((res) => {
       toDos = res.data;
+      stateButton = "open"
       render()
     })
     .catch(() => {
@@ -30,20 +33,23 @@ export function getList() {
   </div>
 }
 
-let stateButton = true;
-
 export function showList() {
-  if (stateButton) {
+  if (stateButton === "close") {
     return (
       <button onClick={getToDos} className={"open-button"}> Get list </button>
     );
-  } else {
+  }
+  if (stateButton === "wait") {
+    return (
+      <button className={"open-button"}> Wait... </button>
+    )
+  }
+  if (stateButton === "open") {
     return (getList());
   }
 }
 
 function closeList() {
-  stateButton = true
-  showList()
+  stateButton = "close"
   render()
 }

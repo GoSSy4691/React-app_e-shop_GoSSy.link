@@ -13,17 +13,55 @@
 
 .form-popup {
     display: block;
-    overflow: scroll;
+    overflow-y: scroll;
     position: fixed;
     height: 50%;
     bottom: 0;
     right: 15px;
-    border: 3px solid #f1f1f1;
     z-index: 9;
+    border: black;
+    /*overflow: hidden;*/
+}
+
+/* width */
+.form-popup::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+.form-popup::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+.form-popup::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+.form-popup::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
 
 .form-container {
     max-width: 300px;
     padding: 10px;
     background-color: black;
+}
+
+.closeButton {
+    height: 50px;
+    width: 50px;
+    position: fixed;
+    bottom: 490px;
+    right: 10px;
+    border: brown;
+    color: aliceblue;
+}
+
+.list {
+    list-style-type: disc;
+    font-family: "Century Gothic", sans-serif;
+    font-size: 20px;
+    text-align: left;
 }

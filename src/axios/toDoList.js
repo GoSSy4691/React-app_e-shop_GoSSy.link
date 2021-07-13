@@ -6,7 +6,7 @@ import closeButton from "../files/closeButton.png"
 let toDos = [];
 let stateButton = "close";
 
-export function getToDos() {
+function getToDos() {
   stateButton = "wait"
   render()
   axios.get("https://jsonplaceholder.typicode.com/todos/")
@@ -20,7 +20,7 @@ export function getToDos() {
     })
 }
 
-export function getList() {
+function getList() {
   let list = toDos.map(p => <li key={Math.random()} className={"list"}>{p.title}</li>);
   return <div className={"form-popup"}>
     <img
@@ -34,7 +34,7 @@ export function getList() {
   </div>
 }
 
-export function showList() {
+function showList() {
   if (stateButton === "close") {
     return (
       <button onClick={getToDos} className={"open-button"}> Get list </button>
@@ -54,3 +54,5 @@ function closeList() {
   stateButton = "close"
   render()
 }
+
+export default showList

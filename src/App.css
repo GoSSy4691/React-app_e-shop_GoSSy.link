@@ -2,33 +2,6 @@
   text-align: center;
 }
 
-.parent {
-  position: relative;
-}
-
-.image1 {
-  position: fixed;
-  top: 5%;
-  left: 35%;
-  height: 40vmin;
-}
-
-.image2 {
-  position: fixed;
-  top: 10%;
-  height: 2vmin;
-  animation: fire 0.8s 1 forwards;
-}
-
-@keyframes fire {
-  0% {
-    left:57%;
-  }
-  100% {
-    left: 100%;
-  }
-}
-
 /*@media (prefers-reduced-motion: no-preference) {*/
 /*  .parent {*/
 /*    animation: App-logo-spin infinite 20s linear;*/
@@ -62,4 +35,12 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.Top-bar {
+  width: 100%;
+  text-align: left;
+  background-color: #1b1d23;
+  min-height: 7vh;
+  align-items: flex-start
 }

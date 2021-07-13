@@ -1,0 +1,19 @@
+.mainGoose-view {
+    height: 100px;
+}
+
+.lasers-view {
+    position: fixed;
+    top: 1%;
+    height: 2vmin;
+    animation: fire-laser 0.8s 1 forwards;
+}
+
+@keyframes fire-laser {
+    0% {
+        left: 8%;
+    }
+    100% {
+        left: 100%;
+    }
+}

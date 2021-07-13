@@ -24,10 +24,11 @@ export function getList() {
   let list = toDos.map(p => <li key={Math.random()} className={"list"}>{p.title}</li>);
   return <div className={"form-popup"}>
     <img
-      onClick={() => closeList()}
+      onClick={closeList}
       src={closeButton}
       className={"closeButton"}
       alt={"closeButtonInToDoList"}
+      title={"Close"}
     />
     <form className={"form-container"}>{list}</form>
   </div>

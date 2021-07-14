@@ -19,7 +19,9 @@
     bottom: 0;
     right: 15px;
     z-index: 9;
-    border: black;
+    border-top: solid #000000;
+    border-left: solid #000000;
+    border-radius: 10px 0 0 0;
     /*overflow: hidden;*/
 }
 
@@ -30,7 +32,7 @@
 
 /* Track */
 .form-popup::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: #4c4c4c;
 }
 
 /* Handle */
@@ -46,7 +48,7 @@
 .form-container {
     max-width: 300px;
     padding: 10px;
-    background-color: black;
+    background-color: #1c1c1c;
 }
 
 .closeButton {

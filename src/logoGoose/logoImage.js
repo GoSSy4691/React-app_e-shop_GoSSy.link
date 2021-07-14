@@ -5,7 +5,7 @@ import "../logoGoose/gooses.css"
 
 let buffer = []
 
-export function logoImg() {
+function logoImg() {
   if (buffer.length > 0) {
     return (
       <div>
@@ -30,3 +30,5 @@ function makeFire() {
     buffer.pop()
   }, 1000);
 }
+
+export default logoImg

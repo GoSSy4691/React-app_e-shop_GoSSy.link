@@ -4,14 +4,14 @@
 
 .lasers-view {
     position: fixed;
-    top: 1%;
+    top: 10px;
     height: 2vmin;
     animation: fire-laser 0.8s 1 forwards;
 }
 
 @keyframes fire-laser {
     0% {
-        left: 8%;
+        left: 110px;
     }
     100% {
         left: 100%;

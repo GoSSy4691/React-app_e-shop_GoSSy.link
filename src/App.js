@@ -1,6 +1,6 @@
 import "./App.css";
 // import {makeFire} from "./logoGoose/logoImage.js"
-import {logoImg} from "./logoGoose/logoImage.js";
+import logoImg from "./logoGoose/logoImage.js";
 import showList from "./axios/toDoList.js";
 
 function App() {
@@ -11,11 +11,7 @@ function App() {
       </div>
       <header className="App-header">
         <div className={"App-header2"}>
-          It goose TIME
-          &nbsp;
-          {/*<button onClick={makeFire} >*/}
-          {/*  Activate Lasers*/}
-          {/*</button>*/}
+          It's goose TIME
           <div>
             {showList()}
           </div>

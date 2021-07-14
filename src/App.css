@@ -38,9 +38,10 @@
 }
 
 .Top-bar {
+  display: flex;
   width: 100%;
   text-align: left;
   background-color: #1b1d23;
-  min-height: 7vh;
+  max-height: 100px;
   align-items: flex-start
 }

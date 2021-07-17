@@ -1,0 +1,20 @@
+.nav {
+    display: flex;
+    list-style-type: none;
+    text-align: center;
+}
+
+.bar li {
+    display: inline-block;
+    font-size: 20px;
+    margin: 40px;
+    color: white; /* doesn't work*/
+}
+
+.text-inactive {
+    color: white;
+}
+
+.text-active {
+    color: black;
+}

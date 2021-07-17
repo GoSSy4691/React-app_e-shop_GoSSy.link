@@ -1,16 +1,15 @@
 import LogoImg from './logoGoose/logoImage';
 import {NavLink} from 'react-router-dom';
+import './header.css';
 
 function Header() {
   return (
-    <div>
-      <div>
-        <LogoImg/>
-      </div>
-      <div>
-        <NavLink to='/'>Home</NavLink>
-        <NavLink to='/welcome'>Welcome</NavLink>
-        <NavLink to='/test_page'>Test Page</NavLink>
+    <div className='nav'>
+      <li><LogoImg/></li>
+      <div className='bar'>
+      <li><NavLink className='text-inactive' activeClassName='text-active' to='/home'>Home</NavLink></li>
+      <li><NavLink className='text-inactive' activeClassName='text-active' to='/welcome'>Welcome</NavLink></li>
+      <li><NavLink className='text-inactive' activeClassName='text-active' to='/test_page'>Test Page</NavLink></li>
       </div>
     </div>
   );

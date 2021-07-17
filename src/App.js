@@ -1,9 +1,10 @@
 import './App.css';
 import ShowList from './axios/toDoList';
-import Welcome from './mainPage/welcome';
-import TestPage from './mainPage/testPage';
 import {BrowserRouter, Route} from 'react-router-dom';
 import Header from './mainPage/header/header';
+import Home from './mainPage/home';
+import Welcome from './mainPage/welcome';
+import TestPage from './mainPage/testPage';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Header/>
       </div>
       <header className='App-header'>
+        <Route path='/home' component={Home}/>
         <Route path='/welcome' component={Welcome}/>
         <Route path='/test_page' component={TestPage}/>
         <div>

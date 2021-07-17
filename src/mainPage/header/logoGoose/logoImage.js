@@ -1,9 +1,9 @@
-import rotateIt from '../files/logo-goose.png';
-import laser from '../files/laser.png';
-import render from '../render.js';
-import '../logoGoose/gooses.css'
+import rotateIt from '../../../files/logo-goose.png';
+import laser from '../../../files/laser.png';
+import render from '../../../render.js';
+import './gooses.css';
 
-let buffer = []
+let buffer = [];
 
 function makeFire() {
   let blaster = {
@@ -13,9 +13,9 @@ function makeFire() {
     key: Math.random()
   };
   buffer.push(blaster);
-  render()
+  render();
   setTimeout(() => {
-    buffer.pop()
+    buffer.pop();
   }, 1000);
 }
 
@@ -26,9 +26,14 @@ function LogoImg() {
         <img src={rotateIt} className={'mainGoose-view'} onClick={makeFire} alt={'logo'}/>
         {buffer.map(p => <img src={p.src} className={p.className} alt={p.alt} key={p.key}/>)}
       </div>
-    )
+    );
   }
-  return <img src={rotateIt} className={'mainGoose-view'} onClick={makeFire} alt={'logo'}/>
+  return (
+    <div>
+      <img src={rotateIt} className={'mainGoose-view'} onClick={makeFire} alt={'logo'}/>
+    </div>
+  );
+
 }
 
-export default LogoImg
+export default LogoImg;

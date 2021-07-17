@@ -1,22 +1,26 @@
 import './App.css';
-import LogoImg from './logoGoose/logoImage.js';
 import ShowList from './axios/toDoList';
+import Welcome from './mainPage/welcome';
+import TestPage from './mainPage/testPage';
+import {BrowserRouter, Route} from 'react-router-dom';
+import Header from './mainPage/header/header';
 
 function App() {
   return (
+    <BrowserRouter>
     <div className='App'>
       <div className='Top-bar'>
-        <LogoImg/>
+        <Header/>
       </div>
       <header className='App-header'>
-        <div className={'App-header2'}>
-          It's goose TIME
-          <div>
-            <ShowList/>
-          </div>
+        <Route path='/welcome' component={Welcome}/>
+        <Route path='/test_page' component={TestPage}/>
+        <div>
+          <ShowList/>
         </div>
       </header>
     </div>
+    </BrowserRouter>
   );
 }
 

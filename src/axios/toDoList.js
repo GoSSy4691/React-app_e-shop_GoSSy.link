@@ -34,7 +34,12 @@ function getList() {
   </div>
 }
 
-function showList() {
+function closeList() {
+  stateButton = "close"
+  render()
+}
+
+function ShowList() {
   if (stateButton === "close") {
     return (
       <button onClick={getToDos} className={"open-button"}> Get list </button>
@@ -50,9 +55,4 @@ function showList() {
   }
 }
 
-function closeList() {
-  stateButton = "close"
-  render()
-}
-
-export default showList
+export default ShowList

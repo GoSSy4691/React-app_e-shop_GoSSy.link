@@ -5,18 +5,6 @@ import "../logoGoose/gooses.css"
 
 let buffer = []
 
-function logoImg() {
-  if (buffer.length > 0) {
-    return (
-      <div>
-        <img src={rotateIt} className={"mainGoose-view"} onClick={makeFire} alt={"logo"}/>
-        {buffer.map(p => <img src={p.src} className={p.className} alt={p.alt} key={p.key}/>)}
-      </div>
-    )
-  }
-  return <img src={rotateIt} className={"mainGoose-view"} onClick={makeFire} alt={"logo"}/>
-}
-
 function makeFire() {
   let blaster = {
     src: laser,
@@ -31,4 +19,16 @@ function makeFire() {
   }, 1000);
 }
 
-export default logoImg
+function LogoImg() {
+  if (buffer.length > 0) {
+    return (
+      <div>
+        <img src={rotateIt} className={"mainGoose-view"} onClick={makeFire} alt={"logo"}/>
+        {buffer.map(p => <img src={p.src} className={p.className} alt={p.alt} key={p.key}/>)}
+      </div>
+    )
+  }
+  return <img src={rotateIt} className={"mainGoose-view"} onClick={makeFire} alt={"logo"}/>
+}
+
+export default LogoImg

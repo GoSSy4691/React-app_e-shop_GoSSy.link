@@ -4,7 +4,7 @@ import {Route} from 'react-router-dom';
 import Header from './mainPage/header/header';
 import Home from './mainPage/home';
 import Welcome from './mainPage/welcome';
-import TestPage from './mainPage/testPage';
+import Menu from './mainPage/menu/menu';
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
       <header className='App-header'>
         <Route exact path='/' component={Home}/>
         <Route exact path='/welcome' component={Welcome}/>
-        <Route exact path='/test_page' component={TestPage}/>
+        <Route exact path='/menu' component={Menu}/>
         <div>
           <ShowList/>
         </div>

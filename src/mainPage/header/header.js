@@ -7,9 +7,9 @@ function Header() {
     <div className='nav'>
       <li><LogoImg/></li>
       <div className='bar'>
-      <li><NavLink className='text-inactive' activeClassName='text-active' to='/'>Home</NavLink></li>
-      <li><NavLink className='text-inactive' activeClassName='text-active' to='/welcome'>Welcome</NavLink></li>
-      <li><NavLink className='text-inactive' activeClassName='text-active' to='/test_page'>Test Page</NavLink></li>
+      <li><NavLink className='text-inactive' exact activeClassName='text-active' to='/'>Home</NavLink></li>
+      <li><NavLink className='text-inactive' exact activeClassName='text-active' to='/welcome'>Welcome</NavLink></li>
+      <li><NavLink className='text-inactive' exact activeClassName='text-active' to='/menu'>Menu</NavLink></li>
       </div>
     </div>
   );

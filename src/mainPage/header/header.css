@@ -13,6 +13,7 @@
 
 .text-inactive {
     color: white;
+    text-decoration: none;
 }
 
 .text-active {

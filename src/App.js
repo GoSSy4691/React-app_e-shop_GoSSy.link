@@ -13,9 +13,9 @@ function App() {
         <Header/>
       </div>
       <header className='App-header'>
-        <Route path='/home' component={Home}/>
-        <Route path='/welcome' component={Welcome}/>
-        <Route path='/test_page' component={TestPage}/>
+        <Route exact path='/' component={Home}/>
+        <Route exact path='/welcome' component={Welcome}/>
+        <Route exact path='/test_page' component={TestPage}/>
         <div>
           <ShowList/>
         </div>

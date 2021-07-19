@@ -1,15 +1,15 @@
-.mainGoose-view {
+.mainGoose_view {
     height: 100px;
 }
 
-.lasers-view {
+.lasers_view {
     position: fixed;
     top: 10px;
     height: 2vmin;
-    animation: fire-laser 0.8s 1 forwards;
+    animation: fire_laser 0.8s 1 forwards;
 }
 
-@keyframes fire-laser {
+@keyframes fire_laser {
     0% {
         left: 110px;
     }

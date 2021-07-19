@@ -1,7 +1,7 @@
 import axios from 'axios';
-import render from '../render.js';
-import './windowList.css'
-import closeButton from '../files/closeButton.png'
+import render from '../../../render.js';
+import s from './windowList.module.css'
+import closeButton from '../../../files/img/closeButton.png'
 
 let toDos = [];
 let stateButton = 'close';
@@ -21,16 +21,16 @@ function getToDos() {
 }
 
 function getList() {
-  let list = toDos.map(p => <li key={Math.random()} className={'list'}>{p.title}</li>);
-  return <div className={'form-popup'}>
+  let list = toDos.map(p => <li key={Math.random()} className={s.list}>{p.title}</li>);
+  return <div className={s.formPopup}>
     <img
       onClick={closeList}
       src={closeButton}
-      className={'closeButton'}
+      className={s.closeButton}
       alt={'closeButtonInToDoList'}
       title={'Close'}
     />
-    <form className={'form-container'}>{list}</form>
+    <form className={s.formContainer}>{list}</form>
   </div>
 }
 
@@ -42,12 +42,12 @@ function closeList() {
 function ShowList() {
   if (stateButton === 'close') {
     return (
-      <button onClick={getToDos} className={'open-button'}> Get list </button>
+      <button onClick={getToDos} className={s.openButton}> Get list </button>
     );
   }
   if (stateButton === 'wait') {
     return (
-      <button className={'open-button'}> Wait... </button>
+      <button className={s.openButton}> Wait... </button>
     )
   }
   if (stateButton === 'open') {

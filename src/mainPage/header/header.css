@@ -11,11 +11,11 @@
     color: white; /* doesn't work*/
 }
 
-.text-inactive {
+.textInactive {
     color: white;
     text-decoration: none;
 }
 
-.text-active {
+.textActive {
     color: black;
 }

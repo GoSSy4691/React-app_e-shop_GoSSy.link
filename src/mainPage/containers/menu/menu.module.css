@@ -1,0 +1,52 @@
+.showRoom {
+    padding-bottom: 160px;
+    color: #adb4b0;
+}
+
+.foodElement {
+    vertical-align: top;
+    display: inline-block;
+    border: solid black;
+    font-size: 20px;
+    margin: 10px;
+    width: 200px;
+    height: 200px;
+    text-align: center;
+}
+
+.item {
+    display: grid;
+    height: 100%;
+    grid-template-areas:
+            "A B"
+            "C C";
+}
+
+.foodImg {
+    grid-area: A;
+    height: 100px;
+    border-bottom: black solid;
+    border-right: black solid;
+}
+
+.namePrice {
+    grid-area: B;
+    height: 100px;
+    text-align: left;
+    list-style-type: none;
+    inline-size: 90px;
+    overflow-wrap: break-word;
+    -webkit-hyphens: manual;
+    -ms-hyphens: manual;
+    hyphens: manual;
+}
+
+.description {
+    grid-area: C;
+    list-style-type: none;
+    font-size: 17px;
+    width: 190px;
+    height: 90px;
+    overflow: hidden;
+    position: relative;
+}

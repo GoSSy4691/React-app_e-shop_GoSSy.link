@@ -1,4 +1,4 @@
-.open-button {
+.openButton {
     background-color: #555;
     color: white;
     padding: 16px 20px;
@@ -11,7 +11,7 @@
     width: 280px;
 }
 
-.form-popup {
+.formPopup {
     display: block;
     overflow-y: scroll;
     position: fixed;
@@ -26,29 +26,29 @@
 }
 
 /* width */
-.form-popup::-webkit-scrollbar {
+.formPopup::-webkit-scrollbar {
     width: 10px;
 }
 
 /* Track */
-.form-popup::-webkit-scrollbar-track {
+.formPopup::-webkit-scrollbar-track {
     background: #4c4c4c;
 }
 
 /* Handle */
-.form-popup::-webkit-scrollbar-thumb {
+.formPopup::-webkit-scrollbar-thumb {
     background: #888;
 }
 
 /* Handle on hover */
-.form-popup::-webkit-scrollbar-thumb:hover {
+.formPopup::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
 
-.form-container {
+.formContainer {
     max-width: 300px;
     padding: 10px;
-    background-color: #1c1c1c;
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 .closeButton {

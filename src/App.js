@@ -6,16 +6,16 @@ import Home from './mainPage/containers/home/home';
 import Welcome from './mainPage/containers/welcome/welcome';
 import Menu from './mainPage/containers/menu/menu';
 
-function App() {
+function App(props) {
   return (
     <div className='app'>
       <div className='headerBar'>
         <Header/>
       </div>
       <header className='appContainer'>
-        <Route exact path='/' component={Home}/>
-        <Route exact path='/welcome' component={Welcome}/>
-        <Route exact path='/menu' component={Menu}/>
+        <Route exact path='/' render={() => <Home/>}/>
+        <Route exact path='/welcome' render={() => <Welcome/>}/>
+        <Route exact path='/menu' render={() => <Menu menuItems={props.menuItems}/>}/>
         <div>
           <ShowList/>
         </div>

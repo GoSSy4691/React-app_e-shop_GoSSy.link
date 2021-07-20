@@ -22,7 +22,6 @@
     border-top: solid #000000;
     border-left: solid #000000;
     border-radius: 10px 0 0 0;
-    /*overflow: hidden;*/
 }
 
 /* width */
@@ -48,7 +47,7 @@
 .formContainer {
     max-width: 300px;
     padding: 10px;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: #4d4f4e;
 }
 
 .closeButton {

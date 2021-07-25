@@ -7,17 +7,22 @@ let toDos = [];
 let stateButton = 'close';
 
 function getToDos() {
-  stateButton = 'wait'
-  render()
-  axios.get('https://jsonplaceholder.typicode.com/todos/')
-    .then((res) => {
-      toDos = res.data;
-      stateButton = 'open'
-      render()
-    })
-    .catch(() => {
-      alert('error get list')
-    })
+  if (toDos.length > 0) {
+    stateButton = 'open';
+    render()
+  } else {
+    stateButton = 'wait';
+    render();
+    axios.get('https://jsonplaceholder.typicode.com/todos/')
+      .then((res) => {
+        toDos = res.data;
+        stateButton = 'open';
+        render();
+      })
+      .catch(() => {
+        alert('error get list');
+      });
+  }
 }
 
 function getList() {
@@ -41,9 +46,10 @@ function closeList() {
 
 function ShowList() {
   if (stateButton === 'close') {
-    return (
-      <button onClick={getToDos} className={s.openButton}> Get list </button>
-    );
+    if (toDos.length > 0) {
+      return (<button onClick={getToDos} className={s.openButton}> Get list </button>);
+    } else
+      return (<button onClick={getToDos} className={s.openButton}> Get list </button>);
   }
   if (stateButton === 'wait') {
     return (

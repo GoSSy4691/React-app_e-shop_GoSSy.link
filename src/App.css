@@ -1,6 +1,11 @@
 .app {
   text-align: center;
   background-color: #282c34;
+  cursor: url("https://cdn.custom-cursor.com/db/4130/32/arrow2402.png"), auto;
+}
+
+a{
+  cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), pointer;
 }
 
 .headerBar {

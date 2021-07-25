@@ -3,7 +3,7 @@
     color: white;
     padding: 16px 20px;
     border: none;
-    cursor: pointer;
+    cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
     opacity: 0.8;
     position: fixed;
     bottom: 23px;
@@ -58,6 +58,7 @@
     right: 10px;
     border: brown;
     color: aliceblue;
+    cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
 }
 
 .list {

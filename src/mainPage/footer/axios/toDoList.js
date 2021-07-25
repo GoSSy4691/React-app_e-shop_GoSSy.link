@@ -45,20 +45,9 @@ function closeList() {
 }
 
 function ShowList() {
-  if (stateButton === 'close') {
-    if (toDos.length > 0) {
-      return (<button onClick={getToDos} className={s.openButton}> Get list </button>);
-    } else
-      return (<button onClick={getToDos} className={s.openButton}> Get list </button>);
-  }
-  if (stateButton === 'wait') {
-    return (
-      <button className={s.openButton}> Wait... </button>
-    )
-  }
-  if (stateButton === 'open') {
-    return (getList());
-  }
+  if (stateButton === 'close') {return (<button onClick={getToDos} className={s.openButton}> Get list </button>)}
+  if (stateButton === 'wait') {return (<button className={s.openButton}> Wait... </button>)}
+  if (stateButton === 'open') {return (getList())}
 }
 
 export default ShowList

@@ -10,7 +10,7 @@
     font-size: 20px;
     margin: 10px;
     width: 200px;
-    height: 200px;
+    height: 195px;
     text-align: center;
 }
 
@@ -21,6 +21,21 @@
             "A B"
             "C C";
 }
+
+.item:hover {
+    margin-top: -3.5px;
+    margin-left: -2.5px;
+    border: solid black;
+    width: 100%;
+    backface-visibility: hidden;
+    background-color: #4d4f4e;
+    height: 416px;
+}
+
+.item:hover .description {
+    overflow: hidden;
+}
+
 
 .foodImg {
     grid-area: A;
@@ -46,7 +61,5 @@
     list-style-type: none;
     font-size: 17px;
     width: 190px;
-    height: 90px;
     overflow: hidden;
-    position: relative;
 }

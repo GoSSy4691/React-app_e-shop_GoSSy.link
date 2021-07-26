@@ -18,8 +18,11 @@
     display: grid;
     height: 100%;
     grid-template-areas:
+            "D D"
             "A B"
+            "A G"
             "C C";
+    align-content: start;
 }
 
 .item:hover {
@@ -40,20 +43,47 @@
 .foodImg {
     grid-area: A;
     height: 100px;
+    border-top: black solid;
     border-bottom: black solid;
     border-right: black solid;
 }
 
-.namePrice {
-    grid-area: B;
-    height: 100px;
-    text-align: left;
+.name {
+    grid-area: D;
+    height: 20px;
+    width: 200px;
     list-style-type: none;
-    inline-size: 90px;
-    overflow-wrap: break-word;
-    -webkit-hyphens: manual;
-    -ms-hyphens: manual;
-    hyphens: manual;
+    padding-bottom: 6px;
+    margin-top: -5px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.price {
+    grid-area: B;
+    list-style-type: none;
+    width: 75px;
+    height: 80px;
+    /*padding-left: 10px;*/
+    /*padding-right: 10px;*/
+    /*background: gold;*/
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.buyButton {
+    grid-area: G;
+    height: 25px;
+    width: 90px;
+    align-self: end;
+    border: solid #adb4b0;
+    border-radius: 20px;
+    background: #4d4f4e;
+    font-family: "Comic Sans MS", sans-serif;
+    font-size: 21px;
+    line-height: 11px;
+    cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
 }
 
 .description {

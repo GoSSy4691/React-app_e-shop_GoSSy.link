@@ -15,7 +15,11 @@ function App(props) {
       <header className='appContainer'>
         <Route exact path='/' render={() => <Home/>}/>
         <Route exact path='/welcome' render={() => <Welcome/>}/>
-        <Route exact path='/menu' render={() => <Menu menuItems={props.menuItems}/>}/>
+        <Route exact path='/menu' render={() => <Menu
+          menuItems={props.menuItems}
+          shopCart={props.shopCart}
+          addFood={props.addFood}
+        />}/>
         <div>
           <ShowList/>
         </div>

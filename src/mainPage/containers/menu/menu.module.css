@@ -1,5 +1,5 @@
 .showRoom {
-    padding-bottom: 360px;
+    padding-bottom: 160px;
     color: #adb4b0;
 }
 
@@ -33,6 +33,8 @@
     backface-visibility: hidden;
     background-color: #4d4f4e;
     height: 416px;
+    position: relative;
+    z-index: 1;
 }
 
 .item:hover .description {
@@ -64,9 +66,6 @@
     list-style-type: none;
     width: 75px;
     height: 80px;
-    /*padding-left: 10px;*/
-    /*padding-right: 10px;*/
-    /*background: gold;*/
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
@@ -146,7 +145,6 @@
 .shoppingCartTitle {
     font-family: "Comic Sans MS", sans-serif;
     font-size: 20px;
-    /*padding-bottom: 10px;*/
     border-bottom: solid black;
 }
 
@@ -169,6 +167,23 @@
     top: 50%;
     left: 50%;
     transform: translate(450%, -550%);
-    z-index: 1;
+    z-index: 2;
     cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
+}
+
+.footerImg {
+    height: 100px;
+    margin-top: 50px;
+    position: relative;
+    bottom: 10px;
+    animation: run 10s infinite;
+}
+
+@keyframes run {
+    0% {
+        left: -60%;
+    }
+    100% {
+        left: 60%;
+    }
 }

@@ -2,6 +2,7 @@ import s from './menu.module.css';
 import emptyImg from '../../../files/img/noItem.png';
 import shopCartIco from '../../../files/img/shopCart.png';
 import closeButton from '../../../files/img/closeButton.png';
+import runForestRun from '../../../files/img/runForestRun.png';
 import render from '../../../render';
 
 let shoppingCart = s.hideCart;
@@ -43,8 +44,8 @@ function Cart(props) {
       title={'Close'}
     />
     <div className={shoppingCart}>
-      <div className={s.shoppingCartTitle}>Your chose:</div>
-      {props.shopCart.map((currElement, index) => <li key={Math.random()}>{index+1 + ") " + currElement}</li>)}
+      <div className={s.shoppingCartTitle}>Your choose:</div>
+      {props.shopCart.map((currElement, index) => <li key={Math.random()}>{index + 1 + ') ' + currElement}</li>)}
     </div>
   </div>;
 }
@@ -54,22 +55,25 @@ function Menu(props) {
     <div className={s.showRoom}>
       <CartElement shopCart={props.shopCart}/>
       <Cart shopCart={props.shopCart}/>
-      {props.menuItems[0].items.menu.map(p =>
-        <div className={s.foodElement} key={p.id}>
-          <div className={s.item}>
-            <img src={emptyImg} className={s.foodImg} alt={'logo'}/>
-            <div className={s.name}>
-              <li>{p.name}</li>
+      <div>
+        {props.menuItems[0].items.menu.map(p =>
+          <div className={s.foodElement} key={p.id}>
+            <div className={s.item}>
+              <img src={emptyImg} className={s.foodImg} alt={'logo'}/>
+              <div className={s.name}>
+                <li>{p.name}</li>
+              </div>
+              <div className={s.price}>
+                <li>{p.cost + ' ₽'}</li>
+              </div>
+              <button className={s.buyButton} onClick={() => addToCart(p.name, props.addFood)}>add</button>
+              <div className={s.description}>
+                <li>{p.description}</li>
+              </div>
             </div>
-            <div className={s.price}>
-              <li>{p.cost + ' ₽'}</li>
-            </div>
-            <button className={s.buyButton} onClick={() => addToCart(p.name, props.addFood)}>add</button>
-            <div className={s.description}>
-              <li>{p.description}</li>
-            </div>
-          </div>
-        </div>)}
+          </div>)}
+      </div>
+      <img className={s.footerImg} src={runForestRun} key={Math.random()} alt={'footer'}/>
     </div>);
 }
 

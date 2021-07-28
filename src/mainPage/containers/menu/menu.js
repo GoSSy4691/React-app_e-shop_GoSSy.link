@@ -44,7 +44,7 @@ function Cart(props) {
     />
     <div className={shoppingCart}>
       <div className={s.shoppingCartTitle}>Your chose:</div>
-      {props.shopCart.map(p => <li key={Math.random()}>{p}</li>)}
+      {props.shopCart.map((currElement, index) => <li key={Math.random()}>{index+1 + ") " + currElement}</li>)}
     </div>
   </div>;
 }

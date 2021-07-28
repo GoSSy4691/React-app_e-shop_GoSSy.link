@@ -24,26 +24,6 @@
     border-radius: 10px 0 0 0;
 }
 
-/* width */
-.formPopup::-webkit-scrollbar {
-    width: 10px;
-}
-
-/* Track */
-.formPopup::-webkit-scrollbar-track {
-    background: #4c4c4c;
-}
-
-/* Handle */
-.formPopup::-webkit-scrollbar-thumb {
-    background: #888;
-}
-
-/* Handle on hover */
-.formPopup::-webkit-scrollbar-thumb:hover {
-    background: #555;
-}
-
 .formContainer {
     max-width: 300px;
     padding: 10px;
@@ -56,8 +36,6 @@
     position: fixed;
     bottom: 50%;
     right: 10px;
-    border: brown;
-    color: aliceblue;
     cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
 }
 

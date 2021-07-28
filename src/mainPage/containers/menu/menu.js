@@ -35,14 +35,15 @@ function hideCartMenu() {
 
 function Cart(props) {
   return <div className={backGround}>
+    <img
+      onClick={hideCartMenu}
+      src={closeButton}
+      className={s.closeButton}
+      alt={'closeButtonInToDoList'}
+      title={'Close'}
+    />
     <div className={shoppingCart}>
-      <img
-        onClick={hideCartMenu}
-        src={closeButton}
-        className={s.closeButton}
-        alt={'closeButtonInToDoList'}
-        title={'Close'}
-      />
+      <div className={s.shoppingCartTitle}>Your chose:</div>
       {props.shopCart.map(p => <li key={Math.random()}>{p}</li>)}
     </div>
   </div>;

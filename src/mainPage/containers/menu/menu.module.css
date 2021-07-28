@@ -1,5 +1,5 @@
 .showRoom {
-    padding-bottom: 160px;
+    padding-bottom: 360px;
     color: #adb4b0;
 }
 
@@ -165,9 +165,10 @@
 .closeButton {
     height: 50px;
     width: 50px;
-    position: absolute;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(450%, -550%);
     z-index: 1;
-    top: 14%;
-    right: 19%;
     cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
 }

@@ -1,60 +1,17 @@
 import s from './menu.module.css';
 import emptyImg from '../../../files/img/noItem.png';
-import shopCartIco from '../../../files/img/shopCart.png';
-import closeButton from '../../../files/img/closeButton.png';
 import runForestRun from '../../../files/img/runForestRun.png';
-import render from '../../../render';
-
-let shoppingCart = s.hideCart;
-let backGround = s.darkenBackgroundHide;
-
-function CartElement(props) {
-  return (
-    <div className={s.topBar}>
-      <img src={shopCartIco} className={s.shopIco} alt={'CartImage'} onClick={showCartMenu}/>
-      <div className={s.shopIcoCount}>{props.shopCart.length}</div>
-    </div>
-  );
-}
-
-function addToCart(name, addFood) {
-  addFood(name);
-  render();
-}
-
-function showCartMenu() {
-  shoppingCart = s.showCart;
-  backGround = s.darkenBackgroundShow;
-  render();
-}
-
-function hideCartMenu() {
-  shoppingCart = s.hideCart;
-  backGround = s.darkenBackgroundHide;
-  render()
-}
-
-function Cart(props) {
-  return <div className={backGround}>
-    <img
-      onClick={hideCartMenu}
-      src={closeButton}
-      className={s.closeButton}
-      alt={'closeButtonInToDoList'}
-      title={'Close'}
-    />
-    <div className={shoppingCart}>
-      <div className={s.shoppingCartTitle}>Your choose:</div>
-      {props.shopCart.map((currElement, index) => <li key={Math.random()}>{index + 1 + ') ' + currElement}</li>)}
-    </div>
-  </div>;
-}
+import shopCartIco from '../../../files/img/shopCart.png';
+import Cart, {showCartMenu, addToCart} from './cart.js'
 
 function Menu(props) {
   return (
     <div className={s.showRoom}>
-      <CartElement shopCart={props.shopCart}/>
       <Cart shopCart={props.shopCart}/>
+      <div className={s.topBar}>
+        <img src={shopCartIco} className={s.shopIco} alt={'CartImage'} onClick={showCartMenu}/>
+        <div className={s.shopIcoCount}>{props.shopCart.length}</div>
+      </div>
       <div>
         {props.menuItems[0].items.menu.map(p =>
           <div className={s.foodElement} key={p.id}>

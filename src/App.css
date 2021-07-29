@@ -1,6 +1,12 @@
 .app {
   text-align: center;
   cursor: url("https://cdn.custom-cursor.com/db/4130/32/arrow2402.png"), auto;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 a{

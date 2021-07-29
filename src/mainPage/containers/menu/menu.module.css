@@ -57,10 +57,8 @@
     width: 200px;
     list-style-type: none;
     padding-bottom: 6px;
-    margin-top: -5px;
     overflow: hidden;
     white-space: nowrap;
-    padding-top: 1px;
 }
 
 .price {

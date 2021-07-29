@@ -1,14 +1,17 @@
 .nav {
     display: flex;
     list-style-type: none;
-    text-align: center;
+    width: 100%;
+    text-align: left;
+    background-color: #1b1d23;
+    max-height: 100px;
+    align-items: flex-start
 }
 
 .bar li {
     display: inline-block;
     font-size: 20px;
     margin: 40px;
-    color: white; /* doesn't work*/
 }
 
 .textInactive {

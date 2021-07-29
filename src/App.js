@@ -8,10 +8,8 @@ import Menu from './mainPage/containers/menu/menu';
 function App(props) {
   return (
     <div className='app'>
-      <div className='headerBar'>
-        <Header/>
-      </div>
-      <header className='appContainer'>
+      <Header/>
+      <div className='appContainer'>
         <Route exact path='/' render={() => <Welcome/>}/>
         <Route exact path='/menu' render={() => <Menu
           menuItems={props.menuItems}
@@ -21,7 +19,7 @@ function App(props) {
         <div>
           <ShowList/>
         </div>
-      </header>
+      </div>
     </div>
   );
 }

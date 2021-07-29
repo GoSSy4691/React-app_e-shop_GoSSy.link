@@ -21,4 +21,8 @@
 
 .textActive {
     color: black;
+    background: #747474;
+    border-radius: 25px;
+    padding-left: 5px;
+    padding-right: 5px;
 }

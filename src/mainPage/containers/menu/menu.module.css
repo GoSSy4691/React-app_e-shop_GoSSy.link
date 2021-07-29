@@ -1,6 +1,7 @@
 .showRoom {
     padding-bottom: 160px;
     color: #adb4b0;
+    overflow-x: hidden;
 }
 
 .foodElement {

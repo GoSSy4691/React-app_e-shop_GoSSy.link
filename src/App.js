@@ -12,9 +12,9 @@ function App(props) {
       <div className='appContainer'>
         <Route exact path='/' render={() => <Welcome/>}/>
         <Route exact path='/menu' render={() => <Menu
-          menuItems={props.menuItems}
           shopCart={props.shopCart}
           addFood={props.addFood}
+          allMenu={props.allMenu}
         />}/>
         <div>
           <ShowList/>

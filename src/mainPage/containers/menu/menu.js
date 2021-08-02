@@ -7,9 +7,11 @@ import Cart, {showCartMenu, addToCart} from './cart.js'
 function Menu(props) {
   return (
     <div className={s.showRoom}>
-      <Cart shopCart={props.shopCart}/>
+      <Cart shopCart={props.shopCart} renderSiteDom={props.renderSiteDom}/>
       <div className={s.topBar}>
-        <img src={shopCartIco} className={s.shopIco} alt={'CartImage'} onClick={showCartMenu}/>
+        <img src={shopCartIco} className={s.shopIco} alt={'CartImage'}
+             onClick={() => showCartMenu(props.renderSiteDom)}
+        />
         <div className={s.shopIcoCount}>{props.shopCart.length}</div>
       </div>
       <div>
@@ -23,7 +25,14 @@ function Menu(props) {
               <div className={s.price}>
                 <li>{p.cost + ' ₽'}</li>
               </div>
-              <button className={s.buyButton} onClick={() => addToCart(p.name, props.addFood)}>add</button>
+              <button className={s.buyButton}
+                      onClick={() => addToCart(
+                        p.name,
+                        props.addFood,
+                        props.renderSiteDom
+                      )}
+              >add
+              </button>
               <div className={s.description}>
                 <li>{p.description}</li>
               </div>

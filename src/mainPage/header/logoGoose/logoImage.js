@@ -1,11 +1,10 @@
 import rotateIt from '../../../files/img/logo-goose.png';
 import laser from '../../../files/img/laser.png';
-import render from '../../../render.js';
 import './gooses.css';
 
 let buffer = [];
 
-function makeFire() {
+function makeFire(render) {
   let blaster = {
     src: laser,
     className: 'lasers_view',
@@ -19,18 +18,26 @@ function makeFire() {
   }, 1000);
 }
 
-function LogoImg() {
+function LogoImg(props) {
   if (buffer.length > 0) {
     return (
       <div>
-        <img src={rotateIt} className={'mainGoose_view'} onClick={makeFire} alt={'logo'}/>
+        <img onClick={() => makeFire(props.renderSiteDom)}
+             src={rotateIt}
+             className={'mainGoose_view'}
+             alt={'logo'}
+             title={'don\'t click'}/>
         {buffer.map(p => <img src={p.src} className={p.className} alt={p.alt} key={p.key}/>)}
       </div>
     );
   }
   return (
     <div>
-      <img src={rotateIt} className={'mainGoose_view'} onClick={makeFire} alt={'logo'}/>
+      <img src={rotateIt}
+           className={'mainGoose_view'}
+           onClick={() => makeFire(props.renderSiteDom)}
+           alt={'logo'}
+           title={'don\'t click'}/>
     </div>
   );
 

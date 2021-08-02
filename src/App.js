@@ -1,23 +1,24 @@
 import './App.css';
-import ShowList from './mainPage/footer/axios/toDoList';
 import {Route} from 'react-router-dom';
-import Header from './mainPage/header/header';
-import Welcome from './mainPage/containers/welcome/welcome';
-import Menu from './mainPage/containers/menu/menu';
+import ShowList from './mainPage/footer/axios/toDoList.js';
+import Header from './mainPage/header/header.js';
+import Welcome from './mainPage/containers/welcome/welcome.js';
+import Menu from './mainPage/containers/menu/menu.js';
 
 function App(props) {
   return (
     <div className='app'>
-      <Header/>
+      <Header renderSiteDom={props.renderSiteDom}/>
       <div className='appContainer'>
         <Route exact path='/' render={() => <Welcome/>}/>
         <Route exact path='/menu' render={() => <Menu
           menuItems={props.menuItems}
           shopCart={props.shopCart}
           addFood={props.addFood}
+          renderSiteDom={props.renderSiteDom}
         />}/>
         <div>
-          <ShowList/>
+          <ShowList renderSiteDom={props.renderSiteDom}/>
         </div>
       </div>
     </div>

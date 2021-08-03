@@ -8,7 +8,7 @@ function MenuContainers(props) {
   if (props.allMenu.length === 0) return <div>Loading</div>;
   else return (
     <div>
-      {props.allMenu[0].items.menu.map(p =>
+      {props.allMenu.items.menu.map(p =>
         <div className={s.foodElement} key={p.id}>
           <div className={s.item}>
             <img src={emptyImg} className={s.foodImg} alt={'logo'}/>
@@ -46,7 +46,11 @@ function Menu(props) {
         <div className={s.shopIcoCount}>{props.shopCart.length}</div>
       </div>
       <div>
-        <MenuContainers allMenu={props.allMenu}/>
+        <MenuContainers
+          allMenu={props.allMenu}
+          addFood={props.addFood}
+          renderSiteDom={props.renderSiteDom}
+        />
       </div>
       <img className={s.footerImg} src={runForestRun} key={Math.random()} alt={'footer'}/>
     </div>);

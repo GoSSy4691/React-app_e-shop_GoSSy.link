@@ -1,7 +1,11 @@
 import axios from 'axios';
-import render from '../../render';
 
 let allMenu = [];
+
+let render = () => {}
+export const updateDom_allMenu = (_render) => {
+  render = _render
+}
 
 function getMenuItems() {
   if (allMenu.length === 0) {

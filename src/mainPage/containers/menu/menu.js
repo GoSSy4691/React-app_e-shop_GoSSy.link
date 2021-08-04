@@ -4,6 +4,19 @@ import runForestRun from '../../../files/img/runForestRun.png';
 import shopCartIco from '../../../files/img/shopCart.png';
 import Cart, {showCartMenu, addToCart} from './cart.js';
 
+function CartImgOnTopRight(props) {
+  return (
+    <div className={s.topBar}>
+      <img alt={'CartImage'}
+           src={shopCartIco}
+           className={s.shopIco}
+           onClick={() => showCartMenu(props.renderSiteDom)}
+      />
+      <div className={s.shopIcoCount}>{props.shopCart.length}</div>
+    </div>
+  );
+}
+
 function MenuContainers(props) {
   if (props.allMenu.length === 0) return <div>Loading</div>;
   else return (
@@ -11,7 +24,10 @@ function MenuContainers(props) {
       {props.allMenu.items.menu.map(p =>
         <div className={s.foodElement} key={p.id}>
           <div className={s.item}>
-            <img src={emptyImg} className={s.foodImg} alt={'logo'}/>
+            <img src={getItemImg(p.image)}
+                 className={s.foodImg}
+                 alt={'logo'}
+            />
             <div className={s.name}>
               <li>{p.name}</li>
             </div>
@@ -35,24 +51,28 @@ function MenuContainers(props) {
   );
 }
 
+function getItemImg(imageName) {
+  if (imageName === undefined) return emptyImg;
+  else return 'https://zloi.space/restaurant/images/' + imageName;
+}
+
 function Menu(props) {
   return (
     <div className={s.showRoom}>
-      <Cart shopCart={props.shopCart} renderSiteDom={props.renderSiteDom}/>
-      <div className={s.topBar}>
-        <img src={shopCartIco} className={s.shopIco} alt={'CartImage'}
-             onClick={() => showCartMenu(props.renderSiteDom)}
-        />
-        <div className={s.shopIcoCount}>{props.shopCart.length}</div>
-      </div>
-      <div>
-        <MenuContainers
-          allMenu={props.allMenu}
-          addFood={props.addFood}
-          renderSiteDom={props.renderSiteDom}
-        />
-      </div>
-      <img className={s.footerImg} src={runForestRun} key={Math.random()} alt={'footer'}/>
+      <Cart
+        shopCart={props.shopCart}
+        renderSiteDom={props.renderSiteDom}
+      />
+      <CartImgOnTopRight
+        renderSiteDom={props.renderSiteDom}
+        shopCart={props.shopCart}
+      />
+      <MenuContainers
+        allMenu={props.allMenu}
+        addFood={props.addFood}
+        renderSiteDom={props.renderSiteDom}
+      />
+      <img alt={'footer'} className={s.footerImg} src={runForestRun} key={Math.random()}/>
     </div>);
 }
 

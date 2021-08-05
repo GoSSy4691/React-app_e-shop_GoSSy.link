@@ -14,7 +14,7 @@ let renderSiteDom = () => {
       <BrowserRouter>
         <App
           allMenu={getMenuItems(renderSiteDom)}
-          shopCart={shopCart.cart}
+          shopCart={shopCart}
           addFood={addFood}
           renderSiteDom={renderSiteDom}
         />

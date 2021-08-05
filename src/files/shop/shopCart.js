@@ -1,9 +1,7 @@
-let state = {
-  cart: []
-}
+let shopCart = [];
 
 export let addFood = (name) => {
-  state.cart.push(name)
+  shopCart.push(name);
 }
 
-export default state
+export default shopCart;

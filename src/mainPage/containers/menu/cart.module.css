@@ -53,4 +53,15 @@
     border-radius: 25px;
     padding-left: 50px;
     padding-right: 50px;
+    width: 200px;
+    position: fixed;
+    top: 74%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.buttonToOrder:active {
+    background-color: #3e8e41;
+    box-shadow: 0 5px #666;
+    transform: translateX(-55%);
 }

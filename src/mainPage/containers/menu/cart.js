@@ -36,15 +36,15 @@ function Cart(props) {
         <div className={s.shoppingCartTitle}>Your choose:</div>
         {props.shopCart.map((currElement, index) =>
           <li key={Math.random()}>{index + 1 + ') ' + currElement}</li>)}
-          {(() => {
-            if (props.shopCart.length > 0) {
-              return (<NavLink
-              className={s.buttonToOrder}
-              exact
-              to='/order'
-            >Order</NavLink>)
-          }})()}
       </div>
+      {(() => {
+        if (props.shopCart.length > 0) {
+          return (<NavLink
+            className={s.buttonToOrder}
+            exact
+            to='/order'
+          >Order</NavLink>)
+        }})()}
     </div>
   )
 }

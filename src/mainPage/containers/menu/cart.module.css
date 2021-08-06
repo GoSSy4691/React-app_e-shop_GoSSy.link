@@ -45,3 +45,12 @@
     font-size: 20px;
     border-bottom: solid black;
 }
+
+.buttonToOrder {
+    font-size: 24px;
+    color: black;
+    background: #747474;
+    border-radius: 25px;
+    padding-left: 50px;
+    padding-right: 50px;
+}

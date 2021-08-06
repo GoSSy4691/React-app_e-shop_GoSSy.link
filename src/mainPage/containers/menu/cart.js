@@ -1,5 +1,6 @@
 import s from './cart.module.css';
 import closeButton from '../../../files/img/closeButton.png';
+import {NavLink} from 'react-router-dom';
 
 let shoppingCart = s.hideCart;
 let backGround = s.darkenBackgroundHide;
@@ -35,6 +36,14 @@ function Cart(props) {
         <div className={s.shoppingCartTitle}>Your choose:</div>
         {props.shopCart.map((currElement, index) =>
           <li key={Math.random()}>{index + 1 + ') ' + currElement}</li>)}
+          {(() => {
+            if (props.shopCart.length > 0) {
+              return (<NavLink
+              className={s.buttonToOrder}
+              exact
+              to='/order'
+            >Order</NavLink>)
+          }})()}
       </div>
     </div>
   )

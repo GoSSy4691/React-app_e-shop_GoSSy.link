@@ -24,9 +24,13 @@ function MenuContainers(props) {
       {props.allMenu.items.menu.map(p =>
         <div className={s.foodElement} key={p.id}>
           <div className={s.item}>
-            <img src={getItemImg(p.image)}
-                 className={s.foodImg}
-                 alt={'logo'}
+            <img
+              src={(() => {
+                if (p.image === undefined) return emptyImg;
+                else return 'https://zloi.space/restaurant/images/' + p.image;
+              })()}
+              className={s.foodImg}
+              alt={'logo'}
             />
             <div className={s.name}>
               <li>{p.name}</li>
@@ -53,11 +57,6 @@ function MenuContainers(props) {
         </div>)}
     </div>
   );
-}
-
-function getItemImg(imageName) {
-  if (imageName === undefined) return emptyImg;
-  else return 'https://zloi.space/restaurant/images/' + imageName;
 }
 
 function Menu(props) {

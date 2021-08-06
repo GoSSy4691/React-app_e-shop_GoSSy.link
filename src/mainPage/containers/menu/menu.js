@@ -44,6 +44,10 @@ function MenuContainers(props) {
             </button>
             <div className={s.description}>
               <li>{p.description}</li>
+              {(() => {
+                if (p.description === undefined) {
+                  p.description = 'Типо пока ещё нет описания. Но это очень вкусно'
+                }})()}
             </div>
           </div>
         </div>)}

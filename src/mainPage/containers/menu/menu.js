@@ -4,6 +4,10 @@ import runForestRun from '../../../files/img/runForestRun.png';
 import shopCartIco from '../../../files/img/shopCart.png';
 import Cart, {showCartMenu} from './cart.js';
 
+function isFoodInOrder(name, shopCart) {
+  return !!shopCart[0].map(element => element.name).find(element => element === name);
+}
+
 function addToCart(name, addFood, render) {
   addFood(name);
   render();
@@ -27,8 +31,9 @@ function MenuContainers(props) {
   else return (
     <div>
       {props.allMenu.items.menu.map(p =>
-        <div className={s.foodElement} key={p.id}>
-          <div className={s.item}>
+        <div className={`${isFoodInOrder(p.name, props.shopCart) ? s.foodElementInOrder : s.foodElement}`}
+             key={p.id}>
+          <div className={`${isFoodInOrder(p.name, props.shopCart) ? s.itemInOrder : s.item}`}>
             <img
               src={(() => {
                 if (p.image === undefined) return emptyImg;
@@ -44,8 +49,8 @@ function MenuContainers(props) {
               <li>{p.cost + ' ₽'}</li>
             </div>
             {(() => {
-              if (props.shopCart.find(object => Object.keys(object) === p.name)) {
-                console.log('www')
+              if (isFoodInOrder) {
+                // console.log('www')
               }
             })()}
             <button className={s.buyButton}

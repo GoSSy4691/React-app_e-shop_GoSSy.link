@@ -22,6 +22,7 @@
             "D D"
             "A B"
             "A G"
+            "A K"
             "C C";
     align-content: start;
 }
@@ -69,8 +70,7 @@
     width: 75px;
     height: 80px;
     display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
+    margin-left: 10px;
 }
 
 .buyButton {

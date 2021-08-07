@@ -5,11 +5,6 @@ import {NavLink} from 'react-router-dom';
 let shoppingCart = s.hideCart;
 let backGround = s.darkenBackgroundHide;
 
-export function addToCart(name, addFood, render) {
-  addFood(name);
-  render();
-}
-
 export function showCartMenu(render) {
   shoppingCart = s.showCart;
   backGround = s.darkenBackgroundShow;
@@ -34,16 +29,19 @@ function Cart(props) {
       />
       <div className={shoppingCart}>
         <div className={s.shoppingCartTitle}>Your choose:</div>
-        {props.shopCart.map((currElement, index) =>
-          <li key={Math.random()}>{index + 1 + ') ' + currElement}</li>)}
+        {props.shopCart[0].slice(1).map((currentObject, index) =>
+          <li key={Math.random()}>
+            {index + 1} ) {currentObject.name} - {currentObject.value} pcs
+          </li>
+        )}
       </div>
       {(() => {
-        if (props.shopCart.length > 0) {
+        if (props.shopCart[0].itemsCount > 0) {
           return (<NavLink
             className={s.buttonToOrder}
             exact
             to='/order'
-          >Order</NavLink>)
+          >Order</NavLink>);
         }})()}
     </div>
   )

@@ -2,7 +2,12 @@ import s from './menu.module.css';
 import emptyImg from '../../../files/img/noItem.png';
 import runForestRun from '../../../files/img/runForestRun.png';
 import shopCartIco from '../../../files/img/shopCart.png';
-import Cart, {showCartMenu, addToCart} from './cart.js';
+import Cart, {showCartMenu} from './cart.js';
+
+function addToCart(name, addFood, render) {
+  addFood(name);
+  render();
+}
 
 function CartImgOnTopRight(props) {
   return (
@@ -12,7 +17,7 @@ function CartImgOnTopRight(props) {
            className={s.shopIco}
            onClick={() => showCartMenu(props.renderSiteDom)}
       />
-      <div className={s.shopIcoCount}>{props.shopCart.length}</div>
+      <div className={s.shopIcoCount}>{props.shopCart[0][0].value}</div>
     </div>
   );
 }
@@ -38,6 +43,11 @@ function MenuContainers(props) {
             <div className={s.price}>
               <li>{p.cost + ' ₽'}</li>
             </div>
+            {(() => {
+              if (props.shopCart.find(object => Object.keys(object) === p.name)) {
+                console.log('www')
+              }
+            })()}
             <button className={s.buyButton}
                     onClick={() => addToCart(
                       p.name,
@@ -50,8 +60,9 @@ function MenuContainers(props) {
               <li>{p.description}</li>
               {(() => {
                 if (p.description === undefined) {
-                  p.description = 'Типо пока ещё нет описания. Но это очень вкусно'
-                }})()}
+                  p.description = 'Пока ещё нет описания. Но это очень вкусно';
+                }
+              })()}
             </div>
           </div>
         </div>)}
@@ -67,10 +78,11 @@ function Menu(props) {
         renderSiteDom={props.renderSiteDom}
       />
       <CartImgOnTopRight
-        renderSiteDom={props.renderSiteDom}
         shopCart={props.shopCart}
+        renderSiteDom={props.renderSiteDom}
       />
       <MenuContainers
+        shopCart={props.shopCart}
         allMenu={props.allMenu}
         addFood={props.addFood}
         renderSiteDom={props.renderSiteDom}

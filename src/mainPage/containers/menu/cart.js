@@ -36,7 +36,7 @@ function Cart(props) {
         )}
       </div>
       {(() => {
-        if (props.shopCart[0].itemsCount > 0) {
+        if (props.shopCart[0][0].value > 0) {
           return (<NavLink
             className={s.buttonToOrder}
             exact

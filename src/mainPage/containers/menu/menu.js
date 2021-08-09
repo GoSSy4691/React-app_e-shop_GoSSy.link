@@ -2,7 +2,7 @@ import s from './menu.module.css';
 import emptyImg from '../../../files/img/noItem.png';
 import runForestRun from '../../../files/img/runForestRun.png';
 import shopCartIco from '../../../files/img/shopCart.png';
-import Cart, {showCartMenu} from './cart.js';
+import Cart from './cart.js';
 
 function isFoodInOrder(name, shopCart) {
   return !!shopCart.map(element => element.name).find(element => element === name);
@@ -13,13 +13,21 @@ function addToCart(name, addFood, render) {
   render();
 }
 
+let isCartIcoPushed = false;
+
+function showCartMenu(needCloseOrOpen, render) {
+  if (needCloseOrOpen === 'close') {isCartIcoPushed = false}
+  if (needCloseOrOpen === 'open') {isCartIcoPushed = true}
+  render();
+}
+
 function CartImgOnTopRight(props) { //need put it upper in Nav class
   return (
     <div className={s.topBar}>
       <img alt={'CartImage'}
            src={shopCartIco}
            className={s.shopIco}
-           onClick={() => showCartMenu(props.renderSiteDom)}
+           onClick={() => showCartMenu('open', props.renderSiteDom)}
       />
       <div className={s.shopIcoCount}>{props.shopCart[0].value}</div>
     </div>
@@ -78,10 +86,16 @@ function MenuContainers(props) {
 function Menu(props) {
   return (
     <div className={s.showRoom}>
-      <Cart
-        shopCart={props.shopCart}
-        renderSiteDom={props.renderSiteDom}
-      />
+      {(() => {
+        if (isCartIcoPushed === true) {
+          return (
+            <Cart
+              shopCart={props.shopCart}
+              renderSiteDom={props.renderSiteDom}
+              showCartMenu={showCartMenu}
+            />);
+        }
+      })()}
       <CartImgOnTopRight
         shopCart={props.shopCart}
         renderSiteDom={props.renderSiteDom}

@@ -13,7 +13,7 @@ function addToCart(name, addFood, render) {
   render();
 }
 
-function CartImgOnTopRight(props) {
+function CartImgOnTopRight(props) { //need put it upper in Nav class
   return (
     <div className={s.topBar}>
       <img alt={'CartImage'}
@@ -93,7 +93,7 @@ function Menu(props) {
         renderSiteDom={props.renderSiteDom}
       />
       <img alt={'footer'} className={s.footerImg} src={runForestRun} key={Math.random()}/>
-    </div>);
+    </div>)
 }
 
 export default Menu;

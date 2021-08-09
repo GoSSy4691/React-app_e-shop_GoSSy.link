@@ -19,23 +19,36 @@
 
 .darkenBackgroundShow {
     position: fixed;
+    left: 0;
     top: 0;
+    bottom: 0;
+    right: 0;
     width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.73);
+    height: content-box;
+    background: #666;
+    background: rgba(102,102,102,.5);
+    z-index: 2;
 }
 
 .darkenBackgroundHide {
     display: none;
 }
 
-.closeButton {
-    height: 50px;
-    width: 50px;
+.cartBox {
+    width: 550px;
+    height: 600px;
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(450%, -550%);
+    transform: translate(-50%, -50%);
+}
+
+.closeButton {
+    height: 50px;
+    width: 50px;
+    position: relative;
+    top: 5%;
+    left: 45%;
     z-index: 2;
     cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
 }
@@ -54,10 +67,9 @@
     padding-left: 50px;
     padding-right: 50px;
     width: 200px;
-    position: fixed;
-    top: 74%;
-    left: 50%;
-    transform: translateX(-50%);
+    position: absolute;
+    top: 89%;
+    left: 22%;
 }
 
 .buttonToOrder:active {

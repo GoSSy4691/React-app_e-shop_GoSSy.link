@@ -17,32 +17,35 @@ function hideCartMenu(render) {
   render();
 }
 
-function Cart(props) {
+function Cart(props) { //need show only when call
   return (
     <div className={backGround}>
-      <img
-        onClick={() => hideCartMenu(props.renderSiteDom)}
-        src={closeButton}
-        className={s.closeButton}
-        alt={'closeButtonInToDoList'}
-        title={'Close'}
-      />
-      <div className={shoppingCart}>
-        <div className={s.shoppingCartTitle}>Your choose:</div>
-        {props.shopCart.slice(1).map((currentObject, index) =>
-          <li key={Math.random()}>
-            {index + 1} ) {currentObject.name} - {currentObject.value} pcs
-          </li>
-        )}
+      <div className={s.cartBox}>
+        <img
+          onClick={() => hideCartMenu(props.renderSiteDom)}
+          src={closeButton}
+          className={s.closeButton}
+          alt={'closeButtonInToDoList'}
+          title={'Close'}
+        />
+        <div className={shoppingCart}>
+          <div className={s.shoppingCartTitle}>Your choose:</div>
+          {props.shopCart.slice(1).map((currentObject, index) =>
+            <li key={Math.random()}>
+              {index + 1} ) {currentObject.name} - {currentObject.value} pcs
+            </li>
+          )}
+        </div>
+        {(() => {
+          if (props.shopCart[0].value > 0) {
+            return (<NavLink
+              className={s.buttonToOrder}
+              exact
+              to='/order'
+            >Order</NavLink>);
+          }
+        })()}
       </div>
-      {(() => {
-        if (props.shopCart[0].value > 0) {
-          return (<NavLink
-            className={s.buttonToOrder}
-            exact
-            to='/order'
-          >Order</NavLink>);
-        }})()}
     </div>
   )
 }

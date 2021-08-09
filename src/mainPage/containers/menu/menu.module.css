@@ -57,8 +57,6 @@
     grid-template-areas:
             "D D"
             "A B"
-            "A G"
-            "A K"
             "C C";
     align-content: start;
 }
@@ -99,20 +97,36 @@
     white-space: nowrap;
 }
 
-.price {
+.sectorOfPriceCountBuy {
     grid-area: B;
+    height: 103px;
+    position: relative;
+}
+
+.price {
     list-style-type: none;
     width: 75px;
-    height: 80px;
+    height: 40px;
     display: flex;
     margin-left: 10px;
 }
 
+.showCountOfFood {
+    margin-left: 33px;
+    width: 23px;
+    height: 23px;
+    border: solid #adb4b0;
+    border-radius: 20px;
+    text-align: center;
+    font-size: 16px;
+}
+
 .buyButton {
-    grid-area: G;
+    position: absolute;
+    bottom: 0;
+    left: 0;
     height: 25px;
     width: 90px;
-    align-self: end;
     border: solid #adb4b0;
     border-radius: 20px;
     background: #4d4f4e;

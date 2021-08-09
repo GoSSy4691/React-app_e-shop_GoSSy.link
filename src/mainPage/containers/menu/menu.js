@@ -21,7 +21,7 @@ function showCartMenu(needCloseOrOpen, render) {
   render();
 }
 
-function CartImgOnTopRight(props) { //need put it upper in Nav class
+function CartImgOnTopRight(props) {
   return (
     <div className={s.topBar}>
       <img alt={'CartImage'}
@@ -53,22 +53,25 @@ function MenuContainers(props) {
             <div className={s.name}>
               <li>{p.name}</li>
             </div>
-            <div className={s.price}>
-              <li>{p.cost + ' ₽'}</li>
+            <div className={s.sectorOfPriceCountBuy}>
+              <div className={s.price}>
+                <li>{p.cost + ' ₽'}</li>
+              </div>
+              {(() => {
+                if (isFoodInOrder(p.name, props.shopCart)) {
+                  return (
+                    <div className={s.showCountOfFood}>{props.shopCart.find(e => e.name === p.name).value}</div>);
+                }
+              })()}
+              <button className={s.buyButton}
+                      onClick={() => addToCart(
+                        p.name,
+                        props.addFood,
+                        props.renderSiteDom
+                      )}
+              >add
+              </button>
             </div>
-            {(() => {
-              if (isFoodInOrder) {
-                // console.log('www')
-              }
-            })()}
-            <button className={s.buyButton}
-                    onClick={() => addToCart(
-                      p.name,
-                      props.addFood,
-                      props.renderSiteDom
-                    )}
-            >add
-            </button>
             <div className={s.description}>
               <li>{p.description}</li>
               {(() => {

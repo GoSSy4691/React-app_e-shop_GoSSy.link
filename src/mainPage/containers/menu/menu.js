@@ -5,7 +5,7 @@ import shopCartIco from '../../../files/img/shopCart.png';
 import Cart, {showCartMenu} from './cart.js';
 
 function isFoodInOrder(name, shopCart) {
-  return !!shopCart[0].map(element => element.name).find(element => element === name);
+  return !!shopCart.map(element => element.name).find(element => element === name);
 }
 
 function addToCart(name, addFood, render) {
@@ -21,7 +21,7 @@ function CartImgOnTopRight(props) {
            className={s.shopIco}
            onClick={() => showCartMenu(props.renderSiteDom)}
       />
-      <div className={s.shopIcoCount}>{props.shopCart[0][0].value}</div>
+      <div className={s.shopIcoCount}>{props.shopCart[0].value}</div>
     </div>
   );
 }

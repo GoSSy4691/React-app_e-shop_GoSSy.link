@@ -62,10 +62,12 @@
     position: absolute;
     top: 89%;
     left: 22%;
+    border: solid #1b1d23;
+    text-decoration: none;
 }
 
 .buttonToOrder:active {
     background-color: #3e8e41;
     box-shadow: 0 5px #666;
-    transform: translateX(-55%);
+    transform: translateY(-15%);
 }

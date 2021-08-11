@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import App from './App.js';
 import {BrowserRouter} from 'react-router-dom';
 
-import shopCart, {addFood} from './files/shop/shopCart.js';
+import cart from './files/shop/shopCart.js';
 import getMenuItems from './files/shop/getMenu.js';
 
 let renderSiteDom = () => {
@@ -14,8 +14,7 @@ let renderSiteDom = () => {
       <BrowserRouter>
         <App
           allMenu={getMenuItems(renderSiteDom)}
-          shopCart={shopCart}
-          addFood={addFood}
+          cart={cart}
           renderSiteDom={renderSiteDom}
         />
       </BrowserRouter>

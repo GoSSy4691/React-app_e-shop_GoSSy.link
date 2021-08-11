@@ -12,9 +12,8 @@ function App(props) {
       <div className='appContainer'>
         <Route exact path='/' render={() => <Welcome/>}/>
         <Route exact path='/menu' render={() => <Menu
-          shopCart={props.shopCart}
-          addFood={props.addFood}
           allMenu={props.allMenu}
+          cart={props.cart}
           renderSiteDom={props.renderSiteDom}
         />}/>
         <Route exact path='/OrderView' render={() => <OrderView shopCart={props.shopCart}/>}/>

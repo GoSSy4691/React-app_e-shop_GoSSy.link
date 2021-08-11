@@ -4,13 +4,13 @@ import runForestRun from '../../../files/img/runForestRun.png';
 import shopCartIco from '../../../files/img/shopCart.png';
 import Cart from './cart.js';
 
-function isFoodInOrder(name, shopCart) {
-  return !!shopCart.map(element => element.name).find(element => element === name);
+function isFoodInOrder(name, inCart) {
+  return !!inCart.map(element => element.name).find(element => element === name);
 }
 
-function addToCart(name, addFood, render) {
+function addToCart(name, addFood, renderSiteDom) {
   addFood(name);
-  render();
+  renderSiteDom();
 }
 
 let isCartIcoPushed = false;
@@ -29,7 +29,7 @@ function CartImgOnTopRight(props) {
            className={s.shopIco}
            onClick={() => showCartMenu('open', props.renderSiteDom)}
       />
-      <div className={s.shopIcoCount}>{props.shopCart[0].value}</div>
+      <div className={s.shopIcoCount}>{props.cart.inCart[0].value}</div>
     </div>
   );
 }
@@ -39,9 +39,9 @@ function MenuContainers(props) {
   else return (
     <div>
       {props.allMenu.items.menu.map(p =>
-        <div className={`${isFoodInOrder(p.name, props.shopCart) ? s.foodElementInOrder : s.foodElement}`}
+        <div className={`${isFoodInOrder(p.name, props.cart.inCart) ? s.foodElementInOrder : s.foodElement}`}
              key={p.id}>
-          <div className={`${isFoodInOrder(p.name, props.shopCart) ? s.itemInOrder : s.item}`}>
+          <div className={`${isFoodInOrder(p.name, props.cart.inCart) ? s.itemInOrder : s.item}`}>
             <img
               src={(() => {
                 if (p.image === undefined) return emptyImg;
@@ -58,15 +58,15 @@ function MenuContainers(props) {
                 <li>{p.cost + ' ₽'}</li>
               </div>
               {(() => {
-                if (isFoodInOrder(p.name, props.shopCart)) {
+                if (isFoodInOrder(p.name, props.cart.inCart)) {
                   return (
-                    <div className={s.showCountOfFood}>{props.shopCart.find(e => e.name === p.name).value}</div>);
+                    <div className={s.showCountOfFood}>{props.cart.inCart.find(e => e.name === p.name).value}</div>);
                 }
               })()}
               <button className={s.buyButton}
                       onClick={() => addToCart(
                         p.name,
-                        props.addFood,
+                        props.cart.addFood,
                         props.renderSiteDom
                       )}
               >add
@@ -93,20 +93,19 @@ function Menu(props) {
         if (isCartIcoPushed === true) {
           return (
             <Cart
-              shopCart={props.shopCart}
+              cart={props.cart}
               renderSiteDom={props.renderSiteDom}
               showCartMenu={showCartMenu}
             />);
         }
       })()}
       <CartImgOnTopRight
-        shopCart={props.shopCart}
+        cart={props.cart}
         renderSiteDom={props.renderSiteDom}
       />
       <MenuContainers
-        shopCart={props.shopCart}
+        cart={props.cart}
         allMenu={props.allMenu}
-        addFood={props.addFood}
         renderSiteDom={props.renderSiteDom}
       />
       <img alt={'footer'} className={s.footerImg} src={runForestRun} key={Math.random()}/>

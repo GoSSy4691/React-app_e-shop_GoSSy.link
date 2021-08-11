@@ -15,14 +15,14 @@ function Cart(props) {
         />
         <div className={s.showCart}>
           <div className={s.shoppingCartTitle}>Your choose:</div>
-          {props.shopCart.slice(1).map((currentObject, index) =>
+          {props.cart.inCart.slice(1).map((currentObject, index) =>
             <li key={Math.random()}>
               {index + 1} ) {currentObject.name} - {currentObject.value} pcs
             </li>
           )}
         </div>
         {(() => {
-          if (props.shopCart[0].value > 0) {
+          if (props.cart.inCart[0].value > 0) {
             return (<NavLink
               className={s.buttonToOrder}
               exact

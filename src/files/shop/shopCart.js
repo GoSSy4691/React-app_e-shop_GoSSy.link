@@ -15,6 +15,19 @@ let cart = {
     }
     cart.inCart.length = 0; // ← clean inCart ↓ and assign new volume
     Array.from(buffer, ([name, value]) => cart.inCart.push({name, value}));
+  },
+
+  deleteFood(name) {
+    countAll--;
+    buffer.set('itemsCount', countAll);
+    if (buffer.get(name) === 1) {
+      buffer.delete(name);
+    } else {
+      let countItem = buffer.get(name) - 1;
+      buffer.set(name, countItem);
+    }
+    cart.inCart.length = 0; // ← clean inCart ↓ and assign new volume
+    Array.from(buffer, ([name, value]) => cart.inCart.push({name, value}));
   }
 }
 

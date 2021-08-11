@@ -109,16 +109,35 @@
     height: 40px;
     display: flex;
     margin-left: 10px;
+    font-size: 22px;
 }
 
-.showCountOfFood {
-    margin-left: 33px;
+.deleteAndCountFood {
+    width: 90px;
+    height: 30px;
+    text-align: center;
+}
+
+.deleteItem {
+    display: inline-block;
+    width: 29px;
+    height: 29px;
+    border: solid #adb4b0;
+    border-radius: 20px;
+    background: none;
+    color: inherit;
+    font-size: 18px;
+    cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
+}
+
+.countItem {
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 16px;
     width: 23px;
     height: 23px;
     border: solid #adb4b0;
     border-radius: 20px;
-    text-align: center;
-    font-size: 16px;
 }
 
 .buyButton {

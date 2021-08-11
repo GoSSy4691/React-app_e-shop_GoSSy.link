@@ -8,16 +8,25 @@ function isFoodInOrder(name, inCart) {
   return !!inCart.map(element => element.name).find(element => element === name);
 }
 
-function addToCart(name, addFood, renderSiteDom) {
+function addInCart(name, addFood, renderSiteDom) {
   addFood(name);
+  renderSiteDom();
+}
+
+function deleteInCart(name, deleteFood, renderSiteDom) {
+  deleteFood(name);
   renderSiteDom();
 }
 
 let isCartIcoPushed = false;
 
 function showCartMenu(needCloseOrOpen, render) {
-  if (needCloseOrOpen === 'close') {isCartIcoPushed = false}
-  if (needCloseOrOpen === 'open') {isCartIcoPushed = true}
+  if (needCloseOrOpen === 'close') {
+    isCartIcoPushed = false;
+  }
+  if (needCloseOrOpen === 'open') {
+    isCartIcoPushed = true;
+  }
   render();
 }
 
@@ -60,11 +69,22 @@ function MenuContainers(props) {
               {(() => {
                 if (isFoodInOrder(p.name, props.cart.inCart)) {
                   return (
-                    <div className={s.showCountOfFood}>{props.cart.inCart.find(e => e.name === p.name).value}</div>);
+                    <div className={s.deleteAndCountFood}>
+                      <button className={s.deleteItem}
+                              onClick={() => deleteInCart(
+                                p.name,
+                                props.cart.deleteFood,
+                                props.renderSiteDom)}>
+                        -
+                      </button>
+                      <div className={s.countItem}>
+                        {props.cart.inCart.find(e => e.name === p.name).value}
+                      </div>
+                    </div>);
                 }
               })()}
               <button className={s.buyButton}
-                      onClick={() => addToCart(
+                      onClick={() => addInCart(
                         p.name,
                         props.cart.addFood,
                         props.renderSiteDom

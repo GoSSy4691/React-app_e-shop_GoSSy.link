@@ -10,15 +10,13 @@ import getMenuItems from './files/shop/getMenu.js';
 
 let renderSiteDom = () => {
   ReactDOM.render(
-    <React.StrictMode>
       <BrowserRouter>
         <App
           allMenu={getMenuItems(renderSiteDom)}
           cart={cart}
           renderSiteDom={renderSiteDom}
         />
-      </BrowserRouter>
-    </React.StrictMode>,
+      </BrowserRouter>,
     document.getElementById('root')
   );
 };

@@ -5,7 +5,7 @@ let allMenu = [];
 function getMenuItems(renderSiteDom) {
   if (allMenu.length === 0) {
     axios.get('https://zloi.space/restaurant/api/shops').then((res) => {
-      allMenu = res.data[0];
+      allMenu = res.data[0].menu;
       renderSiteDom();
     })
       .catch(() => {

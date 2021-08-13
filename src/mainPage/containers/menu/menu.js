@@ -47,15 +47,16 @@ function MenuContainers(props) {
   if (props.allMenu.length === 0) return <div>Loading</div>;
   else return (
     <div>
-      {props.allMenu.items.menu.map(p =>
+      {props.allMenu.map(p =>
         <div className={`${isFoodInOrder(p.name, props.cart.inCart) ? s.foodElementInOrder : s.foodElement}`}
              key={p.id}>
           <div className={`${isFoodInOrder(p.name, props.cart.inCart) ? s.itemInOrder : s.item}`}>
             <img
               src={(() => {
-                if (p.image === undefined) return emptyImg;
-                else return 'https://zloi.space/restaurant/images/' + p.image;
+                if (p.icon === undefined) return emptyImg;
+                else return 'https://zloi.space/restaurant/images/' + p.icon;
               })()}
+              onError={e => e.target.src=emptyImg}
               className={s.foodImg}
               alt={'logo'}
             />

@@ -16,7 +16,7 @@ function App(props) {
           cart={props.cart}
           renderSiteDom={props.renderSiteDom}
         />}/>
-        <Route exact path='/OrderView' render={() => <OrderView shopCart={props.shopCart}/>}/>
+        <Route exact path='/order' render={() => <OrderView shopCart={props.shopCart}/>}/>
       </div>
     </div>
   );

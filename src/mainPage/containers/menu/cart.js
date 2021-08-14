@@ -1,18 +1,14 @@
 import s from './cart.module.css';
-import closeButton from '../../../files/img/closeButton.png';
 import {NavLink} from 'react-router-dom';
 
 function Cart(props) {
   return (
     <div className={s.darkenBackgroundShow}>
       <div className={s.cartBox}>
-        <img
-          alt={'closeButtonInCart'}
-          onClick={() => props.showCartMenu('close' ,props.renderSiteDom)}
-          src={closeButton}
-          className={s.closeButton}
-          title={'Close'}
-        />
+        <button className={s.closeButton}
+                onClick={() => props.showCartMenu('close' ,props.renderSiteDom)}>
+          ✖
+        </button>
         <div className={s.showCart}>
           <div className={s.shoppingCartTitle}>Your choose:</div>
           {props.cart.inCart.slice(1).map((currentObject, index) =>

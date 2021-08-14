@@ -36,13 +36,23 @@
 }
 
 .closeButton {
-    height: 50px;
-    width: 50px;
+    height: 55px;
+    width: 55px;
     position: relative;
     top: 5%;
     left: 45%;
     z-index: 2;
     cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
+    border-radius: 25px;
+    border-color: #1b1d23;
+    border-style: solid;
+    border-width: 6px;
+    font-size: 40px;
+    line-height: 0;
+}
+
+.closeButton:active {
+    transform: translateY(4%);
 }
 
 .shoppingCartTitle {

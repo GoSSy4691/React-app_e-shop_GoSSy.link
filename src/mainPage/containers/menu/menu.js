@@ -5,7 +5,7 @@ import shopCartIco from '../../../files/img/shopCart.png';
 import Cart from './cart.js';
 
 function isFoodInOrder(name, inCart) {
-  return !!inCart.map(element => element.name).find(element => element === name);
+  return inCart.find(el => el.name === name);
 }
 
 function addInCart(name, addFood, renderSiteDom) {
@@ -30,7 +30,7 @@ function showCartMenu(needCloseOrOpen, render) {
   render();
 }
 
-function CartImgOnTopRight(props) {
+function CartOnTop(props) {
   return (
     <div className={s.topBar}>
       <img alt={'CartImage'}
@@ -56,7 +56,7 @@ function MenuContainers(props) {
                 if (p.icon === undefined) return emptyImg;
                 else return 'https://zloi.space/restaurant/images/' + p.icon;
               })()}
-              onError={e => e.target.src=emptyImg}
+              onError={e => e.target.src = emptyImg}
               className={s.foodImg}
               alt={'logo'}
             />
@@ -107,7 +107,7 @@ function MenuContainers(props) {
   );
 }
 
-function Menu(props) {
+export default function Menu(props) {
   return (
     <div className={s.showRoom}>
       {(() => {
@@ -120,7 +120,7 @@ function Menu(props) {
             />);
         }
       })()}
-      <CartImgOnTopRight
+      <CartOnTop
         cart={props.cart}
         renderSiteDom={props.renderSiteDom}
       />
@@ -132,5 +132,3 @@ function Menu(props) {
       <img alt={'footer'} className={s.footerImg} src={runForestRun} key={Math.random()}/>
     </div>)
 }
-
-export default Menu;

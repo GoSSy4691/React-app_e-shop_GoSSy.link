@@ -1,7 +1,7 @@
 import s from './cart.module.css';
 import {NavLink} from 'react-router-dom';
 
-function Cart(props) {
+export default function Cart(props) {
   return (
     <div className={s.darkenBackgroundShow}>
       <div className={s.cartBox}>
@@ -30,5 +30,3 @@ function Cart(props) {
     </div>
   )
 }
-
-export default Cart;

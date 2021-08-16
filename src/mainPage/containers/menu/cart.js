@@ -1,12 +1,12 @@
 import s from './cart.module.css';
-import {NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
-function Cart(props) {
+export default function Cart(props) { //опять логика и отображение в перемешку
   return (
     <div className={s.darkenBackgroundShow}>
       <div className={s.cartBox}>
         <button className={s.closeButton}
-                onClick={() => props.showCartMenu('close' ,props.renderSiteDom)}>
+          onClick={() => props.showCartMenu('close', props.renderSiteDom)}>
           ✖
         </button>
         <div className={s.showCart}>
@@ -30,5 +30,3 @@ function Cart(props) {
     </div>
   )
 }
-
-export default Cart;

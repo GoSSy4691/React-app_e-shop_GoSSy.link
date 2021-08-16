@@ -12,7 +12,7 @@ let renderSiteDom = () => {
   ReactDOM.render(
       <BrowserRouter>
         <App
-          allMenu={getMenuItems(renderSiteDom)}
+          allMenu={getMenuItems(renderSiteDom)} //не стоит грузить меню сразу
           cart={cart}
           renderSiteDom={renderSiteDom}
         />

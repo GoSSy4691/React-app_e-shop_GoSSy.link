@@ -1,83 +1,83 @@
 .showCart {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 500px;
-    height: 500px;
-    background: #1b1d23;
-    overflow-y: scroll;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 500px;
+  background: #1b1d23;
+  overflow-y: scroll;
 }
 
 .showCart li {
-    list-style-type: none;
+  list-style-type: none;
 }
 
 .darkenBackgroundShow {
-    position: fixed;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    height: content-box;
-    background: #666;
-    background: rgba(102,102,102,.5);
-    z-index: 2;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: content-box;
+  background: #666;
+  background: rgba(102, 102, 102, 0.5);
+  z-index: 2;
 }
 
 .cartBox {
-    width: 550px;
-    height: 600px;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  width: 550px;
+  height: 600px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .closeButton {
-    height: 55px;
-    width: 55px;
-    position: relative;
-    top: 5%;
-    left: 45%;
-    z-index: 2;
-    cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
-    border-radius: 25px;
-    border-color: #1b1d23;
-    border-style: solid;
-    border-width: 6px;
-    font-size: 35px;
-    line-height: 0;
+  height: 55px;
+  width: 55px;
+  position: relative;
+  top: 5%;
+  left: 45%;
+  z-index: 2;
+  cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
+  border-radius: 25px;
+  border-color: #1b1d23;
+  border-style: solid;
+  border-width: 6px;
+  font-size: 35px;
+  line-height: 0;
 }
 
 .closeButton:active {
-    transform: translateY(4%);
+  transform: translateY(4%);
 }
 
 .shoppingCartTitle {
-    font-family: "Comic Sans MS", sans-serif;
-    font-size: 20px;
-    border-bottom: solid black;
+  font-family: "Comic Sans MS", sans-serif;
+  font-size: 20px;
+  border-bottom: solid black;
 }
 
 .buttonToOrder {
-    font-size: 24px;
-    color: black;
-    background: #747474;
-    border-radius: 25px;
-    padding-left: 50px;
-    padding-right: 50px;
-    width: 200px;
-    position: absolute;
-    top: 89%;
-    left: 22%;
-    border: solid #1b1d23;
-    text-decoration: none;
+  font-size: 24px;
+  color: black;
+  background: #747474;
+  border-radius: 25px;
+  padding-left: 50px;
+  padding-right: 50px;
+  width: 200px;
+  position: absolute;
+  top: 89%;
+  left: 22%;
+  border: solid #1b1d23;
+  text-decoration: none;
 }
 
 .buttonToOrder:active {
-    background-color: #3e8e41;
-    box-shadow: 0 5px #666;
-    transform: translateY(-15%);
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(-15%);
 }

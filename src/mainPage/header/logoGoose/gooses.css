@@ -1,21 +1,21 @@
 .mainGoose_view {
-    height: 100px;
-    cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
-    filter: invert(1);
+  height: 100px;
+  cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
+  filter: invert(1);
 }
 
 .lasers_view {
-    position: fixed;
-    top: 10px;
-    height: 2vmin;
-    animation: fire_laser 0.8s 1 forwards;
+  position: fixed;
+  top: 10px;
+  height: 2vmin;
+  animation: fire_laser 0.8s 1 forwards;
 }
 
 @keyframes fire_laser {
-    0% {
-        left: 110px;
-    }
-    100% {
-        left: 100%;
-    }
+  0% {
+    left: 110px;
+  }
+  100% {
+    left: 100%;
+  }
 }

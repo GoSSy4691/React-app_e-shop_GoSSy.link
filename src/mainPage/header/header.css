@@ -1,28 +1,28 @@
 .nav {
-    display: flex;
-    list-style-type: none;
-    width: 100%;
-    text-align: left;
-    background-color: #1b1d23;
-    max-height: 100px;
-    align-items: flex-start
+  display: flex;
+  list-style-type: none;
+  width: 100%;
+  text-align: left;
+  background-color: #1b1d23;
+  max-height: 100px;
+  align-items: flex-start;
 }
 
 .bar li {
-    display: inline-block;
-    font-size: 20px;
-    margin: 40px;
+  display: inline-block;
+  font-size: 20px;
+  margin: 40px;
 }
 
 .textInactive {
-    color: white;
-    text-decoration: none;
+  color: white;
+  text-decoration: none;
 }
 
 .textActive {
-    color: black;
-    background: #747474;
-    border-radius: 25px;
-    padding-left: 5px;
-    padding-right: 5px;
+  color: black;
+  background: #747474;
+  border-radius: 25px;
+  padding-left: 5px;
+  padding-right: 5px;
 }

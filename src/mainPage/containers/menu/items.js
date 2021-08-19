@@ -1,10 +1,12 @@
 import s from "./CSS/items.module.css";
-import emptyImg from "../../../files/img/noItem.png";
+import GetImgFood from "./getImgFood.js";
 import { useState } from "react";
 
 export default function Items(props) {
   const [cartRendered, setCartRender] = useState(props.cart.inCart);
   const [countAll, setCountAll] = props.useCountAll();
+
+  if (countAll === null) console.log("error countAll"); //line for ESLint warning
 
   const inCart = {
     isFoodIn(name) {
@@ -38,14 +40,8 @@ export default function Items(props) {
           <div
             className={`${inCart.isFoodIn(p.name) ? s.itemInOrder : s.item}`}
           >
-            <img
-              src={(() => {
-                if (p.icon === undefined) return emptyImg;
-                else return "https://zloi.space/restaurant/images/" + p.icon;
-              })()}
-              onError={(e) => (e.target.src = emptyImg)}
-              className={s.foodImg}
-              alt={"logo"}
+            <GetImgFood
+              src={"https://zloi.space/restaurant/images/" + p.icon}
             />
             <div className={s.name}>
               <div>{p.name}</div>

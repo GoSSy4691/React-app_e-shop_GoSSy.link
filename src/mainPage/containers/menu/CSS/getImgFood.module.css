@@ -1,0 +1,9 @@
+.foodImg {
+    grid-area: A;
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+    border-top: black solid;
+    border-bottom: black solid;
+    border-right: black solid;
+}

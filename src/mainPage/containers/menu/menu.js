@@ -35,7 +35,7 @@ function MenuContainer(props) {
 const CountContext = React.createContext();
 
 function CountProvider(props) {
-  const [countAll, setCountAll] = React.useState(0);
+  const [countAll, setCountAll] = React.useState(props.cart.inCart[0].value);
   const value = React.useMemo(() => [countAll, setCountAll], [countAll]);
   return <CountContext.Provider value={value} {...props} />;
 }
@@ -56,7 +56,7 @@ export default function Menu(props) {
           return <Cart cart={props.cart} getShowList={getShowList} />;
         }
       })()}
-      <CountProvider>
+      <CountProvider cart={props.cart}>
         <CartOnTop cart={props.cart} getShowList={getShowList} />
         <MenuContainer cart={props.cart} getMenu={props.getMenu} />
       </CountProvider>

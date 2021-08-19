@@ -1,4 +1,4 @@
-import s from "./orderView.module.css";
+import s from "./CSS/orderView.module.css";
 
 import foodPolicy from "../../../files/img/foodPolicy.jpg";
 

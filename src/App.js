@@ -5,22 +5,16 @@ import Welcome from "./mainPage/containers/welcome/welcome.js";
 import Menu from "./mainPage/containers/menu/menu.js";
 import OrderView from "./mainPage/containers/menu/orderView.js";
 
-function App(props) {
+export default function App(props) {
   return (
     <div className="app">
-      <Header renderSiteDom={props.renderSiteDom} />
+      <Header />
       <div className="appContainer">
         <Route exact path="/" render={() => <Welcome />} />
         <Route
           exact
           path="/menu"
-          render={() => (
-            <Menu
-              allMenu={props.allMenu}
-              cart={props.cart}
-              renderSiteDom={props.renderSiteDom}
-            />
-          )}
+          render={() => <Menu allMenu={props.allMenu} cart={props.cart} />}
         />
         <Route
           exact
@@ -31,5 +25,3 @@ function App(props) {
     </div>
   );
 }
-
-export default App;

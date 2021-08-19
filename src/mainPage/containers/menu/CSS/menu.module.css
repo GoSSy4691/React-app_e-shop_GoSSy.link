@@ -1,0 +1,44 @@
+.showRoom {
+  padding-bottom: 160px;
+  color: #adb4b0;
+  overflow-x: hidden;
+}
+
+.topBar {
+  position: fixed;
+  width: 100px;
+  right: 50px;
+  top: 10px;
+}
+
+.shopIco {
+  width: 100px;
+  cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
+}
+
+.shopIcoCount {
+  position: fixed;
+  width: 23px;
+  height: 23px;
+  right: 40px;
+  top: 50px;
+  border: solid #adb4b0;
+  border-radius: 20px;
+}
+
+.footerImg {
+  height: 100px;
+  margin-top: 50px;
+  position: relative;
+  bottom: 10px;
+  animation: run 10s infinite;
+}
+
+@keyframes run {
+  0% {
+    left: -60%;
+  }
+  100% {
+    left: 60%;
+  }
+}

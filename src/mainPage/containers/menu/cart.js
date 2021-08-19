@@ -1,4 +1,4 @@
-import s from "./cart.module.css";
+import s from "./CSS/cart.module.css";
 import { NavLink } from "react-router-dom";
 
 export default function Cart(props) {
@@ -7,7 +7,7 @@ export default function Cart(props) {
       <div className={s.cartBox}>
         <button
           className={s.closeButton}
-          onClick={() => props.showCartMenu("close", props.renderSiteDom)}
+          onClick={() => props.getShowList(false)}
         >
           ✖
         </button>

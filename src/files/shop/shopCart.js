@@ -13,8 +13,9 @@ let cart = {
     } else {
       buffer.set(name, 1);
     }
-    cart.inCart.length = 0; // ← clean inCart ↓ and assign new volume
-    Array.from(buffer, ([name, value]) => cart.inCart.push({ name, value }));
+    let output = [];
+    Array.from(buffer, ([name, value]) => output.push({ name, value }));
+    return output;
   },
 
   deleteFood(name) {
@@ -26,8 +27,14 @@ let cart = {
       let countItem = buffer.get(name) - 1;
       buffer.set(name, countItem);
     }
-    cart.inCart.length = 0; // ← clean inCart ↓ and assign new volume
-    Array.from(buffer, ([name, value]) => cart.inCart.push({ name, value }));
+    let output = [];
+    Array.from(buffer, ([name, value]) => output.push({ name, value }));
+    return output;
+  },
+
+  changeCart(newCart) {
+    this.inCart = newCart; // ← clean inCart ↓ and assign new volume
+    // this.inCart.push(newCart);
   },
 };
 

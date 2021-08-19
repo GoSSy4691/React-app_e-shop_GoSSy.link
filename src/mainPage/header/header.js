@@ -2,12 +2,10 @@ import LogoImg from "./logoGoose/logoImage";
 import { NavLink } from "react-router-dom";
 import "./header.css";
 
-export default function Header(props) {
+export default function Header() {
   return (
     <div className="nav">
-      <li>
-        <LogoImg renderSiteDom={props.renderSiteDom} />
-      </li>
+      <LogoImg />
       <div className="bar">
         <li>
           <NavLink

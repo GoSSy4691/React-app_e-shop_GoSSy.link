@@ -2,13 +2,13 @@ import axios from "axios";
 
 let allMenu = [];
 
-function getMenuItems(renderSiteDom) {
+export default async function getMenuItems() {
   if (allMenu.length === 0) {
-    axios
+    await axios
       .get("https://zloi.space/restaurant/api/shops")
       .then((res) => {
         allMenu = res.data[0].menu;
-        renderSiteDom();
+        return allMenu;
       })
       .catch(() => {
         console.log("error get menu");
@@ -16,5 +16,3 @@ function getMenuItems(renderSiteDom) {
   }
   return allMenu;
 }
-
-export default getMenuItems;

@@ -23,7 +23,7 @@ function CartOnTop(props) {
 function MenuContainer(props) {
   const [menuData, updateMenuData] = useState([]);
   if (menuData.length === 0) {
-    props.allMenu().then((data) => updateMenuData(data));
+    props.getMenu().then((data) => updateMenuData(data));
     return <div>Loading</div>;
   } else {
     return [
@@ -58,7 +58,7 @@ export default function Menu(props) {
       })()}
       <CountProvider>
         <CartOnTop cart={props.cart} getShowList={getShowList} />
-        <MenuContainer cart={props.cart} allMenu={props.allMenu} />
+        <MenuContainer cart={props.cart} getMenu={props.getMenu} />
       </CountProvider>
       <img
         alt={"footer"}

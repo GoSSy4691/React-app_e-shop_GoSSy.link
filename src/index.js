@@ -6,11 +6,11 @@ import App from "./App.js";
 import { BrowserRouter } from "react-router-dom";
 
 import cart from "./files/shop/shopCart.js";
-import getMenuItems from "./files/shop/getMenu.js";
+import getMenu from "./files/shop/getMenu.js";
 
 ReactDOM.render(
   <BrowserRouter>
-    <App allMenu={getMenuItems} cart={cart} />
+    <App getMenu={getMenu} cart={cart} />
   </BrowserRouter>,
   document.getElementById("root")
 );

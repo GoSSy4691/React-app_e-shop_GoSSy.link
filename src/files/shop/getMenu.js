@@ -2,7 +2,7 @@ import axios from "axios";
 
 let allMenu = [];
 
-export default async function getMenuItems() {
+export default async function getMenu() {
   if (allMenu.length === 0) {
     await axios
       .get("https://zloi.space/restaurant/api/shops")

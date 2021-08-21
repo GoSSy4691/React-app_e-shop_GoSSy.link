@@ -1,5 +1,6 @@
 import s from "./CSS/items.module.css";
 import GetImgFood from "./getImgFood.js";
+import { ButtonAdd, ButtonDelete } from "./ButtonAddDelete.js";
 import { useState } from "react";
 
 export default function Items(props) {
@@ -13,19 +14,19 @@ export default function Items(props) {
       return cartRendered.find((el) => el.name === name);
     },
 
-    add(name) {
-      let newCart = props.cart.addFood(name);
-      setCartRender(newCart);
-      props.cart.changeCart(newCart);
-      setCountAll(props.cart.inCart[0].value);
-    },
-
-    delete(name) {
-      let newCart = props.cart.deleteFood(name);
-      setCartRender(newCart);
-      props.cart.changeCart(newCart);
-      setCountAll(props.cart.inCart[0].value);
-    },
+    // add(name) {
+    //   let newCart = props.cart.addFood(name);
+    //   setCartRender(newCart);
+    //   props.cart.changeCart(newCart);
+    //   setCountAll(props.cart.inCart[0].value);
+    // },
+    //
+    // delete(name) {
+    //   let newCart = props.cart.deleteFood(name);
+    //   setCartRender(newCart);
+    //   props.cart.changeCart(newCart);
+    //   setCountAll(props.cart.inCart[0].value);
+    // },
   };
 
   return (
@@ -54,12 +55,13 @@ export default function Items(props) {
                 if (inCart.isFoodIn(p.name, cartRendered)) {
                   return (
                     <div className={s.deleteAndCountFood}>
-                      <button
-                        className={s.deleteItem}
-                        onClick={() => inCart.delete(p.name)}
-                      >
-                        -
-                      </button>
+                      <ButtonDelete
+                        name={p.name}
+                        cart={props.cart}
+                        setCartRender={setCartRender}
+                        setCountAll={setCountAll}
+                        style={s.deleteItem}
+                      />
                       <div className={s.countItem}>
                         {cartRendered.find((e) => e.name === p.name).value}
                       </div>
@@ -67,12 +69,13 @@ export default function Items(props) {
                   );
                 }
               })()}
-              <button
-                className={s.buyButton}
-                onClick={() => inCart.add(p.name)}
-              >
-                add
-              </button>
+              <ButtonAdd
+                name={p.name}
+                cart={props.cart}
+                setCartRender={setCartRender}
+                setCountAll={setCountAll}
+                style={s.buyButton}
+              />
             </div>
             <div className={s.description}>
               <div>{p.description}</div>

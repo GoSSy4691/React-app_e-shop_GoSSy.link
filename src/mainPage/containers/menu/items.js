@@ -41,9 +41,7 @@ export default function Items(props) {
           <div
             className={`${inCart.isFoodIn(p.name) ? s.itemInOrder : s.item}`}
           >
-            <GetImgFood
-              src={"https://zloi.space/restaurant/images/" + p.icon}
-            />
+            <GetImgFood imgName={p.icon} />
             <div className={s.name}>
               <div>{p.name}</div>
             </div>

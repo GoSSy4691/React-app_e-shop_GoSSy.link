@@ -1,65 +1,43 @@
 import s from "./CSS/menu.module.css";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import runForestRun from "../../../files/img/runForestRun.png";
 import shopCartIco from "../../../files/img/shopCart.png";
 import Cart from "./cart.js";
 import Items from "./items.js";
-import React, { useState } from "react";
 
 function CartOnTop(props) {
-  const [countAll] = useCountAll();
+  const store = useSelector((state) => state);
   return (
     <div className={s.topBar}>
       <img
         alt={"CartImage"}
         src={shopCartIco}
         className={s.shopIco}
-        onClick={() => props.getShowList(true)}
+        onClick={() => props.openCart(true)}
       />
-      <div className={s.shopIcoCount}>{countAll}</div>
+      <div className={s.shopIcoCount}>{store.itemsCount}</div>
     </div>
   );
 }
 
 function MenuContainer(props) {
-  const [menuData, updateMenuData] = useState([]);
-  if (menuData.length === 0) {
-    props.getMenu().then((data) => updateMenuData(data));
+  const [menu, updateMenu] = useState([]);
+  if (menu.length === 0) {
+    props.getMenu().then((data) => updateMenu(data));
     return <div>Loading</div>;
   } else {
-    return [
-      <Items menuData={menuData} cart={props.cart} useCountAll={useCountAll} />,
-    ];
+    return <Items menu={menu} />;
   }
 }
 
-const CountContext = React.createContext();
-
-function CountProvider(props) {
-  const [countAll, setCountAll] = React.useState(props.cart.inCart[0].value);
-  const value = React.useMemo(() => [countAll, setCountAll], [countAll]);
-  return <CountContext.Provider value={value} {...props} />;
-}
-
-function useCountAll() {
-  const context = React.useContext(CountContext);
-  if (!context)
-    throw new Error(`useCountAll must be used within a CountProvider`);
-  return context;
-}
-
 export default function Menu(props) {
-  const [showList, getShowList] = useState(false);
+  const [isCartOpen, openCart] = useState(false);
   return (
     <div className={s.showRoom}>
-      {(() => {
-        if (showList === true) {
-          return <Cart cart={props.cart} getShowList={getShowList} />;
-        }
-      })()}
-      <CountProvider cart={props.cart}>
-        <CartOnTop cart={props.cart} getShowList={getShowList} />
-        <MenuContainer cart={props.cart} getMenu={props.getMenu} />
-      </CountProvider>
+      {isCartOpen ? <Cart openCart={openCart} /> : false}
+      <CartOnTop openCart={openCart} />
+      <MenuContainer getMenu={props.getMenu} />
       <img
         alt={"footer"}
         className={s.footerImg}

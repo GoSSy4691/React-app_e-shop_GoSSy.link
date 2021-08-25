@@ -1,46 +1,31 @@
 import s from "./CSS/items.module.css";
+import { useDispatch, useSelector } from "react-redux";
 import GetImgFood from "./getImgFood.js";
-import { ButtonAdd, ButtonDelete } from "./ButtonAddDelete.js";
-import { useState } from "react";
 
 export default function Items(props) {
-  const [cartRendered, setCartRender] = useState(props.cart.inCart);
-  const [countAll, setCountAll] = props.useCountAll();
+  const dispatch = useDispatch();
+  const store = useSelector((state) => state);
 
-  if (countAll === null) console.log("error countAll"); //line for ESLint warning
+  const addFood = (name) => {
+    dispatch({ type: "ADD_FOOD", payload: name });
+  };
 
-  const inCart = {
-    isFoodIn(name) {
-      return cartRendered.find((el) => el.name === name);
-    },
+  const deleteFood = (name) => {
+    dispatch({ type: "DELETE_FOOD", payload: name });
+  };
 
-    // add(name) {
-    //   let newCart = props.cart.addFood(name);
-    //   setCartRender(newCart);
-    //   props.cart.changeCart(newCart);
-    //   setCountAll(props.cart.inCart[0].value);
-    // },
-    //
-    // delete(name) {
-    //   let newCart = props.cart.deleteFood(name);
-    //   setCartRender(newCart);
-    //   props.cart.changeCart(newCart);
-    //   setCountAll(props.cart.inCart[0].value);
-    // },
+  const isFoodIn = (name) => {
+    return store.selectedFood.has(name);
   };
 
   return (
     <div>
-      {props.menuData.map((p) => (
+      {props.menu.map((p) => (
         <div
-          className={`${
-            inCart.isFoodIn(p.name) ? s.foodElementInOrder : s.foodElement
-          }`}
+          className={isFoodIn(p.name) ? s.foodElementInOrder : s.foodElement}
           key={p.id}
         >
-          <div
-            className={`${inCart.isFoodIn(p.name) ? s.itemInOrder : s.item}`}
-          >
+          <div className={isFoodIn(p.name) ? s.itemInOrder : s.item}>
             <GetImgFood imgName={p.icon} />
             <div className={s.name}>
               <div>{p.name}</div>
@@ -50,38 +35,33 @@ export default function Items(props) {
                 <div>{p.cost + " ₽"}</div>
               </div>
               {(() => {
-                if (inCart.isFoodIn(p.name, cartRendered)) {
+                if (isFoodIn(p.name)) {
                   return (
                     <div className={s.deleteAndCountFood}>
-                      <ButtonDelete
-                        name={p.name}
-                        cart={props.cart}
-                        setCartRender={setCartRender}
-                        setCountAll={setCountAll}
-                        style={s.deleteItem}
-                      />
+                      <button
+                        className={s.deleteItem}
+                        onClick={() => deleteFood(p.name)}
+                      >
+                        -
+                      </button>
                       <div className={s.countItem}>
-                        {cartRendered.find((e) => e.name === p.name).value}
+                        {store.selectedFood.get(p.name)}
                       </div>
                     </div>
                   );
                 }
               })()}
-              <ButtonAdd
-                name={p.name}
-                cart={props.cart}
-                setCartRender={setCartRender}
-                setCountAll={setCountAll}
-                style={s.buyButton}
-              />
+              <button className={s.buyButton} onClick={() => addFood(p.name)}>
+                add
+              </button>
             </div>
             <div className={s.description}>
-              <div>{p.description}</div>
               {(() => {
-                if (p.description === undefined) {
+                if (p.description.length < 1) {
                   p.description = "Пока ещё нет описания. Но это очень вкусно";
                 }
               })()}
+              {p.description}
             </div>
           </div>
         </div>

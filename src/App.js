@@ -14,7 +14,7 @@ export default function App(props) {
         <Route
           exact
           path="/menu"
-          render={() => <Menu getMenu={props.getMenu} cart={props.cart} />}
+          render={() => <Menu getMenu={props.getMenu} />}
         />
         <Route
           exact

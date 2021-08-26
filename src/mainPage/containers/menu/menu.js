@@ -35,7 +35,7 @@ export default function Menu(props) {
   const [isCartOpen, openCart] = useState(false);
   return (
     <div className={s.showRoom}>
-      {isCartOpen ? <Cart openCart={openCart} /> : false}
+      {isCartOpen ? <Cart openCart={openCart} /> : null}
       <CartOnTop openCart={openCart} />
       <MenuContainer getMenu={props.getMenu} />
       <img

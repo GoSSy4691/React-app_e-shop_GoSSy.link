@@ -22,10 +22,16 @@ export default function Items(props) {
     <div>
       {props.menu.map((p) => (
         <div
-          className={isFoodIn(p.name) ? s.foodElementInOrder : s.foodElement}
+          className={s.foodElement}
+          style={isFoodIn(p.name) ? { background: "#1d3e1f" } : null}
           key={p.id}
         >
-          <div className={isFoodIn(p.name) ? s.itemInOrder : s.item}>
+          <div
+            className={`
+            ${s.item} 
+            ${isFoodIn(p.name) ? s.itemActive : s.itemNotActive}
+            `}
+          >
             <GetImgFood imgName={p.icon} />
             <div className={s.name}>
               <div>{p.name}</div>

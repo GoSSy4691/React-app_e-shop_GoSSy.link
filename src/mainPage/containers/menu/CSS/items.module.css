@@ -1,15 +1,3 @@
-.foodElementInOrder {
-    vertical-align: top;
-    display: inline-block;
-    border: solid black;
-    font-size: 20px;
-    margin: 10px;
-    width: 200px;
-    height: 195px;
-    text-align: center;
-    background: #1d3e1f;
-}
-
 .foodElement {
     vertical-align: top;
     display: inline-block;
@@ -19,28 +7,6 @@
     width: 200px;
     height: 195px;
     text-align: center;
-}
-
-.itemInOrder {
-    display: grid;
-    height: 100%;
-    grid-template-areas:
-            "D D"
-            "A B"
-            "C C";
-    align-content: start;
-}
-
-.itemInOrder:hover {
-    margin-top: -3.5px;
-    margin-left: -2.5px;
-    border: solid black;
-    width: 100%;
-    backface-visibility: hidden;
-    background-color: inherit;
-    height: 416px;
-    position: relative;
-    z-index: 1;
 }
 
 .item {
@@ -59,10 +25,17 @@
     border: solid black;
     width: 100%;
     backface-visibility: hidden;
-    background-color: #4d4f4e;
     height: 416px;
     position: relative;
     z-index: 1;
+}
+
+.itemActive:hover {
+    background-color: inherit
+}
+
+.itemNotActive:hover {
+    background-color: #4d4f4e
 }
 
 .item:hover .description {

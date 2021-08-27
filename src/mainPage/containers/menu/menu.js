@@ -1,13 +1,15 @@
 import s from "./CSS/menu.module.css";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import runForestRun from "../../../files/img/runForestRun.png";
 import shopCartIco from "../../../files/img/shopCart.png";
 import Cart from "./cart.js";
 import Items from "./items.js";
+import LeftBar from "./LeftBar.js";
+import getShopData from "../../../files/shop/getShopData.js";
 
 function CartOnTop(props) {
-  const store = useSelector((state) => state);
+  const store = useSelector((state) => state.cart);
   return (
     <div className={s.topBar}>
       <img
@@ -21,23 +23,31 @@ function CartOnTop(props) {
   );
 }
 
-function MenuContainer(props) {
-  const [menu, updateMenu] = useState([]);
+function MenuContainer() {
+  const menu = useSelector((state) => state.menu.menuOnDisplay);
+  const dispatch = useDispatch();
   if (menu.length === 0) {
-    props.getMenu().then((data) => updateMenu(data));
+    getShopData().then((data) =>
+      dispatch({ type: "GET_ALL_MENU", payload: data })
+    );
     return <div>Loading</div>;
   } else {
-    return <Items menu={menu} />;
+    return (
+      <div>
+        <LeftBar />
+        <Items />
+      </div>
+    );
   }
 }
 
-export default function Menu(props) {
+export default function Menu() {
   const [isCartOpen, openCart] = useState(false);
   return (
     <div className={s.showRoom}>
       {isCartOpen ? <Cart openCart={openCart} /> : null}
       <CartOnTop openCart={openCart} />
-      <MenuContainer getMenu={props.getMenu} />
+      <MenuContainer />
       <img
         alt={"footer"}
         className={s.footerImg}

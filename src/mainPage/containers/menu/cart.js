@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 export default function Cart(props) {
-  const store = useSelector((state) => state);
+  const store = useSelector((state) => state.cart);
   return (
     <div className={s.darkenBackgroundShow}>
       <div className={s.cartBox}>

@@ -2,9 +2,10 @@ import s from "./CSS/items.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import GetImgFood from "./getImgFood.js";
 
-export default function Items(props) {
+export default function Items() {
   const dispatch = useDispatch();
-  const store = useSelector((state) => state);
+  const store = useSelector((state) => state.cart);
+  const menu = useSelector((state) => state.menu.menuOnDisplay);
 
   const addFood = (name) => {
     dispatch({ type: "ADD_FOOD", payload: name });
@@ -19,9 +20,9 @@ export default function Items(props) {
   };
 
   return (
-    <div>
-      {props.menu.map((p) => (
-        <div
+    <div className={s.menuItems}>
+      {menu.map((p) => (
+        <li
           className={s.foodElement}
           style={isFoodIn(p.name) ? { background: "#1d3e1f" } : null}
           key={p.id}
@@ -70,7 +71,7 @@ export default function Items(props) {
               {p.description}
             </div>
           </div>
-        </div>
+        </li>
       ))}
     </div>
   );

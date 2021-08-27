@@ -1,12 +1,10 @@
-import { createStore } from "redux";
-
 let cart = new Map();
 let data = {
   itemsCount: 0,
   selectedFood: cart,
 };
 
-const storeReducer = (state = data, action) => {
+export const cartReducer = (state = data, action) => {
   let name = action.payload;
   switch (action.type) {
     case "ADD_FOOD":
@@ -27,5 +25,3 @@ const storeReducer = (state = data, action) => {
       return state;
   }
 };
-
-export const store = createStore(storeReducer);

@@ -1,3 +1,7 @@
+.menuItems {
+    padding-left: 50px;
+}
+
 .foodElement {
     vertical-align: top;
     display: inline-block;

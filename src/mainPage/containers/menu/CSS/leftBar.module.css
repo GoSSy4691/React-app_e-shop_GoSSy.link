@@ -1,0 +1,26 @@
+.box {
+    position: fixed;
+    width: 70px;
+    height: 100%;
+    background-color: #282c34;
+    border-right: solid 5px #1b1d23;
+    z-index: 3;
+}
+
+.box:hover {
+    width: 200px;
+}
+
+.type {
+    background-color: #1b1d23;
+    width: inherit;
+    height: 40px;
+    font-size: 25px;
+    display: inline-block;
+    white-space: nowrap;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    overflow: hidden;
+    color: white;
+    cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
+}

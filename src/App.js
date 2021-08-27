@@ -11,11 +11,7 @@ export default function App(props) {
       <Header />
       <div className="appContainer">
         <Route exact path="/" render={() => <Welcome />} />
-        <Route
-          exact
-          path="/menu"
-          render={() => <Menu getMenu={props.getMenu} />}
-        />
+        <Route exact path="/menu" render={() => <Menu />} />
         <Route
           exact
           path="/order"

@@ -1,18 +1,18 @@
 import axios from "axios";
 
-let allMenu = [];
+let allData = [];
 
-export default async function getMenu() {
-  if (allMenu.length === 0) {
+export default async function getShopData() {
+  if (allData.length === 0) {
     await axios
       .get("https://zloi.space/restaurant/api/shops")
       .then((res) => {
-        allMenu = res.data[0].menu;
-        return allMenu;
+        allData = res.data;
+        return allData;
       })
       .catch(() => {
         console.log("error get menu");
       });
   }
-  return allMenu;
+  return allData;
 }

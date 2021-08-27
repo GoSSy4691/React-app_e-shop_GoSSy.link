@@ -1,19 +1,11 @@
 import s from "./CSS/items.module.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import GetImgFood from "./getImgFood.js";
+import { ButtonAdd, ButtonDelete } from "./ButtonAddDelete.js";
 
 export default function Items() {
-  const dispatch = useDispatch();
   const store = useSelector((state) => state.cart);
   const menu = useSelector((state) => state.menu.menuOnDisplay);
-
-  const addFood = (name) => {
-    dispatch({ type: "ADD_FOOD", payload: name });
-  };
-
-  const deleteFood = (name) => {
-    dispatch({ type: "DELETE_FOOD", payload: name });
-  };
 
   const isFoodIn = (name) => {
     return store.selectedFood.has(name);
@@ -45,12 +37,7 @@ export default function Items() {
                 if (isFoodIn(p.name)) {
                   return (
                     <div className={s.deleteAndCountFood}>
-                      <button
-                        className={s.deleteItem}
-                        onClick={() => deleteFood(p.name)}
-                      >
-                        -
-                      </button>
+                      <ButtonDelete name={p.name} style={s.deleteItem} />
                       <div className={s.countItem}>
                         {store.selectedFood.get(p.name)}
                       </div>
@@ -58,9 +45,7 @@ export default function Items() {
                   );
                 }
               })()}
-              <button className={s.buyButton} onClick={() => addFood(p.name)}>
-                add
-              </button>
+              <ButtonAdd name={p.name} style={s.buyButton} />
             </div>
             <div className={s.description}>
               {(() => {

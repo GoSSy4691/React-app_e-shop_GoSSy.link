@@ -81,3 +81,35 @@
   box-shadow: 0 5px #666;
   transform: translateY(-15%);
 }
+
+.foodElement {
+  display: flex;
+  justify-content: flex-end;
+  height: 40px;
+  align-items: center;
+  border-bottom: solid 2px black;
+}
+
+.selectedFood {
+  width: 240px;
+}
+
+.countFood {
+  margin-right: 10px;
+}
+.buttonsBox {
+
+}
+
+.buttonAddDelete {
+  width: 40px;
+  height: 30px;
+  border-radius: 25px;
+  background: #4d4f4e;
+  border-color: white;
+  font-size: 35px;
+  line-height: 0;
+  vertical-align:top;
+  font-family: "Comic Sans MS", sans-serif;
+  cursor: url(https://cdn.custom-cursor.com/db/4129/32/arrow2402.png), auto;
+}

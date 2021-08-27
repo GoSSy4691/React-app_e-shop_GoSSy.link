@@ -1,6 +1,7 @@
 import s from "./CSS/cart.module.css";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { ButtonAdd, ButtonDelete } from "./ButtonAddDelete";
 
 export default function Cart(props) {
   const store = useSelector((state) => state.cart);
@@ -13,9 +14,24 @@ export default function Cart(props) {
         <div className={s.showCart}>
           <div className={s.shoppingCartTitle}>Your choose:</div>
           {Array.from(store.selectedFood, ([name, value], index) => (
-            <li key={Math.random()}>
-              {index + 1} ) {name} - {value} pcs
-            </li>
+            <div className={s.foodElement} key={index}>
+              <div className={s.selectedFood}>
+                {index + 1} ) {name}
+              </div>
+              <div className={s.countFood}>{value} pcs</div>
+              <div className={s.buttonsBox}>
+                <ButtonAdd
+                  text={"+"}
+                  foodName={name}
+                  style={s.buttonAddDelete}
+                />
+                <ButtonDelete
+                  text={"-"}
+                  foodName={name}
+                  style={s.buttonAddDelete}
+                />
+              </div>
+            </div>
           ))}
         </div>
         {(() => {

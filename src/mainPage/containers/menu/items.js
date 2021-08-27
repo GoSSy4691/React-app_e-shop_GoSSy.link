@@ -37,7 +37,11 @@ export default function Items() {
                 if (isFoodIn(p.name)) {
                   return (
                     <div className={s.deleteAndCountFood}>
-                      <ButtonDelete name={p.name} style={s.deleteItem} />
+                      <ButtonDelete
+                        text={"-"}
+                        foodName={p.name}
+                        style={s.deleteItem}
+                      />
                       <div className={s.countItem}>
                         {store.selectedFood.get(p.name)}
                       </div>
@@ -45,7 +49,7 @@ export default function Items() {
                   );
                 }
               })()}
-              <ButtonAdd name={p.name} style={s.buyButton} />
+              <ButtonAdd text={"add"} foodName={p.name} style={s.buyButton} />
             </div>
             <div className={s.description}>
               {(() => {

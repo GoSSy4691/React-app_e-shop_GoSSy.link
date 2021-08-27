@@ -3,13 +3,13 @@ import { useDispatch } from "react-redux";
 export function ButtonAdd(props) {
   const dispatch = useDispatch();
 
-  const addFood = (name) => {
-    dispatch({ type: "ADD_FOOD", payload: name });
+  const addFood = (foodName) => {
+    dispatch({ type: "ADD_FOOD", payload: foodName });
   };
 
   return (
-    <button className={props.style} onClick={() => addFood(props.name)}>
-      add
+    <button className={props.style} onClick={() => addFood(props.foodName)}>
+      {props.text}
     </button>
   );
 }
@@ -17,13 +17,13 @@ export function ButtonAdd(props) {
 export function ButtonDelete(props) {
   const dispatch = useDispatch();
 
-  const deleteFood = (name) => {
-    dispatch({ type: "DELETE_FOOD", payload: name });
+  const deleteFood = (foodName) => {
+    dispatch({ type: "DELETE_FOOD", payload: foodName });
   };
 
   return (
-    <button className={props.style} onClick={() => deleteFood(props.name)}>
-      -
+    <button className={props.style} onClick={() => deleteFood(props.foodName)}>
+      {props.text}
     </button>
   );
 }

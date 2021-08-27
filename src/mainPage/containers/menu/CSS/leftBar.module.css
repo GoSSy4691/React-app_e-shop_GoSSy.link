@@ -4,7 +4,7 @@
     height: 100%;
     background-color: #282c34;
     border-right: solid 5px #1b1d23;
-    z-index: 3;
+    z-index: 1;
 }
 
 .box:hover {

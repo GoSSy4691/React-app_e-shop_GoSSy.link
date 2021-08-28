@@ -2,10 +2,11 @@ import s from "./CSS/getImgFood.module.css";
 import emptyImg from "../../../files/img/noItem.png";
 import { useState } from "react";
 
-const LoadableImage = (props) => {
+const GetImgFood = (props) => {
   const [loaded, setLoaded] = useState(false);
 
   function addressName(imgName) {
+    if (imgName === null) return emptyImg;
     if (imgName.length < 1) return emptyImg;
     return "https://zloi.space/restaurant/images/" + imgName;
   }
@@ -21,4 +22,4 @@ const LoadableImage = (props) => {
   );
 };
 
-export default LoadableImage;
+export default GetImgFood;

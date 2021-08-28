@@ -1,6 +1,6 @@
 import rotateIt from "../../../files/img/logo-goose.png";
 import laser from "../../../files/img/laser.png";
-import "./gooses.css";
+import s from "./gooses.module.css";
 import { useState } from "react";
 
 export default function LogoImg() {
@@ -8,20 +8,22 @@ export default function LogoImg() {
 
   let blaster = {
     src: laser,
-    className: "lasers_view",
+    className: s.lasers_view,
     alt: "lasers",
     key: Math.random(),
   };
 
   return (
     <div>
-      <img
-        src={rotateIt}
-        className={"mainGoose_view"}
-        onClick={() => setBuffer(buffer.concat([blaster]))}
-        alt={"logo"}
-        title={"don't click"}
-      />
+      <div className={s.imgHeaderBack}>
+        <img
+          src={rotateIt}
+          className={s.mainGoose_view}
+          onClick={() => setBuffer(buffer.concat([blaster]))}
+          alt={"logo"}
+          title={"don't click"}
+        />
+      </div>
       {buffer.map((p) => (
         <img src={p.src} className={p.className} alt={p.alt} key={p.key} />
       ))}

@@ -12,12 +12,9 @@ function CartOnTop(props) {
   const store = useSelector((state) => state.cart);
   return (
     <div className={s.topBar}>
-      <img
-        alt={"CartImage"}
-        src={shopCartIco}
-        className={s.shopIco}
-        onClick={() => props.openCart(true)}
-      />
+      <div className={s.topImgBack} onClick={() => props.openCart(true)}>
+        <img alt={"CartImage"} src={shopCartIco} className={s.shopIco} />
+      </div>
       <div className={s.shopIcoCount}>{store.itemsCount}</div>
     </div>
   );

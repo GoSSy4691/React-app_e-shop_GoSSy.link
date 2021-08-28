@@ -1,17 +1,17 @@
 import LogoImg from "./logoGoose/logoImage";
 import { NavLink } from "react-router-dom";
-import "./header.css";
+import s from "./header.module.css";
 
 export default function Header() {
   return (
-    <div className="nav">
+    <div className={s.nav}>
       <LogoImg />
-      <div className="bar">
+      <div className={s.bar}>
         <li>
           <NavLink
-            className="textInactive"
+            className={s.textInactive}
             exact
-            activeClassName="textActive"
+            activeClassName={s.textActive}
             to="/"
           >
             Welcome
@@ -19,9 +19,9 @@ export default function Header() {
         </li>
         <li>
           <NavLink
-            className="textInactive"
+            className={s.textInactive}
             exact
-            activeClassName="textActive"
+            activeClassName={s.textActive}
             to="/menu"
           >
             Menu

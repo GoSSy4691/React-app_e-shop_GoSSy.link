@@ -11,6 +11,11 @@
   top: 10px;
 }
 
+.topImgBack {
+  width: 100px;
+  height: 90px;
+}
+
 .shopIco {
   width: 100px;
   cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;

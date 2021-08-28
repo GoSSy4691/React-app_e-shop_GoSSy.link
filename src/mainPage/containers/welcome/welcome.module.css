@@ -5,7 +5,13 @@
   color: white;
 }
 
+.welocmeImgback{
+
+}
+
 .welcomeImg {
+  width: 355px;
+  height: 431px;
 }
 
 .description {

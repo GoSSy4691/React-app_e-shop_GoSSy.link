@@ -4,12 +4,14 @@ import welcomeImg from "../../../files/img/welcomeImg.png";
 function Welcome() {
   return (
     <div className={s.divContainer}>
-      <img
-        src={welcomeImg}
-        className={s.welcomeImg}
-        key={Math.random()}
-        alt={"welcomeImg"}
-      />
+      <div className={s.welocmeImgback}>
+        <img
+          src={welcomeImg}
+          className={s.welcomeImg}
+          key={Math.random()}
+          alt={"welcomeImg"}
+        />
+      </div>
       <div className={s.description}>
         Hi &#128400; this site created for learning React's capabilities.
         <br />

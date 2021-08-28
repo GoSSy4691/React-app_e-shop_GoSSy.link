@@ -26,18 +26,26 @@ function CartOnTop(props) {
 function MenuContainer() {
   const menu = useSelector((state) => state.menu.menuOnDisplay);
   const dispatch = useDispatch();
-  if (menu.length === 0) {
-    getShopData().then((data) =>
-      dispatch({ type: "GET_ALL_MENU", payload: data })
-    );
-    return <div>Loading</div>;
-  } else {
-    return (
-      <div>
-        <LeftBar />
-        <Items />
-      </div>
-    );
+  switch (menu) {
+    case "Загрузка":
+      getShopData().then((data) =>
+        dispatch({ type: "GET_ALL_MENU", payload: data })
+      );
+      return <div className={s.emptyItemDialog}>Loading</div>;
+    case "Пусто":
+      return (
+        <div>
+          <LeftBar />
+          <div className={s.emptyItemDialog}>Nothing find</div>
+        </div>
+      );
+    default:
+      return (
+        <div>
+          <LeftBar />
+          <Items />
+        </div>
+      );
   }
 }
 

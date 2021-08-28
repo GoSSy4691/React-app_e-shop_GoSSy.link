@@ -1,6 +1,6 @@
 let menu = {
   menuAll: [],
-  menuOnDisplay: [],
+  menuOnDisplay: "Загрузка",
   categoryAll: [
     {
       id: 0,
@@ -29,6 +29,9 @@ export const menuReducer = (state = menu, action) => {
         state.menuOnDisplay = state.menuAll.filter(
           (e) => e.id_category === state.categoryNow.id
         );
+        if (state.menuOnDisplay.length === 0) {
+          state.menuOnDisplay = "Пусто";
+        }
       }
       return state;
     default:

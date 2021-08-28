@@ -8,7 +8,8 @@ export default function Items() {
   const menu = useSelector((state) => state.menu.menuOnDisplay);
 
   const isFoodIn = (name) => {
-    return store.selectedFood.has(name);
+    let answer = store.selectedFood.findIndex((el) => el.name === name);
+    return answer > -1;
   };
 
   return (
@@ -39,17 +40,26 @@ export default function Items() {
                     <div className={s.deleteAndCountFood}>
                       <ButtonDelete
                         text={"-"}
-                        foodName={p.name}
+                        name={p.name}
+                        cost={p.cost}
                         style={s.deleteItem}
                       />
                       <div className={s.countItem}>
-                        {store.selectedFood.get(p.name)}
+                        {
+                          store.selectedFood.find((el) => el.name === p.name)
+                            .amount
+                        }
                       </div>
                     </div>
                   );
                 }
               })()}
-              <ButtonAdd text={"add"} foodName={p.name} style={s.buyButton} />
+              <ButtonAdd
+                text={"add"}
+                name={p.name}
+                cost={p.cost}
+                style={s.buyButton}
+              />
             </div>
             <div className={s.description}>
               {(() => {

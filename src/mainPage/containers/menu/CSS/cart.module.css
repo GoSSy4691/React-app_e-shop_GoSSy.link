@@ -94,22 +94,50 @@
   width: 240px;
 }
 
-.countFood {
-  margin-right: 10px;
+.priceFood {
+  padding-right: 10px;
 }
+
 .buttonsBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.countFood {
+  width: 25px;
+}
+
+.button {
+  --t: 3px; /* Thickness */
+  --l: 38px; /* size of the symbol */
+  --s: 5px; /* space around the symbol */
+  --c1: #fff; /* Plus color*/
+  --c2: black; /* background color*/
+
+  display: inline-block;
+  width: var(--l);
+  height: var(--l);
+  padding: var(--s);
+  box-sizing: border-box; /*Remove this if you don't want space to be included in the size*/
+}
+
+.Add {
+  background: linear-gradient(var(--c1), var(--c1)) content-box,
+  linear-gradient(var(--c1), var(--c1)) content-box,
+  var(--c2);
 
 }
 
-.buttonAddDelete {
-  width: 40px;
-  height: 30px;
-  border-radius: 25px;
-  background: #4d4f4e;
-  border-color: white;
-  font-size: 35px;
-  line-height: 0;
-  vertical-align:top;
-  font-family: "Comic Sans MS", sans-serif;
-  cursor: url(https://cdn.custom-cursor.com/db/4129/32/arrow2402.png), auto;
+.Delete {
+  background: linear-gradient(var(--c1), var(--c1)) content-box,
+  var(--c2);
+}
+
+._style {
+  background-position: center;
+  background-size: 100% var(--t), var(--t) 100%;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  border: solid 1px gray;
 }

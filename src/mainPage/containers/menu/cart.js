@@ -4,7 +4,13 @@ import { useSelector } from "react-redux";
 import { ButtonAdd, ButtonDelete } from "./ButtonAddDelete";
 
 export default function Cart(props) {
-  const store = useSelector((state) => state.cart);
+  const cart = useSelector((state) => state.cart);
+
+  const isAnyFood = () => {
+    if (cart.selectedFood.length === 0) return false;
+    if (cart.selectedFood.length > 0) return true;
+  };
+
   return (
     <div className={s.darkenBackgroundShow}>
       <div className={s.cartBox}>
@@ -13,36 +19,37 @@ export default function Cart(props) {
         </button>
         <div className={s.showCart}>
           <div className={s.shoppingCartTitle}>Your choose:</div>
-          {Array.from(store.selectedFood, ([name, value], index) => (
-            <div className={s.foodElement} key={index}>
-              <div className={s.selectedFood}>
-                {index + 1} ) {name}
+          {isAnyFood() ? (
+            cart.selectedFood.map((p, index) => (
+              <div className={s.foodElement} key={index}>
+                <div className={s.selectedFood}>
+                  {index + 1} ) {p.name}
+                </div>
+                <div className={s.priceFood}>{p.costAll} ₽</div>
+                <div className={s.buttonsBox}>
+                  <ButtonAdd
+                    name={p.name}
+                    cost={p.costOne}
+                    style={`${s.button} ${s.Add} ${s._style}`}
+                  />
+                  <div className={s.countFood}>{p.amount}</div>
+                  <ButtonDelete
+                    name={p.name}
+                    cost={p.costOne}
+                    style={`${s.button} ${s.Delete} ${s._style}`}
+                  />
+                </div>
               </div>
-              <div className={s.countFood}>{value} pcs</div>
-              <div className={s.buttonsBox}>
-                <ButtonAdd
-                  text={"+"}
-                  foodName={name}
-                  style={s.buttonAddDelete}
-                />
-                <ButtonDelete
-                  text={"-"}
-                  foodName={name}
-                  style={s.buttonAddDelete}
-                />
-              </div>
-            </div>
-          ))}
+            ))
+          ) : (
+            <div>Empty</div>
+          )}
         </div>
-        {(() => {
-          if (store.selectedFood.size > 0) {
-            return (
-              <NavLink className={s.buttonToOrder} exact to="/order">
-                Order
-              </NavLink>
-            );
-          }
-        })()}
+        {isAnyFood() ? (
+          <NavLink className={s.buttonToOrder} exact to="/order">
+            Order {cart.selectedFood.reduce((a, b) => a + b.costAll, 0)} ₽
+          </NavLink>
+        ) : null}
       </div>
     </div>
   );

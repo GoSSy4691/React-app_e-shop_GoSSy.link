@@ -1,24 +1,45 @@
-let cart = new Map();
-let data = {
+let cart = {
   itemsCount: 0,
-  selectedFood: cart,
+  selectedFood: [],
 };
 
-export const cartReducer = (state = data, action) => {
-  let name = action.payload;
+export const cartReducer = (state = cart, action) => {
+  let payload = action.payload;
+
+  const howManyItems = () => {
+    let find = state.selectedFood.find((el) => el.name === payload.name);
+    return find === undefined ? 0 : find.amount;
+  };
+
+  const findIndex = () => {
+    return state.selectedFood.findIndex((el) => el.name === payload.name);
+  };
+
   switch (action.type) {
     case "ADD_FOOD":
-      if (cart.get(name) === undefined) {
-        cart.set(name, 1);
+      if (howManyItems() === 0) {
+        state.selectedFood.push({
+          name: payload.name,
+          costOne: payload.cost,
+          amount: 1,
+          costAll: payload.cost,
+        });
       } else {
-        cart.set(name, cart.get(name) + 1);
+        let index = findIndex();
+        state.selectedFood[index].amount++;
+        state.selectedFood[index].costAll =
+          state.selectedFood[index].costAll + state.selectedFood[index].costOne;
       }
       return { ...state, itemsCount: state.itemsCount + 1 };
     case "DELETE_FOOD":
-      if (cart.get(name) === 1) {
-        cart.delete(name);
+      if (howManyItems() === 1) {
+        let index = findIndex();
+        state.selectedFood.splice(index, 1);
       } else {
-        cart.set(name, cart.get(name) - 1);
+        let index = findIndex();
+        state.selectedFood[index].amount--;
+        state.selectedFood[index].costAll =
+          state.selectedFood[index].costAll - state.selectedFood[index].costOne;
       }
       return { ...state, itemsCount: state.itemsCount - 1 };
     default:

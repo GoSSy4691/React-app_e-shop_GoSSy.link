@@ -1,5 +1,4 @@
 import s from "./CSS/menu.module.css";
-import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import runForestRun from "../../../files/img/runForestRun.png";
 import shopCartIco from "../../../files/img/shopCart.png";
@@ -8,11 +7,15 @@ import Items from "./items.js";
 import LeftBar from "./LeftBar.js";
 import getShopData from "../../../files/shop/getShopData.js";
 
-function CartOnTop(props) {
+export function CartOnTop() {
   const store = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
   return (
     <div className={s.topBar}>
-      <div className={s.topImgBack} onClick={() => props.openCart(true)}>
+      <div
+        className={s.topImgBack}
+        onClick={() => dispatch({ type: "OPEN_CART" })}
+      >
         <img alt={"CartImage"} src={shopCartIco} className={s.shopIco} />
       </div>
       <div className={s.shopIcoCount}>{store.itemsCount}</div>
@@ -31,14 +34,14 @@ function MenuContainer() {
       return <div className={s.emptyItemDialog}>Loading</div>;
     case "Пусто":
       return (
-        <div>
+        <div className={"menu_container"}>
           <LeftBar />
           <div className={s.emptyItemDialog}>Nothing find</div>
         </div>
       );
     default:
       return (
-        <div>
+        <div className={"menu_container"}>
           <LeftBar />
           <Items />
         </div>
@@ -46,12 +49,11 @@ function MenuContainer() {
   }
 }
 
-export default function Menu() {
-  const [isCartOpen, openCart] = useState(false);
+export function Menu() {
+  const isCartShow = useSelector((state) => state.isCartShow);
   return (
     <div className={s.showRoom}>
-      {isCartOpen ? <Cart openCart={openCart} /> : null}
-      <CartOnTop openCart={openCart} />
+      {isCartShow ? <Cart /> : null}
       <MenuContainer />
       <img
         alt={"footer"}

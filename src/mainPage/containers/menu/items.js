@@ -28,7 +28,7 @@ export default function Items() {
           >
             <GetImgFood imgName={p.icon} />
             <div className={s.name}>
-              <div>{p.name}</div>
+              <span>{p.name}</span>
             </div>
             <div className={s.sectorOfPriceCountBuy}>
               <div className={s.price}>

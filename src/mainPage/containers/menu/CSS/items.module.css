@@ -1,5 +1,5 @@
 .menuItems {
-    padding-left: 50px;
+    margin-left: 75px;
 }
 
 .foodElement {
@@ -48,12 +48,13 @@
 
 .name {
     grid-area: D;
-    height: 20px;
+    height: 24px;
     width: 200px;
-    list-style-type: none;
-    padding-bottom: 6px;
-    overflow: hidden;
-    white-space: nowrap;
+}
+
+.name span {
+    vertical-align: top;
+    line-height: 21px;
 }
 
 .sectorOfPriceCountBuy {

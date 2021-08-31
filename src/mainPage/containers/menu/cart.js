@@ -1,10 +1,11 @@
 import s from "./CSS/cart.module.css";
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ButtonAdd, ButtonDelete } from "./ButtonAddDelete";
 
-export default function Cart(props) {
+export default function Cart() {
   const cart = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
 
   const isAnyFood = () => {
     if (cart.selectedFood.length === 0) return false;
@@ -14,7 +15,10 @@ export default function Cart(props) {
   return (
     <div className={s.darkenBackgroundShow}>
       <div className={s.cartBox}>
-        <button className={s.closeButton} onClick={() => props.openCart(false)}>
+        <button
+          className={s.closeButton}
+          onClick={() => dispatch({ type: "CLOSE_CART" })}
+        >
           ✖
         </button>
         <div className={s.showCart}>

@@ -14,16 +14,14 @@ export default function LogoImg() {
   };
 
   return (
-    <div>
-      <div className={s.imgHeaderBack}>
-        <img
-          src={rotateIt}
-          className={s.mainGoose_view}
-          onClick={() => setBuffer(buffer.concat([blaster]))}
-          alt={"logo"}
-          title={"don't click"}
-        />
-      </div>
+    <div className={s.imgHeaderBack}>
+      <img
+        src={rotateIt}
+        className={s.mainGoose_view}
+        onClick={() => setBuffer(buffer.concat([blaster]))}
+        alt={"logo"}
+        title={"don't click"}
+      />
       {buffer.map((p) => (
         <img src={p.src} className={p.className} alt={p.alt} key={p.key} />
       ))}

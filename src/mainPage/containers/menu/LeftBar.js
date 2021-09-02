@@ -20,14 +20,20 @@ export default function LeftBar() {
         className={s.categoryButton}
         onClick={() => getCategoryShow(!isCategoryShow)}
         is_category_show={isCategoryShow.toString()}
+        // onAnimationEnd={() => getCategoryShow(false)}
       >
         <span />
         <span />
         <span />
       </button>
       {categoryAll.map((p) => (
-        <button className={s.categoryBox} key={p.id} title={p.name}>
-          <span onClick={() => changeCategory(p.id)}>
+        <button
+          className={s.categoryBox}
+          key={p.id}
+          title={p.name}
+          onClick={() => changeCategory(p.id)}
+        >
+          <span>
             <GetImgFood imgName={p.icon} style={s.categoryImg} />
           </span>
           <span className={s.categoryType}>{p.name}</span>

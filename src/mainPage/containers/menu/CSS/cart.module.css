@@ -23,7 +23,7 @@
   height: content-box;
   background: #666;
   background: rgba(102, 102, 102, 0.5);
-  z-index: 2;
+  z-index: 3;
 }
 
 .cartBox {
@@ -41,7 +41,7 @@
   position: relative;
   top: 5%;
   left: 45%;
-  z-index: 2;
+  z-index: 3;
   cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
   border-radius: 25px;
   border-color: #1b1d23;

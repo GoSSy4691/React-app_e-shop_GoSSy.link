@@ -5,6 +5,7 @@ let menu = {
     {
       id: 0,
       name: "Все",
+      icon: "",
     },
   ],
   categoryNow: [],

@@ -26,7 +26,7 @@ export default function Items() {
             ${isFoodIn(p.name) ? s.itemActive : s.itemNotActive}
             `}
           >
-            <GetImgFood imgName={p.icon} />
+            <GetImgFood imgName={p.icon} style={s.foodImg} />
             <div className={s.name}>
               <span>{p.name}</span>
             </div>

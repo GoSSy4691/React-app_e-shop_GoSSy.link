@@ -1,7 +1,10 @@
 import s from "./CSS/leftBar.module.css";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import GetImgFood from "./getImgFood.js";
 
 export default function LeftBar() {
+  const [isCategoryShow, getCategoryShow] = useState(false);
   const categoryAll = useSelector((state) => state.menu.categoryAll);
   const dispatch = useDispatch();
   const changeCategory = (id) => {
@@ -9,14 +12,25 @@ export default function LeftBar() {
   };
 
   return (
-    <div className={s.box}>
+    <div
+      className={s.box}
+      style={isCategoryShow ? { width: "fit-content" } : { width: "60px" }}
+    >
+      <button
+        className={s.categoryButton}
+        onClick={() => getCategoryShow(!isCategoryShow)}
+        is_category_show={isCategoryShow.toString()}
+      >
+        <span />
+        <span />
+        <span />
+      </button>
       {categoryAll.map((p) => (
-        <button
-          className={s.type}
-          onClick={() => changeCategory(p.id)}
-          key={p.id}
-        >
-          {p.name}
+        <button className={s.categoryBox} key={p.id} title={p.name}>
+          <span onClick={() => changeCategory(p.id)}>
+            <GetImgFood imgName={p.icon} style={s.categoryImg} />
+          </span>
+          <span className={s.categoryType}>{p.name}</span>
         </button>
       ))}
     </div>

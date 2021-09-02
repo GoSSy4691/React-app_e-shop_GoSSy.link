@@ -1,4 +1,3 @@
-import s from "./CSS/getImgFood.module.css";
 import emptyImg from "../../../files/img/noItem.png";
 import { useState } from "react";
 
@@ -15,7 +14,7 @@ const GetImgFood = (props) => {
     <img
       alt={"notLoaded"}
       src={loaded ? addressName(props.imgName) : emptyImg}
-      className={s.foodImg}
+      className={props.style}
       onLoad={() => setLoaded(true)}
       onError={(event) => (event.target.src = emptyImg)}
     />

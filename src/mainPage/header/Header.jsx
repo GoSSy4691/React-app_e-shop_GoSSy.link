@@ -1,4 +1,4 @@
-import LogoImg from "./logoGoose/logoImage";
+import LogoImg from "./logoGoose/LogoImage.jsx";
 import { NavLink } from "react-router-dom";
 import s from "./header.module.css";
 

@@ -1,7 +1,7 @@
 import s from "./CSS/items.module.css";
 import { useSelector } from "react-redux";
-import GetImgFood from "./getImgFood.js";
-import { ButtonAdd, ButtonDelete } from "./ButtonAddDelete.js";
+import GetImgFood from "./GetImgFood.jsx";
+import { ButtonAdd, ButtonDelete } from "./ButtonAddDelete.jsx";
 
 export default function Items() {
   const store = useSelector((state) => state.cart);

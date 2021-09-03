@@ -1,10 +1,10 @@
 import s from "./CSS/menu.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import runForestRun from "../../../files/img/runForestRun.png";
-import Cart from "./cart.js";
-import Items from "./items.js";
-import LeftBar from "./LeftBar.js";
 import getShopData from "../../../files/shop/getShopData.js";
+import Cart from "./Cart.jsx";
+import Items from "./Items.jsx";
+import LeftBar from "./LeftBar.jsx";
 
 function MenuContainer() {
   const menu = useSelector((state) => state.menu.menuOnDisplay);

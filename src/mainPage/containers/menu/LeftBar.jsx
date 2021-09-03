@@ -1,7 +1,7 @@
 import s from "./CSS/leftBar.module.css";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import GetImgFood from "./getImgFood.js";
+import GetImgFood from "./GetImgFood.jsx";
 
 export default function LeftBar() {
   const [isCategoryShow, getCategoryShow] = useState(false);

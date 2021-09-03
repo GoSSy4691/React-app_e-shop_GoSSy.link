@@ -4,34 +4,6 @@
   overflow-x: hidden;
 }
 
-.topBar {
-  position: fixed;
-  width: 100px;
-  right: 50px;
-  top: 10px;
-}
-
-.topImgBack {
-  width: 100px;
-  height: 90px;
-}
-
-.shopIco {
-  width: 100px;
-  cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
-}
-
-.shopIcoCount {
-  position: fixed;
-  width: 23px;
-  height: 23px;
-  right: 40px;
-  top: 50px;
-  border: solid #adb4b0;
-  border-radius: 20px;
-  color: white;
-}
-
 .footerImg {
   height: 100px;
   margin-top: 50px;

@@ -2,7 +2,8 @@ import "./App.css";
 import { Route } from "react-router-dom";
 import Header from "./mainPage/header/header.js";
 import Welcome from "./mainPage/containers/welcome/welcome.js";
-import { Menu, CartOnTop } from "./mainPage/containers/menu/menu.js";
+import Menu from "./mainPage/containers/menu/menu.js";
+import MenuHeader from "./mainPage/containers/menu/MenuHeader.jsx";
 import OrderView from "./mainPage/containers/menu/orderView.js";
 
 export default function App(props) {
@@ -13,7 +14,7 @@ export default function App(props) {
         <Route exact path="/" render={() => <Welcome />} />
         <Route exact path="/menu">
           <Menu />
-          <CartOnTop />
+          <MenuHeader />
         </Route>
         <Route
           exact

@@ -1,27 +1,10 @@
 import s from "./CSS/menu.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import runForestRun from "../../../files/img/runForestRun.png";
-import shopCartIco from "../../../files/img/shopCart.png";
 import Cart from "./cart.js";
 import Items from "./items.js";
 import LeftBar from "./LeftBar.js";
 import getShopData from "../../../files/shop/getShopData.js";
-
-export function CartOnTop() {
-  const store = useSelector((state) => state.cart);
-  const dispatch = useDispatch();
-  return (
-    <div className={s.topBar}>
-      <div
-        className={s.topImgBack}
-        onClick={() => dispatch({ type: "OPEN_CART" })}
-      >
-        <img alt={"CartImage"} src={shopCartIco} className={s.shopIco} />
-      </div>
-      <div className={s.shopIcoCount}>{store.itemsCount}</div>
-    </div>
-  );
-}
 
 function MenuContainer() {
   const menu = useSelector((state) => state.menu.menuOnDisplay);
@@ -49,7 +32,7 @@ function MenuContainer() {
   }
 }
 
-export function Menu() {
+export default function Menu() {
   const isCartShow = useSelector((state) => state.isCartShow);
   return (
     <div className={s.showRoom}>

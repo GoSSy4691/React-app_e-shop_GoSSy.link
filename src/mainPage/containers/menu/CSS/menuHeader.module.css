@@ -56,31 +56,3 @@
     border-radius: 20px;
     color: white;
 }
-
-.userInfo {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    position: fixed;
-    width: 200px;
-    height: fit-content;
-    right: 50px;
-    top: 100px;
-    z-index: 2;
-    background: #282c34;
-    line-height: 45px;
-    border: solid 3px black;
-}
-
-.userInfo input{
-    height: 20px;
-    margin-top: 10px;
-    border-radius: 10px;
-}
-
-.loginBtn {
-    margin-top: 15px;
-    height: 35px;
-    font-size: 20px;
-    border-radius: 20px;
-}

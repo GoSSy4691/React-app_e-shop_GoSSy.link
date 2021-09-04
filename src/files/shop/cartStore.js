@@ -1,4 +1,5 @@
 let cart = {
+  isCartShow: false,
   itemsCount: 0,
   selectedFood: [],
 };
@@ -42,6 +43,10 @@ export const cartReducer = (state = cart, action) => {
           state.selectedFood[index].costAll - state.selectedFood[index].costOne;
       }
       return { ...state, itemsCount: state.itemsCount - 1 };
+    case "OPEN_CART":
+      return { ...state, isCartShow: true };
+    case "CLOSE_CART":
+      return { ...state, isCartShow: false };
     default:
       return state;
   }

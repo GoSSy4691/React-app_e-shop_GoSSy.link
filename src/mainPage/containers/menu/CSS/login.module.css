@@ -1,0 +1,41 @@
+.userInfo {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    position: absolute;
+    width: 500px;
+    height: fit-content;
+    top: 20%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    background: #282c34;
+    line-height: 45px;
+    border: solid 3px black;
+}
+
+.userInfo input{
+    height: 20px;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.footer {
+    display: flex;
+    justify-content: flex-end;
+    width: inherit;
+}
+
+.response {
+    word-break: break-word;
+    max-width: 400px;
+    font-size: 20px;
+}
+
+.loginBtn {
+    width: 100px;
+    margin: 15px 10px;
+    height: 35px;
+    font-size: 20px;
+    border-radius: 5px;
+}

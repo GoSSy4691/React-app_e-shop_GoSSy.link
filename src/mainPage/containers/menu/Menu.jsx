@@ -2,7 +2,6 @@ import s from "./CSS/menu.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import runForestRun from "../../../files/img/runForestRun.png";
 import getShopData from "../../../files/shop/getShopData.js";
-import Cart from "./Cart.jsx";
 import Items from "./Items.jsx";
 import LeftBar from "./LeftBar.jsx";
 
@@ -33,10 +32,8 @@ function MenuContainer() {
 }
 
 export default function Menu() {
-  const isCartShow = useSelector((state) => state.isCartShow);
   return (
     <div className={s.showRoom}>
-      {isCartShow ? <Cart /> : null}
       <MenuContainer />
       <img
         alt={"footer"}

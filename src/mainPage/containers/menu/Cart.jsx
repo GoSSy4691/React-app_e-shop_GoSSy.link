@@ -1,4 +1,5 @@
 import s from "./CSS/cart.module.css";
+import patternCSS from "./CSS/pattern.module.css";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { ButtonAdd, ButtonDelete } from "./ButtonAddDelete";
@@ -13,10 +14,10 @@ export default function Cart() {
   };
 
   return (
-    <div className={s.darkenBackgroundShow}>
-      <div className={s.cartBox}>
+    <div className={patternCSS.darkenBackground}>
+      <div className={patternCSS.activeBox}>
         <button
-          className={s.closeButton}
+          className={patternCSS.closeButton}
           onClick={() => dispatch({ type: "CLOSE_CART" })}
         >
           ✖

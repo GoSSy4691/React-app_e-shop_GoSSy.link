@@ -2,7 +2,7 @@ import s from "./CSS/login.module.css";
 import patternCSS from "./CSS/pattern.module.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { authorization } from "../../../files/API/api.js";
+import { authByPass } from "../../../files/API/api.js";
 import vkIco from "../../../files/img/token/vk.png";
 import yandexIco from "../../../files/img/token/ya.png";
 import googleIco from "../../../files/img/token/gog.png";
@@ -11,19 +11,43 @@ export default function Login() {
   const [phone, setPhone] = useState("");
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
-  const [loginForm, setLoginForm] = useState("Phone");
+  const [loginForm, setLoginForm] = useState("byPhone");
   const dispatch = useDispatch();
 
-  function getAnswer() {
-    authorization(login, password)
+  function getAnswerPass() {
+    authByPass(login, password)
       .then((data) => dispatch({ type: "LOGIN_CONFIRM", payload: data }))
-      .catch((error) =>
-        console.log(error.response.status + " " + error.response.statusText)
-      );
+      .catch((error) => {
+        let answer = error.response.status + " " + error.response.statusText;
+        dispatch({ type: "ERROR", payload: answer });
+        setTimeout(() => {
+          dispatch({ type: "ERROR_CLEAN" });
+        }, 4000);
+      });
+  }
+
+  function getAnswerPhone() {
+    dispatch({
+      type: "ERROR",
+      payload: "Not work yet. Try log in by password",
+    });
+    setTimeout(() => {
+      dispatch({ type: "ERROR_CLEAN" });
+    }, 4000);
+  }
+
+  function getAnswerToken() {
+    dispatch({
+      type: "ERROR",
+      payload: "Not work yet. Try log in by password",
+    });
+    setTimeout(() => {
+      dispatch({ type: "ERROR_CLEAN" });
+    }, 4000);
   }
 
   switch (loginForm) {
-    case "Phone":
+    case "byPhone":
       return (
         <div className={patternCSS.darkenBackground}>
           <div className={patternCSS.activeBox}>
@@ -37,29 +61,34 @@ export default function Login() {
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                   />
-                  <button
-                    className={s.loginBtn}
-                    onClick={() => console.log("not work yet")}
-                  >
+                  <button className={s.loginBtn} onClick={getAnswerPhone}>
                     Login
                   </button>
                 </div>
                 <button
                   className={s.loginByPassLink}
-                  onClick={() => setLoginForm("Password")}
+                  onClick={() => setLoginForm("byPassword")}
                 >
                   Sign in by password
                 </button>
                 <div className={s.loginByToken}>Sign in with:</div>
                 <div className={s.tokenImg}>
                   <div>
-                    <img src={vkIco} alt={"Vk"} />
+                    <img src={vkIco} alt={"Vk"} onClick={getAnswerToken} />
                   </div>
                   <div>
-                    <img src={yandexIco} alt={"Yandex"} />
+                    <img
+                      src={yandexIco}
+                      alt={"Yandex"}
+                      onClick={getAnswerToken}
+                    />
                   </div>
                   <div>
-                    <img src={googleIco} alt={"Google"} />
+                    <img
+                      src={googleIco}
+                      alt={"Google"}
+                      onClick={getAnswerToken}
+                    />
                   </div>
                 </div>
               </div>
@@ -67,7 +96,7 @@ export default function Login() {
           </div>
         </div>
       );
-    case "Password":
+    case "byPassword":
       return (
         <div className={patternCSS.darkenBackground}>
           <div className={patternCSS.activeBox}>
@@ -81,7 +110,7 @@ export default function Login() {
                     value={login}
                     onChange={(e) => setLogin(e.target.value)}
                   />
-                  <button className={s.loginBtn} onClick={() => getAnswer()}>
+                  <button className={s.loginBtn} onClick={getAnswerPass}>
                     Login
                   </button>
                 </div>
@@ -94,7 +123,7 @@ export default function Login() {
                 />
                 <div
                   className={s.loginByPassLink}
-                  onClick={() => setLoginForm("Phone")}
+                  onClick={() => setLoginForm("byPhone")}
                 >
                   Sign in by phone
                 </div>

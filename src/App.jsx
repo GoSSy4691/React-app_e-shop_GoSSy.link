@@ -8,6 +8,7 @@ import MenuHeader from "./mainPage/containers/menu/MenuHeader.jsx";
 import OrderView from "./mainPage/containers/menu/OrderView.jsx";
 import Cart from "./mainPage/containers/menu/Cart.jsx";
 import Login from "./mainPage/containers/menu/Login.jsx";
+import ErrorPopup from "./errorFolder/ErrorPopup.jsx";
 
 export default function App(props) {
   const isCartShow = useSelector((state) => state.cart.isCartShow);
@@ -29,6 +30,7 @@ export default function App(props) {
           render={() => <OrderView shopCart={props.shopCart} />}
         />
       </div>
+      <ErrorPopup />
     </div>
   );
 }

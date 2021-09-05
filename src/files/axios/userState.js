@@ -9,8 +9,6 @@ export const userDataReducer = (state = userData, action) => {
       return { ...state, isPopupShow: true };
     case "CLOSE_LOGIN_POPUP":
       return { ...state, isPopupShow: false };
-    case "LOGIN_REQUEST":
-      return { ...state, serverResponse: "Waiting..." };
     case "LOGIN_CONFIRM":
       return { ...state, serverResponse: action.payload };
     default:

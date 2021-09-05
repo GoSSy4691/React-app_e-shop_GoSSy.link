@@ -8,6 +8,7 @@ export default function MenuHeader() {
   return (
     <div className={s.headerZone}>
       <div
+        title={"Login"}
         className={s.userIco}
         onClick={() => dispatch({ type: "OPEN_LOGIN_POPUP" })}
       >
@@ -15,6 +16,7 @@ export default function MenuHeader() {
         <span drow={"body"} />
       </div>
       <div
+        title={"Cart"}
         className={s.shopIcoDiv}
         onClick={() => dispatch({ type: "OPEN_CART" })}
       >

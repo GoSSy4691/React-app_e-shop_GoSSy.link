@@ -1,8 +1,8 @@
 import s from "./CSS/login.module.css";
 import patternCSS from "./CSS/pattern.module.css";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import auth from "../../../files/shop/auth.js";
+import { useDispatch } from "react-redux";
+import { authorization } from "../../../files/API/api.js";
 
 export default function Login() {
   const [login, setLogin] = useState("");
@@ -10,32 +10,12 @@ export default function Login() {
   const [answer, setAnswer] = useState("");
   const dispatch = useDispatch();
 
-  function GetAnswer() {
-    const answer = useSelector((state) => state.userData.serverResponse);
-    console.log(answer);
-    switch (answer) {
-      case "":
-        return null;
-      case "Waiting...":
-        auth(login, password).then((data) =>
-          dispatch({ type: "LOGIN_CONFIRM", payload: data })
-        );
-        return <span>Waiting...</span>;
-      default:
-        return answer;
-    }
-  }
-
-  function getAnswer2() {
-    auth(login, password)
+  function getAnswer() {
+    authorization(login, password)
       .then((data) => setAnswer(data))
-      .catch(function (error) {
-        if (error.response) {
-          console.log(error.response.status);
-          console.log(error.response.statusText);
-          setAnswer(error.response.status + " " + error.response.statusText);
-        }
-      });
+      .catch((error) =>
+        setAnswer(error.response.status + " " + error.response.statusText)
+      );
     setAnswer("Loading...");
   }
 
@@ -63,7 +43,7 @@ export default function Login() {
           />
           <div className={s.footer}>
             <div className={s.response}>{answer}</div>
-            <button className={s.loginBtn} onClick={() => getAnswer2()}>
+            <button className={s.loginBtn} onClick={() => getAnswer()}>
               Login
             </button>
           </div>

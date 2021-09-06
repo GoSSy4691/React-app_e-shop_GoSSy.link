@@ -2,15 +2,17 @@ import { useSelector } from "react-redux";
 import s from "./errorPopup.module.css";
 
 export default function ErrorPopup() {
-  const errorData = useSelector((state) => state.errorData);
+  const popupMassage = useSelector((state) => state.errorData.lastPopup);
+  const popupType = useSelector((state) => state.errorData.typePopup);
   return (
     <div
       className={`
             ${s.errorLog} 
-            ${errorData.isItError ? s.errorLogActive : null}
+            ${popupType === "red" ? s.error : null}
+            ${popupType === "green" ? s.popupGreen : null}
             `}
     >
-      {errorData.lastError}
+      {popupMassage}
     </div>
   );
 }

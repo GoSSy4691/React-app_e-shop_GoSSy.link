@@ -2,48 +2,68 @@ import s from "./CSS/login.module.css";
 import patternCSS from "./CSS/pattern.module.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { authByPass } from "../../../files/API/api.js";
+import {
+  authByPass,
+  authByPhone,
+  authPhoneCode,
+} from "../../../files/API/api.js";
+import { useDispatchPopup } from "../../../files/axios/dispatchPopup.js";
 import vkIco from "../../../files/img/token/vk.png";
 import yandexIco from "../../../files/img/token/ya.png";
 import googleIco from "../../../files/img/token/gog.png";
 
 export default function Login() {
-  const [phone, setPhone] = useState("");
+  const [phoneCode, setPhoneCode] = useState("");
+  const [savedPhone, setSavedPhone] = useState("");
+  const [placeholderPhone, setPlaceholderPhone] = useState("Phone");
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [loginForm, setLoginForm] = useState("byPhone");
   const dispatch = useDispatch();
+  const popupDispatch = useDispatchPopup();
 
   function getAnswerPass() {
     authByPass(login, password)
-      .then((data) => dispatch({ type: "LOGIN_CONFIRM", payload: data }))
+      .then((data) => {
+        dispatch({ type: "LOGIN_CONFIRM", payload: data });
+        popupDispatch({ type: "POPUP", payload: "log in confirmed" });
+      })
       .catch((error) => {
         let answer = error.response.status + " " + error.response.statusText;
-        dispatch({ type: "ERROR", payload: answer });
-        setTimeout(() => {
-          dispatch({ type: "ERROR_CLEAN" });
-        }, 4000);
+        popupDispatch({ type: "ERROR", payload: answer });
       });
   }
 
   function getAnswerPhone() {
-    dispatch({
-      type: "ERROR",
-      payload: "Not work yet. Try log in by password",
-    });
-    setTimeout(() => {
-      dispatch({ type: "ERROR_CLEAN" });
-    }, 4000);
+    if (phoneCode.length > 4) {
+      setSavedPhone(phoneCode);
+      authByPhone(savedPhone)
+        .then((data) => {
+          dispatch({ type: "LOGIN_CONFIRM", payload: data });
+          popupDispatch({ type: "POPUP", payload: "Code sent" });
+          setPlaceholderPhone("Code");
+          setPhoneCode("");
+        })
+        .catch((error) => {
+          let answer = error.response.status + " " + error.response.statusText;
+          popupDispatch({ type: "ERROR", payload: answer });
+        });
+    }
+    if (phoneCode.length <= 4) {
+      authPhoneCode(savedPhone, phoneCode)
+        .then((data) => {
+          dispatch({ type: "LOGIN_CONFIRM", payload: data });
+          popupDispatch({ type: "POPUP", payload: "code confirmed" });
+        })
+        .catch((error) => {
+          let answer = error.response.status + " " + error.response.statusText;
+          popupDispatch({ type: "ERROR", payload: answer });
+        });
+    }
   }
 
   function getAnswerToken() {
-    dispatch({
-      type: "ERROR",
-      payload: "Not work yet. Try log in by password",
-    });
-    setTimeout(() => {
-      dispatch({ type: "ERROR_CLEAN" });
-    }, 4000);
+    popupDispatch({ type: "ERROR", payload: "didn't work" });
   }
 
   switch (loginForm) {
@@ -57,9 +77,9 @@ export default function Login() {
                 <div className={s.flexbox}>
                   <input
                     name={"Phone"}
-                    placeholder=""
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
+                    placeholder={placeholderPhone}
+                    value={phoneCode}
+                    onChange={(e) => setPhoneCode(e.target.value)}
                   />
                   <button className={s.loginBtn} onClick={getAnswerPhone}>
                     Login
@@ -105,8 +125,8 @@ export default function Login() {
               <div className={s.afterName}>
                 <div className={s.flexbox}>
                   <input
-                    name={"Phone"}
-                    placeholder=""
+                    name={"Login"}
+                    placeholder="Login"
                     value={login}
                     onChange={(e) => setLogin(e.target.value)}
                   />
@@ -116,8 +136,8 @@ export default function Login() {
                 </div>
                 <input
                   className={s.passwordInput}
-                  name={"Phone"}
-                  placeholder=""
+                  name={"Password"}
+                  placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />

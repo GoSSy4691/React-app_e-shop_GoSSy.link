@@ -1,14 +1,16 @@
 let errorData = {
-  lastError: "",
-  isItError: false,
+  lastPopup: "",
+  typePopup: "none",
 };
 
 export const errorDataReducer = (state = errorData, action) => {
   switch (action.type) {
-    case "ERROR":
-      return { ...state, lastError: action.payload, isItError: true };
-    case "ERROR_CLEAN":
-      return { ...state, lastError: "", isItError: false };
+    case "_POPUP_RED":
+      return { ...state, lastPopup: action.payload, typePopup: "red" };
+    case "_POPUP_GREEN":
+      return { ...state, lastPopup: action.payload, typePopup: "green" };
+    case "_POPUP_CLEAN":
+      return { ...state, lastPopup: "", typePopup: "none" };
     default:
       return state;
   }

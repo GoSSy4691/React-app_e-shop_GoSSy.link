@@ -23,3 +23,11 @@ export function authPhoneCode(phone, code) {
     code: code,
   });
 }
+export function authByToken(method) {
+  console.log(
+    "https://zloi.space/restaurant/api/oauth?method=" + method + "&device=web"
+  );
+  return axios.get(
+    "https://zloi.space/restaurant/api/oauth?method=" + method + "&device=web"
+  );
+}

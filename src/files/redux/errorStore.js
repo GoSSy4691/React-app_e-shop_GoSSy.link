@@ -1,9 +1,9 @@
-let errorData = {
+let error = {
   lastPopup: "",
   typePopup: "none",
 };
 
-export const errorDataReducer = (state = errorData, action) => {
+export const errorReducer = (state = error, action) => {
   switch (action.type) {
     case "_POPUP_RED":
       return { ...state, lastPopup: action.payload, typePopup: "red" };

@@ -1,5 +1,5 @@
 import s from "./CSS/orderView.module.css";
-import foodPolicy from "../../../files/img/foodPolicy.jpg";
+import foodPolicy from "../../files/img/foodPolicy.jpg";
 
 export default function OrderView() {
   return (

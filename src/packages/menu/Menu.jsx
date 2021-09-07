@@ -1,7 +1,7 @@
 import s from "./CSS/menu.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import runForestRun from "../../../files/img/runForestRun.png";
-import { getMenuData } from "../../../files/API/api.js";
+import runForestRun from "../../files/img/runForestRun.png";
+import { getMenuData } from "../../files/API/api.js";
 import Items from "./Items.jsx";
 import LeftBar from "./LeftBar.jsx";
 

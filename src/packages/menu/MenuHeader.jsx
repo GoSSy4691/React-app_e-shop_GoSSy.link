@@ -1,6 +1,6 @@
 import s from "./CSS/menuHeader.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import shopCartIco from "../../../files/img/shopCart.png";
+import shopCartIco from "../../files/img/shopCart.png";
 
 export default function MenuHeader() {
   const store = useSelector((state) => state.cart);

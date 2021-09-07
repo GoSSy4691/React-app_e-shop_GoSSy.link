@@ -6,11 +6,12 @@ import {
   authByPass,
   authByPhone,
   authPhoneCode,
-} from "../../../files/API/api.js";
-import { useDispatchPopup } from "../../../files/axios/dispatchPopup.js";
-import vkIco from "../../../files/img/token/vk.png";
-import yandexIco from "../../../files/img/token/ya.png";
-import googleIco from "../../../files/img/token/gog.png";
+  authByToken,
+} from "../../files/API/api.js";
+import { useDispatchPopup } from "../popup/dispatchPopup.js";
+import vkIco from "../../files/img/token/vk.png";
+import yandexIco from "../../files/img/token/ya.png";
+import googleIco from "../../files/img/token/gog.png";
 
 export default function Login() {
   const [phoneCode, setPhoneCode] = useState("");
@@ -62,8 +63,17 @@ export default function Login() {
     }
   }
 
-  function getAnswerToken() {
-    popupDispatch({ type: "ERROR", payload: "didn't work" });
+  function getAnswerToken(method) {
+    if (method === "google") {
+      popupDispatch({ type: "ERROR", payload: "didn't work" });
+    } else {
+      // authByToken(method).then((data) => console.log(data));
+      let url =
+        "https://zloi.space/restaurant/api/oauth?method=" +
+        method +
+        "&device=web";
+      window.open(url, "", "width=700,height=500,left=200,top=200");
+    }
   }
 
   switch (loginForm) {
@@ -94,20 +104,24 @@ export default function Login() {
                 <div className={s.loginByToken}>Sign in with:</div>
                 <div className={s.tokenImg}>
                   <div>
-                    <img src={vkIco} alt={"Vk"} onClick={getAnswerToken} />
+                    <img
+                      src={vkIco}
+                      alt={"Vk"}
+                      onClick={() => getAnswerToken("vk")}
+                    />
                   </div>
                   <div>
                     <img
                       src={yandexIco}
                       alt={"Yandex"}
-                      onClick={getAnswerToken}
+                      onClick={() => getAnswerToken("yandex")}
                     />
                   </div>
                   <div>
                     <img
                       src={googleIco}
                       alt={"Google"}
-                      onClick={getAnswerToken}
+                      onClick={() => getAnswerToken("google")}
                     />
                   </div>
                 </div>

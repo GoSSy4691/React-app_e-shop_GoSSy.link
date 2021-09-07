@@ -1,5 +1,5 @@
 import s from "./welcome.module.css";
-import welcomeImg from "../../../files/img/welcomeImg.png";
+import welcomeImg from "../../files/img/welcomeImg.png";
 
 function Welcome() {
   return (

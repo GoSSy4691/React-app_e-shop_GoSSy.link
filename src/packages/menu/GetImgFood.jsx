@@ -1,4 +1,4 @@
-import emptyImg from "../../../files/img/noItem.png";
+import emptyImg from "../../files/img/noItem.png";
 import { useState } from "react";
 
 const GetImgFood = (props) => {

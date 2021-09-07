@@ -2,8 +2,8 @@ import { useSelector } from "react-redux";
 import s from "./errorPopup.module.css";
 
 export default function ErrorPopup() {
-  const popupMassage = useSelector((state) => state.errorData.lastPopup);
-  const popupType = useSelector((state) => state.errorData.typePopup);
+  const popupMassage = useSelector((state) => state.error.lastPopup);
+  const popupType = useSelector((state) => state.error.typePopup);
   return (
     <div
       className={`

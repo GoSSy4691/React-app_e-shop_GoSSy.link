@@ -10,8 +10,10 @@
 
 .error {
     background: rgba(130, 0, 0, 0.6);
+    z-index: 3;
 }
 
 .popupGreen {
     background: rgba(19, 130, 0, 0.6);
+    z-index: 3;
 }

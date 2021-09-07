@@ -1,9 +1,9 @@
-let userData = {
+let user = {
   isPopupShow: false,
   serverResponse: "",
 };
 
-export const userDataReducer = (state = userData, action) => {
+export const userReducer = (state = user, action) => {
   switch (action.type) {
     case "OPEN_LOGIN_POPUP":
       return { ...state, isPopupShow: true };

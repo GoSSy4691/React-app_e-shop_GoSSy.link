@@ -7,7 +7,7 @@ import {
   authPhoneCode,
   authByToken,
 } from "../../files/API/api.js";
-import { useDispatchPopup } from "../popup/dispatchPopup.js";
+import useDispatchPopup from "../popup/dispatchPopup.js";
 import vkIco from "../../files/img/token/vk.png";
 import yandexIco from "../../files/img/token/ya.png";
 import googleIco from "../../files/img/token/gog.png";

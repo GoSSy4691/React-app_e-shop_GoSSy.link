@@ -3,19 +3,22 @@ import { useSelector } from "react-redux";
 import { Cookies } from "react-cookie";
 import LoginByPass from "./LoginByPass.jsx";
 import LoginByPhone from "./LoginByPhone.js";
+import useDispatchPopup from "../popup/dispatchPopup.js";
 import patternCSS from "../pattern.module.css";
 import s from "./login.module.css";
 
 export default function Login() {
+  const cookies = new Cookies();
+  const popupDispatch = useDispatchPopup();
   const method = useSelector((state) => state.user.methodToken);
   const token = useSelector((state) => state.user.token);
-  const cookies = new Cookies();
   const [loginForm, setLoginForm] = useState(token ? "Logout" : "byPhone");
   console.log(token);
 
   function logoutBtn() {
     cookies.remove("token");
-    setLoginForm(token ? "Logout" : "byPhone");
+    popupDispatch({ type: "POPUP", payload: "log out confirmed" });
+    setLoginForm("byPhone");
   }
 
   switch (loginForm) {
@@ -34,7 +37,7 @@ export default function Login() {
                   <div className={s.afterToken}>Log in by {method}</div>
                   <button
                     className={s.loginBtn}
-                    onClick={() => setLoginForm("byPhone")}
+                    onClick={() => setLoginForm("Logout")}
                   >
                     Ok
                   </button>

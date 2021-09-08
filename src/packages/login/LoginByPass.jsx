@@ -3,7 +3,7 @@ import patternCSS from "../pattern.module.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { authByPass } from "../../files/API/api.js";
-import { useDispatchPopup } from "../popup/dispatchPopup.js";
+import useDispatchPopup from "../popup/dispatchPopup.js";
 
 export default function LoginByPass(props) {
   const [login, setLogin] = useState("");

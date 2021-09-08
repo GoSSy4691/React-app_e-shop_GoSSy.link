@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 
-export function useDispatchPopup() {
+export default function useDispatchPopup() {
   const dispatch = useDispatch();
   return (action) => {
     switch (action.type) {

@@ -64,16 +64,12 @@ export default function Login() {
   }
 
   function getAnswerToken(method) {
-    if (method === "google") {
-      popupDispatch({ type: "ERROR", payload: "didn't work" });
-    } else {
-      // authByToken(method).then((data) => console.log(data));
-      let url =
-        "https://zloi.space/restaurant/api/oauth?method=" +
-        method +
-        "&device=web";
-      window.open(url, "", "width=700,height=500,left=200,top=200");
-    }
+    // authByToken(method).then((data) => console.log(data));
+    let url =
+      "https://zloi.space/restaurant/api/oauth?method=" +
+      method +
+      "&device=web";
+    window.open(url, "", "width=700,height=500,left=200,top=200");
   }
 
   switch (loginForm) {

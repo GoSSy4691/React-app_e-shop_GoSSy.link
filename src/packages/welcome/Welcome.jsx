@@ -1,7 +1,20 @@
 import s from "./welcome.module.css";
+import { useCookies } from "react-cookie";
 import welcomeImg from "../../files/img/welcomeImg.png";
 
 function Welcome() {
+  const [cookies, setCookie] = useCookies(["token"]);
+
+  const tokenAll = window.location.search;
+  if (tokenAll.length > 0) {
+    console.log(tokenAll);
+    const tokenStart = tokenAll.search(/=/);
+    const tokenAnswer = tokenAll.slice(tokenStart + 1);
+    console.log(tokenAnswer);
+    setCookie("token", tokenAnswer);
+    window.close();
+  }
+
   return (
     <div className={s.divContainer}>
       <div className={s.welocmeImgback}>

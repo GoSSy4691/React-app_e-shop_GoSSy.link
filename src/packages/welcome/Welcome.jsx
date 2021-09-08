@@ -1,8 +1,10 @@
 import s from "./welcome.module.css";
 import { useCookies } from "react-cookie";
+import { useDispatch } from "react-redux";
 import welcomeImg from "../../files/img/welcomeImg.png";
 
 function Welcome() {
+  const dispatch = useDispatch();
   const [cookies, setCookie] = useCookies(["token"]);
 
   const tokenAll = window.location.search;
@@ -13,6 +15,9 @@ function Welcome() {
     console.log(tokenAnswer);
     setCookie("token", tokenAnswer);
     window.close();
+  }
+  if (cookies.token !== undefined) {
+    dispatch({ type: "SET_TOKEN", payload: cookies.token });
   }
 
   return (

@@ -7,7 +7,7 @@ import Menu from "./packages/menu/Menu.jsx";
 import MenuHeader from "./packages/menu/MenuHeader.jsx";
 import OrderView from "./packages/menu/OrderView.jsx";
 import Cart from "./packages/menu/Cart.jsx";
-import Login from "./packages/menu/Login.jsx";
+import Login from "./packages/login/Login.jsx";
 import ErrorPopup from "./packages/popup/ErrorPopup.jsx";
 
 export default function App(props) {

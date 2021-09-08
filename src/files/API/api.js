@@ -24,10 +24,7 @@ export function authPhoneCode(phone, code) {
   });
 }
 export function authByToken(method) {
-  console.log(
-    "https://zloi.space/restaurant/api/oauth?method=" + method + "&device=web"
-  );
-  return axios.get(
-    "https://zloi.space/restaurant/api/oauth?method=" + method + "&device=web"
-  );
+  let url =
+    "https://zloi.space/restaurant/api/oauth?method=" + method + "&device=web";
+  window.open(url, "", "width=700,height=500,left=200,top=200");
 }

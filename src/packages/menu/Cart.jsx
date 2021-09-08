@@ -1,5 +1,5 @@
 import s from "./CSS/cart.module.css";
-import patternCSS from "./CSS/pattern.module.css";
+import patternCSS from "../pattern.module.css";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { ButtonAdd, ButtonDelete } from "./ButtonAddDelete";

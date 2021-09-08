@@ -11,6 +11,8 @@ import useDispatchPopup from "../popup/dispatchPopup.js";
 import vkIco from "../../files/img/token/vk.png";
 import yandexIco from "../../files/img/token/ya.png";
 import googleIco from "../../files/img/token/gog.png";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 
 export default function ByPhone(props) {
   const [phoneCode, setPhoneCode] = useState("");
@@ -53,6 +55,17 @@ export default function ByPhone(props) {
     props.setLoginForm("Wait");
   }
 
+  function codeChecker(input) {
+    // let match = input.match("^[0-9]+$");
+    // console.log(input);
+    // console.log(match);
+    // if (match !== null) {
+    //   let match2 = match.join("");
+    //   setPhoneCode(match2);
+    // }
+    if (input.length < 5) setPhoneCode(input);
+  }
+
   return (
     <div className={patternCSS.darkenBackground}>
       <div className={patternCSS.activeBox}>
@@ -60,13 +73,32 @@ export default function ByPhone(props) {
           <div className={s.naming}>Вход в учетную запись</div>
           <div className={s.afterName}>
             <div className={s.flexbox}>
-              <input
-                name={"Phone"}
-                placeholder={placeholderPhone}
-                value={phoneCode}
-                type={"tel"}
-                onChange={(e) => setPhoneCode(e.target.value)}
-              />
+              <div className={s.phoneNumber}>
+                {placeholderPhone === "Phone" ? (
+                  <PhoneInput
+                    country={"ru"}
+                    value={phoneCode}
+                    onChange={(e) => setPhoneCode(e)}
+                    inputStyle={{
+                      width: "248px",
+                      height: "38px",
+                      borderRadius: "10px",
+                    }}
+                    buttonStyle={{ borderRadius: "10px" }}
+                  />
+                ) : (
+                  <input
+                    name={"Phone"}
+                    className={s.codeAfterNumber}
+                    placeholder={placeholderPhone}
+                    value={phoneCode}
+                    onChange={(e) => codeChecker(e.target.value)}
+                    onKeyPress={(e) =>
+                      e.nativeEvent.key === "Enter" ? getAnswerPhone() : null
+                    }
+                  />
+                )}
+              </div>
               <button className={s.loginBtn} onClick={getAnswerPhone}>
                 Login
               </button>

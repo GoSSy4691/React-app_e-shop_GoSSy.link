@@ -34,10 +34,14 @@ export default function ByPass(props) {
           <div className={s.afterName}>
             <div className={s.flexbox}>
               <input
+                className={s.loginForm}
                 name={"Login"}
                 placeholder="Login"
                 value={login}
                 onChange={(e) => setLogin(e.target.value)}
+                onKeyPress={(e) =>
+                  e.nativeEvent.key === "Enter" ? getAnswerPass() : null
+                }
               />
               <button className={s.loginBtn} onClick={getAnswerPass}>
                 Login
@@ -50,6 +54,9 @@ export default function ByPass(props) {
               type={isPassShow ? "text" : "password"}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              onKeyPress={(e) =>
+                e.nativeEvent.key === "Enter" ? getAnswerPass() : null
+              }
             />
             <img
               alt={"showHideEye"}

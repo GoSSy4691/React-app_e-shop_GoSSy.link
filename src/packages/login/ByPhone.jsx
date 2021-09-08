@@ -12,7 +12,7 @@ import vkIco from "../../files/img/token/vk.png";
 import yandexIco from "../../files/img/token/ya.png";
 import googleIco from "../../files/img/token/gog.png";
 
-export default function LoginByPhone(props) {
+export default function ByPhone(props) {
   const [phoneCode, setPhoneCode] = useState("");
   const [savedPhone, setSavedPhone] = useState("");
   const [placeholderPhone, setPlaceholderPhone] = useState("Phone");
@@ -64,6 +64,7 @@ export default function LoginByPhone(props) {
                 name={"Phone"}
                 placeholder={placeholderPhone}
                 value={phoneCode}
+                type={"tel"}
                 onChange={(e) => setPhoneCode(e.target.value)}
               />
               <button className={s.loginBtn} onClick={getAnswerPhone}>

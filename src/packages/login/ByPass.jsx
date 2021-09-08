@@ -4,17 +4,20 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { authByPass } from "../../files/API/api.js";
 import useDispatchPopup from "../popup/dispatchPopup.js";
+import eye_show from "../../files/img/visible_show.png";
+import eye_hide from "../../files/img/visible_hide.png";
 
-export default function LoginByPass(props) {
+export default function ByPass(props) {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
+  const [isPassShow, setPassShow] = useState(false);
   const dispatch = useDispatch();
   const popupDispatch = useDispatchPopup();
 
   function getAnswerPass() {
     authByPass(login, password)
-      .then((data) => {
-        dispatch({ type: "LOGIN_CONFIRM", payload: data });
+      .then(() => {
+        dispatch({ type: "token", payload: "you log in by password" });
         popupDispatch({ type: "POPUP", payload: "log in confirmed" });
       })
       .catch((error) => {
@@ -44,8 +47,15 @@ export default function LoginByPass(props) {
               className={s.passwordInput}
               name={"Password"}
               placeholder="Password"
+              type={isPassShow ? "text" : "password"}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+            />
+            <img
+              alt={"showHideEye"}
+              src={isPassShow ? eye_show : eye_hide}
+              onClick={() => setPassShow(!isPassShow)}
+              className={s.eyeInput}
             />
             <div
               className={s.loginByPassLink}

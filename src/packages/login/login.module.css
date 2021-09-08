@@ -18,6 +18,7 @@
     background: #282c34;
     align-items: flex-start;
     padding-bottom: 10px;
+    border-radius: 10px;
 }
 
 .flexbox {
@@ -32,7 +33,13 @@
     margin-top: 25px;
     margin-left: 23px;
     border-radius: 10px;
+    font-size: 21px;
     cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
+}
+
+.token {
+    width: 400px;
+    overflow-wrap: break-word;
 }
 
 .afterToken {
@@ -60,7 +67,15 @@
     margin-top: 9px;
     margin-left: 23px;
     border-radius: 10px;
+    font-size: 21px;
+    /*line-height: 10px;*/
     cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
+}
+
+.eyeInput {
+    position:absolute;
+    bottom:30px;
+    right:125px;
 }
 
 .loginByPassLink {

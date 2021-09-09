@@ -1,3 +1,8 @@
+*{
+  font-family: Roboto, sans-serif;
+  font-weight: 500;
+}
+
 .app {
   text-align: center;
   cursor: url("https://cdn.custom-cursor.com/db/4130/32/arrow2402.png"), auto;

@@ -33,43 +33,46 @@ export default function ByPass(props) {
           <div className={s.naming}>Вход в учетную запись</div>
           <div className={s.afterName}>
             <div className={s.flexbox}>
-              <input
-                className={s.loginForm}
-                name={"Login"}
-                autoFocus
-                placeholder="Login"
-                value={login}
-                onChange={(e) => setLogin(e.target.value)}
-                onKeyPress={(e) =>
-                  e.nativeEvent.key === "Enter" ? getAnswerPass() : null
-                }
-              />
+              <div className={s.leftBar}>
+                <input
+                  className={s.loginInput}
+                  name={"Login"}
+                  autoFocus
+                  placeholder="Login"
+                  value={login}
+                  onChange={(e) => setLogin(e.target.value)}
+                  onKeyPress={(e) =>
+                    e.nativeEvent.key === "Enter" ? getAnswerPass() : null
+                  }
+                />
+                <input
+                  className={s.passwordInput}
+                  name={"Password"}
+                  placeholder="Password"
+                  type={isPassShow ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  onKeyPress={(e) =>
+                    e.nativeEvent.key === "Enter" ? getAnswerPass() : null
+                  }
+                />
+                <img
+                  alt={"showHideEye"}
+                  src={isPassShow ? eye_show : eye_hide}
+                  className={s.eyeInput}
+                  onMouseDown={() => setPassShow(true)}
+                  onMouseUp={() => setPassShow(false)}
+                />
+                <div
+                  className={s.loginByPassLink}
+                  onClick={() => props.setLoginForm("byPhone")}
+                >
+                  Sign in by phone
+                </div>
+              </div>
               <button className={s.loginBtn} onClick={getAnswerPass}>
-                Login
+                Sign in
               </button>
-            </div>
-            <input
-              className={s.passwordInput}
-              name={"Password"}
-              placeholder="Password"
-              type={isPassShow ? "text" : "password"}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              onKeyPress={(e) =>
-                e.nativeEvent.key === "Enter" ? getAnswerPass() : null
-              }
-            />
-            <img
-              alt={"showHideEye"}
-              src={isPassShow ? eye_show : eye_hide}
-              onClick={() => setPassShow(!isPassShow)}
-              className={s.eyeInput}
-            />
-            <div
-              className={s.loginByPassLink}
-              onClick={() => props.setLoginForm("byPhone")}
-            >
-              Sign in by phone
             </div>
           </div>
         </div>

@@ -17,6 +17,7 @@ import InputCode from "./InputCode.jsx";
 export default function ByPhone(props) {
   const [phone, setPhone] = useState("8(___)___-__-__");
   const [code, setCode] = useState("____");
+  const [isCodeWrong, setCodeWrong] = useState(false);
   const [inputType, setInputType] = useState("Phone");
   const dispatch = useDispatch();
   const popupDispatch = useDispatchPopup();
@@ -44,6 +45,7 @@ export default function ByPhone(props) {
         .catch((error) => {
           let answer = error.response.status + " " + error.response.statusText;
           popupDispatch({ type: "ERROR", payload: answer });
+          setCodeWrong(true);
         });
     }
   }
@@ -61,7 +63,7 @@ export default function ByPhone(props) {
           <div className={s.naming}>Вход в учетную запись</div>
           <div className={s.afterName}>
             <div className={s.flexbox}>
-              <div className={s.phoneNumber}>
+              <div className={s.numberOrCodeBox}>
                 {inputType === "Phone" ? (
                   <InputPhone
                     phone={phone}
@@ -72,6 +74,8 @@ export default function ByPhone(props) {
                   <InputCode
                     code={code}
                     setCode={setCode}
+                    isCodeWrong={isCodeWrong}
+                    setCodeWrong={setCodeWrong}
                     getAnswerPhone={getAnswerPhone}
                   />
                 )}

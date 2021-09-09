@@ -31,7 +31,7 @@ export default function InputPhone(props) {
     <input
       name={"phoneCode"}
       autoFocus
-      className={s.phoneBeforeCode}
+      className={s.phoneForm}
       value={props.phone}
       inputMode="numeric"
       onChange={(e) => phoneChecker(e.nativeEvent.data)}

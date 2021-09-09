@@ -1,13 +1,21 @@
+* input {
+    cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
+}
+
+* button {
+    cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
+}
+
 .loginDialog {
     position: absolute;
-    width: 400px;
+    width: 405px;
     top: 5%;
     left: 15%;
-    color: white;
+    color: #E5E5E5;
 }
 
 .naming {
-    font-size: 18px;
+    line-height: 19px;
 }
 
 .afterName {
@@ -17,7 +25,7 @@
     flex-wrap: wrap;
     background: #282c34;
     align-items: flex-start;
-    padding-bottom: 10px;
+    padding-bottom: 20px;
     border-radius: 10px;
 }
 
@@ -27,35 +35,39 @@
     justify-content: space-between;
 }
 
-.loginForm{
-    width: 244px;
-    height: 36px;
-    margin-top: 25px;
-    margin-left: 23px;
-    border-radius: 10px;
-    font-size: 21px;
-    border: none;
-    outline: none;
-    cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
+.leftBar {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    align-items: flex-start;
 }
 
-.phoneNumber {
+.numberOrCodeBox {
     margin-top: 25px;
     margin-left: 23px;
     width: 244px;
     color: black;
+    opacity: 0.8;
+
 }
 
-.phoneBeforeCode {
-    text-align: start;
-    width: 158px;
+.phoneForm {
+    text-align: center;
+    width: 244px;
     height: 36px;
     border-radius: 10px;
-    font-size: 21px;
+    font-size: 16px;
     border: none;
-    padding: 1px 45px;
     outline: none;
-    cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
+    letter-spacing: 0.1em;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 19px;
+    display: flex;
+    align-items: center;
+    color: #878787;
+
 }
 
 .phoneBeforeCode text {
@@ -78,16 +90,8 @@
     font-size: 21px;
     border: none;
     outline: none;
-    cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
-}
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-input[type=number] {
-    -moz-appearance: textfield;
+    letter-spacing: 0.1em;
+    text-align: center
 }
 
 .token {
@@ -105,31 +109,57 @@ input[type=number] {
 .loginBtn {
     width: 74px;
     height: 30px;
-    margin-top: 30px;
+    margin-top: 29px;
     margin-left: 31px;
     margin-right: 20px;
     font-size: 16px;
     border-radius: 10px;
-    font-family: Roboto, sans-serif;
-    cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
+    border: none;
+}
+
+.loginBtn text {
+    position: static;
+    width: 74px;
+    height: 30px;
+    left: 0;
+    top: 0;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.loginInput{
+    width: 208px;
+    height: 36px;
+    margin-top: 25px;
+    margin-left: 23px;
+    padding: 1px 20px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
 }
 
 .passwordInput {
-    width: 244px;
+    width: 208px;
     height: 36px;
     margin-top: 9px;
     margin-left: 23px;
     border-radius: 10px;
-    font-size: 21px;
+    padding: 1px 20px;
     border: none;
     outline: none;
-    cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
 }
 
 .eyeInput {
+    width: 40px;
     position:absolute;
-    bottom:30px;
-    right:125px;
+    bottom:42px;
+    right:135px;
+    cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
 }
 
 .loginByPassLink {
@@ -145,7 +175,7 @@ input[type=number] {
 }
 
 .loginByPassLink:hover {
-    color: blue;
+    color: #0000bb;
 }
 
 .loginByToken {
@@ -160,17 +190,17 @@ input[type=number] {
     margin-left: 28px;
     margin-top: 9px;
     line-height: 15px;
-    margin-right: 10px;
+    margin-right: 25px;
 }
 
 .tokenImg img {
     width: 50px;
     margin-right: 10px;
-    cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
 }
 
 .tokenImg div {
     width: 50px;
     height: 50px;
     margin-right: inherit;
+    cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
 }

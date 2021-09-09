@@ -8,6 +8,7 @@ export default function InputPhone(props) {
       if (lastEmptyIndex - 1 === -2) lastEmptyIndex = 4;
       array[lastEmptyIndex - 1] = "_";
       props.setCode(array.join(""));
+      props.setCodeWrong(false);
     } else {
       if (Number(input) < 10) {
         array[lastEmptyIndex] = input;
@@ -21,7 +22,7 @@ export default function InputPhone(props) {
       name={"phoneCode"}
       autoFocus
       className={s.codeAfterNumber}
-      style={{ textAlign: "center" }}
+      style={props.isCodeWrong ? { color: "red" } : null}
       value={props.code}
       inputMode="numeric"
       onChange={(e) => codeChecker(e.nativeEvent.data)}

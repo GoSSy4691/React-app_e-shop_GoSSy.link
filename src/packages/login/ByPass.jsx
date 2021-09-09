@@ -36,6 +36,7 @@ export default function ByPass(props) {
               <input
                 className={s.loginForm}
                 name={"Login"}
+                autoFocus
                 placeholder="Login"
                 value={login}
                 onChange={(e) => setLogin(e.target.value)}

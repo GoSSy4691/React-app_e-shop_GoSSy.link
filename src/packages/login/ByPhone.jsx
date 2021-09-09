@@ -11,33 +11,32 @@ import useDispatchPopup from "../popup/dispatchPopup.js";
 import vkIco from "../../files/img/token/vk.png";
 import yandexIco from "../../files/img/token/ya.png";
 import googleIco from "../../files/img/token/gog.png";
-import PhoneInput from "react-phone-input-2";
-import "react-phone-input-2/lib/style.css";
+import InputPhone from "./InputPhone.jsx";
+import InputCode from "./InputCode.jsx";
 
 export default function ByPhone(props) {
-  const [phoneCode, setPhoneCode] = useState("");
-  const [savedPhone, setSavedPhone] = useState("");
-  const [placeholderPhone, setPlaceholderPhone] = useState("Phone");
+  const [phone, setPhone] = useState("8(___)___-__-__");
+  const [code, setCode] = useState("____");
+  const [inputType, setInputType] = useState("Phone");
   const dispatch = useDispatch();
   const popupDispatch = useDispatchPopup();
 
   function getAnswerPhone() {
-    if (phoneCode.length > 4) {
-      setSavedPhone(phoneCode);
-      authByPhone(savedPhone)
+    if (phone.length > 4) {
+      authByPhone(phone)
         .then((data) => {
           dispatch({ type: "LOGIN_CONFIRM", payload: data });
           popupDispatch({ type: "POPUP", payload: "Code sent" });
-          setPlaceholderPhone("Code");
-          setPhoneCode("");
+          setInputType("Code");
+          setPhone("");
         })
         .catch((error) => {
           let answer = error.response.status + " " + error.response.statusText;
           popupDispatch({ type: "ERROR", payload: answer });
         });
     }
-    if (phoneCode.length <= 4) {
-      authPhoneCode(savedPhone, phoneCode)
+    if (phone.length <= 4) {
+      authPhoneCode(phone, code)
         .then((data) => {
           dispatch({ type: "LOGIN_CONFIRM", payload: data });
           popupDispatch({ type: "POPUP", payload: "code confirmed" });
@@ -55,17 +54,6 @@ export default function ByPhone(props) {
     props.setLoginForm("Wait");
   }
 
-  function codeChecker(input) {
-    // let match = input.match("^[0-9]+$");
-    // console.log(input);
-    // console.log(match);
-    // if (match !== null) {
-    //   let match2 = match.join("");
-    //   setPhoneCode(match2);
-    // }
-    if (input.length < 5) setPhoneCode(input);
-  }
-
   return (
     <div className={patternCSS.darkenBackground}>
       <div className={patternCSS.activeBox}>
@@ -74,33 +62,22 @@ export default function ByPhone(props) {
           <div className={s.afterName}>
             <div className={s.flexbox}>
               <div className={s.phoneNumber}>
-                {placeholderPhone === "Phone" ? (
-                  <PhoneInput
-                    country={"ru"}
-                    value={phoneCode}
-                    onChange={(e) => setPhoneCode(e)}
-                    inputStyle={{
-                      width: "248px",
-                      height: "38px",
-                      borderRadius: "10px",
-                    }}
-                    buttonStyle={{ borderRadius: "10px" }}
+                {inputType === "Phone" ? (
+                  <InputPhone
+                    phone={phone}
+                    setPhone={setPhone}
+                    getAnswerPhone={getAnswerPhone}
                   />
                 ) : (
-                  <input
-                    name={"Phone"}
-                    className={s.codeAfterNumber}
-                    placeholder={placeholderPhone}
-                    value={phoneCode}
-                    onChange={(e) => codeChecker(e.target.value)}
-                    onKeyPress={(e) =>
-                      e.nativeEvent.key === "Enter" ? getAnswerPhone() : null
-                    }
+                  <InputCode
+                    code={code}
+                    setCode={setCode}
+                    getAnswerPhone={getAnswerPhone}
                   />
                 )}
               </div>
               <button className={s.loginBtn} onClick={getAnswerPhone}>
-                Login
+                Next
               </button>
             </div>
             <button

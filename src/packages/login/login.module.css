@@ -35,6 +35,7 @@
     border-radius: 10px;
     font-size: 21px;
     border: none;
+    outline: none;
     cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
 }
 
@@ -45,13 +46,38 @@
     color: black;
 }
 
+.phoneBeforeCode {
+    text-align: start;
+    width: 158px;
+    height: 36px;
+    border-radius: 10px;
+    font-size: 21px;
+    border: none;
+    padding: 1px 45px;
+    outline: none;
+    cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
+}
+
+.phoneBeforeCode text {
+    margin-left: 10px;
+}
+
+.phoneBeforeCode::after {
+    position: absolute;
+    left: 5px;
+    top: 3px;
+    content: attr(data-placeholder);
+    pointer-events: none;
+    opacity: 0.6;
+}
+
 .codeAfterNumber {
-    text-align: center;
     width: 244px;
     height: 36px;
     border-radius: 10px;
     font-size: 21px;
     border: none;
+    outline: none;
     cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
 }
 
@@ -96,6 +122,7 @@ input[type=number] {
     border-radius: 10px;
     font-size: 21px;
     border: none;
+    outline: none;
     cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
 }
 

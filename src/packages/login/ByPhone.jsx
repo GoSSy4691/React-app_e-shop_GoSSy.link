@@ -1,5 +1,4 @@
 import s from "./login.module.css";
-import patternCSS from "../pattern.module.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import {
@@ -57,64 +56,53 @@ export default function ByPhone(props) {
   }
 
   return (
-    <div className={patternCSS.darkenBackground}>
-      <div className={patternCSS.activeBox}>
-        <div className={s.loginDialog}>
-          <div className={s.naming}>Вход в учетную запись</div>
-          <div className={s.afterName}>
-            <div className={s.flexbox}>
-              <div className={s.numberOrCodeBox}>
-                {inputType === "Phone" ? (
-                  <InputPhone
-                    phone={phone}
-                    setPhone={setPhone}
-                    getAnswerPhone={getAnswerPhone}
-                  />
-                ) : (
-                  <InputCode
-                    code={code}
-                    setCode={setCode}
-                    isCodeWrong={isCodeWrong}
-                    setCodeWrong={setCodeWrong}
-                    getAnswerPhone={getAnswerPhone}
-                  />
-                )}
-              </div>
-              <button className={s.loginBtn} onClick={getAnswerPhone}>
-                Next
-              </button>
-            </div>
-            <button
-              className={s.loginByPassLink}
-              onClick={() => props.setLoginForm("byPass")}
-            >
-              Sign in by password
-            </button>
-            <div className={s.loginByToken}>Sign in with:</div>
-            <div className={s.tokenImg}>
-              <div>
-                <img
-                  src={vkIco}
-                  alt={"Vk"}
-                  onClick={() => getAnswerToken("vk")}
-                />
-              </div>
-              <div>
-                <img
-                  src={yandexIco}
-                  alt={"Yandex"}
-                  onClick={() => getAnswerToken("yandex")}
-                />
-              </div>
-              <div>
-                <img
-                  src={googleIco}
-                  alt={"Google"}
-                  onClick={() => getAnswerToken("google")}
-                />
-              </div>
-            </div>
-          </div>
+    <div className={s.afterName}>
+      <div className={s.flexbox}>
+        <div className={s.numberOrCodeBox}>
+          {inputType === "Phone" ? (
+            <InputPhone
+              phone={phone}
+              setPhone={setPhone}
+              getAnswerPhone={getAnswerPhone}
+            />
+          ) : (
+            <InputCode
+              code={code}
+              setCode={setCode}
+              isCodeWrong={isCodeWrong}
+              setCodeWrong={setCodeWrong}
+              getAnswerPhone={getAnswerPhone}
+            />
+          )}
+        </div>
+        <button className={s.loginBtn} onClick={getAnswerPhone}>
+          Next
+        </button>
+      </div>
+      <button
+        className={s.loginByPassLink}
+        onClick={() => props.setLoginForm("byPass")}
+      >
+        Sign in by password
+      </button>
+      <div className={s.loginByToken}>Sign in with:</div>
+      <div className={s.tokenImg}>
+        <div>
+          <img src={vkIco} alt={"Vk"} onClick={() => getAnswerToken("vk")} />
+        </div>
+        <div>
+          <img
+            src={yandexIco}
+            alt={"Yandex"}
+            onClick={() => getAnswerToken("yandex")}
+          />
+        </div>
+        <div>
+          <img
+            src={googleIco}
+            alt={"Google"}
+            onClick={() => getAnswerToken("google")}
+          />
         </div>
       </div>
     </div>

@@ -24,9 +24,9 @@
 .closeButton {
     height: 55px;
     width: 55px;
-    position: relative;
-    top: 5%;
-    left: 45%;
+    position: absolute;
+    top: 3%;
+    right: 1%;
     z-index: 3;
     cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
     border-radius: 25px;

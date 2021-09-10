@@ -22,9 +22,27 @@ export default function Login() {
 
   switch (loginForm) {
     case "byPhone":
-      return <ByPhone setLoginForm={setLoginForm} />;
+      return (
+        <div className={patternCSS.darkenBackground}>
+          <div className={patternCSS.activeBox}>
+            <div className={s.loginDialog}>
+              <div className={s.naming}>Вход в учетную запись</div>
+              <ByPhone setLoginForm={setLoginForm} />
+            </div>
+          </div>
+        </div>
+      );
     case "byPass":
-      return <ByPass setLoginForm={setLoginForm} />;
+      return (
+        <div className={patternCSS.darkenBackground}>
+          <div className={patternCSS.activeBox}>
+            <div className={s.loginDialog}>
+              <div className={s.naming}>Вход в учетную запись</div>
+              <ByPass setLoginForm={setLoginForm} />
+            </div>
+          </div>
+        </div>
+      );
     case "Wait":
       return (
         <div className={patternCSS.darkenBackground}>

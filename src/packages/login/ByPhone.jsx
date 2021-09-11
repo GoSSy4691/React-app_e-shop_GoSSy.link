@@ -16,37 +16,48 @@ import InputCode from "./InputCode.jsx";
 export default function ByPhone(props) {
   const [phone, setPhone] = useState("8(___)___-__-__");
   const [code, setCode] = useState("____");
+  const [isPhoneWrong, setPhoneWrong] = useState(false);
   const [isCodeWrong, setCodeWrong] = useState(false);
   const [inputType, setInputType] = useState("Phone");
   const dispatch = useDispatch();
   const popupDispatch = useDispatchPopup();
 
-  function getAnswerPhone() {
-    if (phone.length > 4) {
-      authByPhone(phone)
-        .then((data) => {
-          dispatch({ type: "LOGIN_CONFIRM", payload: data });
-          popupDispatch({ type: "POPUP", payload: "Code sent" });
-          setInputType("Code");
-          setPhone("");
-        })
-        .catch((error) => {
-          let answer = error.response.status + " " + error.response.statusText;
-          popupDispatch({ type: "ERROR", payload: answer });
-        });
+  function sendPhoneNumber() {
+    if (phone.indexOf("_") !== -1) {
+      popupDispatch({ type: "ERROR", payload: "Wrong phone number" });
+      setPhoneWrong(true);
+      return null;
     }
-    if (phone.length <= 4) {
-      authPhoneCode(phone, code)
-        .then((data) => {
-          dispatch({ type: "LOGIN_CONFIRM", payload: data });
-          popupDispatch({ type: "POPUP", payload: "code confirmed" });
-        })
-        .catch((error) => {
-          let answer = error.response.status + " " + error.response.statusText;
-          popupDispatch({ type: "ERROR", payload: answer });
-          setCodeWrong(true);
-        });
+    let preparedPhone = phone.split("").filter((e) => !isNaN(Number(e)));
+    preparedPhone = "+7" + preparedPhone.join("").slice(1);
+    authByPhone(preparedPhone)
+      .then((data) => {
+        dispatch({ type: "LOGIN_CONFIRM", payload: data });
+        popupDispatch({ type: "POPUP", payload: "Code sent" });
+        setInputType("Code");
+      })
+      .catch((error) => {
+        let answer = error.response.status + " " + error.response.statusText;
+        popupDispatch({ type: "ERROR", payload: answer });
+      });
+  }
+
+  function sendCode() {
+    if (code.indexOf("_") !== -1) {
+      popupDispatch({ type: "ERROR", payload: "Wrong code" });
+      setCodeWrong(true);
+      return null;
     }
+    authPhoneCode(phone, code)
+      .then((data) => {
+        dispatch({ type: "LOGIN_CONFIRM", payload: data });
+        popupDispatch({ type: "POPUP", payload: "code confirmed" });
+      })
+      .catch((error) => {
+        let answer = error.response.status + " " + error.response.statusText;
+        popupDispatch({ type: "ERROR", payload: answer });
+        setCodeWrong(true);
+      });
   }
 
   function getAnswerToken(method) {
@@ -63,7 +74,9 @@ export default function ByPhone(props) {
             <InputPhone
               phone={phone}
               setPhone={setPhone}
-              getAnswerPhone={getAnswerPhone}
+              isPhoneWrong={isPhoneWrong}
+              setPhoneWrong={setPhoneWrong}
+              sendPhoneNumber={sendPhoneNumber}
             />
           ) : (
             <InputCode
@@ -71,11 +84,14 @@ export default function ByPhone(props) {
               setCode={setCode}
               isCodeWrong={isCodeWrong}
               setCodeWrong={setCodeWrong}
-              getAnswerPhone={getAnswerPhone}
+              sendCode={sendCode}
             />
           )}
         </div>
-        <button className={s.loginBtn} onClick={getAnswerPhone}>
+        <button
+          className={s.loginBtn}
+          onClick={inputType === "Phone" ? sendPhoneNumber : sendCode}
+        >
           Next
         </button>
       </div>

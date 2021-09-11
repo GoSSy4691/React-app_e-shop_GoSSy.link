@@ -2,6 +2,7 @@ import s from "./login.module.css";
 
 export default function InputPhone(props) {
   function phoneChecker(input) {
+    props.setPhoneWrong(false);
     let array = props.phone.split("");
     let lastEmptyIndex = array.findIndex((e) => e === "_");
     if (input === null) {
@@ -32,11 +33,12 @@ export default function InputPhone(props) {
       name={"phoneCode"}
       autoFocus
       className={s.phoneForm}
+      style={props.isPhoneWrong ? { color: "red" } : null}
       value={props.phone}
       inputMode="numeric"
       onChange={(e) => phoneChecker(e.nativeEvent.data)}
       onKeyPress={(e) =>
-        e.nativeEvent.key === "Enter" ? props.getAnswerPhone() : null
+        e.nativeEvent.key === "Enter" ? props.sendPhoneNumber() : null
       }
     />
   );

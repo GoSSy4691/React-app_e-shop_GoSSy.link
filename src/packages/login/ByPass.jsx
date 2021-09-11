@@ -9,11 +9,22 @@ import eye_hide from "../../files/img/visible_hide.png";
 export default function ByPass(props) {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
+  const [isPassWrong, setPassWrong] = useState(false);
   const [isPassShow, setPassShow] = useState(false);
   const dispatch = useDispatch();
   const popupDispatch = useDispatchPopup();
 
   function getAnswerPass() {
+    if (login.length < 5) {
+      popupDispatch({ type: "ERROR", payload: "Wrong login" });
+      setPassWrong(true);
+      return null;
+    }
+    if (password.length < 5) {
+      popupDispatch({ type: "ERROR", payload: "Wrong password" });
+      setPassWrong(true);
+      return null;
+    }
     authByPass(login, password)
       .then(() => {
         dispatch({ type: "token", payload: "you log in by password" });
@@ -25,28 +36,40 @@ export default function ByPass(props) {
       });
   }
 
+  function loginValidation(event) {
+    setPassWrong(false);
+    setLogin(event);
+  }
+
+  function passwordValidation(event) {
+    setPassWrong(false);
+    setPassword(event);
+  }
+
   return (
     <div className={s.afterName}>
       <div className={s.flexbox}>
         <div className={s.leftBar}>
           <input
-            className={s.loginInput}
             name={"Login"}
+            className={s.loginInput}
+            style={isPassWrong ? { color: "red" } : null}
             autoFocus
             placeholder="Login"
             value={login}
-            onChange={(e) => setLogin(e.target.value)}
+            onChange={(e) => loginValidation(e.target.value)}
             onKeyPress={(e) =>
               e.nativeEvent.key === "Enter" ? getAnswerPass() : null
             }
           />
           <input
-            className={s.passwordInput}
             name={"Password"}
+            className={s.passwordInput}
+            style={isPassWrong ? { color: "red" } : null}
             placeholder="Password"
             type={isPassShow ? "text" : "password"}
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => passwordValidation(e.target.value)}
             onKeyPress={(e) =>
               e.nativeEvent.key === "Enter" ? getAnswerPass() : null
             }

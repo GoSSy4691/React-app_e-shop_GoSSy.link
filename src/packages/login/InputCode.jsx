@@ -1,6 +1,9 @@
 import s from "./login.module.css";
+import { useEffect, useRef } from "react";
 
 export default function InputPhone(props) {
+  const inputElement = useRef(null);
+
   function codeChecker(input) {
     props.setCodeWrong(false);
     let array = props.code.split("");
@@ -17,10 +20,18 @@ export default function InputPhone(props) {
     }
   }
 
+  useEffect(() => {
+    if (props.phone !== undefined) {
+      let array = props.phone.split("");
+      inputElement.current.selectionEnd = array.findIndex((e) => e === "_");
+    }
+  });
+
   return (
     <input
       name={"phoneCode"}
       autoFocus
+      ref={inputElement}
       className={s.codeAfterNumber}
       style={props.isCodeWrong ? { color: "red" } : null}
       value={props.code}

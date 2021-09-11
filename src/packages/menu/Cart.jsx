@@ -2,10 +2,12 @@ import s from "./CSS/cart.module.css";
 import patternCSS from "../pattern.module.css";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { ButtonAdd, ButtonDelete } from "./ButtonAddDelete";
+import useDetectClickOut from "../useDetectClickOut.js";
+import { ButtonAdd, ButtonDelete } from "./ButtonAddDelete.jsx";
 
 export default function Cart(props) {
   const cart = useSelector((state) => state.cart);
+  const refCart = useDetectClickOut(props.isShowCart, props.setShowCart);
 
   const isAnyFood = () => {
     if (cart.selectedFood.length === 0) return false;
@@ -21,7 +23,7 @@ export default function Cart(props) {
         >
           ✖
         </button>
-        <div className={s.showCart}>
+        <div className={s.showCart} ref={refCart}>
           <div className={s.shoppingCartTitle}>Your choose:</div>
           {isAnyFood() ? (
             cart.selectedFood.map((p, index) => (

@@ -57,8 +57,12 @@ export default function Header() {
           <div className={s.shopIcoCount}>{store.itemsCount}</div>
         </div>
       </div>
-      {isShowLogin ? <Login setShowLogin={setShowLogin} /> : null}
-      {isShowCart ? <Cart setShowCart={setShowCart} /> : null}
+      {isShowLogin ? (
+        <Login isShowLogin={isShowLogin} setShowLogin={setShowLogin} />
+      ) : null}
+      {isShowCart ? (
+        <Cart isShowCart={isShowCart} setShowCart={setShowCart} />
+      ) : null}
     </div>
   );
 }

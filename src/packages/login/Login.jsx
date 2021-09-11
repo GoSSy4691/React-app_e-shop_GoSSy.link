@@ -6,13 +6,15 @@ import { Cookies } from "react-cookie";
 import ByPass from "./ByPass.jsx";
 import ByPhone from "./ByPhone.jsx";
 import useDispatchPopup from "../popup/dispatchPopup.js";
+import useDetectClickOut from "../useDetectClickOut.js";
 
-export default function Login() {
+export default function Login(props) {
   const cookies = new Cookies();
   const popupDispatch = useDispatchPopup();
   const method = useSelector((state) => state.user.methodToken);
   const token = useSelector((state) => state.user.token);
   const [loginForm, setLoginForm] = useState(token ? "Logout" : "byPhone");
+  const refLogin = useDetectClickOut(props.isShowLogin, props.setShowLogin);
 
   function logoutBtn() {
     cookies.remove("token");
@@ -25,7 +27,7 @@ export default function Login() {
       return (
         <div className={patternCSS.darkenBackground}>
           <div className={patternCSS.activeBox}>
-            <div className={s.loginDialog}>
+            <div className={s.loginDialog} ref={refLogin}>
               <div className={s.naming}>Вход в учетную запись</div>
               <ByPhone setLoginForm={setLoginForm} />
             </div>
@@ -36,7 +38,7 @@ export default function Login() {
       return (
         <div className={patternCSS.darkenBackground}>
           <div className={patternCSS.activeBox}>
-            <div className={s.loginDialog}>
+            <div className={s.loginDialog} ref={refLogin}>
               <div className={s.naming}>Вход в учетную запись</div>
               <ByPass setLoginForm={setLoginForm} />
             </div>
@@ -47,7 +49,7 @@ export default function Login() {
       return (
         <div className={patternCSS.darkenBackground}>
           <div className={patternCSS.activeBox}>
-            <div className={s.loginDialog}>
+            <div className={s.loginDialog} ref={refLogin}>
               <div className={s.naming}>Вход в учетную запись</div>
               <div className={s.afterName}>
                 <div className={s.flexbox}>
@@ -68,7 +70,7 @@ export default function Login() {
       return (
         <div className={patternCSS.darkenBackground}>
           <div className={patternCSS.activeBox}>
-            <div className={s.loginDialog}>
+            <div className={s.loginDialog} ref={refLogin}>
               <div className={s.naming}>Вход в учетную запись</div>
               <div className={s.afterName}>
                 <div className={s.token}> Your token is </div>

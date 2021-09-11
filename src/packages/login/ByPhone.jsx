@@ -48,7 +48,9 @@ export default function ByPhone(props) {
       setCodeWrong(true);
       return null;
     }
-    authPhoneCode(phone, code)
+    let preparedPhone = phone.split("").filter((e) => !isNaN(Number(e)));
+    preparedPhone = "+7" + preparedPhone.join("").slice(1);
+    authPhoneCode(preparedPhone, code)
       .then((data) => {
         dispatch({ type: "LOGIN_CONFIRM", payload: data });
         popupDispatch({ type: "POPUP", payload: "code confirmed" });

@@ -33,10 +33,10 @@ function Welcome() {
       <div className={s.description}>
         Hi &#128400; this site created for learning React's capabilities.
         <br />
-        I just beginner at developing and in the future want know more about
+        I am a beginner at developing and in the future want to know more about
         front development.
         <br />
-        Please bear with me and my code.
+        Go easy on me and my code.
       </div>
       <div className={s.ps}>It's goose TIME</div>
     </div>

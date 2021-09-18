@@ -15,7 +15,7 @@ export const menuReducer = (state = menu, action) => {
   switch (action.type) {
     case "GET_ALL_MENU":
       let getData = action.payload.data;
-      if (typeof getData === "object" && Object.keys(getData).length !== 0) {
+      if (typeof getData === "object" && getData.length !== 0) {
         return {
           ...state,
           menuAll: getData[0].menu,

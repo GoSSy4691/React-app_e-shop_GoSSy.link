@@ -1,12 +1,11 @@
 import s from "./login.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import {
   authByPhone,
   authPhoneCode,
   authByToken,
 } from "../../files/API/api.js";
-import useDispatchPopup from "../popup/dispatchPopup.js";
 import vkIco from "../../files/img/token/vk.png";
 import yandexIco from "../../files/img/token/ya.png";
 import googleIco from "../../files/img/token/gog.png";
@@ -20,32 +19,37 @@ export default function ByPhone(props) {
   const [isCodeWrong, setCodeWrong] = useState(false);
   const [inputType, setInputType] = useState("Phone");
   const dispatch = useDispatch();
-  const popupDispatch = useDispatchPopup();
+
+  useEffect(() => {
+    setTimeout(() => {
+      dispatch({ type: "POPUP_CLEAN" });
+    }, 4000);
+  });
 
   function sendPhoneNumber() {
     if (phone.indexOf("_") !== -1) {
-      popupDispatch({ type: "ERROR", payload: "Wrong phone number" });
       setPhoneWrong(true);
+      dispatch({ type: "ERROR", payload: "Wrong phone number" });
       return null;
     }
     let preparedPhone = phone.split("").filter((e) => !isNaN(Number(e)));
     preparedPhone = "+7" + preparedPhone.join("").slice(1);
     authByPhone(preparedPhone)
       .then((data) => {
-        dispatch({ type: "LOGIN_CONFIRM", payload: data });
-        popupDispatch({ type: "POPUP", payload: "Code sent" });
         setInputType("Code");
+        dispatch({ type: "LOGIN_CONFIRM", payload: data });
+        dispatch({ type: "POPUP", payload: "Code sent" });
       })
       .catch((error) => {
         let answer = error.response.status + " " + error.response.statusText;
-        popupDispatch({ type: "ERROR", payload: answer });
+        dispatch({ type: "ERROR", payload: answer });
       });
   }
 
   function sendCode() {
     if (code.indexOf("_") !== -1) {
-      popupDispatch({ type: "ERROR", payload: "Wrong code" });
       setCodeWrong(true);
+      dispatch({ type: "ERROR", payload: "Wrong code" });
       return null;
     }
     let preparedPhone = phone.split("").filter((e) => !isNaN(Number(e)));
@@ -53,12 +57,12 @@ export default function ByPhone(props) {
     authPhoneCode(preparedPhone, code)
       .then((data) => {
         dispatch({ type: "LOGIN_CONFIRM", payload: data });
-        popupDispatch({ type: "POPUP", payload: "code confirmed" });
+        dispatch({ type: "POPUP", payload: "code confirmed" });
       })
       .catch((error) => {
         let answer = error.response.status + " " + error.response.statusText;
-        popupDispatch({ type: "ERROR", payload: answer });
         setCodeWrong(true);
+        dispatch({ type: "ERROR", payload: answer });
       });
   }
 

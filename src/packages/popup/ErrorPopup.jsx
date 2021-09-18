@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import s from "./errorPopup.module.css";
 
 export default function ErrorPopup() {
-  const popupMassage = useSelector((state) => state.error.lastPopup);
+  const popupMessage = useSelector((state) => state.error.lastPopup);
   const popupType = useSelector((state) => state.error.typePopup);
   return (
     <div
@@ -12,7 +12,7 @@ export default function ErrorPopup() {
             ${popupType === "green" ? s.popupGreen : null}
             `}
     >
-      {popupMassage}
+      {popupMessage}
     </div>
   );
 }

@@ -5,11 +5,11 @@ let error = {
 
 export const errorReducer = (state = error, action) => {
   switch (action.type) {
-    case "_POPUP_RED":
+    case "ERROR":
       return { ...state, lastPopup: action.payload, typePopup: "red" };
-    case "_POPUP_GREEN":
+    case "POPUP":
       return { ...state, lastPopup: action.payload, typePopup: "green" };
-    case "_POPUP_CLEAN":
+    case "POPUP_CLEAN":
       return { ...state, lastPopup: "", typePopup: "none" };
     default:
       return state;

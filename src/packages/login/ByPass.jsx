@@ -1,8 +1,7 @@
 import s from "./login.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { authByPass } from "../../files/API/api.js";
-import useDispatchPopup from "../popup/dispatchPopup.js";
 import eye_show from "../../files/img/visible_show.png";
 import eye_hide from "../../files/img/visible_hide.png";
 
@@ -12,27 +11,31 @@ export default function ByPass(props) {
   const [isPassWrong, setPassWrong] = useState(false);
   const [isPassShow, setPassShow] = useState(false);
   const dispatch = useDispatch();
-  const popupDispatch = useDispatchPopup();
+
+  useEffect(() => {
+    setTimeout(() => {
+      dispatch({ type: "POPUP_CLEAN" });
+    }, 4000);
+  });
 
   function getAnswerPass() {
     if (login.length < 5) {
-      popupDispatch({ type: "ERROR", payload: "Wrong login" });
       setPassWrong(true);
+      dispatch({ type: "ERROR", payload: "Wrong login" });
       return null;
     }
     if (password.length < 5) {
-      popupDispatch({ type: "ERROR", payload: "Wrong password" });
       setPassWrong(true);
+      dispatch({ type: "ERROR", payload: "Wrong password" });
       return null;
     }
     authByPass(login, password)
       .then(() => {
-        dispatch({ type: "token", payload: "you log in by password" });
-        popupDispatch({ type: "POPUP", payload: "log in confirmed" });
+        dispatch({ type: "POPUP", payload: "log in confirmed" });
       })
       .catch((error) => {
         let answer = error.response.status + " " + error.response.statusText;
-        popupDispatch({ type: "ERROR", payload: answer });
+        dispatch({ type: "ERROR", payload: answer });
       });
   }
 

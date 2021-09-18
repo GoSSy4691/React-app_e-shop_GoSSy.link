@@ -1,11 +1,7 @@
 import s from "./login.module.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import {
-  authByPhone,
-  authPhoneCode,
-  authByToken,
-} from "../../files/API/api.js";
+import API from "../../files/API/api.js";
 import useDispatchPopup from "../popup/dispatchPopup.js";
 import vkIco from "../../files/img/token/vk.png";
 import yandexIco from "../../files/img/token/ya.png";
@@ -30,15 +26,14 @@ export default function ByPhone(props) {
     }
     let preparedPhone = phone.split("").filter((e) => !isNaN(Number(e)));
     preparedPhone = "+7" + preparedPhone.join("").slice(1);
-    authByPhone(preparedPhone)
-      .then((data) => {
-        dispatch({ type: "LOGIN_CONFIRM", payload: data });
-        popupDispatch({ type: "POPUP", payload: "Code sent" });
+    API.authByPhone(preparedPhone)
+      .then((res) => {
+        dispatch({ type: "LOGIN_CONFIRM", payload: res.data });
+        popupDispatch({ type: "SUCCESS", payload: "Code sent" });
         setInputType("Code");
       })
-      .catch((error) => {
-        let answer = error.response.status + " " + error.response.statusText;
-        popupDispatch({ type: "ERROR", payload: answer });
+      .catch((err) => {
+        popupDispatch({ type: "ERROR", payload: err.message });
       });
   }
 
@@ -50,10 +45,10 @@ export default function ByPhone(props) {
     }
     let preparedPhone = phone.split("").filter((e) => !isNaN(Number(e)));
     preparedPhone = "+7" + preparedPhone.join("").slice(1);
-    authPhoneCode(preparedPhone, code)
+    API.authByCode(preparedPhone, code)
       .then((data) => {
         dispatch({ type: "LOGIN_CONFIRM", payload: data });
-        popupDispatch({ type: "POPUP", payload: "code confirmed" });
+        popupDispatch({ type: "SUCCESS", payload: "code confirmed" });
       })
       .catch((error) => {
         let answer = error.response.status + " " + error.response.statusText;
@@ -64,7 +59,7 @@ export default function ByPhone(props) {
 
   function getAnswerToken(method) {
     dispatch({ type: "SET_METHOD_TOKEN", payload: method });
-    authByToken(method);
+    API.authByOAuth(method);
     props.setLoginForm("Wait");
   }
 

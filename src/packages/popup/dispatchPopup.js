@@ -10,7 +10,7 @@ export default function useDispatchPopup() {
           dispatch({ type: "_POPUP_CLEAN" });
         }, 4000);
         break;
-      case "POPUP":
+      case "SUCCESS":
         dispatch({ type: "_POPUP_GREEN", payload: action.payload });
         setTimeout(() => {
           dispatch({ type: "_POPUP_CLEAN" });

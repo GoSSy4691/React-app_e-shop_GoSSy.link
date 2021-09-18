@@ -1,18 +1,25 @@
 import s from "./CSS/menu.module.css";
+import useDispatchPopup from "../popup/dispatchPopup.js";
 import { useDispatch, useSelector } from "react-redux";
 import runForestRun from "../../files/img/runForestRun.png";
-import { getMenuData } from "../../files/API/api.js";
+import API from "../../files/API/api.js";
 import Items from "./Items.jsx";
 import LeftBar from "./LeftBar.jsx";
 
 function MenuContainer() {
   const menuOnDisplay = useSelector((state) => state.menu.menuOnDisplay);
   const dispatch = useDispatch();
+  const popupDispatch = useDispatchPopup();
+
   switch (menuOnDisplay) {
     case "Загрузка":
-      getMenuData().then((data) =>
-        dispatch({ type: "GET_ALL_MENU", payload: data })
-      );
+      API.getShops()
+        .then(data => {
+          dispatch({ type: "ALL_MENU", payload: data.data })
+        })
+        .catch(err => {
+          popupDispatch({ type: "ERROR", payload: err.message });
+        })
       return <div className={s.emptyItemDialog}>Loading</div>;
     case "Пусто":
       return (

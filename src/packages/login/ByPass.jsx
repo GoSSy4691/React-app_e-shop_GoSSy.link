@@ -1,5 +1,5 @@
 import s from "./login.module.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { authByPass } from "../../files/API/api.js";
 import eye_show from "../../files/img/visible_show.png";
@@ -12,30 +12,24 @@ export default function ByPass(props) {
   const [isPassShow, setPassShow] = useState(false);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    setTimeout(() => {
-      dispatch({ type: "POPUP_CLEAN" });
-    }, 4000);
-  });
-
   function getAnswerPass() {
     if (login.length < 5) {
       setPassWrong(true);
-      dispatch({ type: "ERROR", payload: "Wrong login" });
+      dispatch({ type: "ERROR_MESSAGE", payload: "Wrong login" });
       return null;
     }
     if (password.length < 5) {
       setPassWrong(true);
-      dispatch({ type: "ERROR", payload: "Wrong password" });
+      dispatch({ type: "ERROR_MESSAGE", payload: "Wrong password" });
       return null;
     }
     authByPass(login, password)
       .then(() => {
-        dispatch({ type: "POPUP", payload: "log in confirmed" });
+        dispatch({ type: "SUCCESS_MESSAGE", payload: "log in confirmed" });
       })
       .catch((error) => {
         let answer = error.response.status + " " + error.response.statusText;
-        dispatch({ type: "ERROR", payload: answer });
+        dispatch({ type: "ERROR_MESSAGE", payload: answer });
       });
   }
 

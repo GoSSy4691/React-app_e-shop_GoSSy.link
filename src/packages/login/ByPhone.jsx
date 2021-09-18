@@ -1,5 +1,5 @@
 import s from "./login.module.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import {
   authByPhone,
@@ -20,16 +20,10 @@ export default function ByPhone(props) {
   const [inputType, setInputType] = useState("Phone");
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    setTimeout(() => {
-      dispatch({ type: "POPUP_CLEAN" });
-    }, 4000);
-  });
-
   function sendPhoneNumber() {
     if (phone.indexOf("_") !== -1) {
       setPhoneWrong(true);
-      dispatch({ type: "ERROR", payload: "Wrong phone number" });
+      dispatch({ type: "ERROR_MESSAGE", payload: "Wrong phone number" });
       return null;
     }
     let preparedPhone = phone.split("").filter((e) => !isNaN(Number(e)));
@@ -38,18 +32,18 @@ export default function ByPhone(props) {
       .then((data) => {
         setInputType("Code");
         dispatch({ type: "LOGIN_CONFIRM", payload: data });
-        dispatch({ type: "POPUP", payload: "Code sent" });
+        dispatch({ type: "SUCCESS_MESSAGE", payload: "Code sent" });
       })
       .catch((error) => {
         let answer = error.response.status + " " + error.response.statusText;
-        dispatch({ type: "ERROR", payload: answer });
+        dispatch({ type: "ERROR_MESSAGE", payload: answer });
       });
   }
 
   function sendCode() {
     if (code.indexOf("_") !== -1) {
       setCodeWrong(true);
-      dispatch({ type: "ERROR", payload: "Wrong code" });
+      dispatch({ type: "ERROR_MESSAGE", payload: "Wrong code" });
       return null;
     }
     let preparedPhone = phone.split("").filter((e) => !isNaN(Number(e)));
@@ -57,12 +51,12 @@ export default function ByPhone(props) {
     authPhoneCode(preparedPhone, code)
       .then((data) => {
         dispatch({ type: "LOGIN_CONFIRM", payload: data });
-        dispatch({ type: "POPUP", payload: "code confirmed" });
+        dispatch({ type: "SUCCESS_MESSAGE", payload: "code confirmed" });
       })
       .catch((error) => {
         let answer = error.response.status + " " + error.response.statusText;
         setCodeWrong(true);
-        dispatch({ type: "ERROR", payload: answer });
+        dispatch({ type: "ERROR_MESSAGE", payload: answer });
       });
   }
 

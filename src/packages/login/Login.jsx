@@ -1,6 +1,6 @@
 import s from "./login.module.css";
 import patternCSS from "../pattern.module.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Cookies } from "react-cookie";
 import ByPass from "./ByPass.jsx";
@@ -15,15 +15,9 @@ export default function Login(props) {
   const [loginForm, setLoginForm] = useState(token ? "Logout" : "byPhone");
   const refLogin = useDetectClickOut(props.isShowLogin, props.setShowLogin);
 
-  useEffect(() => {
-    setTimeout(() => {
-      dispatch({ type: "POPUP_CLEAN" });
-    }, 4000);
-  });
-
   function logoutBtn() {
     cookies.remove("token");
-    dispatch({ type: "POPUP", payload: "log out confirmed" });
+    dispatch({ type: "SUCCESS_MESSAGE", payload: "log out confirmed" });
     setLoginForm("byPhone");
   }
 

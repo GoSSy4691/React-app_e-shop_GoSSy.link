@@ -34,8 +34,7 @@
   color: black;
   background: #747474;
   border-radius: 25px;
-  padding-left: 5px;
-  padding-right: 5px;
+  padding: 0 5px;
 }
 
 .rightSide {

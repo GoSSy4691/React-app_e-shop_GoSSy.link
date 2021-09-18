@@ -1,31 +1,31 @@
 import s from "./CSS/cart.module.css";
 import patternCSS from "../pattern.module.css";
-import { NavLink } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { useSelector } from "react-redux";
 import useDetectClickOut from "../useDetectClickOut.js";
 import { ButtonAdd, ButtonDelete } from "./ButtonAddDelete.jsx";
 
-export default function Cart(props) {
+function Cart(props) {
   const cart = useSelector((state) => state.cart);
   const refCart = useDetectClickOut(props.isShowCart, props.setShowCart);
 
-  const isAnyFood = () => {
-    if (cart.selectedFood.length === 0) return false;
-    if (cart.selectedFood.length > 0) return true;
-  };
+  function goToOrder() {
+    props.setShowCart(false);
+    props.history.push("/order");
+  }
 
   return (
     <div className={patternCSS.darkenBackground}>
-      <div className={patternCSS.activeBox}>
+      <div className={patternCSS.activeBox} ref={refCart}>
         <button
           className={patternCSS.closeButton}
           onClick={() => props.setShowCart(false)}
         >
           ✖
         </button>
-        <div className={s.showCart} ref={refCart}>
+        <div className={s.showCart}>
           <div className={s.shoppingCartTitle}>Your choose:</div>
-          {isAnyFood() ? (
+          {cart.selectedFood.length > 0 ? (
             cart.selectedFood.map((p, index) => (
               <div className={s.foodElement} key={index}>
                 <div className={s.selectedFood}>
@@ -51,12 +51,14 @@ export default function Cart(props) {
             <div>Empty</div>
           )}
         </div>
-        {isAnyFood() ? (
-          <NavLink className={s.buttonToOrder} exact to="/order">
+        {cart.selectedFood.length > 0 ? (
+          <button className={s.buttonToOrder} onClick={goToOrder}>
             Order {cart.selectedFood.reduce((a, b) => a + b.costAll, 0)} ₽
-          </NavLink>
+          </button>
         ) : null}
       </div>
     </div>
   );
 }
+
+export default withRouter(Cart);

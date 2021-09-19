@@ -23,9 +23,9 @@ export const menuReducer = (state = menu, action) => {
         categoryAll: state.categoryAll.concat(shops[0].category),
         categoryNow: state.categoryAll[0],
       };
-      // have to add check resived data from server like
-      // if (typeof getData === "object" && getData.length !== 0) {
-      // } else return { ...state, menuOnDisplay: "Ошибка" };
+    // have to add check received data from server like
+    // if (typeof getData === "object" && getData.length !== 0) {
+    // } else return { ...state, menuOnDisplay: "Ошибка" };
     case "CHANGE_CATEGORY":
       state.categoryNow = state.categoryAll.find(
         (e) => e.id === action.payload

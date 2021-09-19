@@ -11,6 +11,7 @@ import InputCode from "./InputCode.jsx";
 export default function ByPhone(props) {
   const [phone, setPhone] = useState("8(___)___-__-__");
   const [code, setCode] = useState("____");
+  // move isPhoneWrong and isCodeWrong in child component
   const [isPhoneWrong, setPhoneWrong] = useState(false);
   const [isCodeWrong, setCodeWrong] = useState(false);
   const [inputType, setInputType] = useState("Phone");
@@ -20,41 +21,36 @@ export default function ByPhone(props) {
     if (phone.indexOf("_") !== -1) {
       setPhoneWrong(true);
       dispatch({ type: "ERROR_MESSAGE", payload: "Wrong phone number" });
-      return null;
+    } else {
+      let preparedPhone = phone.split("").filter((e) => !isNaN(Number(e)));
+      preparedPhone = "+7" + preparedPhone.join("").slice(1);
+      API.authByPhone(preparedPhone)
+        .then((res) => {
+          setInputType("Code");
+          dispatch({ type: "LOGIN_CONFIRM", payload: res.data });
+          dispatch({ type: "SUCCESS_MESSAGE", payload: "Code sent" });
+        })
+        .catch((err) => {
+          dispatch({ type: "ERROR_MESSAGE", payload: err.message });
+        });
     }
-    let preparedPhone = phone.split("").filter((e) => !isNaN(Number(e)));
-    preparedPhone = "+7" + preparedPhone.join("").slice(1);
-    API.authByPhone(preparedPhone)
-      .then((res) => {
-        setInputType("Code");
-        //payload res or res.data ?
-        dispatch({ type: "LOGIN_CONFIRM", payload: res.data });
-        popupDispatch({ type: "SUCCESS_MESSAGE", payload: "Code sent" });
-      })
-      .catch((err) => {
-        // let answer = err.response.status + " " + err.response.statusText;
-        popupDispatch({ type: "ERROR", payload: err.message });
-      });
   }
 
   function sendCode() {
     if (code.indexOf("_") !== -1) {
       setCodeWrong(true);
       dispatch({ type: "ERROR_MESSAGE", payload: "Wrong code" });
-      return null;
+    } else {
+      API.authByCode(code)
+        .then((res) => {
+          dispatch({ type: "LOGIN_CONFIRM", payload: res });
+          dispatch({ type: "SUCCESS_MESSAGE", payload: "Code confirmed" });
+        })
+        .catch((err) => {
+          setCodeWrong(true);
+          dispatch({ type: "ERROR_MESSAGE", payload: err.message });
+        });
     }
-    let preparedPhone = phone.split("").filter((e) => !isNaN(Number(e)));
-    preparedPhone = "+7" + preparedPhone.join("").slice(1);
-    API.authByCode(preparedPhone, code)
-      .then((res) => {
-        dispatch({ type: "LOGIN_CONFIRM", payload: res });
-        dispatch({ type: "SUCCESS_MESSAGE", payload: "Code confirmed" });
-      })
-      .catch((error) => {
-        let answer = error.response.status + " " + error.response.statusText;
-        setCodeWrong(true);
-        dispatch({ type: "ERROR_MESSAGE", payload: answer });
-      });
   }
 
   function getAnswerToken(method) {

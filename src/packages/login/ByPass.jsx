@@ -17,9 +17,12 @@ export default function ByPass(props) {
       .then(() => {
         dispatch({ type: "SUCCESS_MESSAGE", payload: "log in confirmed" });
       })
-      .catch(err => {
-        // let answer = err.response.status + " " + err.response.statusText;
-        popupDispatch({ type: "ERROR_MESSAGE", payload: err.message });
+      .catch((err) => {
+        console.error(err.message);
+        dispatch({
+          type: "ERROR_MESSAGE",
+          payload: "login / password don't match",
+        });
       });
   }
 

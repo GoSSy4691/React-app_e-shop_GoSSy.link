@@ -1,7 +1,7 @@
 import s from "./login.module.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { authByPass } from "../../files/API/api.js";
+import API from "../../files/API/api.js";
 import eye_show from "../../files/img/visible_show.png";
 import eye_hide from "../../files/img/visible_hide.png";
 
@@ -13,23 +13,13 @@ export default function ByPass(props) {
   const dispatch = useDispatch();
 
   function getAnswerPass() {
-    if (login.length < 5) {
-      setPassWrong(true);
-      dispatch({ type: "ERROR_MESSAGE", payload: "Wrong login" });
-      return null;
-    }
-    if (password.length < 5) {
-      setPassWrong(true);
-      dispatch({ type: "ERROR_MESSAGE", payload: "Wrong password" });
-      return null;
-    }
-    authByPass(login, password)
+    API.authByPassword(login, password)
       .then(() => {
         dispatch({ type: "SUCCESS_MESSAGE", payload: "log in confirmed" });
       })
-      .catch((error) => {
-        let answer = error.response.status + " " + error.response.statusText;
-        dispatch({ type: "ERROR_MESSAGE", payload: answer });
+      .catch(err => {
+        // let answer = err.response.status + " " + err.response.statusText;
+        popupDispatch({ type: "ERROR_MESSAGE", payload: err.message });
       });
   }
 

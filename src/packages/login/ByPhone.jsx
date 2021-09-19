@@ -1,11 +1,7 @@
 import s from "./login.module.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import {
-  authByPhone,
-  authPhoneCode,
-  authByToken,
-} from "../../files/API/api.js";
+import API from "../../files/API/api.js";
 import vkIco from "../../files/img/token/vk.png";
 import yandexIco from "../../files/img/token/ya.png";
 import googleIco from "../../files/img/token/gog.png";
@@ -28,15 +24,16 @@ export default function ByPhone(props) {
     }
     let preparedPhone = phone.split("").filter((e) => !isNaN(Number(e)));
     preparedPhone = "+7" + preparedPhone.join("").slice(1);
-    authByPhone(preparedPhone)
-      .then((data) => {
+    API.authByPhone(preparedPhone)
+      .then((res) => {
         setInputType("Code");
-        dispatch({ type: "LOGIN_CONFIRM", payload: data });
-        dispatch({ type: "SUCCESS_MESSAGE", payload: "Code sent" });
+        //payload res or res.data ?
+        dispatch({ type: "LOGIN_CONFIRM", payload: res.data });
+        popupDispatch({ type: "SUCCESS_MESSAGE", payload: "Code sent" });
       })
-      .catch((error) => {
-        let answer = error.response.status + " " + error.response.statusText;
-        dispatch({ type: "ERROR_MESSAGE", payload: answer });
+      .catch((err) => {
+        // let answer = err.response.status + " " + err.response.statusText;
+        popupDispatch({ type: "ERROR", payload: err.message });
       });
   }
 
@@ -48,10 +45,10 @@ export default function ByPhone(props) {
     }
     let preparedPhone = phone.split("").filter((e) => !isNaN(Number(e)));
     preparedPhone = "+7" + preparedPhone.join("").slice(1);
-    authPhoneCode(preparedPhone, code)
-      .then((data) => {
-        dispatch({ type: "LOGIN_CONFIRM", payload: data });
-        dispatch({ type: "SUCCESS_MESSAGE", payload: "code confirmed" });
+    API.authByCode(preparedPhone, code)
+      .then((res) => {
+        dispatch({ type: "LOGIN_CONFIRM", payload: res });
+        dispatch({ type: "SUCCESS_MESSAGE", payload: "Code confirmed" });
       })
       .catch((error) => {
         let answer = error.response.status + " " + error.response.statusText;
@@ -62,7 +59,7 @@ export default function ByPhone(props) {
 
   function getAnswerToken(method) {
     dispatch({ type: "SET_METHOD_TOKEN", payload: method });
-    authByToken(method);
+    API.authByOAuth(method);
     props.setLoginForm("Wait");
   }
 

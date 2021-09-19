@@ -13,17 +13,19 @@ let menu = {
 
 export const menuReducer = (state = menu, action) => {
   switch (action.type) {
-    case "GET_ALL_MENU":
-      let getData = action.payload.data;
-      if (typeof getData === "object" && getData.length !== 0) {
-        return {
-          ...state,
-          menuAll: getData[0].menu,
-          menuOnDisplay: getData[0].menu,
-          categoryAll: state.categoryAll.concat(getData[0].category),
-          categoryNow: state.categoryAll[0],
-        };
-      } else return { ...state, menuOnDisplay: "Ошибка" };
+    //change naming
+    case "ALL_MENU":
+      let shops = action.payload;
+      return {
+        ...state,
+        menuAll: shops[0].menu,
+        menuOnDisplay: shops[0].menu,
+        categoryAll: state.categoryAll.concat(shops[0].category),
+        categoryNow: state.categoryAll[0],
+      };
+      // have to add check resived data from server like
+      // if (typeof getData === "object" && getData.length !== 0) {
+      // } else return { ...state, menuOnDisplay: "Ошибка" };
     case "CHANGE_CATEGORY":
       state.categoryNow = state.categoryAll.find(
         (e) => e.id === action.payload

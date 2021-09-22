@@ -78,6 +78,7 @@ export default function ByPhone(props) {
               isCodeWrong={isCodeWrong}
               setCodeWrong={setCodeWrong}
               sendCode={sendCode}
+              // send code when fill input window
             />
           )}
         </div>

@@ -1,10 +1,13 @@
 .menuItems {
     margin-left: 60px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 230px);
+    justify-content: space-evenly;
 }
 
 .foodElement {
     vertical-align: top;
-    display: inline-block;
+    list-style: none;
     border: solid black;
     font-size: 20px;
     margin: 10px;

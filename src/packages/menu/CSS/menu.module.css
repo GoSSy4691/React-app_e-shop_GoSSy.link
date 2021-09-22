@@ -14,10 +14,10 @@
 
 @keyframes run {
   0% {
-    left: -60%;
+    left: -40%;
   }
   100% {
-    left: 60%;
+    left: 110%;
   }
 }
 

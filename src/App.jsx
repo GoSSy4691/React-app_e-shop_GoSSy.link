@@ -10,14 +10,12 @@ export default function App() {
   return (
     <div className="app">
       <Header />
-      <div className="appContainer">
-        <Switch>
-          <Route exact path="/" component={Welcome} />
-          <Route exact path="/menu" component={Menu} />
-          <Route exact path="/order" component={OrderView} />
-          <Redirect to="/" />
-        </Switch>
-      </div>
+      <Switch>
+        <Route exact path="/" component={Welcome} />
+        <Route exact path="/menu" component={Menu} />
+        <Route exact path="/order" component={OrderView} />
+        <Redirect to="/" />
+      </Switch>
       <ErrorPopup />
     </div>
   );

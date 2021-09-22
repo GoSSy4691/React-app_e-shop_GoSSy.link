@@ -38,7 +38,6 @@
 }
 
 .rightSide {
-  padding-right: 45px;
   align-self: center;
   display: flex;
   width: fit-content;
@@ -75,20 +74,29 @@
 }
 
 .shopIcoDiv {
-  width: 100px;
-  height: 90px;
+  display: flex;
+  width: 80px;
+  height: 80px;
+  position: fixed;
+  bottom: 21px;
+  right: 25px;
+  z-index: 3;
+  border-radius: 50%;
+  background: #1b1d23;
 }
 
 .shopIco {
-  width: 100px;
+  width: 40px;
+  height: 40px;
+  margin: auto;
   cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
 }
 
 .shopIcoCount {
-  position: fixed;
+  position: absolute;
   width: 23px;
   height: 23px;
-  right: 40px;
+  right: 1px;
   top: 60px;
   border: solid #adb4b0;
   border-radius: 20px;

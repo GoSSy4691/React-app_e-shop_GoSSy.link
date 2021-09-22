@@ -1,5 +1,5 @@
 import s from "./header.module.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, Route } from "react-router-dom";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import shopCartIco from "../../files/img/shopCart.png";
@@ -48,15 +48,19 @@ export default function Header() {
           <span drow={"head"} />
           <span drow={"body"} />
         </div>
+      </div>
+      <Route exact path="/menu">
         <div
           title={"Cart"}
           className={s.shopIcoDiv}
           onClick={() => setShowCart(true)}
         >
           <img alt={"CartImage"} src={shopCartIco} className={s.shopIco} />
-          <div className={s.shopIcoCount}>{store.itemsCount}</div>
+          {store.itemsCount > 0 ? (
+            <div className={s.shopIcoCount}>{store.itemsCount}</div>
+          ) : null}
         </div>
-      </div>
+      </Route>
       {isShowLogin ? (
         <Login isShowLogin={isShowLogin} setShowLogin={setShowLogin} />
       ) : null}

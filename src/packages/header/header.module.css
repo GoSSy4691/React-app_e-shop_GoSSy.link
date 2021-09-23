@@ -44,33 +44,10 @@
 }
 
 .userIco {
-  width: 100px;
-  height: 90px;
-  display: flex;
-  flex-direction: column;
-  margin: 0 5px;
-  border: none;
-  background: none;
-  padding: 0;
-  align-items: center;
-  overflow: hidden;
+  color: white;
+  margin-right: 35px;
+  font-size: 20px;
   cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
-}
-
-.userIco span[drow="head"] {
-  background: black;
-  width: 30px;
-  height: 30px;
-  margin: 4px 0;
-  border-radius: 20px;
-}
-
-.userIco span[drow="body"] {
-  background: black;
-  width: 50px;
-  height: 45px;
-  margin: 4px 0;
-  border-radius: 10px;
 }
 
 .shopIcoDiv {

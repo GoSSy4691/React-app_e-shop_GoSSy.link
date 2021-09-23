@@ -5,6 +5,7 @@ let menu = {
   shops: [],
   menuOnDisplay: [],
   category: [],
+  categoryNumber: 0,
 };
 
 let category0 = [
@@ -37,10 +38,12 @@ export const menuReducer = (state = menu, action) => {
         category: category0.concat(point[pointNumber].category),
         shopId: pointNumber,
         menuOnDisplay: point[pointNumber].menu,
+        categoryNumber: 0,
       };
     case "CHANGE_CATEGORY":
       return {
         ...state,
+        categoryNumber: action.payload,
         menuOnDisplay:
           action.payload === 0
             ? state.data[state.shopId].menu

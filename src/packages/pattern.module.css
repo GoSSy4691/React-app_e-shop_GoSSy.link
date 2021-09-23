@@ -40,3 +40,53 @@
 .closeButton:active {
     transform: translateY(4%);
 }
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 250px);
+    justify-content: space-between;
+    column-gap: 35px;
+    row-gap: 40px;
+    list-style: none;
+    margin-top: 40px;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.shopsOrFood {
+    width: 250px;
+    height: 200px;
+    background: #1b1d23;
+    position: relative;
+    display: flex;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.75);
+    cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
+}
+
+.shopsOrFood:active {
+    box-shadow: 0 0 16px 4px rgba(0, 0, 0, 0.75);
+}
+
+.img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    /*object-fit: cover;*/
+}
+
+.footerItem {
+    display: inline-flex;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 0;
+    font-size: 21px;
+    color: white;
+    width: 250px;
+    height: 45px;
+    background: linear-gradient(360deg, rgba(13, 13, 13, 0.45) 0%, rgba(13, 13, 13, 0) 100%);
+}
+
+.nameFood {
+    margin-left: 7px;
+    line-height: 50px;
+}

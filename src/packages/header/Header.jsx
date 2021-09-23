@@ -44,13 +44,8 @@ export default function Header() {
         </div>
       </div>
       <div className={s.rightSide}>
-        <div
-          title={"Login"}
-          className={s.userIco}
-          onClick={() => setShowLogin(true)}
-        >
-          <span drow={"head"} />
-          <span drow={"body"} />
+        <div className={s.userIco} onClick={() => setShowLogin(true)}>
+          Log in
         </div>
       </div>
       <Route exact path="/menu">

@@ -1,78 +1,29 @@
 import s from "./CSS/items.module.css";
-import { useSelector } from "react-redux";
+import patternCSS from "../pattern.module.css";
+import { useDispatch, useSelector } from "react-redux";
 import GetImgFood from "./GetImgFood.jsx";
-import { ButtonAdd, ButtonDelete } from "./ButtonAddDelete.jsx";
 
 export default function Items() {
-  const store = useSelector((state) => state.cart);
   const menu = useSelector((state) => state.menu.menuOnDisplay);
-
-  const isFoodIn = (name) => {
-    let answer = store.selectedFood.findIndex((el) => el.name === name);
-    return answer > -1;
-  };
+  const dispatch = useDispatch();
 
   return (
-    <div className={s.menuItems}>
+    <div className={patternCSS.grid}>
       {menu.length === 0 ? (
         <div className={s.emptyDialog}>Empty</div>
       ) : (
-        menu.map((p) => (
+        menu.map((el) => (
           <li
-            className={s.foodElement}
-            style={isFoodIn(p.name) ? { background: "#1d3e1f" } : null}
-            key={p.id}
+            className={patternCSS.shopsOrFood}
+            key={el.id}
+            onClick={() =>
+              dispatch({ type: "ERROR_MESSAGE", payload: "Didn't work yet" })
+            }
           >
-            <div
-              className={`
-            ${s.item} 
-            ${isFoodIn(p.name) ? s.itemActive : s.itemNotActive}
-            `}
-            >
-              <GetImgFood imgName={p.icon} style={s.foodImg} />
-              <div className={s.name}>
-                <span>{p.name}</span>
-              </div>
-              <div className={s.sectorOfPriceCountBuy}>
-                <div className={s.price}>
-                  <div>{p.cost + " ₽"}</div>
-                </div>
-                {(() => {
-                  if (isFoodIn(p.name)) {
-                    return (
-                      <div className={s.deleteAndCountFood}>
-                        <ButtonDelete
-                          text={"-"}
-                          name={p.name}
-                          cost={p.cost}
-                          style={s.deleteItem}
-                        />
-                        <div className={s.countItem}>
-                          {
-                            store.selectedFood.find((el) => el.name === p.name)
-                              .amount
-                          }
-                        </div>
-                      </div>
-                    );
-                  }
-                })()}
-                <ButtonAdd
-                  text={"add"}
-                  name={p.name}
-                  cost={p.cost}
-                  style={s.buyButton}
-                />
-              </div>
-              <div className={s.description}>
-                {(() => {
-                  if (p.description.length < 1) {
-                    p.description =
-                      "Пока ещё нет описания. Но это очень вкусно";
-                  }
-                })()}
-                {p.description}
-              </div>
+            <GetImgFood imgName={el.icon} style={patternCSS.img} />
+            <div className={patternCSS.footerItem}>
+              <span className={patternCSS.nameFood}>{el.name}</span>
+              <span className={s.cost}>{el.cost} р.</span>
             </div>
           </li>
         ))

@@ -22,9 +22,10 @@ function MenuContainer() {
         });
       return <div className={s.menuMessage}>Loading</div>;
     case "Choose shop":
-      if (shops.length === 0)
+      if (shops.length === 0) {
         dispatch({ type: "CHANGE_STATUS", payload: "Empty" });
-      else
+        return <div className={s.menuMessage}>Loading</div>;
+      } else {
         return (
           <div className={"menu_container"}>
             <div className={s.roomName}>Точки продаж</div>
@@ -44,7 +45,7 @@ function MenuContainer() {
             </div>
           </div>
         );
-      break;
+      }
     case "Choose food":
       return (
         <div className={"menu_container"}>

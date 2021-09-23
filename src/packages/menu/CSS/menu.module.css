@@ -46,20 +46,34 @@
   width: 250px;
   height: 200px;
   background: #1b1d23;
-  border-radius: 10px;
   position: relative;
   display: flex;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.75);
+  cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
+}
+
+.shops:active {
+  box-shadow: 0 0 16px 4px rgba(0, 0, 0, 0.75);
 }
 
 .img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  border-radius: 10px;
+  /*object-fit: cover;*/
 }
 
 .naming {
   position: absolute;
-  margin-left: 7px;
-  bottom: 7px;
+  bottom: 0;
   font-size: 21px;
+  color: white;
+  width: 250px;
+  height: 45px;
+  background: linear-gradient(360deg, rgba(13, 13, 13, 0.45) 0%, rgba(13, 13, 13, 0) 100%);
+}
+
+.naming text{
+  margin-left: 7px;
+  line-height: 50px;
 }

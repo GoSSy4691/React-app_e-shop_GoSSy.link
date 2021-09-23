@@ -38,8 +38,10 @@ function MenuContainer() {
                     dispatch({ type: "CHANGE_SHOP", payload: index })
                   }
                 >
-                  <GetImgFood imgName={""} style={s.img} />
-                  <span className={s.naming}>{el.name}</span>
+                  <GetImgFood imgName={el.icon} style={s.img} />
+                  <span className={s.naming}>
+                    <text>{el.name}</text>
+                  </span>
                 </li>
               ))}
             </div>

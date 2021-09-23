@@ -41,6 +41,14 @@
     transform: translateY(4%);
 }
 
+.roomName {
+    display: inline-flex;
+    font-size: 21px;
+    margin-top: 25px;
+    gap: 8px;
+    height: 25px;
+}
+
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, 250px);
@@ -48,7 +56,6 @@
     column-gap: 35px;
     row-gap: 40px;
     list-style: none;
-    margin-top: 40px;
     margin-left: 0;
     padding-left: 0;
 }
@@ -88,5 +95,8 @@
 
 .nameFood {
     margin-left: 7px;
-    line-height: 50px;
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 10px;
+    max-width: 195px;
 }

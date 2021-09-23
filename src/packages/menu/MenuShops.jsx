@@ -1,11 +1,10 @@
-import s from "./CSS/menu.module.css";
+import s from "./CSS/menuShops.module.css";
 import patternCSS from "../pattern.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import runForestRun from "../../files/img/runForestRun.png";
 import API from "../../files/API/api.js";
 import GetImgFood from "./GetImgFood.jsx";
-import Items from "./Items.jsx";
-import LeftBar from "./LeftBar.jsx";
+import MenuFoods from "./MenuFoods.jsx";
 
 function MenuContainer() {
   const status = useSelector((state) => state.menu.status);
@@ -21,16 +20,16 @@ function MenuContainer() {
         .catch((err) => {
           dispatch({ type: "ERROR", payload: err.message });
         });
-      return <div className={s.roomName}>Loading</div>;
+      return <div className={patternCSS.roomName}>Loading</div>;
     case "Choose shop":
       if (shops.length === 0) {
         dispatch({ type: "CHANGE_STATUS", payload: "Empty" });
-        return <div className={s.roomName}>Loading</div>;
+        return <div className={patternCSS.roomName}>Loading</div>;
       } else {
         return (
-          <div className={s.menu_container}>
-            <div className={s.roomName}>Точки продаж</div>
-            <div className={patternCSS.grid}>
+          <>
+            <div className={patternCSS.roomName}>Точки продаж</div>
+            <div className={patternCSS.grid} style={{ marginTop: "44px" }}>
               {shops.map((el, index) => (
                 <li
                   className={patternCSS.shopsOrFood}
@@ -46,34 +45,31 @@ function MenuContainer() {
                 </li>
               ))}
             </div>
-          </div>
+          </>
         );
       }
     case "Choose food":
-      return (
-        <div className={s.menu_container}>
-          <div className={s.roomName}>Точки продаж</div>
-          <input className={s.searchBar} placeholder="Инфо" />
-          <LeftBar />
-          <Items />
-        </div>
-      );
+      return <MenuFoods />;
     default:
       console.error(status);
-      return <div className={s.roomName}>Error</div>;
+      return <div className={patternCSS.roomName}>Error</div>;
   }
 }
 
-export default function Menu() {
+export default function MenuShops() {
   return (
-    <div className={s.showRoom}>
-      <MenuContainer />
-      <img
-        alt={"footer"}
-        className={s.footerImg}
-        src={runForestRun}
-        key={Math.random()}
-      />
-    </div>
+    <>
+      <div className={s.showRoom}>
+        <MenuContainer />
+      </div>
+      <div className={s.footer}>
+        <img
+          alt={"footer"}
+          className={s.footerImg}
+          src={runForestRun}
+          key={Math.random()}
+        />
+      </div>
+    </>
   );
 }

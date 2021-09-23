@@ -1,0 +1,39 @@
+.menuItems {
+    margin-top: 25px;
+}
+
+.arrowBack {
+    font-size: 50px;
+    line-height: 14px;
+    width: 25px;
+    height: 25px;
+    overflow: hidden;
+    cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
+}
+
+.emptyDialog {
+    font-size: 30px;
+    margin-top: 40px;
+}
+
+.cost {
+    margin-right: 10px;
+    margin-bottom: 12px;
+    font-size: 12px;
+    min-width: 34px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.searchBar {
+    width: 306px;
+    height: 30px;
+    border-radius: 15px;
+    margin-top: 21px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.75);
+    font-size: 21px;
+    padding: 1px 21px;
+    color: black;
+    border: none;
+    outline: none;
+}

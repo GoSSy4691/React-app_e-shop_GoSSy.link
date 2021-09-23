@@ -1,0 +1,33 @@
+.showRoom {
+  color: #adb4b0;
+  /*overflow-x: hidden;*/
+  margin-left: 35px;
+  margin-right: 35px;
+  margin-bottom: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.footerImg {
+  width: 224px;
+  height: 100px;
+  margin-top: 70px;
+  bottom: 10px;
+  position: relative;
+  animation: run 10s infinite;
+}
+
+@keyframes run {
+  0% {
+    left: -40%;
+  }
+  100% {
+    left: 110%;
+  }
+}

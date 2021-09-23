@@ -5,8 +5,9 @@ import GetImgFood from "./GetImgFood.jsx";
 
 export default function LeftBar() {
   const [isCategoryShow, getCategoryShow] = useState(false);
-  const categoryAll = useSelector((state) => state.menu.categoryAll);
+  const category = useSelector((state) => state.menu.category);
   const dispatch = useDispatch();
+
   const changeCategory = (id) => {
     dispatch({ type: "CHANGE_CATEGORY", payload: id });
   };
@@ -26,7 +27,7 @@ export default function LeftBar() {
         <span />
         <span />
       </button>
-      {categoryAll.map((p) => (
+      {category.map((p) => (
         <button
           className={s.categoryBox}
           key={p.id}

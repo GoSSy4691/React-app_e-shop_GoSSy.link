@@ -1,7 +1,7 @@
 import s from "./header.module.css";
 import { NavLink, Route } from "react-router-dom";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import shopCartIco from "../../files/img/shopCart.png";
 import LogoImg from "./logoGoose/LogoImage.jsx";
 import Cart from "../menu/Cart.jsx";
@@ -11,6 +11,7 @@ export default function Header() {
   const store = useSelector((state) => state.cart);
   const [isShowLogin, setShowLogin] = useState(false);
   const [isShowCart, setShowCart] = useState(false);
+  const dispatch = useDispatch();
 
   return (
     <div className={s.nav}>
@@ -33,6 +34,9 @@ export default function Header() {
               exact
               activeClassName={s.textActive}
               to="/menu"
+              onClick={() =>
+                dispatch({ type: "CHANGE_STATUS", payload: "Choose shop" })
+              }
             >
               Menu
             </NavLink>

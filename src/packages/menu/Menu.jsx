@@ -2,39 +2,59 @@ import s from "./CSS/menu.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import runForestRun from "../../files/img/runForestRun.png";
 import API from "../../files/API/api.js";
+import GetImgFood from "./GetImgFood.jsx";
 import Items from "./Items.jsx";
 import LeftBar from "./LeftBar.jsx";
 
 function MenuContainer() {
-  const menuOnDisplay = useSelector((state) => state.menu.menuOnDisplay);
+  const status = useSelector((state) => state.menu.status);
+  const shops = useSelector((state) => state.menu.shops);
   const dispatch = useDispatch();
 
-  switch (menuOnDisplay) {
-    case "Загрузка":
+  switch (status) {
+    case "Empty":
       API.getShops()
         .then((data) => {
-          dispatch({ type: "ALL_MENU", payload: data.data });
+          dispatch({ type: "LOAD_DATA", payload: data.data });
         })
         .catch((err) => {
           dispatch({ type: "ERROR", payload: err.message });
         });
-      return <div className={s.emptyItemDialog}>Loading</div>;
-    case "Пусто":
-      return (
-        <div className={"menu_container"}>
-          <LeftBar />
-          <div className={s.emptyItemDialog}>Nothing find</div>
-        </div>
-      );
-    case "Ошибка":
-      return <div className={s.emptyItemDialog}>Error get data</div>;
-    default:
+      return <div className={s.menuMessage}>Loading</div>;
+    case "Choose shop":
+      if (shops.length === 0)
+        dispatch({ type: "CHANGE_STATUS", payload: "Empty" });
+      else
+        return (
+          <div className={"menu_container"}>
+            <div className={s.roomName}>Точки продаж</div>
+            <div className={s.grid}>
+              {shops.map((el, index) => (
+                <li
+                  className={s.shops}
+                  key={el.id}
+                  onClick={() =>
+                    dispatch({ type: "CHANGE_SHOP", payload: index })
+                  }
+                >
+                  <GetImgFood imgName={""} style={s.img} />
+                  <span className={s.naming}>{el.name}</span>
+                </li>
+              ))}
+            </div>
+          </div>
+        );
+      break;
+    case "Choose food":
       return (
         <div className={"menu_container"}>
           <LeftBar />
           <Items />
         </div>
       );
+    default:
+      console.error(status);
+      return <div className={s.menuMessage}>Error</div>;
   }
 }
 

@@ -7,6 +7,10 @@
     row-gap: 0;
 }
 
+.emptyDialog {
+    font-size: 30px;
+}
+
 .foodElement {
     vertical-align: top;
     list-style: none;

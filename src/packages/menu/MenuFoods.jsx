@@ -33,7 +33,7 @@ export default function MenuFoods() {
         className={s.searchBar}
         placeholder="Инфо"
         value={search}
-        onChange={(e) => setSearch(e.target.value)}
+        onChange={(e) => setSearch(e.target.value.toLowerCase())}
       />
       <LeftBar />
       {menuChosen.length === 0 ? (

@@ -52,7 +52,7 @@ export default function MenuFoods() {
               <div className={patternCSS.footerItem}>
                 <span className={patternCSS.nameFood}>{el.name}</span>
                 <div className={s.costBox}>
-                  <span>{el.cost} р.</span>
+                  <span>{el.cost}&nbsp;р.</span>
                 </div>
               </div>
             </li>

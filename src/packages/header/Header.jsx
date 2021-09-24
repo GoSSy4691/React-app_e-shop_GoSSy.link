@@ -24,8 +24,11 @@ export default function Header() {
               exact
               activeClassName={s.textActive}
               to="/"
+              onClick={() =>
+                dispatch({ type: "CHANGE_STATUS", payload: "Choose shop" })
+              }
             >
-              Welcome
+              Menu
             </NavLink>
           </li>
           <li>
@@ -33,12 +36,9 @@ export default function Header() {
               className={s.textInactive}
               exact
               activeClassName={s.textActive}
-              to="/menu"
-              onClick={() =>
-                dispatch({ type: "CHANGE_STATUS", payload: "Choose shop" })
-              }
+              to="/about"
             >
-              Menu
+              About
             </NavLink>
           </li>
         </div>
@@ -48,7 +48,7 @@ export default function Header() {
           Log in
         </div>
       </div>
-      <Route exact path="/menu">
+      <Route exact path="/">
         <div
           title={"Cart"}
           className={s.shopIcoDiv}

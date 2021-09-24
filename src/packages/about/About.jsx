@@ -1,9 +1,9 @@
-import s from "./welcome.module.css";
+import s from "./about.module.css";
 import { useCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
 import welcomeImg from "../../files/img/welcomeImg.png";
 
-function Welcome() {
+function About() {
   const dispatch = useDispatch();
   const [cookies, setCookie] = useCookies(["token"]);
 
@@ -43,4 +43,4 @@ function Welcome() {
   );
 }
 
-export default Welcome;
+export default About;

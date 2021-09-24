@@ -42,7 +42,7 @@ export default function MenuFoods() {
         <div className={patternCSS.grid} style={{ marginTop: "25px" }}>
           {menuChosen.map((el) => (
             <li
-              className={patternCSS.shopsOrFood}
+              className={patternCSS.shopOrFood}
               key={el.id}
               onClick={() =>
                 dispatch({ type: "ERROR_MESSAGE", payload: "Didn't work yet" })
@@ -51,7 +51,9 @@ export default function MenuFoods() {
               <GetImgFood imgName={el.icon} style={patternCSS.img} />
               <div className={patternCSS.footerItem}>
                 <span className={patternCSS.nameFood}>{el.name}</span>
-                <span className={s.cost}>{el.cost} р.</span>
+                <div className={s.costBox}>
+                  <span>{el.cost} р.</span>
+                </div>
               </div>
             </li>
           ))}

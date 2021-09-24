@@ -32,7 +32,7 @@ function MenuContainer() {
             <div className={patternCSS.grid} style={{ marginTop: "44px" }}>
               {shops.map((el, index) => (
                 <li
-                  className={patternCSS.shopsOrFood}
+                  className={patternCSS.shopOrFood}
                   key={el.id}
                   onClick={() =>
                     dispatch({ type: "CHANGE_SHOP", payload: index })

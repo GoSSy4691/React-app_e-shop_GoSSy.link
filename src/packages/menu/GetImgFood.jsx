@@ -17,6 +17,7 @@ const GetImgFood = (props) => {
       className={props.style}
       onLoad={() => setLoaded(true)}
       onError={(event) => (event.target.src = emptyImg)}
+      draggable="false"
     />
   );
 };

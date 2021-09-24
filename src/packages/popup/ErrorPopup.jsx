@@ -1,23 +1,31 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 import s from "./errorPopup.module.css";
 
 export default function ErrorPopup() {
-  const dispatch = useDispatch();
-  const error = useSelector((state) => state.error);
-
-  setTimeout(() => {
-    dispatch({ type: "CLEAN_MESSAGE" });
-  }, 4000);
+  let error = useSelector((state) => state.error);
+  const [isShow, setIsShow] = useState(false);
 
   return (
-    <div
-      className={`
+    <>
+      {error.message.length > 0 && !isShow ? setIsShow(true) : null}
+      {isShow ? (
+        <>
+          <div
+            className={`
             ${s.errorLog} 
             ${error.type === "red" ? s.error : null}
             ${error.type === "green" ? s.popupGreen : null}
             `}
-    >
-      {error.message}
-    </div>
+          >
+            {error.message}
+          </div>
+          {setTimeout(() => {
+            error.message = "";
+            setIsShow(false);
+          }, 4000)}
+        </>
+      ) : null}
+    </>
   );
 }

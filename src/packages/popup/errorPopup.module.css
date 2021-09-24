@@ -11,9 +11,19 @@
 .error {
     background: rgba(130, 0, 0, 0.6);
     z-index: 3;
+    /*animation: hideAnimation 0s ease-in 4s forwards;*/
 }
 
 .popupGreen {
     background: rgba(19, 130, 0, 0.6);
     z-index: 3;
+    /*animation: hideAnimation 0s ease-in 4s forwards;*/
+}
+
+@keyframes hideAnimation {
+    to {
+        background: none;
+        z-index: unset;
+        /*visibility: hidden;*/
+    }
 }

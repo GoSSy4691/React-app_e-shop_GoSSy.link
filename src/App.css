@@ -12,7 +12,6 @@
   -ms-user-select: none;
   user-select: none;
   background-color: #282c34;
-  min-width: 100vw;
   min-height: 100vh;
   overflow-x: hidden;
   position: relative;

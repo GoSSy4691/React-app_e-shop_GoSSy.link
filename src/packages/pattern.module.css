@@ -11,22 +11,12 @@
     backdrop-filter: blur(10px);
 }
 
-.activeBox {
-    width: 550px;
-    height: 600px;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #adb4b0;
-}
-
 .closeButton {
     height: 55px;
     width: 55px;
     position: absolute;
-    top: 3%;
-    right: 1%;
+    top: -5%;
+    right: -5%;
     z-index: 3;
     cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
     border-radius: 25px;
@@ -38,7 +28,8 @@
 }
 
 .closeButton:active {
-    transform: translateY(4%);
+    box-shadow: 0 0 16px 4px rgba(0, 0, 0, 0.75);
+    transform: translateY(5%);
 }
 
 .roomName {

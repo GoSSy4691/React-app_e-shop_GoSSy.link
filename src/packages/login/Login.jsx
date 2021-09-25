@@ -25,41 +25,35 @@ export default function Login(props) {
     case "byPhone":
       return (
         <div className={patternCSS.darkenBackground}>
-          <div className={patternCSS.activeBox}>
-            <div className={s.loginDialog} ref={refLogin}>
-              <div className={s.naming}>Вход в учетную запись</div>
-              <ByPhone setLoginForm={setLoginForm} />
-            </div>
+          <div className={s.loginDialog} ref={refLogin}>
+            <div className={s.naming}>Вход в учетную запись</div>
+            <ByPhone setLoginForm={setLoginForm} />
           </div>
         </div>
       );
     case "byPass":
       return (
         <div className={patternCSS.darkenBackground}>
-          <div className={patternCSS.activeBox}>
-            <div className={s.loginDialog} ref={refLogin}>
-              <div className={s.naming}>Вход в учетную запись</div>
-              <ByPass setLoginForm={setLoginForm} />
-            </div>
+          <div className={s.loginDialog} ref={refLogin}>
+            <div className={s.naming}>Вход в учетную запись</div>
+            <ByPass setLoginForm={setLoginForm} />
           </div>
         </div>
       );
     case "Wait":
       return (
         <div className={patternCSS.darkenBackground}>
-          <div className={patternCSS.activeBox}>
-            <div className={s.loginDialog} ref={refLogin}>
-              <div className={s.naming}>Вход в учетную запись</div>
-              <div className={s.afterName}>
-                <div className={s.flexbox}>
-                  <div className={s.afterToken}>Log in by {method}</div>
-                  <button
-                    className={s.loginBtn}
-                    onClick={() => setLoginForm("Logout")}
-                  >
-                    Ok
-                  </button>
-                </div>
+          <div className={s.loginDialog} ref={refLogin}>
+            <div className={s.naming}>Вход в учетную запись</div>
+            <div className={s.afterName}>
+              <div className={s.flexbox}>
+                <div className={s.afterToken}>Log in by {method}</div>
+                <button
+                  className={s.loginBtn}
+                  onClick={() => setLoginForm("Logout")}
+                >
+                  Ok
+                </button>
               </div>
             </div>
           </div>
@@ -68,18 +62,16 @@ export default function Login(props) {
     case "Logout":
       return (
         <div className={patternCSS.darkenBackground}>
-          <div className={patternCSS.activeBox}>
-            <div className={s.loginDialog} ref={refLogin}>
-              <div className={s.naming}>Вход в учетную запись</div>
-              <div className={s.afterName}>
-                <div className={s.token}> Your token is </div>
-                <div className={s.token}> {token} </div>
-                <div className={s.flexbox}>
-                  <div className={s.afterToken}>To logout press the button</div>
-                  <button className={s.loginBtn} onClick={logoutBtn}>
-                    Ok
-                  </button>
-                </div>
+          <div className={s.loginDialog} ref={refLogin}>
+            <div className={s.naming}>Вход в учетную запись</div>
+            <div className={s.afterName}>
+              <div className={s.token}> Your token is </div>
+              <div className={s.token}> {token} </div>
+              <div className={s.flexbox}>
+                <div className={s.afterToken}>To logout press the button</div>
+                <button className={s.loginBtn} onClick={logoutBtn}>
+                  Ok
+                </button>
               </div>
             </div>
           </div>

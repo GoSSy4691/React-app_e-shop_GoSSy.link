@@ -6,8 +6,9 @@
   width: 500px;
   height: 500px;
   background: #1b1d23;
-  overflow-y: scroll;
+  /*overflow-y: scroll;*/
   text-align: center;
+  color: #adb4b0;
 }
 
 .showCart li {
@@ -29,17 +30,17 @@
   padding-right: 50px;
   width: 300px;
   position: absolute;
-  top: 89%;
-  left: 22%;
+  top: 96%;
+  left: 50%;
+  transform: translateX(-50%);
   border: solid #1b1d23;
   text-decoration: none;
   text-align: center;
 }
 
 .buttonToOrder:active {
-  background-color: #3e8e41;
-  box-shadow: 0 5px #666;
-  transform: translateY(-15%);
+  box-shadow: 0 0 16px 4px rgba(0, 0, 0, 0.75);
+  transform: translate(-50%, 5%);
 }
 
 .foodElement {

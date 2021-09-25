@@ -32,16 +32,16 @@ function Cart(props) {
               </div>
               <div className={s.priceFood}>{p.costAll} ₽</div>
               <div className={s.buttonsBox}>
-                <ButtonAdd
-                  name={p.name}
-                  cost={p.costOne}
-                  style={`${s.button} ${s.Add} ${s._style}`}
-                />
-                <div className={s.countFood}>{p.amount}</div>
                 <ButtonDelete
                   name={p.name}
                   cost={p.costOne}
                   style={`${s.button} ${s.Delete} ${s._style}`}
+                />
+                <div className={s.countFood}>{p.amount}</div>
+                <ButtonAdd
+                  name={p.name}
+                  cost={p.costOne}
+                  style={`${s.button} ${s.Add} ${s._style}`}
                 />
               </div>
             </div>

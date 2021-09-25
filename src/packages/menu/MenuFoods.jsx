@@ -4,9 +4,11 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import GetImgFood from "./GetImgFood.jsx";
 import LeftBar from "./LeftBar.jsx";
+import FoodDialog from "./FoodDialog.jsx";
 
 export default function MenuFoods() {
   const [search, setSearch] = useState("");
+  const [chosenFood, setChosenFood] = useState({ isShow: false });
   const menu = useSelector((state) => state.menu.menuOnDisplay);
   const data = useSelector((state) => state.menu.data);
   const shopId = useSelector((state) => state.menu.shopId);
@@ -53,7 +55,13 @@ export default function MenuFoods() {
               className={patternCSS.shopOrFood}
               key={el.id}
               onClick={() =>
-                dispatch({ type: "ERROR_MESSAGE", payload: "Didn't work yet" })
+                setChosenFood({
+                  isShow: true,
+                  name: el.name,
+                  cost: el.cost,
+                  icon: el.icon,
+                  description: el.description,
+                })
               }
             >
               <GetImgFood imgName={el.icon} style={patternCSS.img} />
@@ -67,6 +75,9 @@ export default function MenuFoods() {
           ))}
         </div>
       )}
+      {chosenFood.isShow ? (
+        <FoodDialog chosenFood={chosenFood} setChosenFood={setChosenFood} />
+      ) : null}
     </>
   );
 }

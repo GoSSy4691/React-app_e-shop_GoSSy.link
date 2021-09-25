@@ -1,0 +1,137 @@
+.foodBox {
+    width: 480px;
+    height: 540px;
+    background: #FFFDFD;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+}
+
+.exitButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: -11px;
+    margin-right: -15px;
+    z-index: 1;
+    cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
+}
+
+.exitButton:active {
+    box-shadow: 0 0 16px 4px rgba(0, 0, 0, 0.75);
+    transform: translateY(5%);
+    border-radius: 50%;
+}
+
+.imgBox {
+    height: 203px;
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background: #adb4b0;
+}
+
+.imgBox span {
+    position: absolute;
+    font-size: 21px;
+    width: 480px;
+    color: white;
+}
+
+.nameBox {
+    height: 63px;
+    background: linear-gradient(180deg, #000000 0%, rgba(196, 196, 196, 0) 100%);
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    align-items: center;
+}
+
+.nameBox p {
+    margin-left: 15px;
+}
+
+.cost {
+    bottom: 0;
+    margin-left: 15px;
+    margin-bottom: 15px;
+}
+
+.descriptionName {
+    color: black;
+    font-size: 14px;
+    margin-left: 15px;
+    margin-top: 7px;
+}
+
+.descriptionBox {
+    width: 450px;
+    min-height: 119px;
+    max-height: 119px;
+    background: #C4C4C4;
+    align-self: center;
+    margin-top: 7px;
+    box-sizing: border-box;
+    text-align: center;
+    overflow-y: auto;
+    color: white;
+}
+
+.nutritionBox {
+    min-height: 70px;
+    max-height: 70px;
+}
+
+.inCartBtn {
+    width: 310px;
+    height: 37px;
+    align-self: center;
+    margin-top: 25px;
+    border-radius: 10px;
+    background: #EF5E5E;
+    border: none;
+    outline: none;
+    font-size: 21px;
+    color: white;
+}
+
+.foodBoxFooter {
+    display: inline-flex;
+    margin-left: 15px;
+    font-size: 21px;
+    color: black;
+}
+
+.addRemoveButton {
+    width: 37px;
+    height: 37px;
+    margin-top: 24px;
+    background: #EF5E5E;
+    border-radius: 10px;
+    color: white;
+    font-size: 21px;
+    border: none;
+    outline: none;
+}
+
+.countOnFooter {
+    margin-top: 30px;
+    width: 98px;
+    text-align: center;
+}
+
+.costDescription {
+    margin-left: 52px;
+    margin-top: 30px;
+}
+
+.costFooter {
+    margin-top: 30px;
+    margin-right: 15px;
+    width: 175px;
+    text-align: end;
+}

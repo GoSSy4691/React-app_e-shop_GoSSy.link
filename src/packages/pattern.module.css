@@ -49,6 +49,14 @@
     height: 25px;
 }
 
+.roomName span {
+    line-height: 20px;
+}
+
+.roomName svg {
+    cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
+}
+
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));

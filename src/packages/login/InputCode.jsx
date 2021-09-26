@@ -28,7 +28,8 @@ export default function InputPhone(props) {
     if (props.code.split("").findIndex((e) => e === "_") === -1) {
       props.sendCode();
     }
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.code]);
 
   return (
     <input

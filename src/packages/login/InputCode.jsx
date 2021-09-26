@@ -21,8 +21,8 @@ export default function InputPhone(props) {
   }
 
   useEffect(() => {
-    if (props.phone !== undefined) {
-      let array = props.phone.split("");
+    if (props.code !== undefined) {
+      let array = props.code.split("");
       inputElement.current.selectionEnd = array.findIndex((e) => e === "_");
     }
   });

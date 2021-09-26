@@ -25,6 +25,9 @@ export default function InputPhone(props) {
       let array = props.code.split("");
       inputElement.current.selectionEnd = array.findIndex((e) => e === "_");
     }
+    if (props.code.split("").findIndex((e) => e === "_") === -1) {
+      props.sendCode();
+    }
   });
 
   return (

@@ -9,6 +9,7 @@ import Login from "../login/Login.jsx";
 
 export default function Header() {
   const store = useSelector((state) => state.cart);
+  const isUserLogin = useSelector((state) => state.user.isUserLogin);
   const [isShowLogin, setShowLogin] = useState(false);
   const [isShowCart, setShowCart] = useState(false);
   const dispatch = useDispatch();
@@ -45,7 +46,7 @@ export default function Header() {
       </div>
       <div className={s.rightSide}>
         <div className={s.userIco} onClick={() => setShowLogin(true)}>
-          Log in
+          {isUserLogin ? "Log out" : "Log in"}
         </div>
       </div>
       <Route exact path="/">

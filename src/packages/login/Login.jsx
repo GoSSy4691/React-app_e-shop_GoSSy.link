@@ -2,13 +2,11 @@ import s from "./login.module.css";
 import patternCSS from "../pattern.module.css";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Cookies } from "react-cookie";
 import ByPass from "./ByPass.jsx";
 import ByPhone from "./ByPhone.jsx";
 import useDetectClickOut from "../useDetectClickOut.js";
 
 export default function Login(props) {
-  const cookies = new Cookies();
   const dispatch = useDispatch();
   const method = useSelector((state) => state.user.methodToken);
   const token = useSelector((state) => state.user.token);
@@ -16,9 +14,9 @@ export default function Login(props) {
   const refLogin = useDetectClickOut(props.isShowLogin, props.setShowLogin);
 
   function logoutBtn() {
-    cookies.remove("token");
     dispatch({ type: "SUCCESS_MESSAGE", payload: "log out confirmed" });
-    setLoginForm("byPhone");
+    dispatch({ type: "LOGOUT_CONFIRM" });
+    props.setShowLogin(false);
   }
 
   switch (loginForm) {
@@ -27,7 +25,10 @@ export default function Login(props) {
         <div className={patternCSS.darkenBackground}>
           <div className={s.loginDialog} ref={refLogin}>
             <div className={s.naming}>Вход в учетную запись</div>
-            <ByPhone setLoginForm={setLoginForm} />
+            <ByPhone
+              setLoginForm={setLoginForm}
+              setShowLogin={props.setShowLogin}
+            />
           </div>
         </div>
       );

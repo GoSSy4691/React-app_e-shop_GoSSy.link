@@ -43,8 +43,9 @@ export default function ByPhone(props) {
     } else {
       API.authByCode(code)
         .then((res) => {
-          dispatch({ type: "LOGIN_CONFIRM", payload: res });
+          dispatch({ type: "LOGIN_CONFIRM", payload: res.data.token });
           dispatch({ type: "SUCCESS_MESSAGE", payload: "Code confirmed" });
+          props.setShowLogin(false);
         })
         .catch((err) => {
           setCodeWrong(true);
@@ -54,7 +55,6 @@ export default function ByPhone(props) {
   }
 
   function getAnswerToken(method) {
-    dispatch({ type: "SET_METHOD_TOKEN", payload: method });
     API.authByOAuth(method);
     props.setLoginForm("Wait");
   }

@@ -2,21 +2,31 @@ import s from "./login.module.css";
 import patternCSS from "../pattern.module.css";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import Cookies from "universal-cookie";
 import ByPass from "./ByPass.jsx";
 import ByPhone from "./ByPhone.jsx";
 import useDetectClickOut from "../useDetectClickOut.js";
 
 export default function Login(props) {
-  const dispatch = useDispatch();
-  const method = useSelector((state) => state.user.methodToken);
   const token = useSelector((state) => state.user.token);
   const [loginForm, setLoginForm] = useState(token ? "Logout" : "byPhone");
   const refLogin = useDetectClickOut(props.isShowLogin, props.setShowLogin);
+  const dispatch = useDispatch();
+  const cookies = new Cookies();
 
   function logoutBtn() {
     dispatch({ type: "SUCCESS_MESSAGE", payload: "log out confirmed" });
     dispatch({ type: "LOGOUT_CONFIRM" });
     props.setShowLogin(false);
+  }
+
+  function closeAndRefresh() {
+    if (cookies.get("Token") !== undefined) {
+      dispatch({ type: "LOGIN_CONFIRM", payload: cookies.get("Token") });
+      props.setShowLogin(false);
+    } else {
+      setLoginForm("byPhone");
+    }
   }
 
   switch (loginForm) {
@@ -48,11 +58,10 @@ export default function Login(props) {
             <div className={s.naming}>Вход в учетную запись</div>
             <div className={s.afterName}>
               <div className={s.flexbox}>
-                <div className={s.afterToken}>Log in by {method}</div>
-                <button
-                  className={s.loginBtn}
-                  onClick={() => setLoginForm("Logout")}
-                >
+                <div className={s.afterToken}>
+                  Please verify your profile in new window
+                </div>
+                <button className={s.loginBtn} onClick={closeAndRefresh}>
                   Ok
                 </button>
               </div>

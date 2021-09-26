@@ -6,9 +6,10 @@ import About from "./packages/about/About.jsx";
 import MenuShops from "./packages/menu/MenuShops.jsx";
 import OrderView from "./packages/menu/OrderView.jsx";
 import ErrorPopup from "./packages/popup/ErrorPopup.jsx";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function App() {
+  const token = useSelector((state) => state.user.token);
   const dispatch = useDispatch();
   const cookies = new Cookies();
 
@@ -20,8 +21,9 @@ export default function App() {
     console.log(tokenAnswer);
     cookies.set("Token", tokenAnswer, { path: "/" });
     window.close();
+    //https://gossy.link/?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoxNiwiaWF0IjoxNjMyNjQyNDc3fQ.66fjQzMMocs4ixgFe9qEzOsLxRWrXfKQ4PJqCtt1ARY
   }
-  if (cookies.get("Token") !== undefined) {
+  if (token.length === 0 && cookies.get("Token") !== undefined) {
     dispatch({ type: "LOGIN_CONFIRM", payload: cookies.get("Token") });
   }
 

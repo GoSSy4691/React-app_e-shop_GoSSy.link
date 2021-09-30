@@ -66,6 +66,8 @@
     width: 465px;
     height: 248px;
     overflow-y: auto;
+    overflow-x: hidden;
+    overscroll-behavior: none;
 }
 
 .descriptionName {
@@ -75,13 +77,9 @@
 }
 
 .descriptionBox {
-    width: 450px;
-    background: #C4C4C4;
-    align-self: center;
     margin-top: 7px;
-    box-sizing: border-box;
-    text-align: center;
-    color: white;
+    padding-right: 15px;
+    text-align: justify;
 }
 
 .nutritionBox {

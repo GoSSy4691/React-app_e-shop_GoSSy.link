@@ -61,14 +61,14 @@ export default function MenuShops() {
     <>
       <div className={s.showRoom}>
         <MenuContainer />
-      </div>
-      <div className={s.footer}>
-        <img
-          alt={"footer"}
-          className={s.footerImg}
-          src={runForestRun}
-          key={Math.random()}
-        />
+        <div className={s.footer}>
+          <img
+            alt={"footer"}
+            className={s.footerImg}
+            src={runForestRun}
+            key={Math.random()}
+          />
+        </div>
       </div>
     </>
   );

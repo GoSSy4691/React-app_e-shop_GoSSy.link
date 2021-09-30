@@ -52,10 +52,12 @@ export default function FoodDialog(props) {
           </span>
           <span className={s.cost}>{props.chosenFood.cost}&nbsp;Р.</span>
         </div>
-        <div className={s.descriptionName}>Описание</div>
-        <div className={s.descriptionBox}>{props.chosenFood.description}</div>
-        <div className={s.descriptionName}>Состав</div>
-        <div className={`${s.descriptionBox} ${s.nutritionBox}`}>&nbsp;</div>
+        <div className={s.middleBox}>
+          <div className={s.descriptionName}>Описание</div>
+          <div className={s.descriptionBox}>{props.chosenFood.description}</div>
+          <div className={s.descriptionName}>Состав</div>
+          <div className={`${s.descriptionBox} ${s.nutritionBox}`}>&nbsp;</div>
+        </div>
         {!isFoodIn(props.chosenFood.name) ? (
           <button
             className={s.inCartBtn}

@@ -1,11 +1,12 @@
 .showRoom {
   color: #adb4b0;
-  /*overflow-x: hidden;*/
   margin-left: 60px;
   margin-right: 60px;
-  margin-bottom: 200px;
+  /*margin-bottom: 200px;*/
   display: flex;
   flex-direction: column;
+  position: relative;
+  padding-bottom: 200px;
 }
 
 .footer {
@@ -19,7 +20,7 @@
   height: 100px;
   margin-top: 70px;
   bottom: 10px;
-  position: relative;
+  position: absolute;
   animation: run 10s infinite;
 }
 

@@ -7,8 +7,10 @@ import MenuShops from "./packages/menu/MenuShops.jsx";
 import OrderView from "./packages/menu/OrderView.jsx";
 import ErrorPopup from "./packages/popup/ErrorPopup.jsx";
 import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 
 export default function App() {
+  const [scrollPosition, setScrollPosition] = useState(0);
   const token = useSelector((state) => state.user.token);
   const dispatch = useDispatch();
   const cookies = new Cookies();
@@ -28,10 +30,15 @@ export default function App() {
   }
 
   return (
-    <div className="app">
+    <div
+      className="app"
+      onScroll={(e) => setScrollPosition(e.target.scrollTop)}
+    >
       <Header />
       <Switch>
-        <Route exact path="/" component={MenuShops} />
+        <Route exact path="/">
+          <MenuShops scrollPosition={scrollPosition} />
+        </Route>
         <Route exact path="/about" component={About} />
         <Route exact path="/order" component={OrderView} />
         <Redirect to="/" />

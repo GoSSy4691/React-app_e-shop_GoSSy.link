@@ -6,7 +6,7 @@ import GetImgFood from "./GetImgFood.jsx";
 import LeftBar from "./LeftBar.jsx";
 import FoodDialog from "./FoodDialog.jsx";
 
-export default function MenuFoods() {
+export default function MenuFoods(props) {
   const [search, setSearch] = useState("");
   const [chosenFood, setChosenFood] = useState({ isShow: false });
   const menu = useSelector((state) => state.menu.menuOnDisplay);
@@ -45,7 +45,7 @@ export default function MenuFoods() {
         value={search}
         onChange={(e) => setSearch(e.target.value.toLowerCase())}
       />
-      <LeftBar />
+      <LeftBar scrollPosition={props.scrollPosition} />
       {menuChosen.length === 0 ? (
         <div className={s.emptyDialog}>Такой еды нет в меню</div>
       ) : (

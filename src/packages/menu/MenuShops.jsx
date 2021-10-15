@@ -6,7 +6,7 @@ import API from "../../files/API/api.js";
 import GetImgFood from "./GetImgFood.jsx";
 import MenuFoods from "./MenuFoods.jsx";
 
-function MenuContainer() {
+function MenuContainer(props) {
   const status = useSelector((state) => state.menu.status);
   const shops = useSelector((state) => state.menu.shops);
   const dispatch = useDispatch();
@@ -49,18 +49,18 @@ function MenuContainer() {
         );
       }
     case "Choose food":
-      return <MenuFoods />;
+      return <MenuFoods scrollPosition={props.scrollPosition} />;
     default:
       console.error(status);
       return <div className={patternCSS.roomName}>Error</div>;
   }
 }
 
-export default function MenuShops() {
+export default function MenuShops(props) {
   return (
     <>
       <div className={s.showRoom}>
-        <MenuContainer />
+        <MenuContainer scrollPosition={props.scrollPosition} />
         <div className={s.footer}>
           <img
             alt={"footer"}

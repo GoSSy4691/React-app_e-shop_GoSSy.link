@@ -3,9 +3,10 @@ import patternCSS from "../pattern.module.css";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Cookies from "universal-cookie";
+import useDetectClickOut from "../useDetectClickOut.js";
+import API from "../../files/API/api.js";
 import ByPass from "./ByPass.jsx";
 import ByPhone from "./ByPhone.jsx";
-import useDetectClickOut from "../useDetectClickOut.js";
 
 export default function Login(props) {
   const token = useSelector((state) => state.user.token);
@@ -28,6 +29,12 @@ export default function Login(props) {
       setLoginForm("byPhone");
     }
   }
+
+  // if (token.length > 0) {
+  //   API.getProfile(token).then((res) => {
+  //     console.log(res.data);
+  //   });
+  // }
 
   switch (loginForm) {
     case "byPhone":

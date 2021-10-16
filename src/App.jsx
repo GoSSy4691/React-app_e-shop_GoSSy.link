@@ -15,19 +15,25 @@ export default function App() {
   const dispatch = useDispatch();
   const cookies = new Cookies();
 
-  const tokenAll = window.location.search;
-  if (tokenAll.length > 0) {
-    console.log(tokenAll);
-    const tokenStart = tokenAll.search(/=/);
-    const tokenAnswer = tokenAll.slice(tokenStart + 1);
-    console.log(tokenAnswer);
-    cookies.set("Token", tokenAnswer, { path: "/" });
-    window.close();
-    //https://gossy.link/?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoxNiwiaWF0IjoxNjMyNjQyNDc3fQ.66fjQzMMocs4ixgFe9qEzOsLxRWrXfKQ4PJqCtt1ARY
+  switch (token) {
+    case "":
+      const tokenAll = window.location.search;
+      if (tokenAll.length > 0) {
+        console.log(tokenAll);
+        const tokenStart = tokenAll.search(/=/);
+        const tokenAnswer = tokenAll.slice(tokenStart + 1);
+        console.log(tokenAnswer);
+        cookies.set("Token", tokenAnswer, { path: "/" });
+        window.close();
+        //https://gossy.link/?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoxNiwiaWF0IjoxNjMyNjQyNDc3fQ.66fjQzMMocs4ixgFe9qEzOsLxRWrXfKQ4PJqCtt1ARY
+      }
   }
-  if (token.length === 0 && cookies.get("Token") !== undefined) {
+  if (cookies.get("Token") !== undefined && cookies.get("Token").length > 0) {
     dispatch({ type: "LOGIN_CONFIRM", payload: cookies.get("Token") });
   }
+  // if (token.length === 0 && cookies.get("Token") !== undefined) {
+  //   dispatch({ type: "LOGIN_CONFIRM", payload: cookies.get("Token") });
+  // }
 
   return (
     <div

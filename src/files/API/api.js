@@ -37,4 +37,10 @@ export default class API {
       "width=700,height=500,left=200,top=200"
     );
   }
+
+  static getProfile(token) {
+    return axios.get("https://zloi.space/restaurant/api/users/profile", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  }
 }

@@ -1,7 +1,7 @@
 import s from "./header.module.css";
-import { NavLink, Route } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { NavLink, Route } from "react-router-dom";
 import shopCartIco from "../../files/img/shopCart.png";
 import LogoImg from "./logoGoose/LogoImage.jsx";
 import Cart from "../menu/Cart.jsx";
@@ -45,9 +45,11 @@ export default function Header() {
         </div>
       </div>
       <div className={s.rightSide}>
-        <div className={s.userIco} onClick={() => setShowLogin(true)}>
+        <div
+          className={s.userIco}
+          onClick={headerStatus !== "Loading" ? () => setShowLogin(true) : null}
+        >
           {headerStatus}
-          {console.log(headerStatus)}
           {/*{user.userData ? "Log out" : "Log in"}*/}
         </div>
       </div>

@@ -19,9 +19,9 @@ export default function App() {
   //search token in navigation bar
   const tokenInBar = window.location.search;
   if (tokenInBar.length > 0) {
-    console.log(tokenInBar);
     const tokenStart = tokenInBar.search(/=/);
     const tokenAnswer = tokenInBar.slice(tokenStart + 1);
+    console.log("Token is");
     console.log(tokenAnswer);
     cookies.set("Token", tokenAnswer, { path: "/" });
     window.close();
@@ -33,7 +33,6 @@ export default function App() {
     dispatch({ type: "LOGIN_LOADING" });
     API.getProfile(cookies.get("Token"))
       .then((res) => {
-        console.log(res.data[0]);
         dispatch({ type: "LOGIN_CONFIRM", payload: res.data[0] });
       })
       .catch((err) => {

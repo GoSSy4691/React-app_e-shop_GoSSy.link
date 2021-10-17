@@ -1,8 +1,8 @@
 import Cookies from "universal-cookie";
 
 let user = {
-  isUserLogin: false,
-  token: "",
+  headerStatus: "Log in",
+  userData: false,
 };
 
 export const userReducer = (state = user, action) => {
@@ -10,10 +10,12 @@ export const userReducer = (state = user, action) => {
   switch (action.type) {
     case "LOGIN_CONFIRM":
       cookies.set("Token", action.payload, { path: "/" });
-      return { ...state, isUserLogin: true, token: action.payload };
+      return { ...state, userData: action.payload, headerStatus: "Log out" };
     case "LOGOUT_CONFIRM":
       cookies.remove("Token");
-      return { ...state, isUserLogin: false, token: "" };
+      return { ...state, userData: false, headerStatus: "Log in" };
+    case "LOGIN_LOADING":
+      return { ...state, headerStatus: "Loading" };
     default:
       return state;
   }

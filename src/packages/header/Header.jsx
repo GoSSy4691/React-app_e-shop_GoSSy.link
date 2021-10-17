@@ -1,6 +1,6 @@
 import s from "./header.module.css";
 import { NavLink, Route } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import shopCartIco from "../../files/img/shopCart.png";
 import LogoImg from "./logoGoose/LogoImage.jsx";
@@ -9,7 +9,7 @@ import Login from "../login/Login.jsx";
 
 export default function Header() {
   const store = useSelector((state) => state.cart);
-  const isUserLogin = useSelector((state) => state.user.isUserLogin);
+  const headerStatus = useSelector((state) => state.user.headerStatus);
   const [isShowLogin, setShowLogin] = useState(false);
   const [isShowCart, setShowCart] = useState(false);
   const dispatch = useDispatch();
@@ -46,7 +46,9 @@ export default function Header() {
       </div>
       <div className={s.rightSide}>
         <div className={s.userIco} onClick={() => setShowLogin(true)}>
-          {isUserLogin ? "Log out" : "Log in"}
+          {headerStatus}
+          {console.log(headerStatus)}
+          {/*{user.userData ? "Log out" : "Log in"}*/}
         </div>
       </div>
       <Route exact path="/">

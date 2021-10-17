@@ -1,39 +1,46 @@
 import "./App.css";
 import { Route, Switch, Redirect } from "react-router-dom";
 import Cookies from "universal-cookie";
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import API from "./files/API/api.js";
 import Header from "./packages/header/Header.jsx";
 import About from "./packages/about/About.jsx";
 import MenuShops from "./packages/menu/MenuShops.jsx";
 import OrderView from "./packages/menu/OrderView.jsx";
 import ErrorPopup from "./packages/popup/ErrorPopup.jsx";
-import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
 
 export default function App() {
   const [scrollPosition, setScrollPosition] = useState(0);
-  const token = useSelector((state) => state.user.token);
+  const userData = useSelector((state) => state.user.userData);
   const dispatch = useDispatch();
   const cookies = new Cookies();
 
-  switch (token) {
-    case "":
-      const tokenAll = window.location.search;
-      if (tokenAll.length > 0) {
-        console.log(tokenAll);
-        const tokenStart = tokenAll.search(/=/);
-        const tokenAnswer = tokenAll.slice(tokenStart + 1);
-        console.log(tokenAnswer);
-        cookies.set("Token", tokenAnswer, { path: "/" });
-        window.close();
-        //https://gossy.link/?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjoxNiwiaWF0IjoxNjMyNjQyNDc3fQ.66fjQzMMocs4ixgFe9qEzOsLxRWrXfKQ4PJqCtt1ARY
-      }
+  //search token in navigation bar
+  const tokenInBar = window.location.search;
+  if (tokenInBar.length > 0) {
+    console.log(tokenInBar);
+    const tokenStart = tokenInBar.search(/=/);
+    const tokenAnswer = tokenInBar.slice(tokenStart + 1);
+    console.log(tokenAnswer);
+    cookies.set("Token", tokenAnswer, { path: "/" });
+    window.close();
   }
-  if (cookies.get("Token") !== undefined && cookies.get("Token").length > 0) {
-    dispatch({ type: "LOGIN_CONFIRM", payload: cookies.get("Token") });
+
+  //load profile
+  if (cookies.get("Token") !== undefined && !userData) {
+    console.log("get profile");
+    dispatch({ type: "LOGIN_LOADING" });
+    API.getProfile(cookies.get("Token"))
+      .then((res) => {
+        console.log(res.data[0]);
+        dispatch({ type: "LOGIN_CONFIRM", payload: res.data[0] });
+      })
+      .catch((err) => {
+        console.error(err.message);
+        dispatch({ type: "LOGOUT_CONFIRM" });
+      });
   }
-  // if (token.length === 0 && cookies.get("Token") !== undefined) {
-  //   dispatch({ type: "LOGIN_CONFIRM", payload: cookies.get("Token") });
-  // }
 
   return (
     <div

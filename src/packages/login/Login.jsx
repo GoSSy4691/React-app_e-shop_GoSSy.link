@@ -4,13 +4,14 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Cookies from "universal-cookie";
 import useDetectClickOut from "../useDetectClickOut.js";
-import API from "../../files/API/api.js";
 import ByPass from "./ByPass.jsx";
 import ByPhone from "./ByPhone.jsx";
 
 export default function Login(props) {
-  const token = useSelector((state) => state.user.token);
-  const [loginForm, setLoginForm] = useState(token ? "Logout" : "byPhone");
+  const user = useSelector((state) => state.user);
+  const [loginForm, setLoginForm] = useState(
+    user.userData ? "Profile" : "byPhone"
+  );
   const refLogin = useDetectClickOut(props.isShowLogin, props.setShowLogin);
   const dispatch = useDispatch();
   const cookies = new Cookies();
@@ -29,12 +30,6 @@ export default function Login(props) {
       setLoginForm("byPhone");
     }
   }
-
-  // if (token.length > 0) {
-  //   API.getProfile(token).then((res) => {
-  //     console.log(res.data);
-  //   });
-  // }
 
   switch (loginForm) {
     case "byPhone":
@@ -76,14 +71,14 @@ export default function Login(props) {
           </div>
         </div>
       );
-    case "Logout":
+    case "Profile":
       return (
         <div className={patternCSS.darkenBackground}>
           <div className={s.loginDialog} ref={refLogin}>
             <div className={s.naming}>Вход в учетную запись</div>
             <div className={s.afterName}>
-              <div className={s.token}> Your token is </div>
-              <div className={s.token}> {token} </div>
+              <div className={s.token}> Hello, {user.userData.name}! </div>
+              <div className={s.token}> 1 </div>
               <div className={s.flexbox}>
                 <div className={s.afterToken}>To logout press the button</div>
                 <button className={s.loginBtn} onClick={logoutBtn}>

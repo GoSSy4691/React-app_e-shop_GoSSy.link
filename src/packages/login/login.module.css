@@ -27,14 +27,8 @@
     flex-wrap: wrap;
     background: #282c34;
     align-items: flex-start;
-    padding-bottom: 20px;
+    /*padding-bottom: 20px;*/
     border-radius: 10px;
-}
-
-.flexbox {
-    display: flex;
-    width: 400px;
-    justify-content: space-between;
 }
 
 .leftBar {
@@ -96,27 +90,31 @@
     text-align: center
 }
 
+.firstLine {
+    display: inline-flex;
+}
+
+.editBtn {
+    padding-left: 13px;
+    align-self: center;
+    cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
+}
+
 .token {
-    width: 400px;
+    padding-top: 13px;
+    padding-left: 13px;
+    max-width: 350px;
     overflow-wrap: break-word;
 }
 
-.afterToken {
-    margin-top: 25px;
-    margin-left: 20px;
-    font-size: 20px;
-    line-height: 20px;
-}
-
 .loginBtn {
-    width: 74px;
-    height: 30px;
-    margin-top: 29px;
-    margin-left: 31px;
-    margin-right: 20px;
-    font-size: 16px;
-    border-radius: 10px;
-    border: none;
+    display: inline-flex;
+    align-self: flex-end;
+    height: 20px;
+    margin: 13px 20px 0 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
 }
 
 .loginBtn text {

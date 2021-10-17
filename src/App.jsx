@@ -21,8 +21,7 @@ export default function App() {
   if (tokenInBar.length > 0) {
     const tokenStart = tokenInBar.search(/=/);
     const tokenAnswer = tokenInBar.slice(tokenStart + 1);
-    console.log("Token is");
-    console.log(tokenAnswer);
+    console.log("Token is " + tokenAnswer);
     cookies.set("Token", tokenAnswer, { path: "/" });
     window.close();
   }

@@ -50,7 +50,6 @@ export default function Header() {
           onClick={headerStatus !== "Loading" ? () => setShowLogin(true) : null}
         >
           {headerStatus}
-          {/*{user.userData ? "Log out" : "Log in"}*/}
         </div>
       </div>
       <Route exact path="/">

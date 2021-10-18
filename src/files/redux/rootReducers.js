@@ -10,7 +10,7 @@ import { errorReducer } from "./errorStore.js";
 const persistConfig = {
   key: "root",
   storage: storageSession,
-  whitelist: ["cart", "user"],
+  whitelist: ["cart"],
 };
 
 const rootReducer = combineReducers({

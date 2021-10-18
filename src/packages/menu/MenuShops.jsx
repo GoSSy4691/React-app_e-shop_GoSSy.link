@@ -5,6 +5,7 @@ import runForestRun from "../../files/img/runForestRun.png";
 import API from "../../files/API/api.js";
 import GetImgFood from "./GetImgFood.jsx";
 import MenuFoods from "./MenuFoods.jsx";
+import AdminBar from "./AdminBar.jsx";
 
 function MenuContainer(props) {
   const status = useSelector((state) => state.menu.status);
@@ -59,6 +60,7 @@ function MenuContainer(props) {
 export default function MenuShops(props) {
   return (
     <>
+      <AdminBar />
       <div className={s.showRoom}>
         <MenuContainer scrollPosition={props.scrollPosition} />
         <div className={s.footer}>

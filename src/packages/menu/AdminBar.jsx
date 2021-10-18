@@ -1,30 +1,33 @@
 import s from "./CSS/adminBar.module.css";
 import { useDispatch, useSelector } from "react-redux";
 
+import menuOpenSVG from "../../files/img/adminBar/00_menuOpen.svg";
+import userSVG from "../../files/img/adminBar/01_user.svg";
+import shopSVG from "../../files/img/adminBar/02_shop.svg";
+import menuSVG from "../../files/img/adminBar/03_menu.svg";
+import imagesSVG from "../../files/img/adminBar/04_images.svg";
+import foodsSVG from "../../files/img/adminBar/05_foods.svg";
+import cartSVG from "../../files/img/adminBar/06_cart.svg";
+import statsSVG from "../../files/img/adminBar/07_stats.svg";
+import dialogSVG from "../../files/img/adminBar/08_dialog.svg";
+import warehouseSVG from "../../files/img/adminBar/09_warehouse.svg";
+
 export default function AdminBar(props) {
-  // const categoryNumber = useSelector((state) => state.menu.categoryNumber);
-  // const category = useSelector((state) => state.menu.category);
+  const userData = useSelector((state) => state.user.userData);
   // const dispatch = useDispatch();
 
   return (
-    <div className={s.barWrapper}>
-      <div className={`${s.box}`}>
-        {/*{category.map((p) => (*/}
-        {/*  <li*/}
-        {/*    className={s.categoryBox}*/}
-        {/*    style={*/}
-        {/*      p.id === categoryNumber*/}
-        {/*        ? { borderBottom: "solid 2px#414EBB" }*/}
-        {/*        : null*/}
-        {/*    }*/}
-        {/*    key={p.id}*/}
-        {/*    title={p.name}*/}
-        {/*    onClick={() => changeCategory(p.id)}*/}
-        {/*  >*/}
-        {/*    <span className={s.categoryType}>{p.name}</span>*/}
-        {/*  </li>*/}
-        {/*))}*/}
-      </div>
+    <div className={`${s.box}`}>
+      <img alt={"open"} src={menuOpenSVG} />
+      <img alt={"open"} src={userSVG} />
+      <img alt={"open"} src={shopSVG} />
+      <img alt={"open"} src={menuSVG} />
+      <img alt={"open"} src={imagesSVG} />
+      <img alt={"open"} src={foodsSVG} />
+      <img alt={"open"} src={cartSVG} />
+      <img alt={"open"} src={statsSVG} />
+      <img alt={"open"} src={dialogSVG} />
+      <img alt={"open"} src={warehouseSVG} />
     </div>
   );
 }

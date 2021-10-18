@@ -1,12 +1,14 @@
 import s from "./login.module.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import Cookies from "universal-cookie";
 import API from "../../files/API/api.js";
+import InputPhone from "./InputPhone.jsx";
+import InputCode from "./InputCode.jsx";
+
 import vkIco from "../../files/img/token/vk.png";
 import yandexIco from "../../files/img/token/ya.png";
 import googleIco from "../../files/img/token/gog.png";
-import InputPhone from "./InputPhone.jsx";
-import InputCode from "./InputCode.jsx";
 
 export default function ByPhone(props) {
   const [phone, setPhone] = useState("8(___)___-__-__");
@@ -16,6 +18,7 @@ export default function ByPhone(props) {
   const [isCodeWrong, setCodeWrong] = useState(false);
   const [inputType, setInputType] = useState("Phone");
   const dispatch = useDispatch();
+  const cookies = new Cookies();
 
   function sendPhoneNumber() {
     if (phone.indexOf("_") !== -1) {
@@ -24,10 +27,10 @@ export default function ByPhone(props) {
     } else {
       let preparedPhone = phone.split("").filter((e) => !isNaN(Number(e)));
       preparedPhone = "+7" + preparedPhone.join("").slice(1);
+      dispatch({ type: "SUCCESS_MESSAGE", payload: "Checking phone" });
       API.authByPhone(preparedPhone)
         .then((res) => {
           setInputType("Code");
-          dispatch({ type: "LOGIN_CONFIRM", payload: res.data });
           dispatch({ type: "SUCCESS_MESSAGE", payload: "Code sent" });
         })
         .catch((err) => {
@@ -43,7 +46,8 @@ export default function ByPhone(props) {
     } else {
       API.authByCode(code)
         .then((res) => {
-          dispatch({ type: "LOGIN_CONFIRM", payload: res.data.token });
+          console.log("Your token is " + res.data.token);
+          dispatch({ type: "LOAD_PROFILE" });
           dispatch({ type: "SUCCESS_MESSAGE", payload: "Code confirmed" });
           props.setShowLogin(false);
         })
@@ -61,7 +65,7 @@ export default function ByPhone(props) {
 
   return (
     <div className={s.afterName}>
-      <div className={s.flexbox}>
+      <div className={s.firstLine}>
         <div className={s.numberOrCodeBox}>
           {inputType === "Phone" ? (
             <InputPhone
@@ -78,16 +82,15 @@ export default function ByPhone(props) {
               isCodeWrong={isCodeWrong}
               setCodeWrong={setCodeWrong}
               sendCode={sendCode}
-              // send code when fill input window
             />
           )}
         </div>
-        <button
+        <p
           className={s.loginBtn}
           onClick={inputType === "Phone" ? sendPhoneNumber : sendCode}
         >
           Next
-        </button>
+        </p>
       </div>
       <button
         className={s.loginByPassLink}

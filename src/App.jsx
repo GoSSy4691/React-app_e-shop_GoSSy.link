@@ -1,9 +1,7 @@
 import "./App.css";
+import { useState } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import Cookies from "universal-cookie";
-import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
-import API from "./files/API/api.js";
 import Header from "./packages/header/Header.jsx";
 import About from "./packages/about/About.jsx";
 import MenuShops from "./packages/menu/MenuShops.jsx";
@@ -12,8 +10,6 @@ import ErrorPopup from "./packages/popup/ErrorPopup.jsx";
 
 export default function App() {
   const [scrollPosition, setScrollPosition] = useState(0);
-  const userData = useSelector((state) => state.user.userData);
-  const dispatch = useDispatch();
   const cookies = new Cookies();
 
   //search token in navigation bar
@@ -24,20 +20,6 @@ export default function App() {
     console.log("Token is " + tokenAnswer);
     cookies.set("Token", tokenAnswer, { path: "/" });
     window.close();
-  }
-
-  //load profile
-  if (cookies.get("Token") !== undefined && !userData) {
-    console.log("get profile");
-    dispatch({ type: "LOGIN_LOADING" });
-    API.getProfile(cookies.get("Token"))
-      .then((res) => {
-        dispatch({ type: "LOGIN_CONFIRM", payload: res.data[0] });
-      })
-      .catch((err) => {
-        console.error(err.message);
-        dispatch({ type: "LOGOUT_CONFIRM" });
-      });
   }
 
   return (

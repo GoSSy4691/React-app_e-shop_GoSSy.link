@@ -1,7 +1,9 @@
 import s from "./login.module.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import Cookies from "universal-cookie";
 import API from "../../files/API/api.js";
+
 import eye_show from "../../files/img/visible_show.png";
 import eye_hide from "../../files/img/visible_hide.png";
 
@@ -11,10 +13,12 @@ export default function ByPass(props) {
   const [isPassWrong, setPassWrong] = useState(false);
   const [isPassShow, setPassShow] = useState(false);
   const dispatch = useDispatch();
+  const cookies = new Cookies();
 
   function getAnswerPass() {
     API.authByPassword(login, password)
       .then(() => {
+        dispatch({ type: "LOAD_PROFILE" });
         dispatch({ type: "SUCCESS_MESSAGE", payload: "log in confirmed" });
       })
       .catch((err) => {

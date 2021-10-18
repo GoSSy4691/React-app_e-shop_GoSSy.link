@@ -8,7 +8,7 @@
 
 .loginDialog {
     position: absolute;
-    width: 405px;
+    width: 400px;
     top: 15%;
     left: 50%;
     transform: translateX(-50%);
@@ -92,6 +92,8 @@
 
 .firstLine {
     display: inline-flex;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .editBtn {
@@ -108,12 +110,18 @@
 }
 
 .loginBtn {
-    display: inline-flex;
-    align-self: flex-end;
-    height: 20px;
-    margin: 13px 20px 0 0;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    width: 74px;
+    height: 30px;
+    margin: 28px 28px 0 0;
+    text-align: center;
+    line-height: 32px;
+    /*align-self: center;*/
+    /*display: inline-flex;*/
+    /*align-self: flex-end;*/
+    /*height: 20px;*/
+    /*margin: 13px 20px 0 0;*/
+    /*padding-top: 10px;*/
+    /*padding-bottom: 10px;*/
     cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
 }
 
@@ -203,4 +211,11 @@
     height: 50px;
     margin-right: inherit;
     cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
+}
+
+.penEdit {
+    width: fit-content;
+    height: fit-content;
+    margin-right: 5px;
+    align-self: center;
 }

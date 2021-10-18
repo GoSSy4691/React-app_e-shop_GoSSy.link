@@ -2,17 +2,39 @@ import s from "./header.module.css";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Route } from "react-router-dom";
-import shopCartIco from "../../files/img/shopCart.png";
+import Cookies from "universal-cookie";
+import API from "../../files/API/api.js";
 import LogoImg from "./logoGoose/LogoImage.jsx";
 import Cart from "../menu/Cart.jsx";
 import Login from "../login/Login.jsx";
 
+import shopCartIco from "../../files/img/shopCart.png";
+
 export default function Header() {
   const store = useSelector((state) => state.cart);
-  const headerStatus = useSelector((state) => state.user.headerStatus);
   const [isShowLogin, setShowLogin] = useState(false);
   const [isShowCart, setShowCart] = useState(false);
   const dispatch = useDispatch();
+  const cookies = new Cookies();
+  const [profileStatus, setProfileStatus] = useState(
+    cookies.get("Token") === undefined ? "Log in" : "Loading"
+  );
+
+  //load profile
+  if (profileStatus === "Loading") {
+    console.log("get profile");
+    API.getProfile(cookies.get("Token"))
+      .then((res) => {
+        dispatch({ type: "LOGIN_CONFIRM", payload: res.data[0] });
+        setProfileStatus("Log out");
+      })
+      .catch((err) => {
+        console.error(err.message);
+        dispatch({ type: "LOGOUT_CONFIRM" });
+        cookies.remove("Token");
+        setProfileStatus("Log in");
+      });
+  }
 
   return (
     <div className={s.nav}>
@@ -47,9 +69,11 @@ export default function Header() {
       <div className={s.rightSide}>
         <div
           className={s.userIco}
-          onClick={headerStatus !== "Loading" ? () => setShowLogin(true) : null}
+          onClick={
+            profileStatus === "Loading" ? null : () => setShowLogin(true)
+          }
         >
-          {headerStatus}
+          {profileStatus}
         </div>
       </div>
       <Route exact path="/">
@@ -65,7 +89,11 @@ export default function Header() {
         </div>
       </Route>
       {isShowLogin ? (
-        <Login isShowLogin={isShowLogin} setShowLogin={setShowLogin} />
+        <Login
+          isShowLogin={isShowLogin}
+          setShowLogin={setShowLogin}
+          setProfileStatus={setProfileStatus}
+        />
       ) : null}
       {isShowCart ? (
         <Cart isShowCart={isShowCart} setShowCart={setShowCart} />

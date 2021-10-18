@@ -1,21 +1,20 @@
 import Cookies from "universal-cookie";
+import API from "../API/api";
 
+// const cookies = new Cookies();
 let user = {
-  headerStatus: "Log in",
+  // headerStatus: cookies.get("Token") === undefined ? "Log in" : "Loading",
   userData: false,
 };
 
 export const userReducer = (state = user, action) => {
-  const cookies = new Cookies();
   switch (action.type) {
+    case "LOAD_PROFILE":
+      return { ...state };
     case "LOGIN_CONFIRM":
-      cookies.set("Token", action.payload, { path: "/" });
-      return { ...state, userData: action.payload, headerStatus: "Log out" };
+      return { ...state, userData: action.payload };
     case "LOGOUT_CONFIRM":
-      cookies.remove("Token");
-      return { ...state, userData: false, headerStatus: "Log in" };
-    case "LOGIN_LOADING":
-      return { ...state, headerStatus: "Loading" };
+      return { ...state, userData: false };
     default:
       return state;
   }

@@ -1,66 +1,25 @@
 .box {
     position: fixed;
-    min-height: 100%;
+    height: 100%;
+    width: 50px;
+    align-items: center;
+    /*min-height: 100%;*/
+    /*background-color: #282c34;*/
     background-color: #282c34;
     border-right: solid 5px #1b1d23;
     z-index: 2;
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    gap: 15px;
+    padding-top: 15px;
     transition: all .5s ease-in-out;
 }
 
 .categoryButton {
-    display: flex;
-    flex-direction: column;
-    height: 50px;
-    width: 50px;
-    margin: 10px 5px;
-    border: none;
-    background: none;
-    padding: 0;
-    align-items: center;
-    overflow: hidden;
-    transform: rotate(90deg);
-    cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
+    /*transform: rotate(90deg);*/
 }
 
 .categoryButton[is_category_show="true"] {
     transform: rotate(0deg);
-}
-
-.categoryButton span {
-    background: #acabab;
-    width: 50px;
-    height: 10px;
-    margin: 4px 0;
-    border-radius: 10px;
-}
-
-.categoryBox {
-    display: flex;
-    min-width: 100%;
-    height: 48px;
-    padding: 0 6px;
-    white-space: nowrap;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    overflow: hidden;
-    background: none;
-    cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
-}
-
-.categoryImg {
-    height:45px;
-    width: 45px;
-    object-fit: cover;
-}
-
-.categoryType {
-    padding-left: 10px;
-    line-height: 45px;
-    width: inherit;
-    height: 50px;
-    font-size: 25px;
-    color: white;
 }

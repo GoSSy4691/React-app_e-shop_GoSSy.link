@@ -10,7 +10,7 @@ import vkIco from "../../files/img/token/vk.png";
 import yandexIco from "../../files/img/token/ya.png";
 import googleIco from "../../files/img/token/gog.png";
 
-export default function ByPhone(props) {
+export default function ByPhone() {
   const [phone, setPhone] = useState("8(___)___-__-__");
   const [code, setCode] = useState("____");
   // move isPhoneWrong and isCodeWrong in child component
@@ -29,7 +29,7 @@ export default function ByPhone(props) {
       preparedPhone = "+7" + preparedPhone.join("").slice(1);
       dispatch({ type: "SUCCESS_MESSAGE", payload: "Checking phone" });
       API.authByPhone(preparedPhone)
-        .then((res) => {
+        .then(() => {
           setInputType("Code");
           dispatch({ type: "SUCCESS_MESSAGE", payload: "Code sent" });
         })
@@ -47,9 +47,12 @@ export default function ByPhone(props) {
       API.authByCode(code)
         .then((res) => {
           console.log("Your token is " + res.data.token);
-          dispatch({ type: "LOAD_PROFILE" });
           dispatch({ type: "SUCCESS_MESSAGE", payload: "Code confirmed" });
-          props.setShowLogin(false);
+          cookies.set("Token", res.data.token, { path: "/" });
+          dispatch({ type: "LOGIN_CONFIRM", payload: res.data[0] });
+          dispatch({ type: "PROFILE_DIALOG_SHOW" });
+          dispatch({ type: "PROFILE_DIALOG_STATE", payload: "Profile" });
+          dispatch({ type: "LOAD_PROFILE" });
         })
         .catch((err) => {
           setCodeWrong(true);
@@ -60,7 +63,7 @@ export default function ByPhone(props) {
 
   function getAnswerToken(method) {
     API.authByOAuth(method);
-    props.setLoginForm("Wait");
+    dispatch({ type: "PROFILE_DIALOG_STATE", payload: "Wait" });
   }
 
   return (
@@ -94,7 +97,9 @@ export default function ByPhone(props) {
       </div>
       <button
         className={s.loginByPassLink}
-        onClick={() => props.setLoginForm("byPass")}
+        onClick={() =>
+          dispatch({ type: "PROFILE_DIALOG_STATE", payload: "byPass" })
+        }
       >
         Sign in by password
       </button>

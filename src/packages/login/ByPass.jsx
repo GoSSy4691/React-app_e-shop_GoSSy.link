@@ -7,7 +7,7 @@ import API from "../../files/API/api.js";
 import eye_show from "../../files/img/visible_show.png";
 import eye_hide from "../../files/img/visible_hide.png";
 
-export default function ByPass(props) {
+export default function ByPass() {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [isPassWrong, setPassWrong] = useState(false);
@@ -16,10 +16,14 @@ export default function ByPass(props) {
   const cookies = new Cookies();
 
   function getAnswerPass() {
+    dispatch({ type: "SUCCESS_MESSAGE", payload: "Loading" });
     API.authByPassword(login, password)
-      .then(() => {
+      .then((res) => {
+        console.log("You token is " + res.data.token);
+        dispatch({ type: "SUCCESS_MESSAGE", payload: "Log in confirmed" });
+        cookies.set("Token", res.data.token, { path: "/" });
+        dispatch({ type: "PROFILE_DIALOG_SHOW" });
         dispatch({ type: "LOAD_PROFILE" });
-        dispatch({ type: "SUCCESS_MESSAGE", payload: "log in confirmed" });
       })
       .catch((err) => {
         console.error(err.message);
@@ -77,7 +81,9 @@ export default function ByPass(props) {
           />
           <div
             className={s.loginByPassLink}
-            onClick={() => props.setLoginForm("byPhone")}
+            onClick={() =>
+              dispatch({ type: "PROFILE_DIALOG_STATE", payload: "byPhone" })
+            }
           >
             Sign in by phone
           </div>

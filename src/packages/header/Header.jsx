@@ -12,27 +12,24 @@ import shopCartIco from "../../files/img/shopCart.png";
 
 export default function Header() {
   const store = useSelector((state) => state.cart);
-  const [isShowLogin, setShowLogin] = useState(false);
+  const headerStatus = useSelector((state) => state.user.headerStatus);
+  const isDialogOpen = useSelector((state) => state.user.isDialogOpen);
   const [isShowCart, setShowCart] = useState(false);
   const dispatch = useDispatch();
   const cookies = new Cookies();
-  const [profileStatus, setProfileStatus] = useState(
-    cookies.get("Token") === undefined ? "Log in" : "Loading"
-  );
 
   //load profile
-  if (profileStatus === "Loading") {
-    console.log("get profile");
+  if (headerStatus === "Loading") {
+    console.log("Loading profile");
     API.getProfile(cookies.get("Token"))
       .then((res) => {
         dispatch({ type: "LOGIN_CONFIRM", payload: res.data[0] });
-        setProfileStatus("Log out");
+        dispatch({ type: "PROFILE_DIALOG_STATE", payload: "Profile" });
       })
       .catch((err) => {
         console.error(err.message);
         dispatch({ type: "LOGOUT_CONFIRM" });
-        cookies.remove("Token");
-        setProfileStatus("Log in");
+        dispatch({ type: "ERROR_MESSAGE", payload: "Token expired" });
       });
   }
 
@@ -70,10 +67,12 @@ export default function Header() {
         <div
           className={s.userIco}
           onClick={
-            profileStatus === "Loading" ? null : () => setShowLogin(true)
+            headerStatus === "Loading"
+              ? null
+              : () => dispatch({ type: "PROFILE_DIALOG_SHOW" })
           }
         >
-          {profileStatus}
+          {headerStatus}
         </div>
       </div>
       <Route exact path="/">
@@ -88,13 +87,7 @@ export default function Header() {
           ) : null}
         </div>
       </Route>
-      {isShowLogin ? (
-        <Login
-          isShowLogin={isShowLogin}
-          setShowLogin={setShowLogin}
-          setProfileStatus={setProfileStatus}
-        />
-      ) : null}
+      {isDialogOpen ? <Login /> : null}
       {isShowCart ? (
         <Cart isShowCart={isShowCart} setShowCart={setShowCart} />
       ) : null}

@@ -58,9 +58,10 @@ function MenuContainer(props) {
 }
 
 export default function MenuShops(props) {
+  const userData = useSelector((state) => state.user.userData);
   return (
     <>
-      <AdminBar />
+      {userData !== undefined && userData.login === "admin" && <AdminBar />}
       <div className={s.showRoom}>
         <MenuContainer scrollPosition={props.scrollPosition} />
         <div className={s.footer}>

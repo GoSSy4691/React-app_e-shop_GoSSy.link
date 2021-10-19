@@ -1,5 +1,6 @@
 import "./App.css";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
 import Cookies from "universal-cookie";
 import Header from "./packages/header/Header.jsx";
@@ -10,6 +11,7 @@ import ErrorPopup from "./packages/popup/ErrorPopup.jsx";
 
 export default function App() {
   const [scrollPosition, setScrollPosition] = useState(0);
+  const dispatch = useDispatch();
   const cookies = new Cookies();
 
   //search token in navigation bar
@@ -19,6 +21,7 @@ export default function App() {
     const tokenAnswer = tokenInBar.slice(tokenStart + 1);
     console.log("Token is " + tokenAnswer);
     cookies.set("Token", tokenAnswer, { path: "/" });
+    dispatch({ type: "LOAD_PROFILE" });
     window.close();
   }
 

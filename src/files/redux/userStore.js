@@ -1,20 +1,31 @@
 import Cookies from "universal-cookie";
-import API from "../API/api";
 
-// const cookies = new Cookies();
+const cookies = new Cookies();
 let user = {
-  // headerStatus: cookies.get("Token") === undefined ? "Log in" : "Loading",
   userData: false,
+  headerStatus: cookies.get("Token") === undefined ? "Log in" : "Loading",
+  isDialogOpen: false,
+  dialogState: "byPhone",
 };
 
 export const userReducer = (state = user, action) => {
   switch (action.type) {
+    case "PROFILE_DIALOG_SHOW":
+      return { ...state, isDialogOpen: !state.isDialogOpen };
+    case "PROFILE_DIALOG_STATE":
+      return { ...state, dialogState: action.payload };
     case "LOAD_PROFILE":
-      return { ...state };
+      return { ...state, headerStatus: "Loading" };
     case "LOGIN_CONFIRM":
-      return { ...state, userData: action.payload };
+      return { ...state, userData: action.payload, headerStatus: "Log out" };
     case "LOGOUT_CONFIRM":
-      return { ...state, userData: false };
+      cookies.remove("Token");
+      return {
+        ...state,
+        userData: false,
+        headerStatus: "Log in",
+        dialogState: "byPhone",
+      };
     default:
       return state;
   }

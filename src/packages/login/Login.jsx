@@ -87,7 +87,17 @@ export default function Login() {
                     : "Noname"}
                   !
                 </div>
-                <img alt={"Edit"} src={penEdit} className={s.penEdit} />
+                <img
+                  alt={"Edit"}
+                  src={penEdit}
+                  className={s.penEdit}
+                  onClick={() =>
+                    dispatch({
+                      type: "ERROR_MESSAGE",
+                      payload: "Didn't work yet",
+                    })
+                  }
+                />
               </div>
               <div className={s.token}>
                 {user.userData.phone > 0

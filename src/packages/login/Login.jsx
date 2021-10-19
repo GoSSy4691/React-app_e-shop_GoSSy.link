@@ -78,7 +78,16 @@ export default function Login() {
             <div className={s.naming}>Вход в учетную запись</div>
             <div className={s.afterName}>
               <div className={s.firstLine}>
-                <div className={s.token}>Hello, {user.userData.name}!</div>
+                {console.log(user.userData)}
+                <div className={s.token}>
+                  Hello,
+                  {user.userData.name.length > 0
+                    ? user.userData.name
+                    : user.userData.login !== null
+                    ? user.userData.login
+                    : "Noname"}
+                  !
+                </div>
                 <img alt={"Edit"} src={penEdit} className={s.penEdit} />
               </div>
               <div className={s.token}>

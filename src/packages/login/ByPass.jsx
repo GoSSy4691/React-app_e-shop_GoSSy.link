@@ -46,51 +46,51 @@ export default function ByPass() {
 
   return (
     <div className={s.afterName}>
-      <div className={s.flexbox}>
-        <div className={s.leftBar}>
-          <input
-            name={"Login"}
-            className={s.loginInput}
-            style={isPassWrong ? { color: "red" } : null}
-            autoFocus
-            placeholder="Login"
-            value={login}
-            onChange={(e) => loginValidation(e.target.value)}
-            onKeyPress={(e) =>
-              e.nativeEvent.key === "Enter" ? getAnswerPass() : null
-            }
-          />
-          <input
-            name={"Password"}
-            className={s.passwordInput}
-            style={isPassWrong ? { color: "red" } : null}
-            placeholder="Password"
-            type={isPassShow ? "text" : "password"}
-            value={password}
-            onChange={(e) => passwordValidation(e.target.value)}
-            onKeyPress={(e) =>
-              e.nativeEvent.key === "Enter" ? getAnswerPass() : null
-            }
-          />
-          <img
-            alt={"showHideEye"}
-            src={isPassShow ? eye_show : eye_hide}
-            className={s.eyeInput}
-            onMouseDown={() => setPassShow(true)}
-            onMouseUp={() => setPassShow(false)}
-          />
-          <div
-            className={s.loginByPassLink}
-            onClick={() =>
-              dispatch({ type: "PROFILE_DIALOG_STATE", payload: "byPhone" })
-            }
-          >
-            Sign in by phone
-          </div>
-        </div>
+      <div className={s.firstLine}>
+        <input
+          name={"Login"}
+          className={s.loginInput}
+          style={isPassWrong ? { color: "red" } : null}
+          autoFocus
+          placeholder="Login"
+          value={login}
+          onChange={(e) => loginValidation(e.target.value)}
+          onKeyPress={(e) =>
+            e.nativeEvent.key === "Enter" ? getAnswerPass() : null
+          }
+        />
         <button className={s.loginBtn} onClick={getAnswerPass}>
           Sign in
         </button>
+      </div>
+      <div className={s.passwordLine}>
+        <input
+          name={"Password"}
+          className={s.passwordInput}
+          style={isPassWrong ? { color: "red" } : null}
+          placeholder="Password"
+          type={isPassShow ? "text" : "password"}
+          value={password}
+          onChange={(e) => passwordValidation(e.target.value)}
+          onKeyPress={(e) =>
+            e.nativeEvent.key === "Enter" ? getAnswerPass() : null
+          }
+        />
+        <img
+          alt={"showHideEye"}
+          src={isPassShow ? eye_show : eye_hide}
+          className={s.eyeInput}
+          onMouseDown={() => setPassShow(true)}
+          onMouseUp={() => setPassShow(false)}
+        />
+      </div>
+      <div
+        className={s.loginByPassLink}
+        onClick={() =>
+          dispatch({ type: "PROFILE_DIALOG_STATE", payload: "byPhone" })
+        }
+      >
+        Sign in by phone
       </div>
     </div>
   );

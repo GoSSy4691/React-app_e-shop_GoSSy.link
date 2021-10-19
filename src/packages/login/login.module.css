@@ -27,15 +27,8 @@
     flex-wrap: wrap;
     background: #282c34;
     align-items: flex-start;
-    /*padding-bottom: 20px;*/
+    padding-bottom: 10px;
     border-radius: 10px;
-}
-
-.flexbox {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    background: #0000bb;
 }
 
 .leftBar {
@@ -52,7 +45,6 @@
     width: 244px;
     color: black;
     opacity: 0.8;
-
 }
 
 .phoneForm {
@@ -103,10 +95,16 @@
     width: 100%;
 }
 
+.sendCodeFor {
+    position: absolute;
+    font-size: 12px;
+    margin-top: 10px;
+    margin-left: 23px;
+}
+
 .editBtn {
     padding-left: 13px;
     align-self: center;
-    cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
 }
 
 .token {
@@ -120,16 +118,10 @@
     width: 74px;
     height: 30px;
     margin: 28px 28px 0 0;
-    text-align: center;
-    line-height: 32px;
-    /*align-self: center;*/
-    /*display: inline-flex;*/
-    /*align-self: flex-end;*/
-    /*height: 20px;*/
-    /*margin: 13px 20px 0 0;*/
-    /*padding-top: 10px;*/
-    /*padding-bottom: 10px;*/
-    cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
+    border-radius: 10px;
+    border: none;
+    font-size: 16px;
+    font-family: Roboto, sans-serif;
 }
 
 .loginBtn text {
@@ -158,11 +150,16 @@
     outline: none;
 }
 
+.passwordLine {
+    position: relative;
+    margin-top: 9px;
+    margin-left: 23px;
+}
+
 .passwordInput {
     width: 208px;
     height: 36px;
-    margin-top: 9px;
-    margin-left: 23px;
+
     border-radius: 10px;
     padding: 1px 20px;
     border: none;
@@ -172,8 +169,9 @@
 .eyeInput {
     width: 40px;
     position:absolute;
-    bottom:42px;
-    right:135px;
+    align-self: center;
+    /*bottom:42px;*/
+    right: 10px;
     cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
 }
 

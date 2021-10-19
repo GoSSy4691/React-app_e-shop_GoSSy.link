@@ -13,6 +13,7 @@ import googleIco from "../../files/img/token/gog.png";
 export default function ByPhone() {
   const [phone, setPhone] = useState("8(___)___-__-__");
   const [code, setCode] = useState("____");
+  const [isShowVYG, setShowVYG] = useState(true);
   // move isPhoneWrong and isCodeWrong in child component
   const [isPhoneWrong, setPhoneWrong] = useState(false);
   const [isCodeWrong, setCodeWrong] = useState(false);
@@ -31,6 +32,7 @@ export default function ByPhone() {
       API.authByPhone(preparedPhone)
         .then(() => {
           setInputType("Code");
+          setShowVYG(false);
           dispatch({ type: "SUCCESS_MESSAGE", payload: "Code sent" });
         })
         .catch((err) => {
@@ -69,6 +71,7 @@ export default function ByPhone() {
   return (
     <div className={s.afterName}>
       <div className={s.firstLine}>
+        {inputType === "Code" && <div className={s.sendCodeFor}>{phone}</div>}
         <div className={s.numberOrCodeBox}>
           {inputType === "Phone" ? (
             <InputPhone
@@ -88,12 +91,12 @@ export default function ByPhone() {
             />
           )}
         </div>
-        <p
+        <button
           className={s.loginBtn}
           onClick={inputType === "Phone" ? sendPhoneNumber : sendCode}
         >
           Next
-        </p>
+        </button>
       </div>
       <button
         className={s.loginByPassLink}
@@ -103,26 +106,34 @@ export default function ByPhone() {
       >
         Sign in by password
       </button>
-      <div className={s.loginByToken}>Sign in with:</div>
-      <div className={s.tokenImg}>
-        <div>
-          <img src={vkIco} alt={"Vk"} onClick={() => getAnswerToken("vk")} />
-        </div>
-        <div>
-          <img
-            src={yandexIco}
-            alt={"Yandex"}
-            onClick={() => getAnswerToken("yandex")}
-          />
-        </div>
-        <div>
-          <img
-            src={googleIco}
-            alt={"Google"}
-            onClick={() => getAnswerToken("google")}
-          />
-        </div>
-      </div>
+      {isShowVYG && (
+        <>
+          <div className={s.loginByToken}>Sign in with:</div>
+          <div className={s.tokenImg}>
+            <div>
+              <img
+                src={vkIco}
+                alt={"Vk"}
+                onClick={() => getAnswerToken("vk")}
+              />
+            </div>
+            <div>
+              <img
+                src={yandexIco}
+                alt={"Yandex"}
+                onClick={() => getAnswerToken("yandex")}
+              />
+            </div>
+            <div>
+              <img
+                src={googleIco}
+                alt={"Google"}
+                onClick={() => getAnswerToken("google")}
+              />
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 }

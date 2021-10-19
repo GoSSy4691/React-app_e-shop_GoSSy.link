@@ -28,6 +28,7 @@ export default function Login() {
     if (cookies.get("Token") !== undefined) {
       dispatch({ type: "SUCCESS_MESSAGE", payload: "Token received" });
       dispatch({ type: "PROFILE_DIALOG_SHOW" });
+      dispatch({ type: "LOAD_PROFILE" });
     } else {
       dispatch({ type: "ERROR_MESSAGE", payload: "Didn't get token" });
       dispatch({ type: "PROFILE_DIALOG_STATE", payload: "byPhone" });
@@ -59,14 +60,12 @@ export default function Login() {
           <div className={s.loginDialog} ref={refLogin}>
             <div className={s.naming}>Вход в учетную запись</div>
             <div className={s.afterName}>
-              <div className={s.flexbox}>
-                <div className={s.afterToken}>
-                  Please verify your profile in new window
-                </div>
-                <button className={s.loginBtn} onClick={closeAndRefresh}>
-                  Ok
-                </button>
+              <div className={s.afterTokenDialog}>
+                Please verify your profile in new window
               </div>
+              <button className={s.logoutBtn} onClick={closeAndRefresh}>
+                Ok
+              </button>
             </div>
           </div>
         </div>
@@ -109,9 +108,9 @@ export default function Login() {
                   ? user.userData.birthday
                   : "Birthday not set"}
               </div>
-              <p className={s.logoutBtn} onClick={logoutBtn}>
+              <button className={s.logoutBtn} onClick={logoutBtn}>
                 Log out
-              </p>
+              </button>
             </div>
           </div>
         </div>

@@ -139,6 +139,12 @@
     text-align: center;
 }
 
+.logoutBtn {
+    align-self: flex-end;
+    margin: 23px 20px 0 0;
+    cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
+}
+
 .loginInput{
     width: 208px;
     height: 36px;

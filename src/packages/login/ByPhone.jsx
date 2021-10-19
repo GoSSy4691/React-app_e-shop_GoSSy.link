@@ -46,6 +46,7 @@ export default function ByPhone() {
       setCodeWrong(true);
       dispatch({ type: "ERROR_MESSAGE", payload: "Wrong code" });
     } else {
+      dispatch({ type: "SUCCESS_MESSAGE", payload: "Checking code" });
       API.authByCode(code)
         .then((res) => {
           console.log("Your token is " + res.data.token);

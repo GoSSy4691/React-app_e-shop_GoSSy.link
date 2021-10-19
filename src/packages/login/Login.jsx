@@ -91,7 +91,7 @@ export default function Login() {
                   ? user.userData.birthday
                   : "Birthday not set"}
               </div>
-              <p className={s.loginBtn} onClick={logoutBtn}>
+              <p className={s.logoutBtn} onClick={logoutBtn}>
                 Log out
               </p>
             </div>

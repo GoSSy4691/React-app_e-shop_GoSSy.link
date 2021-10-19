@@ -78,7 +78,6 @@ export default function Login() {
             <div className={s.naming}>Вход в учетную запись</div>
             <div className={s.afterName}>
               <div className={s.firstLine}>
-                {console.log(user.userData)}
                 <div className={s.token}>
                   Hello,
                   {user.userData.name.length > 0
@@ -93,7 +92,7 @@ export default function Login() {
               <div className={s.token}>
                 {user.userData.phone > 0
                   ? user.userData.phone
-                  : "Birth date not set"}
+                  : "Phone not set"}
               </div>
               <div className={s.token}>
                 {user.userData.birthday > 0

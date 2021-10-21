@@ -12,6 +12,7 @@ export default function MenuShops() {
   const userData = useSelector((state) => state.user.userData);
   const userView = useSelector((state) => state.menu.userView);
   const points = useSelector((state) => state.menu.points);
+  const shopId = useSelector((state) => state.menu.shopId);
   // const [isShowLoad, setShowLoad] = useState(true);
   const dispatch = useDispatch();
 
@@ -29,37 +30,41 @@ export default function MenuShops() {
   }
 
   async function openMenu(shopName, shopIndex) {
-    let categoryBuffer = [];
-    dispatch({ type: "CHANGE_DISPLAY_NOW", payload: "Loading" });
-    await API.getCategory(shopIndex)
-      .then((res) => {
-        categoryBuffer = res.data.data;
-      })
-      .catch((err) => {
-        console.error(err);
-        dispatch({ type: "ERROR_MESSAGE", payload: "Can't get category" });
-      });
-    let howManyLoad = Math.round((window.innerWidth / 250) * 3);
-    API.getMenu(1, howManyLoad, shopIndex)
-      .then((res) => {
-        dispatch({
-          type: "LOAD_MENU",
-          payload: {
-            shopName,
-            id: shopIndex,
-            menu: res.data.data,
-            categoryBuffer,
-            loadedPages: 1,
-            unloadedPages: res.data.meta.pages - 1,
-            howManyLoad,
-          },
+    if (shopId === shopIndex) {
+      dispatch({ type: "CHANGE_DISPLAY_NOW", payload: "Menu" });
+    } else {
+      let categoryBuffer = [];
+      dispatch({ type: "CHANGE_DISPLAY_NOW", payload: "Loading" });
+      await API.getCategory(shopIndex)
+        .then((res) => {
+          categoryBuffer = res.data.data;
+        })
+        .catch((err) => {
+          console.error(err);
+          dispatch({ type: "ERROR_MESSAGE", payload: "Can't get category" });
         });
-        dispatch({ type: "CHANGE_DISPLAY_NOW", payload: "Menu" });
-      })
-      .catch((err) => {
-        console.error(err);
-        dispatch({ type: "CHANGE_DISPLAY_NOW", payload: "Error" });
-      });
+      let howManyLoad = Math.round((window.innerWidth / 250) * 3);
+      API.getMenu(1, howManyLoad, shopIndex)
+        .then((res) => {
+          dispatch({
+            type: "LOAD_MENU",
+            payload: {
+              shopName,
+              id: shopIndex,
+              menu: res.data.data,
+              categoryBuffer,
+              loadedPages: 1,
+              unloadedPages: res.data.meta.pages - 1,
+              howManyLoad,
+            },
+          });
+          dispatch({ type: "CHANGE_DISPLAY_NOW", payload: "Menu" });
+        })
+        .catch((err) => {
+          console.error(err);
+          dispatch({ type: "CHANGE_DISPLAY_NOW", payload: "Error" });
+        });
+    }
   }
 
   return (

@@ -15,9 +15,6 @@ export default function MenuFoods() {
   const [search, setSearch] = useState("");
   const dispatch = useDispatch();
 
-  console.log(window.innerWidth);
-  console.log(Math.round((window.innerWidth / 250) * 4));
-
   //load more foods when scroll to the bottom
   if (menu.isReachedBottom && menu.unloadedPages > 0) {
     API.getMenu(menu.loadedPages + 1, menu.howManyLoad, menu.shopId)

@@ -17,7 +17,7 @@ export const userReducer = (state = user, action) => {
     case "LOAD_PROFILE":
       return { ...state, headerStatus: "Loading" };
     case "LOGIN_CONFIRM":
-      return { ...state, userData: action.payload, headerStatus: "Log out" };
+      return { ...state, userData: action.payload, headerStatus: "Profile" };
     case "LOGOUT_CONFIRM":
       cookies.remove("Token");
       return {

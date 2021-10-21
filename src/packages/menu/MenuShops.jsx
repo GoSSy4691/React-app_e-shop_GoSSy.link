@@ -39,7 +39,8 @@ export default function MenuShops() {
         console.error(err);
         dispatch({ type: "ERROR_MESSAGE", payload: "Can't get category" });
       });
-    API.getMenu(1, 10, shopIndex)
+    let howManyLoad = Math.round((window.innerWidth / 250) * 3);
+    API.getMenu(1, howManyLoad, shopIndex)
       .then((res) => {
         dispatch({
           type: "LOAD_MENU",
@@ -50,6 +51,7 @@ export default function MenuShops() {
             categoryBuffer,
             loadedPages: 1,
             unloadedPages: res.data.meta.pages - 1,
+            howManyLoad,
           },
         });
         dispatch({ type: "CHANGE_DISPLAY_NOW", payload: "Menu" });

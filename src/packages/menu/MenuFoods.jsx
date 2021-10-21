@@ -15,10 +15,12 @@ export default function MenuFoods() {
   const [search, setSearch] = useState("");
   const dispatch = useDispatch();
 
+  console.log(window.innerWidth);
+  console.log(Math.round((window.innerWidth / 250) * 4));
+
   //load more foods when scroll to the bottom
   if (menu.isReachedBottom && menu.unloadedPages > 0) {
-    console.log("Get more and more");
-    API.getMenu(menu.loadedPages + 1, 10, menu.shopId)
+    API.getMenu(menu.loadedPages + 1, menu.howManyLoad, menu.shopId)
       .then((res) => {
         dispatch({ type: "LOAD_MENU_MORE", payload: { menu: res.data.data } });
       })

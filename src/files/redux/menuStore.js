@@ -10,6 +10,7 @@ let menu = {
   category: [],
   categoryNow: 0,
   isReachedBottom: false,
+  howManyLoad: 0,
 };
 
 let categoryAll = [
@@ -45,6 +46,9 @@ export const menuReducer = (state = menu, action) => {
         categoryNow: action.payload.setCategory
           ? action.payload.setCategory
           : state.categoryNow,
+        howManyLoad: action.payload.howManyLoad
+          ? action.payload.howManyLoad
+          : state.howManyLoad,
       };
     case "LOAD_MENU_MORE":
       return {

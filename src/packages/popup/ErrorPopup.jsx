@@ -6,6 +6,11 @@ export default function ErrorPopup() {
   let error = useSelector((state) => state.error);
   const [isShow, setIsShow] = useState(false);
 
+  setTimeout(() => {
+    error.message = "";
+    setIsShow(false);
+  }, 4000);
+
   return (
     <>
       {error.message.length > 0 && !isShow ? setIsShow(true) : null}
@@ -20,10 +25,6 @@ export default function ErrorPopup() {
           >
             {error.message}
           </div>
-          {setTimeout(() => {
-            error.message = "";
-            setIsShow(false);
-          }, 4000)}
         </>
       ) : null}
     </>

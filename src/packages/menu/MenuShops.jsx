@@ -6,13 +6,14 @@ import GetImgFood from "./GetImgFood.jsx";
 import MenuFoods from "./MenuFoods.jsx";
 import AdminBar from "./AdminBar.jsx";
 
-import runForestRun from "../../files/img/runForestRun.png";
+import loadingGoose from "../../files/img/loadingGoose.png";
 
 export default function MenuShops() {
   const userData = useSelector((state) => state.user.userData);
   const userView = useSelector((state) => state.menu.userView);
   const points = useSelector((state) => state.menu.points);
   const shopId = useSelector((state) => state.menu.shopId);
+  const unloadedPages = useSelector((state) => state.menu.unloadedPages);
   // const [isShowLoad, setShowLoad] = useState(true);
   const dispatch = useDispatch();
 
@@ -109,12 +110,17 @@ export default function MenuShops() {
               console.error("User can't view it = " + userView);
           }
         })()}
-        <div className={s.footer}>
+        <div className={s.loadingDiv}>
           <img
-            alt={"footer"}
-            className={s.footerImg}
-            // style={isShowLoad ? null : { display: "none" }}
-            src={runForestRun}
+            alt={"loadingImg"}
+            className={s.loadingImg}
+            style={
+              userView === "Loading" ||
+              (userView === "Menu" && unloadedPages > 0)
+                ? null
+                : { display: "none" }
+            }
+            src={loadingGoose}
             key={Math.random()}
           />
         </div>

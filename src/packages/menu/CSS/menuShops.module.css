@@ -9,13 +9,13 @@
   padding-bottom: 200px;
 }
 
-.footer {
+.loadingDiv {
   position: absolute;
   bottom: 0;
   width: 100%;
 }
 
-.footerImg {
+.loadingImg {
   width: 224px;
   height: 100px;
   margin-top: 70px;

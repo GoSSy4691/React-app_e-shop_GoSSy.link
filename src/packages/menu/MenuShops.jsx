@@ -1,6 +1,5 @@
 import s from "./CSS/menuShops.module.css";
 import patternCSS from "../pattern.module.css";
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import API from "../../files/API/api.js";
 import GetImgFood from "./GetImgFood.jsx";
@@ -13,7 +12,6 @@ export default function MenuShops() {
   const userData = useSelector((state) => state.user.userData);
   const userView = useSelector((state) => state.menu.userView);
   const points = useSelector((state) => state.menu.points);
-  // const [loadedFood, setLoadedFood] = useState({ need: 0, have: 0 });
   // const [isShowLoad, setShowLoad] = useState(true);
   const dispatch = useDispatch();
 

@@ -15,8 +15,6 @@ export default function MenuFoods() {
   const [search, setSearch] = useState("");
   const dispatch = useDispatch();
 
-  console.log(menu);
-
   //load more foods when scroll to the bottom
   if (menu.isReachedBottom && menu.unloadedPages > 0) {
     console.log("Get more and more");
@@ -28,6 +26,34 @@ export default function MenuFoods() {
         console.error(err);
         dispatch({ type: "ERROR_MESSAGE", payload: "Can't load more foods" });
       });
+  }
+
+  function searchFood(input) {
+    setSearch(input);
+    if (menu.unloadedPages > 0) {
+      dispatch({ type: "SUCCESS_MESSAGE", payload: "Search in all menu" });
+      API.getMenu(1, 100, menu.shopId)
+        .then((res) => {
+          dispatch({
+            type: "LOAD_MENU",
+            payload: {
+              shopName: menu.shopName,
+              id: menu.shopId,
+              menu: res.data.data,
+              loadedPages: 1,
+              unloadedPages: res.data.meta.pages - 1,
+              setCategory: menu.categoryNow,
+            },
+          });
+        })
+        .catch((err) => {
+          console.error(err);
+          dispatch({
+            type: "ERROR_MESSAGE",
+            payload: "Can't load all menu for search",
+          });
+        });
+    }
   }
 
   const menuChosen = menu.menuOnDisplay.filter(
@@ -51,7 +77,7 @@ export default function MenuFoods() {
         className={s.searchBar}
         placeholder="Search"
         value={search}
-        onChange={(e) => setSearch(e.target.value.toLowerCase())}
+        onChange={(e) => searchFood(e.target.value.toLowerCase())}
       />
       <CategoryBar />
       {menuChosen.length === 0 ? (

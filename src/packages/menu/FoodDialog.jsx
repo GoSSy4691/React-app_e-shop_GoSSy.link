@@ -5,6 +5,8 @@ import useDetectClickOut from "../useDetectClickOut.js";
 import { ButtonAdd, ButtonDelete } from "./ButtonAddDelete.jsx";
 import GetImgFood from "./GetImgFood.jsx";
 
+import exitImg from "../../files/img/exit.svg";
+
 export default function FoodDialog(props) {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
@@ -22,29 +24,12 @@ export default function FoodDialog(props) {
   return (
     <div className={patternCSS.darkenBackground}>
       <div className={s.foodBox} ref={refFoodBox}>
-        <svg
-          width="30"
-          height="30"
-          viewBox="0 0 30 30"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
+        <img
+          alt={"exit"}
+          src={exitImg}
           className={s.exitButton}
           onClick={() => props.setChosenFood(false)}
-        >
-          <rect
-            x="0.5"
-            y="0.5"
-            width="29"
-            height="29"
-            rx="14.5"
-            fill="white"
-            stroke="black"
-          />
-          <path
-            d="M13.125 15.5L6 22.625L7.37501 24L14.5 16.875L21.625 24L23 22.625L15.875 15.5L23 8.375L21.625 7L14.5 14.125L7.37501 7L6 8.375L13.125 15.5Z"
-            fill="black"
-          />
-        </svg>
+        />
         <div className={s.imgBox}>
           <GetImgFood imgName={props.chosenFood.icon} style={patternCSS.img} />
           <span className={s.nameBox}>

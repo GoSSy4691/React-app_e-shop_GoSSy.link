@@ -32,10 +32,19 @@ export const menuReducer = (state = menu, action) => {
         shopName: action.payload.shopName,
         shopId: action.payload.id,
         menuAll: action.payload.menu,
-        menuOnDisplay: action.payload.menu,
-        category: categoryAll.concat(action.payload.categoryBuffer),
+        menuOnDisplay: action.payload.setCategory
+          ? action.payload.menu.filter(
+              (el) => el.id_category === action.payload.setCategory
+            )
+          : action.payload.menu,
+        category: action.payload.categoryBuffer
+          ? categoryAll.concat(action.payload.categoryBuffer)
+          : state.category,
         loadedPages: action.payload.loadedPages,
         unloadedPages: action.payload.unloadedPages,
+        categoryNow: action.payload.setCategory
+          ? action.payload.setCategory
+          : state.categoryNow,
       };
     case "LOAD_MENU_MORE":
       return {

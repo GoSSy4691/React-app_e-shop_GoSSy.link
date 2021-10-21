@@ -45,7 +45,7 @@ export default function Header() {
               activeClassName={s.textActive}
               to="/"
               onClick={() =>
-                dispatch({ type: "CHANGE_STATUS", payload: "Choose shop" })
+                dispatch({ type: "CHANGE_DISPLAY_NOW", payload: "Shops" })
               }
             >
               Menu

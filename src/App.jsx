@@ -1,5 +1,4 @@
 import "./App.css";
-import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
 import Cookies from "universal-cookie";
@@ -10,7 +9,6 @@ import OrderView from "./packages/menu/OrderView.jsx";
 import ErrorPopup from "./packages/popup/ErrorPopup.jsx";
 
 export default function App() {
-  const [scrollPosition, setScrollPosition] = useState(0);
   const dispatch = useDispatch();
   const cookies = new Cookies();
 
@@ -25,16 +23,22 @@ export default function App() {
     window.close();
   }
 
+  function scrollObserver(el) {
+    if (el.scrollTop > 220) {
+      dispatch({ type: "MOVE_CATEGORY_DIV", payload: true });
+    } else {
+      dispatch({ type: "MOVE_CATEGORY_DIV", payload: false });
+    }
+    if (el.scrollHeight - el.scrollTop - el.clientHeight <= 200) {
+      dispatch({ type: "NEAR_TO_BOTTOM", payload: true });
+    }
+  }
+
   return (
-    <div
-      className="app"
-      onScroll={(e) => setScrollPosition(e.target.scrollTop)}
-    >
+    <div className="app" onScroll={(e) => scrollObserver(e.target)}>
       <Header />
       <Switch>
-        <Route exact path="/">
-          <MenuShops scrollPosition={scrollPosition} />
-        </Route>
+        <Route exact path="/" component={MenuShops} />
         <Route exact path="/about" component={About} />
         <Route exact path="/order" component={OrderView} />
         <Redirect to="/" />

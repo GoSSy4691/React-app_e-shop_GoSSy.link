@@ -1,5 +1,6 @@
 import s from "./CSS/menuShops.module.css";
 import patternCSS from "../pattern.module.css";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import API from "../../files/API/api.js";
 import GetImgFood from "./GetImgFood.jsx";
@@ -8,9 +9,12 @@ import AdminBar from "./AdminBar.jsx";
 
 import runForestRun from "../../files/img/runForestRun.png";
 
-function MenuContainer(props) {
+export default function MenuShops() {
+  const userData = useSelector((state) => state.user.userData);
   const userView = useSelector((state) => state.menu.userView);
   const points = useSelector((state) => state.menu.points);
+  // const [loadedFood, setLoadedFood] = useState({ need: 0, have: 0 });
+  // const [isShowLoad, setShowLoad] = useState(true);
   const dispatch = useDispatch();
 
   function getPoints() {
@@ -41,7 +45,14 @@ function MenuContainer(props) {
       .then((res) => {
         dispatch({
           type: "LOAD_MENU",
-          payload: { shopName, menu: res.data.data, categoryBuffer },
+          payload: {
+            shopName,
+            id: shopIndex,
+            menu: res.data.data,
+            categoryBuffer,
+            loadedPages: 1,
+            unloadedPages: res.data.meta.pages - 1,
+          },
         });
         dispatch({ type: "CHANGE_DISPLAY_NOW", payload: "Menu" });
       })
@@ -51,50 +62,53 @@ function MenuContainer(props) {
       });
   }
 
-  switch (userView) {
-    case "Loading":
-      if (points.length === 0) getPoints();
-      return <div className={patternCSS.roomName}>Loading</div>;
-    case "Shops":
-      return (
-        <>
-          <div className={patternCSS.roomName}>Shops:</div>
-          <div className={patternCSS.grid} style={{ marginTop: "44px" }}>
-            {points.map((el) => (
-              <li
-                className={patternCSS.shopOrFood}
-                key={el.id}
-                onClick={() => openMenu(el.name, el.id)}
-              >
-                <GetImgFood imgName={el.icon} style={patternCSS.img} />
-                <div className={patternCSS.footerItem}>
-                  <span className={patternCSS.nameFood}>{el.name}</span>
-                </div>
-              </li>
-            ))}
-          </div>
-        </>
-      );
-    case "Menu":
-      return <MenuFoods scrollPosition={props.scrollPosition} />;
-    case "Error":
-      return <div className={patternCSS.roomName}>Error get points</div>;
-    default:
-      console.error("User can't view it = " + userView);
-  }
-}
-
-export default function MenuShops(props) {
-  const userData = useSelector((state) => state.user.userData);
   return (
     <>
       {userData !== undefined && userData.login === "admin" && <AdminBar />}
       <div className={s.showRoom}>
-        <MenuContainer scrollPosition={props.scrollPosition} />
+        {(() => {
+          switch (userView) {
+            case "Loading":
+              if (points.length === 0) getPoints();
+              return <div className={patternCSS.roomName}>Loading</div>;
+            case "Shops":
+              return (
+                <>
+                  <div className={patternCSS.roomName}>Shops:</div>
+                  <div
+                    className={patternCSS.grid}
+                    style={{ marginTop: "44px" }}
+                  >
+                    {points.map((el) => (
+                      <li
+                        className={patternCSS.shopOrFood}
+                        key={el.id}
+                        onClick={() => openMenu(el.name, el.id)}
+                      >
+                        <GetImgFood imgName={el.icon} style={patternCSS.img} />
+                        <div className={patternCSS.footerItem}>
+                          <span className={patternCSS.nameFood}>{el.name}</span>
+                        </div>
+                      </li>
+                    ))}
+                  </div>
+                </>
+              );
+            case "Menu":
+              return <MenuFoods />;
+            case "Error":
+              return (
+                <div className={patternCSS.roomName}>Error get points</div>
+              );
+            default:
+              console.error("User can't view it = " + userView);
+          }
+        })()}
         <div className={s.footer}>
           <img
             alt={"footer"}
             className={s.footerImg}
+            // style={isShowLoad ? null : { display: "none" }}
             src={runForestRun}
             key={Math.random()}
           />

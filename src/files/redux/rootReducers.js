@@ -6,6 +6,7 @@ import { cartReducer } from "./cartStore.js";
 import { menuReducer } from "./menuStore.js";
 import { userReducer } from "./userStore.js";
 import { errorReducer } from "./errorStore.js";
+import { scrollReducer } from "./scrollStore.js";
 
 const persistConfig = {
   key: "root",
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   menu: menuReducer,
   user: userReducer,
   error: errorReducer,
+  scroll: scrollReducer,
 });
 
 export default persistReducer(persistConfig, rootReducer);

@@ -1,10 +1,22 @@
-*{
+* {
   font-family: Roboto, sans-serif;
   font-weight: 500;
 }
 
+* button {
+  border: none;
+  background: none;
+}
+
+.app a {
+  /*cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), pointer;*/
+}
+
+.app button {
+  /*cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), pointer;*/
+}
+
 .app {
-  cursor: url("https://cdn.custom-cursor.com/db/4130/32/arrow2402.png"), auto;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -19,10 +31,6 @@
   position: fixed;
   overflow-y: scroll;
   overflow-x: hidden;
-}
-
-a {
-  cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), pointer;
 }
 
 *::-webkit-scrollbar {

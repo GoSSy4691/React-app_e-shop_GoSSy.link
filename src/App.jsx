@@ -2,13 +2,17 @@ import "./App.css";
 import { useDispatch } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
 import Cookies from "universal-cookie";
+import getCursor from "./files/getCursor.js";
 import Header from "./packages/header/Header.jsx";
 import About from "./packages/about/About.jsx";
 import MenuShops from "./packages/menu/MenuShops.jsx";
 import OrderView from "./packages/menu/OrderView.jsx";
 import ErrorPopup from "./packages/popup/ErrorPopup.jsx";
 
+import { useState } from "react";
+
 export default function App() {
+  const [cursor, setCursor] = useState({ isLoaded: false });
   const dispatch = useDispatch();
   const cookies = new Cookies();
 
@@ -34,8 +38,22 @@ export default function App() {
     }
   }
 
+  if (!cursor.isLoaded) {
+    getCursor().then((res) => {
+      setCursor({
+        isLoaded: true,
+        auto: res.cursorAuto,
+        pointer: res.cursorPointer,
+      });
+    });
+  }
+
   return (
-    <div className="app" onScroll={(e) => scrollObserver(e.target)}>
+    <div
+      className="app"
+      onScroll={(e) => scrollObserver(e.target)}
+      style={cursor.isLoaded ? { cursor: `url(${cursor.auto}), auto` } : null}
+    >
       <Header />
       <Switch>
         <Route exact path="/" component={MenuShops} />

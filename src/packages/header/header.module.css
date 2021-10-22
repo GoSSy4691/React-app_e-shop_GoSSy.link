@@ -47,10 +47,9 @@
   color: white;
   margin-right: 35px;
   font-size: 20px;
-  cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
 }
 
-.shopIcoDiv {
+.shopIcoButton {
   display: flex;
   width: 80px;
   height: 80px;
@@ -66,7 +65,6 @@
   width: 40px;
   height: 40px;
   margin: auto;
-  cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
 }
 
 .shopIcoCount {

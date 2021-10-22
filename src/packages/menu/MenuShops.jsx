@@ -86,7 +86,7 @@ export default function MenuShops() {
                     style={{ marginTop: "44px" }}
                   >
                     {points.map((el) => (
-                      <li
+                      <button
                         className={patternCSS.shopOrFood}
                         key={el.id}
                         onClick={() => openMenu(el.name, el.id)}
@@ -95,7 +95,7 @@ export default function MenuShops() {
                         <div className={patternCSS.footerItem}>
                           <span className={patternCSS.nameFood}>{el.name}</span>
                         </div>
-                      </li>
+                      </button>
                     ))}
                   </div>
                 </>

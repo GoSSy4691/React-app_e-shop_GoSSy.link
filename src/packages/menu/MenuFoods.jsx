@@ -62,14 +62,13 @@ export default function MenuFoods() {
   return (
     <>
       <div className={patternCSS.roomName}>
-        <img
-          alt={"Back"}
-          src={arrowBack}
-          className={s.arrowBack}
+        <button
           onClick={() =>
             dispatch({ type: "CHANGE_DISPLAY_NOW", payload: "Shops" })
           }
-        />
+        >
+          <img alt={"Back"} src={arrowBack} />
+        </button>
         <span>{menu.shopName}</span>
       </div>
       <input
@@ -84,7 +83,7 @@ export default function MenuFoods() {
       ) : (
         <div className={patternCSS.grid} style={{ marginTop: "25px" }}>
           {menuChosen.map((el) => (
-            <li
+            <button
               className={patternCSS.shopOrFood}
               key={el.id}
               onClick={() =>
@@ -104,7 +103,7 @@ export default function MenuFoods() {
                   <span>{el.cost}&nbsp;р.</span>
                 </div>
               </div>
-            </li>
+            </button>
           ))}
         </div>
       )}

@@ -64,7 +64,7 @@ export default function Header() {
         </div>
       </div>
       <div className={s.rightSide}>
-        <div
+        <button
           className={s.userIco}
           onClick={
             headerStatus === "Loading"
@@ -73,19 +73,19 @@ export default function Header() {
           }
         >
           {headerStatus}
-        </div>
+        </button>
       </div>
       <Route exact path="/">
-        <div
+        <button
           title={"Cart"}
-          className={s.shopIcoDiv}
+          className={s.shopIcoButton}
           onClick={() => setShowCart(true)}
         >
           <img alt={"CartImage"} src={shopCartIco} className={s.shopIco} />
           {store.itemsCount > 0 ? (
             <div className={s.shopIcoCount}>{store.itemsCount}</div>
           ) : null}
-        </div>
+        </button>
       </Route>
       {isDialogOpen ? <Login /> : null}
       {isShowCart ? (

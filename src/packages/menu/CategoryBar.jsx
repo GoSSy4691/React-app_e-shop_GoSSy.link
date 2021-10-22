@@ -40,24 +40,25 @@ export default function CategoryBar() {
   }
 
   return (
-    <div className={s.barWrapper}>
-      <div className={`${s.box} ${isCategoryMoved && s.boxFly}`}>
-        {menu.category.map((p) => (
-          <li
-            className={s.categoryBox}
-            style={
-              p.id === menu.categoryNow
-                ? { borderBottom: "solid 2px#414EBB" }
-                : null
-            }
-            key={p.id}
-            title={p.name}
+    <div className={`${s.barWrapper} ${isCategoryMoved && s.boxFly}`}>
+      {menu.category.map((p) => (
+        <div
+          className={s.categoryBox}
+          style={
+            p.id === menu.categoryNow
+              ? { borderBottom: "solid 2px #414EBB" }
+              : { borderBottom: "solid 2px #c4c4c4" }
+          }
+          key={p.id}
+        >
+          <button
+            className={s.categoryName}
             onClick={() => changeCategory(p.id)}
           >
-            <span className={s.categoryType}>{p.name}</span>
-          </li>
-        ))}
-      </div>
+            {p.name}
+          </button>
+        </div>
+      ))}
     </div>
   );
 }

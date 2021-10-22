@@ -14,7 +14,7 @@ export default function LogoImg() {
   };
 
   return (
-    <div className={s.imgHeaderBack}>
+    <button className={s.imgHeaderBack}>
       <img
         src={rotateIt}
         className={s.mainGoose_view}
@@ -25,6 +25,6 @@ export default function LogoImg() {
       {buffer.map((p) => (
         <img src={p.src} className={p.className} alt={p.alt} key={p.key} />
       ))}
-    </div>
+    </button>
   );
 }

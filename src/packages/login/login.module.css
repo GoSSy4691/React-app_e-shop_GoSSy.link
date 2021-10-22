@@ -1,11 +1,3 @@
-* input {
-    cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
-}
-
-* button {
-    cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
-}
-
 .loginDialog {
     position: absolute;
     width: 400px;
@@ -152,7 +144,6 @@
     font-size: 16px;
     align-self: flex-end;
     margin: 23px 20px 0 0;
-    cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
 }
 
 .loginInput{
@@ -188,7 +179,6 @@
     align-self: center;
     /*bottom:42px;*/
     right: 10px;
-    cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
 }
 
 .loginByPassLink {
@@ -200,7 +190,6 @@
     background: none;
     padding: 0;
     color: inherit;
-    cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
 }
 
 .loginByPassLink:hover {
@@ -231,7 +220,6 @@
     width: 50px;
     height: 50px;
     margin-right: inherit;
-    cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
 }
 
 .penEdit {
@@ -239,5 +227,4 @@
     height: fit-content;
     margin-right: 5px;
     align-self: center;
-    cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
 }

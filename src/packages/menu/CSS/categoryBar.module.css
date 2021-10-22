@@ -1,38 +1,37 @@
 .barWrapper {
   margin-top: 30px;
-  height: 27px;
-  width: 100%;
-}
-
-.box {
+  height: 25px;
+  width: fit-content;
   display: inline-flex;
-  height: 27px;
-  gap: 21px;
-  border-bottom: solid 2px #c4c4c4;
-  width: inherit;
   z-index: 1;
+  justify-content: flex-start;
+  gap: 0;
 }
 
 .boxFly {
+  margin-top: 0;
+  width: calc(100% - 70px);
   position: fixed;
   top: 0;
   left: 0;
   padding-left: 60px;
   padding-top: 10px;
-  width: calc(100% - 70px);
   background: #282c34;
+  text-overflow: clip;
+  overflow: hidden;
 }
 
 .categoryBox {
   display: flex;
-  height: inherit;
   white-space: nowrap;
-  background: none;
-  cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), auto;
-}
-
-.categoryType {
+  padding-left: 2px;
+  padding-right: 19px;
   font-size: 21px;
   color: #adb4b0;
-  margin-bottom: -2px;
+  text-align: left;
+}
+
+.categoryName {
+  font-size: 21px;
+  color: #adb4b0;
 }

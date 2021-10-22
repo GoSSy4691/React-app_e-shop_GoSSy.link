@@ -24,12 +24,12 @@ export default function FoodDialog(props) {
   return (
     <div className={patternCSS.darkenBackground}>
       <div className={s.foodBox} ref={refFoodBox}>
-        <img
-          alt={"exit"}
-          src={exitImg}
+        <button
           className={s.exitButton}
           onClick={() => props.setChosenFood(false)}
-        />
+        >
+          <img alt={"exit"} src={exitImg} />
+        </button>
         <div className={s.imgBox}>
           <GetImgFood imgName={props.chosenFood.icon} style={patternCSS.img} />
           <span className={s.nameBox}>

@@ -17,7 +17,12 @@ export default class API {
 
   static getMenu(page, per_page, id_point) {
     return axios.get("https://zloi.space/restaurant/api/menu", {
-      params: { page: page, "per-page": per_page, id_point: id_point },
+      params: {
+        page: page,
+        "per-page": per_page,
+        expand: "category",
+        "category.id_point": id_point,
+      },
     });
   }
 

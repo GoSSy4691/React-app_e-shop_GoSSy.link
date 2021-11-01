@@ -118,22 +118,7 @@
     border-radius: 10px;
     border: none;
     font-size: 16px;
-    font-family: Roboto, sans-serif;
-}
-
-.loginBtn text {
-    position: static;
-    width: 74px;
-    height: 30px;
-    left: 0;
-    top: 0;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 19px;
-    display: flex;
-    align-items: center;
-    text-align: center;
+    color: #E5E5E5;
 }
 
 .logoutBtn {
@@ -216,7 +201,7 @@
     margin-right: 10px;
 }
 
-.tokenImg div {
+.tokenImg button {
     width: 50px;
     height: 50px;
     margin-right: inherit;

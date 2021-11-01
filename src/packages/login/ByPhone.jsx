@@ -111,27 +111,27 @@ export default function ByPhone() {
         <>
           <div className={s.loginByToken}>Sign in with:</div>
           <div className={s.tokenImg}>
-            <div>
+            <button>
               <img
                 src={vkIco}
                 alt={"Vk"}
                 onClick={() => getAnswerToken("vk")}
               />
-            </div>
-            <div>
+            </button>
+            <button>
               <img
                 src={yandexIco}
                 alt={"Yandex"}
                 onClick={() => getAnswerToken("yandex")}
               />
-            </div>
-            <div>
+            </button>
+            <button>
               <img
                 src={googleIco}
                 alt={"Google"}
                 onClick={() => getAnswerToken("google")}
               />
-            </div>
+            </button>
           </div>
         </>
       )}

@@ -1,30 +1,31 @@
 import axios from "axios";
 
-//TO DO Promise.all()
-async function getBothCursor() {
-  let cursorAuto = null;
-  axios
-    .get("https://cdn.custom-cursor.com/db/4130/32/arrow2402.png", {
-      responseType: "arraybuffer",
-    })
-    .then((res) => {
-      let blob = new Blob([res.data], {
-        type: res.headers["content-type"],
-      });
-      cursorAuto = URL.createObjectURL(blob);
-    });
-  let cursorPointer = null;
-  await axios
-    .get("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png", {
-      responseType: "arraybuffer",
-    })
-    .then((res) => {
-      let blob = new Blob([res.data], {
-        type: res.headers["content-type"],
-      });
-      cursorPointer = URL.createObjectURL(blob);
-    });
-  return { cursorAuto, cursorPointer };
-}
+const getCursorAuto = axios.get(
+  "https://cdn.custom-cursor.com/db/4130/32/arrow2402.png",
+  {
+    responseType: "arraybuffer",
+  }
+);
 
-export default getBothCursor;
+const getCursorPointer = axios.get(
+  "https://cdn.custom-cursor.com/db/4129/32/arrow2402.png",
+  {
+    responseType: "arraybuffer",
+  }
+);
+
+export default function getBothCursor() {
+  return Promise.all([getCursorAuto, getCursorPointer])
+    .then((res) => {
+      // console.log(res);
+      let blobAuto = new Blob([res[0].data], {
+        type: res[0].headers["content-type"],
+      });
+      let cursorAuto = URL.createObjectURL(blobAuto);
+      let blobPointer = new Blob([res[1].data], {
+        type: res[1].headers["content-type"],
+      });
+      let cursorPointer = URL.createObjectURL(blobPointer);
+      return { cursorAuto, cursorPointer };
+    })
+}

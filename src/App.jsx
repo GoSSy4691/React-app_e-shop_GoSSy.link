@@ -2,6 +2,7 @@ import "./App.css";
 import { useDispatch } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
 import Cookies from "universal-cookie";
+import styled from "styled-components";
 import getCursor from "./files/getCursor.js";
 import Header from "./packages/header/Header.jsx";
 import About from "./packages/about/About.jsx";
@@ -10,6 +11,21 @@ import OrderView from "./packages/menu/OrderView.jsx";
 import ErrorPopup from "./packages/popup/ErrorPopup.jsx";
 
 import { useState } from "react";
+
+const CustomCursorDiv = styled.div`
+  cursor: url(${(props) => (props.cursor.isLoaded ? props.cursor.auto : null)}),
+    auto;
+  * button {
+    cursor: url(${(props) =>
+        props.cursor.isLoaded ? props.cursor.pointer : null}),
+      auto;
+  }
+  * a {
+    cursor: url(${(props) =>
+        props.cursor.isLoaded ? props.cursor.pointer : null}),
+      auto;
+  }
+`;
 
 export default function App() {
   const [cursor, setCursor] = useState({ isLoaded: false });
@@ -39,20 +55,27 @@ export default function App() {
   }
 
   if (!cursor.isLoaded) {
-    getCursor().then((res) => {
-      setCursor({
-        isLoaded: true,
-        auto: res.cursorAuto,
-        pointer: res.cursorPointer,
+    getCursor()
+      .then((res) => {
+        setCursor({
+          isLoaded: true,
+          auto: res.cursorAuto,
+          pointer: res.cursorPointer,
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+        setCursor({
+          isLoaded: "Error",
+        });
       });
-    });
   }
 
   return (
-    <div
+    <CustomCursorDiv
       className="app"
       onScroll={(e) => scrollObserver(e.target)}
-      style={cursor.isLoaded ? { cursor: `url(${cursor.auto}), auto` } : null}
+      cursor={cursor}
     >
       <Header />
       <Switch>
@@ -62,6 +85,6 @@ export default function App() {
         <Redirect to="/" />
       </Switch>
       <ErrorPopup />
-    </div>
+    </CustomCursorDiv>
   );
 }

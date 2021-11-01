@@ -8,14 +8,6 @@
   background: none;
 }
 
-.app a {
-  /*cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), pointer;*/
-}
-
-.app button {
-  /*cursor: url("https://cdn.custom-cursor.com/db/4129/32/arrow2402.png"), pointer;*/
-}
-
 .app {
   -webkit-touch-callout: none;
   -webkit-user-select: none;

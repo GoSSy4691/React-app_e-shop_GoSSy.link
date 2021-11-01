@@ -76,6 +76,7 @@ export default function ByPass() {
             e.nativeEvent.key === "Enter" ? getAnswerPass() : null
           }
         />
+        <button>
         <img
           alt={"showHideEye"}
           src={isPassShow ? eye_show : eye_hide}
@@ -83,15 +84,16 @@ export default function ByPass() {
           onMouseDown={() => setPassShow(true)}
           onMouseUp={() => setPassShow(false)}
         />
+        </button>
       </div>
-      <div
+      <button
         className={s.loginByPassLink}
         onClick={() =>
           dispatch({ type: "PROFILE_DIALOG_STATE", payload: "byPhone" })
         }
       >
         Sign in by phone
-      </div>
+      </button>
     </div>
   );
 }

@@ -151,19 +151,21 @@
 .passwordInput {
     width: 208px;
     height: 36px;
-
     border-radius: 10px;
     padding: 1px 20px;
     border: none;
     outline: none;
 }
 
+.passwordLine button{
+    width: 40px;
+    height: 40px;
+    position:absolute;
+    right: 10px;
+}
+
 .eyeInput {
     width: 40px;
-    position:absolute;
-    align-self: center;
-    /*bottom:42px;*/
-    right: 10px;
 }
 
 .loginByPassLink {

@@ -76,7 +76,7 @@ export default function MenuShops() {
           switch (userView) {
             case "Loading":
               if (points.length === 0) getPoints();
-              return <div className={patternCSS.roomName}>Loading</div>;
+              return <div className={patternCSS.roomName}/>;
             case "Shops":
               return (
                 <>
@@ -110,16 +110,15 @@ export default function MenuShops() {
               console.error("User can't view it = " + userView);
           }
         })()}
-        <div className={s.loadingDiv}>
+        <div className={s.loadingDiv} style={userView === "Loading" ||
+        (userView === "Menu" && unloadedPages > 0)
+          ? null
+          : { display: "none" }
+        }>
+          <h3 className={s.nameOnTop}>Loading</h3>
           <img
             alt={"loadingImg"}
             className={s.loadingImg}
-            style={
-              userView === "Loading" ||
-              (userView === "Menu" && unloadedPages > 0)
-                ? null
-                : { display: "none" }
-            }
             src={loadingGoose}
             key={Math.random()}
           />

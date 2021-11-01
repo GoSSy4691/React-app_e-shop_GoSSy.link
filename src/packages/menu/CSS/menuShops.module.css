@@ -2,26 +2,29 @@
   color: #adb4b0;
   margin-left: 60px;
   margin-right: 60px;
-  /*margin-bottom: 200px;*/
   display: flex;
   flex-direction: column;
   position: relative;
-  padding-bottom: 200px;
+  padding-bottom: 60px;
 }
 
 .loadingDiv {
   position: absolute;
   bottom: 0;
-  width: 100%;
+  width: fit-content;
+  animation: run 10s infinite;
+}
+
+.nameOnTop {
+  width: fit-content;
+  margin: 0;
+  padding-left: 70px;
 }
 
 .loadingImg {
   width: 224px;
   height: 100px;
-  margin-top: 70px;
-  bottom: 10px;
   position: absolute;
-  animation: run 10s infinite;
 }
 
 @keyframes run {

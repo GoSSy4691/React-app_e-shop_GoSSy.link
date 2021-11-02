@@ -60,4 +60,12 @@ export default class API {
       headers: { Authorization: `Bearer ${token}` },
     });
   }
+
+  static getUsers(token) {
+    return axios.get("https://zloi.space/restaurant/api/users", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  }
+
+
 }

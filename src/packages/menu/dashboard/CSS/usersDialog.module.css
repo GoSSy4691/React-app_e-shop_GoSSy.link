@@ -1,0 +1,43 @@
+.showUsers {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 500px;
+    background: #1b1d23;
+    /*overflow-y: scroll;*/
+    text-align: center;
+    color: #adb4b0;
+}
+
+.usersTitle {
+    font-family: "Comic Sans MS", sans-serif;
+    font-size: 20px;
+    border-bottom: solid black;
+}
+
+.showUsers li {
+    list-style-type: none;
+}
+
+.line {
+    display: inline-flex;
+    width: 100%;
+}
+
+.line p{
+    margin: 10px 0;
+}
+
+.number {
+    width: 30px;
+}
+
+.name {
+    width: 130px;
+}
+
+.phone {
+    width: 180px;
+}

@@ -1,10 +1,7 @@
 .box {
     position: fixed;
     height: 100%;
-    width: 50px;
-    align-items: center;
-    /*min-height: 100%;*/
-    /*background-color: #282c34;*/
+    align-items: flex-start;
     background-color: #282c34;
     border-right: solid 5px #1b1d23;
     z-index: 2;
@@ -13,13 +10,22 @@
     overflow: hidden;
     gap: 15px;
     padding-top: 15px;
+    padding-left: 15px;
     transition: all .5s ease-in-out;
 }
 
-.categoryButton {
-    /*transform: rotate(90deg);*/
+.barOpenBtn {
+    transition: all .5s ease-in-out;
 }
 
-.categoryButton[is_category_show="true"] {
-    transform: rotate(0deg);
+.box button {
+    display: inline-flex;
+}
+
+.box p {
+    padding-left: 7px;
+    color: #E5E5E5;
+    font-size: 14px;
+    margin: 0;
+    align-self: center;
 }

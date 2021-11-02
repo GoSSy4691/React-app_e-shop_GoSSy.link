@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import API from "../../files/API/api.js";
 import GetImgFood from "./GetImgFood.jsx";
 import MenuFoods from "./MenuFoods.jsx";
-import AdminBar from "./AdminBar.jsx";
+import AdminBar from "./dashboard/AdminBar.jsx";
 
 import loadingGoose from "../../files/img/loadingGoose.png";
 

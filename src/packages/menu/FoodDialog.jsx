@@ -1,7 +1,7 @@
 import patternCSS from "../pattern.module.css";
 import s from "./CSS/foodDialog.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import useDetectClickOut from "../useDetectClickOut.js";
+import useDetectClickOut from "../../files/useDetectClickOut.js";
 import { ButtonAdd, ButtonDelete } from "./ButtonAddDelete.jsx";
 import GetImgFood from "./GetImgFood.jsx";
 

@@ -2,7 +2,7 @@ import s from "./login.module.css";
 import patternCSS from "../pattern.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import Cookies from "universal-cookie";
-import useDetectClickOut from "../useDetectClickOut.js";
+import useDetectClickOut from "../../files/useDetectClickOut.js";
 import ByPass from "./ByPass.jsx";
 import ByPhone from "./ByPhone.jsx";
 

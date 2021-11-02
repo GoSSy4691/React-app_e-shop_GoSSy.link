@@ -2,7 +2,7 @@ import s from "./CSS/cart.module.css";
 import patternCSS from "../pattern.module.css";
 import { withRouter } from "react-router-dom";
 import { useSelector } from "react-redux";
-import useDetectClickOut from "../useDetectClickOut.js";
+import useDetectClickOut from "../../files/useDetectClickOut.js";
 import { ButtonAdd, ButtonDelete } from "./ButtonAddDelete.jsx";
 
 function Cart(props) {

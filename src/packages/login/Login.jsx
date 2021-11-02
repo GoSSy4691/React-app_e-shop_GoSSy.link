@@ -1,5 +1,5 @@
 import s from "./login.module.css";
-import patternCSS from "../pattern.module.css";
+import patternCSS from "../patternMenu.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import Cookies from "universal-cookie";
 import useDetectClickOut from "../../files/useDetectClickOut.js";

@@ -1,19 +1,17 @@
 import s from "./CSS/patternDashboard.module.css";
 import patternCSS from "../../patternMenu.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import Cookies from "universal-cookie";
 import useDetectClickOut from "../../../files/useDetectClickOut.js";
 import API from "../../../files/API/api.js";
 
-export default function UsersDialog(props) {
-  const refUsers = useDetectClickOut(props.isUsersShow, props.setUsersShow);
-  const usersData = useSelector((state) => state.admin.users);
+export default function PointsDialog(props) {
+  const refUsers = useDetectClickOut(props.isPointsShow, props.setPointsShow);
+  const pointsData = useSelector((state) => state.admin.points);
   const dispatch = useDispatch();
-  const cookies = new Cookies();
 
   function loadingUsers() {
-    API.getUsers(cookies.get("Token"))
-      .then((res) => dispatch({ type: "LOAD_ALL_USERS", payload: res.data }))
+    API.getPoints()
+      .then((res) => dispatch({ type: "LOAD_ALL_POINTS", payload: res.data.data }))
       .catch((error) => console.error(error));
     return <p>Loading...</p>;
   }
@@ -27,25 +25,23 @@ export default function UsersDialog(props) {
         >
           ✖
         </button>
-        <div className={s.usersTitle}>Users:</div>
-        {usersData.length === 0 ? (
+        <div className={s.usersTitle}>Points:</div>
+        {pointsData.length === 0 ? (
           loadingUsers()
         ) : (
           <>
             <li className={s.line} key={"title"}>
               <p className={s.number}>№</p>
               <p className={s.name}>Name</p>
-              <p className={s.name}>Last name</p>
-              <p className={s.phone}>Phone</p>
-              <p className={s.number}>ID</p>
+              <p className={s.address}>Address</p>
+              <p className={s.delivery}>Delivery</p>
             </li>
-            {usersData.map((el, index) => (
+            {pointsData.map((el, index) => (
               <li className={s.line} key={index}>
                 <p className={s.number}>{index + 1}</p>
-                <p className={s.name}>{el.name.length > 0 ? el.name : "None"}</p>
-                <p className={s.name}>{el.lastname.length > 0 ? el.lastname : "None"}</p>
-                <p className={s.phone}>{el.phone.length > 0 ? el.phone : "None"}</p>
-                <p className={s.number}>{el.id}</p>
+                <p className={s.name}>{el.name}</p>
+                <p className={s.address}>{el.address}</p>
+                <p className={s.delivery}>{el.is_delivering ? el.delivery_cost : "None"}</p>
               </li>
             ))}
           </>

@@ -1,5 +1,5 @@
 import s from "./CSS/cart.module.css";
-import patternCSS from "../pattern.module.css";
+import patternCSS from "../patternMenu.module.css";
 import { withRouter } from "react-router-dom";
 import { useSelector } from "react-redux";
 import useDetectClickOut from "../../files/useDetectClickOut.js";

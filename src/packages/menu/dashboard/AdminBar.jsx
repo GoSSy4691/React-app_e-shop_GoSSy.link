@@ -1,6 +1,7 @@
 import s from "./CSS/adminBar.module.css";
 import { useState } from "react";
 import UsersDialog from "./UsersDialog.jsx";
+import PointsDialog from "./PointsDialog.jsx";
 
 import menuOpenSVG from "../../../files/img/adminBar/00_menuOpen.svg";
 import userSVG from "../../../files/img/adminBar/01_user.svg";
@@ -16,12 +17,12 @@ import warehouseSVG from "../../../files/img/adminBar/09_warehouse.svg";
 export default function AdminBar() {
   const [isBarOpen, setBarOpen] = useState(false);
   const [isUsersShow, setUsersShow] = useState(false);
+  const [isPointsShow, setPointsShow] = useState(false);
 
   return (
     <>
-      {isUsersShow && (
-        <UsersDialog isUsersShow={isUsersShow} setUsersShow={setUsersShow} />
-      )}
+      {isUsersShow && <UsersDialog isUsersShow={isUsersShow} setUsersShow={setUsersShow} />}
+      {isPointsShow && <PointsDialog isPointsShow={isPointsShow} setPointsShow={setPointsShow} />}
       <div
         className={s.box}
         style={isBarOpen ? { width: "108px" } : { width: "40px" }}
@@ -38,7 +39,7 @@ export default function AdminBar() {
           <img alt={"user"} src={userSVG} />
           {isBarOpen && <p>Users</p>}
         </button>
-        <button>
+        <button onClick={() => setPointsShow(!isPointsShow)}>
           <img alt={"shop"} src={shopSVG} />
           {isBarOpen && <p>Points</p>}
         </button>

@@ -1,5 +1,5 @@
 import s from "./CSS/menuFoods.module.css";
-import patternCSS from "../pattern.module.css";
+import patternCSS from "../patternMenu.module.css";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import API from "../../files/API/api.js";

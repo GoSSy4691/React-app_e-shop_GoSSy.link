@@ -83,9 +83,10 @@ export default function Login() {
                     ? user.userData.name
                     : user.userData.login !== null
                     ? user.userData.login
-                    : "Noname"}
+                    : user.userData.phone}
                   !
                 </div>
+                <button>
                 <img
                   alt={"Edit"}
                   src={penEdit}
@@ -97,6 +98,7 @@ export default function Login() {
                     })
                   }
                 />
+                </button>
               </div>
               <div className={s.token}>
                 {user.userData.phone > 0

@@ -32,7 +32,7 @@ export default function UsersDialog(props) {
           loadingUsers()
         ) : (
           <>
-            <li className={s.line}>
+            <li className={s.line} key={"title"}>
               <p className={s.number}>№</p>
               <p className={s.name}>Name</p>
               <p className={s.name}>Last name</p>
@@ -40,7 +40,7 @@ export default function UsersDialog(props) {
               <p className={s.number}>ID</p>
             </li>
             {usersData.map((el, index) => (
-              <li className={s.line}>
+              <li className={s.line} key={index}>
                 <p className={s.number}>{index + 1}</p>
                 <p className={s.name}>{el.name.length > 0 ? el.name : "None"}</p>
                 <p className={s.name}>{el.lastname.length > 0 ? el.lastname : "None"}</p>

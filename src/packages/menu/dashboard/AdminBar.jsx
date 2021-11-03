@@ -5,11 +5,11 @@ import PointsDialog from "./PointsDialog.jsx";
 
 import menuOpenSVG from "../../../files/img/adminBar/00_menuOpen.svg";
 import userSVG from "../../../files/img/adminBar/01_user.svg";
-import menuSVG from "../../../files/img/adminBar/03_menu.svg";
-import cartSVG from "../../../files/img/adminBar/06_cart.svg";
-import statsSVG from "../../../files/img/adminBar/07_stats.svg";
-import dialogSVG from "../../../files/img/adminBar/08_dialog.svg";
-import warehouseSVG from "../../../files/img/adminBar/09_warehouse.svg";
+import menuSVG from "../../../files/img/adminBar/02_menu.svg";
+import cartSVG from "../../../files/img/adminBar/03_cart.svg";
+import statsSVG from "../../../files/img/adminBar/04_stats.svg";
+import dialogSVG from "../../../files/img/adminBar/05_dialog.svg";
+import warehouseSVG from "../../../files/img/adminBar/06_warehouse.svg";
 
 export default function AdminBar() {
   const [isBarOpen, setBarOpen] = useState(false);

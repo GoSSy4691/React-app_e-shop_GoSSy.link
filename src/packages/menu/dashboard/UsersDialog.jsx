@@ -23,7 +23,7 @@ export default function UsersDialog(props) {
       <div className={s.showUsers} ref={refUsers}>
         <button
           className={patternCSS.closeButton}
-          onClick={() => props.setShowCart(false)}
+          onClick={() => props.setUsersShow(false)}
         >
           ✖
         </button>

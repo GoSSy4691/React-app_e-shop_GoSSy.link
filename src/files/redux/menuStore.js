@@ -13,7 +13,7 @@ let menu = {
   howManyLoad: 0,
 };
 
-let categoryAll = [
+const categoryAll = [
   {
     id: 0,
     name: "Все",

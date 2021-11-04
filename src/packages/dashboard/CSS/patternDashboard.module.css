@@ -24,11 +24,13 @@
 .line {
     display: inline-flex;
     width: 100%;
+    color: #adb4b0;
+    font-size: 16px;
+    padding: 0;
 }
 
 .hover:hover{
     background: #777777;
-    border-radius: 10px;
 }
 
 .line p{
@@ -36,7 +38,7 @@
 }
 
 .scrollAbleDashboard {
-    width: 510px;
+    width: 500px;
     height: 410px;
     padding-bottom: 20px;
     overflow-y: auto;

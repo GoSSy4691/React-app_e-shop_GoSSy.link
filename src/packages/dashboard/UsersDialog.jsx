@@ -1,9 +1,9 @@
 import patternDashboard from "./CSS/patternDashboard.module.css";
-import patternMenu from "../../patternMenu.module.css";
+import patternMenu from "../patternMenu.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import Cookies from "universal-cookie";
-import useDetectClickOut from "../../../files/useDetectClickOut.js";
-import API from "../../../files/API/api.js";
+import useDetectClickOut from "../../files/useDetectClickOut.js";
+import API from "../../files/API/api.js";
 
 export default function UsersDialog() {
   const usersData = useSelector((state) => state.admin.users);
@@ -22,13 +22,13 @@ export default function UsersDialog() {
 
   return (
     <div className={patternMenu.darkenBackground}>
-      <button
-        className={patternMenu.closeButton}
-        onClick={() => dispatch({ type: "SET_BAR_SHOW" })}
-      >
-        ✖
-      </button>
       <div className={patternDashboard.showBox} ref={refUsers}>
+        <button
+          className={patternMenu.closeButton}
+          onClick={() => dispatch({ type: "SET_BAR_SHOW" })}
+        >
+          ✖
+        </button>
         <div className={patternDashboard.usersTitle}>Users:</div>
         {usersData.length === 0 ? (
           loadingUsers()
@@ -36,7 +36,7 @@ export default function UsersDialog() {
           <>
             <li className={patternDashboard.line} key={"title"}>
               <p style={{ width: 30 }}>№</p>
-              <p style={{ width: 130 }}>Name</p>
+              <p style={{ width: 120 }}>Name</p>
               <p style={{ width: 130 }}>Last name</p>
               <p style={{ width: 180 }}>Phone</p>
               <p style={{ width: 30 }}>ID</p>
@@ -48,7 +48,7 @@ export default function UsersDialog() {
                   <p style={{ width: 130 }}>
                     {el.name.length > 0 ? el.name : "None"}
                   </p>
-                  <p style={{ width: 130 }}>
+                  <p style={{ width: 120 }}>
                     {el.lastname.length > 0 ? el.lastname : "None"}
                   </p>
                   <p style={{ width: 180 }}>

@@ -3,12 +3,12 @@ import patternCSS from "../patternMenu.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import API from "../../files/API/api.js";
 import GetImgFood from "./GetImgFood.jsx";
-import MenuFoods from "./MenuFoods.jsx";
+import FoodsMenu from "./FoodsMenu.jsx";
 import AdminBar from "../dashboard/AdminBar.jsx";
 
 import loadingGoose from "../../files/img/loadingGoose.png";
 
-export default function MenuShops() {
+export default function ShopsMenu() {
   const userData = useSelector((state) => state.user.userData);
   const userView = useSelector((state) => state.menu.userView);
   const points = useSelector((state) => state.menu.points);
@@ -101,7 +101,7 @@ export default function MenuShops() {
                 </>
               );
             case "Menu":
-              return <MenuFoods />;
+              return <FoodsMenu />;
             case "Error":
               return (
                 <div className={patternCSS.roomName}>Error get points</div>

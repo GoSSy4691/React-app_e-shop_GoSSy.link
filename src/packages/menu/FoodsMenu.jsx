@@ -9,7 +9,7 @@ import FoodDialog from "./FoodDialog.jsx";
 
 import arrowBack from "../../files/img/arrowBack.svg";
 
-export default function MenuFoods() {
+export default function FoodsMenu() {
   const menu = useSelector((state) => state.menu);
   const [chosenFood, setChosenFood] = useState({ isShow: false }); //need object?
   const [search, setSearch] = useState("");

@@ -6,7 +6,7 @@ import styled from "styled-components";
 import getCursor from "./files/getCursor.js";
 import Header from "./packages/header/Header.jsx";
 import About from "./packages/about/About.jsx";
-import MenuShops from "./packages/menu/MenuShops.jsx";
+import ShopsMenu from "./packages/menu/ShopsMenu.jsx";
 import OrderView from "./packages/menu/OrderView.jsx";
 import ErrorPopup from "./packages/popup/ErrorPopup.jsx";
 
@@ -79,7 +79,7 @@ export default function App() {
     >
       <Header />
       <Switch>
-        <Route exact path="/" component={MenuShops} />
+        <Route exact path="/" component={ShopsMenu} />
         <Route exact path="/about" component={About} />
         <Route exact path="/order" component={OrderView} />
         <Redirect to="/" />

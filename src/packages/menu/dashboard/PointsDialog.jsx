@@ -1,49 +1,66 @@
-import s from "./CSS/patternDashboard.module.css";
-import patternCSS from "../../patternMenu.module.css";
+import patternDashboard from "./CSS/patternDashboard.module.css";
+import patternMenu from "../../patternMenu.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import useDetectClickOut from "../../../files/useDetectClickOut.js";
 import API from "../../../files/API/api.js";
 
-export default function PointsDialog(props) {
-  const refUsers = useDetectClickOut(props.isPointsShow, props.setPointsShow);
+export default function PointsDialog() {
   const pointsData = useSelector((state) => state.admin.points);
   const dispatch = useDispatch();
+  const refUsers = useDetectClickOut(true, () =>
+    dispatch({ type: "SET_BAR_SHOW" })
+  );
 
-  function loadingUsers() {
+  function loadingPoints() {
     API.getPoints()
-      .then((res) => dispatch({ type: "LOAD_ALL_POINTS", payload: res.data.data }))
+      .then((res) =>
+        dispatch({ type: "LOAD_ALL_POINTS", payload: res.data.data })
+      )
       .catch((error) => console.error(error));
     return <p>Loading...</p>;
   }
 
   return (
-    <div className={patternCSS.darkenBackground}>
-      <div className={s.showUsers} ref={refUsers}>
-        <button
-          className={patternCSS.closeButton}
-          onClick={() => props.setPointsShow(false)}
-        >
-          ✖
-        </button>
-        <div className={s.usersTitle}>Points:</div>
+    <div className={patternMenu.darkenBackground}>
+      <button
+        className={patternMenu.closeButton}
+        onClick={() => dispatch({ type: "SET_BAR_SHOW" })}
+      >
+        ✖
+      </button>
+      <div className={patternDashboard.showBox} ref={refUsers}>
+        <div className={patternDashboard.usersTitle}>Points:</div>
         {pointsData.length === 0 ? (
-          loadingUsers()
+          loadingPoints()
         ) : (
           <>
-            <li className={s.line} key={"title"}>
-              <p className={s.number}>№</p>
-              <p className={s.name}>Name</p>
-              <p className={s.address}>Address</p>
-              <p className={s.delivery}>Delivery</p>
+            <li className={patternDashboard.line} key={"title"}>
+              <p style={{ width: 30 }}>№</p>
+              <p style={{ width: 130 }}>Name</p>
+              <p style={{ width: 180 }}>Address</p>
+              <p style={{ width: 160 }}>Delivery</p>
             </li>
-            {pointsData.map((el, index) => (
-              <li className={s.line} key={index}>
-                <p className={s.number}>{index + 1}</p>
-                <p className={s.name}>{el.name}</p>
-                <p className={s.address}>{el.address}</p>
-                <p className={s.delivery}>{el.is_delivering ? el.delivery_cost : "None"}</p>
-              </li>
-            ))}
+            <div className={patternDashboard.scrollAbleDashboard}>
+              {pointsData.map((el, index) => (
+                <li
+                  className={`${patternDashboard.line} ${patternDashboard.hover}`}
+                  key={index}
+                  onClick={() =>
+                    dispatch({
+                      type: "SET_BAR_SHOW",
+                      payload: { show: "menu", pointId: el.id },
+                    })
+                  }
+                >
+                  <p style={{ width: 30 }}>{index + 1}</p>
+                  <p style={{ width: 130 }}>{el.name}</p>
+                  <p style={{ width: 180 }}>{el.address}</p>
+                  <p style={{ width: 160 }}>
+                    {el.is_delivering ? el.delivery_cost : "None"}
+                  </p>
+                </li>
+              ))}
+            </div>
           </>
         )}
       </div>

@@ -1,15 +1,17 @@
-import s from "./CSS/patternDashboard.module.css";
-import patternCSS from "../../patternMenu.module.css";
+import patternDashboard from "./CSS/patternDashboard.module.css";
+import patternMenu from "../../patternMenu.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import Cookies from "universal-cookie";
 import useDetectClickOut from "../../../files/useDetectClickOut.js";
 import API from "../../../files/API/api.js";
 
-export default function UsersDialog(props) {
-  const refUsers = useDetectClickOut(props.isUsersShow, props.setUsersShow);
+export default function UsersDialog() {
   const usersData = useSelector((state) => state.admin.users);
   const dispatch = useDispatch();
   const cookies = new Cookies();
+  const refUsers = useDetectClickOut(true, () =>
+    dispatch({ type: "SET_BAR_SHOW" })
+  );
 
   function loadingUsers() {
     API.getUsers(cookies.get("Token"))
@@ -19,35 +21,43 @@ export default function UsersDialog(props) {
   }
 
   return (
-    <div className={patternCSS.darkenBackground}>
-      <div className={s.showUsers} ref={refUsers}>
-        <button
-          className={patternCSS.closeButton}
-          onClick={() => props.setUsersShow(false)}
-        >
-          ✖
-        </button>
-        <div className={s.usersTitle}>Users:</div>
+    <div className={patternMenu.darkenBackground}>
+      <button
+        className={patternMenu.closeButton}
+        onClick={() => dispatch({ type: "SET_BAR_SHOW" })}
+      >
+        ✖
+      </button>
+      <div className={patternDashboard.showBox} ref={refUsers}>
+        <div className={patternDashboard.usersTitle}>Users:</div>
         {usersData.length === 0 ? (
           loadingUsers()
         ) : (
           <>
-            <li className={s.line} key={"title"}>
-              <p className={s.number}>№</p>
-              <p className={s.name}>Name</p>
-              <p className={s.name}>Last name</p>
-              <p className={s.phone}>Phone</p>
-              <p className={s.number}>ID</p>
+            <li className={patternDashboard.line} key={"title"}>
+              <p style={{ width: 30 }}>№</p>
+              <p style={{ width: 130 }}>Name</p>
+              <p style={{ width: 130 }}>Last name</p>
+              <p style={{ width: 180 }}>Phone</p>
+              <p style={{ width: 30 }}>ID</p>
             </li>
-            {usersData.map((el, index) => (
-              <li className={s.line} key={index}>
-                <p className={s.number}>{index + 1}</p>
-                <p className={s.name}>{el.name.length > 0 ? el.name : "None"}</p>
-                <p className={s.name}>{el.lastname.length > 0 ? el.lastname : "None"}</p>
-                <p className={s.phone}>{el.phone.length > 0 ? el.phone : "None"}</p>
-                <p className={s.number}>{el.id}</p>
-              </li>
-            ))}
+            <div className={patternDashboard.scrollAbleDashboard}>
+              {usersData.map((el, index) => (
+                <li className={patternDashboard.line} key={index}>
+                  <p style={{ width: 30 }}>{index + 1}</p>
+                  <p style={{ width: 130 }}>
+                    {el.name.length > 0 ? el.name : "None"}
+                  </p>
+                  <p style={{ width: 130 }}>
+                    {el.lastname.length > 0 ? el.lastname : "None"}
+                  </p>
+                  <p style={{ width: 180 }}>
+                    {el.phone.length > 0 ? el.phone : "None"}
+                  </p>
+                  <p style={{ width: 30 }}>{el.id}</p>
+                </li>
+              ))}
+            </div>
           </>
         )}
       </div>

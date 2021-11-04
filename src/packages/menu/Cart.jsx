@@ -24,31 +24,33 @@ function Cart(props) {
           ✖
         </button>
         <div className={s.shoppingCartTitle}>Your choose:</div>
-        {cart.selectedFood.length > 0 ? (
-          cart.selectedFood.map((p, index) => (
-            <div className={s.foodElement} key={index}>
-              <div className={s.selectedFood}>
-                {index + 1} ) {p.name}
+        <div className={s.scrollAbleCart}>
+          {cart.selectedFood.length > 0 ? (
+            cart.selectedFood.map((p, index) => (
+              <div className={s.foodElement} key={index}>
+                <div className={s.selectedFood}>
+                  {index + 1} ) {p.name}
+                </div>
+                <div className={s.priceFood}>{p.costAll} ₽</div>
+                <div className={s.buttonsBox}>
+                  <ButtonDelete
+                    name={p.name}
+                    cost={p.costOne}
+                    style={`${s.button} ${s.Delete} ${s._style}`}
+                  />
+                  <div className={s.countFood}>{p.amount}</div>
+                  <ButtonAdd
+                    name={p.name}
+                    cost={p.costOne}
+                    style={`${s.button} ${s.Add} ${s._style}`}
+                  />
+                </div>
               </div>
-              <div className={s.priceFood}>{p.costAll} ₽</div>
-              <div className={s.buttonsBox}>
-                <ButtonDelete
-                  name={p.name}
-                  cost={p.costOne}
-                  style={`${s.button} ${s.Delete} ${s._style}`}
-                />
-                <div className={s.countFood}>{p.amount}</div>
-                <ButtonAdd
-                  name={p.name}
-                  cost={p.costOne}
-                  style={`${s.button} ${s.Add} ${s._style}`}
-                />
-              </div>
-            </div>
-          ))
-        ) : (
-          <div>Empty</div>
-        )}
+            ))
+          ) : (
+            <div>Empty</div>
+          )}
+        </div>
         {cart.selectedFood.length > 0 ? (
           <button className={s.buttonToOrder} onClick={goToOrder}>
             Order {cart.selectedFood.reduce((a, b) => a + b.costAll, 0)} ₽

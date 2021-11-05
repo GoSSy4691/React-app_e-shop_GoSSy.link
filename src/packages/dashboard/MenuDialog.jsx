@@ -10,7 +10,7 @@ export default function MenuDialog() {
   const pointId = useSelector((state) => state.admin.pointId);
   const menu = useSelector((state) => state.admin.menu);
   const dispatch = useDispatch();
-  const refUsers = useDetectClickOut(() =>
+  const refBox = useDetectClickOut(() =>
     dispatch({ type: "SET_BAR_SHOW", payload: "points" })
   );
 
@@ -25,7 +25,7 @@ export default function MenuDialog() {
 
   return (
     <div className={patternMenu.darkenBackground}>
-      <div className={patternDashboard.showBox} ref={refUsers}>
+      <div className={patternDashboard.showBox} ref={refBox}>
         <button
           className={patternMenu.closeButton}
           onClick={() => dispatch({ type: "SET_BAR_SHOW", payload: "points" })}

@@ -7,7 +7,7 @@ import API from "../../files/API/api.js";
 export default function PointsDialog() {
   const pointsData = useSelector((state) => state.admin.points);
   const dispatch = useDispatch();
-  const refUsers = useDetectClickOut(() =>
+  const refBox = useDetectClickOut(() =>
     dispatch({ type: "SET_BAR_SHOW" })
   );
 
@@ -22,7 +22,7 @@ export default function PointsDialog() {
 
   return (
     <div className={patternMenu.darkenBackground}>
-      <div className={patternDashboard.showBox} ref={refUsers}>
+      <div className={patternDashboard.showBox} ref={refBox}>
         <button
           className={patternMenu.closeButton}
           onClick={() => dispatch({ type: "SET_BAR_SHOW" })}

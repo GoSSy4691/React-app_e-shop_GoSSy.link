@@ -9,7 +9,7 @@ export default function UsersDialog() {
   const usersData = useSelector((state) => state.admin.users);
   const dispatch = useDispatch();
   const cookies = new Cookies();
-  const refUsers = useDetectClickOut(() =>
+  const refBox = useDetectClickOut(() =>
     dispatch({ type: "SET_BAR_SHOW" })
   );
 
@@ -22,7 +22,7 @@ export default function UsersDialog() {
 
   return (
     <div className={patternMenu.darkenBackground}>
-      <div className={patternDashboard.showBox} ref={refUsers}>
+      <div className={patternDashboard.showBox} ref={refBox}>
         <button
           className={patternMenu.closeButton}
           onClick={() => dispatch({ type: "SET_BAR_SHOW" })}

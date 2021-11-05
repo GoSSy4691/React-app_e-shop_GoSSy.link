@@ -9,12 +9,14 @@ import Cart from "../menu/Cart.jsx";
 import Login from "../login/Login.jsx";
 
 import shopCartIco from "../../files/img/shopCart.png";
+import Settings from "../Settings";
 
 export default function Header() {
   const store = useSelector((state) => state.cart);
   const headerStatus = useSelector((state) => state.user.headerStatus);
   const isDialogOpen = useSelector((state) => state.user.isDialogOpen);
   const [isShowCart, setShowCart] = useState(false);
+  const [isShowSettings, setShowSettings] = useState(false);
   const dispatch = useDispatch();
   const cookies = new Cookies();
 
@@ -34,61 +36,67 @@ export default function Header() {
   }
 
   return (
-    <div className={s.nav}>
-      <div className={s.leftSide}>
-        <LogoImg />
-        <div className={s.bar}>
-          <li>
-            <NavLink
-              className={s.textInactive}
-              exact
-              activeClassName={s.textActive}
-              to="/"
-              onClick={() =>
-                dispatch({ type: "CHANGE_DISPLAY_NOW", payload: "Shops" })
-              }
-            >
-              Menu
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              className={s.textInactive}
-              exact
-              activeClassName={s.textActive}
-              to="/about"
-            >
-              About
-            </NavLink>
-          </li>
+    <>
+      {isShowSettings && <Settings setShowSettings={setShowSettings}/>}
+      <div className={s.nav}>
+        <div className={s.leftSide}>
+          <LogoImg />
+          <div className={s.bar}>
+            <li>
+              <NavLink
+                className={s.textInactive}
+                exact
+                activeClassName={s.textActive}
+                to="/"
+                onClick={() =>
+                  dispatch({ type: "CHANGE_DISPLAY_NOW", payload: "Shops" })
+                }
+              >
+                Menu
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                className={s.textInactive}
+                exact
+                activeClassName={s.textActive}
+                to="/about"
+              >
+                About
+              </NavLink>
+            </li>
+          </div>
         </div>
+        <div className={s.rightSide}>
+          <button
+            className={s.userIco}
+            onClick={
+              headerStatus === "Loading"
+                ? null
+                : () => dispatch({ type: "PROFILE_DIALOG_SHOW" })
+            }
+          >
+            {headerStatus}
+          </button>
+          <button className={s.userIco} onClick={() => setShowSettings(true)}>
+            Settings
+          </button>
+        </div>
+        <Route exact path="/">
+          <button
+            title={"Cart"}
+            className={s.shopIcoButton}
+            onClick={() => setShowCart(true)}
+          >
+            <img alt={"CartImage"} src={shopCartIco} className={s.shopIco} />
+            {store.itemsCount > 0 ? (
+              <div className={s.shopIcoCount}>{store.itemsCount}</div>
+            ) : null}
+          </button>
+        </Route>
+        {isDialogOpen ? <Login /> : null}
+        {isShowCart ? <Cart setShowCart={setShowCart} /> : null}
       </div>
-      <div className={s.rightSide}>
-        <button
-          className={s.userIco}
-          onClick={
-            headerStatus === "Loading"
-              ? null
-              : () => dispatch({ type: "PROFILE_DIALOG_SHOW" })
-          }
-        >
-          {headerStatus}
-        </button>
-      </div>
-      <Route exact path="/">
-        <button
-          title={"Cart"}
-          className={s.shopIcoButton}
-          onClick={() => setShowCart(true)}
-        >
-          <img alt={"CartImage"} src={shopCartIco} className={s.shopIco} />
-          {store.itemsCount > 0 ? (
-            <div className={s.shopIcoCount}>{store.itemsCount}</div>
-          ) : null}
-        </button>
-      </Route>
-      {isDialogOpen ? <Login /> : null}
-      {isShowCart ? <Cart setShowCart={setShowCart} /> : null}
-    </div>
+    </>
   );
 }

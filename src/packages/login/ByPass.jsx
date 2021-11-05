@@ -83,6 +83,7 @@ export default function ByPass() {
           className={s.eyeInput}
           onMouseDown={() => setPassShow(true)}
           onMouseUp={() => setPassShow(false)}
+          draggable="false"
         />
         </button>
       </div>

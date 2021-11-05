@@ -59,9 +59,6 @@ export default function ByPass() {
             e.nativeEvent.key === "Enter" ? getAnswerPass() : null
           }
         />
-        <button className={s.loginBtn} onClick={getAnswerPass}>
-          Sign in
-        </button>
       </div>
       <div className={s.passwordLine}>
         <input
@@ -76,17 +73,23 @@ export default function ByPass() {
             e.nativeEvent.key === "Enter" ? getAnswerPass() : null
           }
         />
-        <button>
-        <img
-          alt={"showHideEye"}
-          src={isPassShow ? eye_show : eye_hide}
-          className={s.eyeInput}
-          onMouseDown={() => setPassShow(true)}
-          onMouseUp={() => setPassShow(false)}
-          draggable="false"
-        />
+        <button tabindex="-1">
+          <img
+            alt={"showHideEye"}
+            src={isPassShow ? eye_show : eye_hide}
+            className={s.eyeInput}
+            onMouseDown={() => setPassShow(true)}
+            onMouseUp={() => setPassShow(false)}
+            draggable="false"
+          />
         </button>
       </div>
+      <button
+        className={`${s.loginBtn} ${s.loginBtnPass}`}
+        onClick={getAnswerPass}
+      >
+        Sign in
+      </button>
       <button
         className={s.loginByPassLink}
         onClick={() =>

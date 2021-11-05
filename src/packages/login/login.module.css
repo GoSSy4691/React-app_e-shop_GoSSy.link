@@ -121,6 +121,11 @@
     color: #E5E5E5;
 }
 
+.loginBtnPass {
+    position: absolute;
+    right: 1%;
+}
+
 .logoutBtn {
     width: 74px;
     height: 30px;

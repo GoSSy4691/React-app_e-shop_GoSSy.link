@@ -88,9 +88,7 @@ export default function Header() {
         </button>
       </Route>
       {isDialogOpen ? <Login /> : null}
-      {isShowCart ? (
-        <Cart isShowCart={isShowCart} setShowCart={setShowCart} />
-      ) : null}
+      {isShowCart ? <Cart setShowCart={setShowCart} /> : null}
     </div>
   );
 }

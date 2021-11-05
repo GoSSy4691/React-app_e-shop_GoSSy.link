@@ -9,7 +9,7 @@ export default function UsersDialog() {
   const usersData = useSelector((state) => state.admin.users);
   const dispatch = useDispatch();
   const cookies = new Cookies();
-  const refUsers = useDetectClickOut(true, () =>
+  const refUsers = useDetectClickOut(() =>
     dispatch({ type: "SET_BAR_SHOW" })
   );
 

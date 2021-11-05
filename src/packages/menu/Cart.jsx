@@ -7,7 +7,7 @@ import { ButtonAdd, ButtonDelete } from "./ButtonAddDelete.jsx";
 
 function Cart(props) {
   const cart = useSelector((state) => state.cart);
-  const refCart = useDetectClickOut(props.isShowCart, props.setShowCart);
+  const refCart = useDetectClickOut(props.setShowCart);
 
   function goToOrder() {
     props.setShowCart(false);

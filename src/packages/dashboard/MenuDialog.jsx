@@ -10,7 +10,7 @@ export default function MenuDialog() {
   const pointId = useSelector((state) => state.admin.pointId);
   const menu = useSelector((state) => state.admin.menu);
   const dispatch = useDispatch();
-  const refUsers = useDetectClickOut(true, () =>
+  const refUsers = useDetectClickOut(() =>
     dispatch({ type: "SET_BAR_SHOW", payload: "points" })
   );
 

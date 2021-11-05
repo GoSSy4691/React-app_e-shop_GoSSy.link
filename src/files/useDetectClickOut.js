@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-export default function useDetectClickOut(isItVisible, setVisible) {
+export default function useDetectClickOut(setVisible) {
   const openedBoxRef = useRef(null);
 
   const handleClickOutside = (event) => {

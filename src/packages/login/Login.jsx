@@ -10,9 +10,8 @@ import penEdit from "../../files/img/penEdit.svg";
 
 export default function Login() {
   const user = useSelector((state) => state.user);
-  const isDialogOpen = useSelector((state) => state.user.isDialogOpen);
   const dialogState = useSelector((state) => state.user.dialogState);
-  const refLogin = useDetectClickOut(isDialogOpen, () =>
+  const refLogin = useDetectClickOut(() =>
     dispatch({ type: "PROFILE_DIALOG_SHOW" })
   );
   const dispatch = useDispatch();
@@ -87,17 +86,17 @@ export default function Login() {
                   !
                 </div>
                 <button>
-                <img
-                  alt={"Edit"}
-                  src={penEdit}
-                  className={s.penEdit}
-                  onClick={() =>
-                    dispatch({
-                      type: "ERROR_MESSAGE",
-                      payload: "Didn't work yet",
-                    })
-                  }
-                />
+                  <img
+                    alt={"Edit"}
+                    src={penEdit}
+                    className={s.penEdit}
+                    onClick={() =>
+                      dispatch({
+                        type: "ERROR_MESSAGE",
+                        payload: "Didn't work yet",
+                      })
+                    }
+                  />
                 </button>
               </div>
               <div className={s.token}>

@@ -7,7 +7,7 @@ import API from "../../files/API/api.js";
 export default function PointsDialog() {
   const pointsData = useSelector((state) => state.admin.points);
   const dispatch = useDispatch();
-  const refUsers = useDetectClickOut(true, () =>
+  const refUsers = useDetectClickOut(() =>
     dispatch({ type: "SET_BAR_SHOW" })
   );
 

@@ -10,11 +10,7 @@ import exitImg from "../../files/img/exit.svg";
 export default function FoodDialog(props) {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-
-  const refFoodBox = useDetectClickOut(
-    props.chosenFood.isShow,
-    props.setChosenFood
-  );
+  const refFoodBox = useDetectClickOut(props.setChosenFood);
 
   const isFoodIn = (name) => {
     let answer = cart.selectedFood.findIndex((el) => el.name === name);

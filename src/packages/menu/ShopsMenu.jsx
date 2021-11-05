@@ -68,10 +68,14 @@ export default function ShopsMenu() {
     }
   }
 
+  function isAdminLogin() {
+    return userData !== undefined && userData.login === "admin"
+  }
+
   return (
     <>
-      {userData !== undefined && userData.login === "admin" && <AdminBar />}
-      <div className={s.showRoom}>
+      {isAdminLogin() && <AdminBar />}
+      <div className={s.showRoom} style={isAdminLogin() ? {margin: "0 60px 0 100px"} : null}>
         {(() => {
           switch (userView) {
             case "Loading":

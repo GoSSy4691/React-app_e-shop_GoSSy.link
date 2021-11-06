@@ -1,30 +1,23 @@
 .showCart {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 500px;
-  height: 500px;
+  bottom: 100px;
+  right: 80px;
+  width: 350px;
+  height: 552px;
   background: #1b1d23;
   /*overflow-y: scroll;*/
   text-align: center;
   color: #adb4b0;
+  z-index: 4;
+  border-radius: 10px;
 }
 
 .showCart li {
   list-style-type: none;
 }
 
-.shoppingCartTitle {
-  font-family: "Comic Sans MS", sans-serif;
-  font-size: 20px;
-  border-bottom: solid black;
-}
-
 .scrollAbleCart {
-  width: 500px;
-  height: 450px;
-  padding-bottom: 20px;
+  height: calc(552px - 80px);
   overflow-y: auto;
 }
 
@@ -32,17 +25,23 @@
   font-size: 24px;
   color: black;
   background: #747474;
-  border-radius: 25px;
-  padding-left: 50px;
-  padding-right: 50px;
-  width: 300px;
+  border-radius: 10px;
+  padding: 0 8px;
+  width: 310px;
+  height: 37px;
   position: absolute;
-  top: 96%;
+  bottom: 1%;
   left: 50%;
   transform: translateX(-50%);
   border: solid #1b1d23;
   text-decoration: none;
   text-align: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.buttonToOrder p {
+  margin: 0;
 }
 
 .buttonToOrder:active {
@@ -51,61 +50,44 @@
 }
 
 .foodElement {
-  display: flex;
-  justify-content: flex-end;
-  height: 40px;
+  display: inline-flex;
+  /*justify-content: flex-end;*/
+  width: 316px;
+  height: 25px;
   align-items: center;
-  border-bottom: solid 2px black;
+  margin-top: 25px;
 }
 
-.selectedFood {
-  width: 240px;
+.foodName {
+  width: 188px;
+  text-align: left;
 }
 
 .priceFood {
-  padding-right: 10px;
+  width: 50px;
 }
 
 .buttonsBox {
-  display: flex;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
 }
 
 .countFood {
-  width: 25px;
+  width: 15px;
 }
 
 .button {
-  --t: 3px; /* Thickness */
-  --l: 38px; /* size of the symbol */
-  --s: 5px; /* space around the symbol */
-  --c1: #fff; /* Plus color*/
-  --c2: black; /* background color*/
-
-  display: inline-block;
-  width: var(--l);
-  height: var(--l);
-  padding: var(--s);
-  box-sizing: border-box; /*Remove this if you don't want space to be included in the size*/
-}
-
-.Add {
-  background: linear-gradient(var(--c1), var(--c1)) content-box,
-  linear-gradient(var(--c1), var(--c1)) content-box,
-  var(--c2);
 
 }
 
-.Delete {
-  background: linear-gradient(var(--c1), var(--c1)) content-box,
-  var(--c2);
+.switchText {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 50px;
 }
 
-._style {
-  background-position: center;
-  background-size: 100% var(--t), var(--t) 100%;
-  background-repeat: no-repeat;
-  border-radius: 50%;
-  border: solid 1px gray;
+.switchText p {
+  z-index: 5;
+  margin: 0;
 }

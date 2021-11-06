@@ -3,8 +3,8 @@ import patternMenu from "./patternMenu.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import i18next from "i18next";
 import { useTranslation } from "react-i18next";
-import useDetectClickOut from "../files/useDetectClickOut.js";
 import styled from "styled-components";
+import useDetectClickOut from "../files/useDetectClickOut.js";
 
 export default function Settings(props) {
   const settings = useSelector((state) => state.settings);

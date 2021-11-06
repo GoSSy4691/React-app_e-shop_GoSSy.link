@@ -6,7 +6,6 @@ import styled from "styled-components";
 import Header from "./packages/header/Header.jsx";
 import About from "./packages/about/About.jsx";
 import ShopsMenu from "./packages/menu/ShopsMenu.jsx";
-import OrderView from "./packages/menu/OrderView.jsx";
 import ErrorPopup from "./packages/popup/ErrorPopup.jsx";
 
 import cursorAuto from "./files/img/cursor/cursorAuto.png";
@@ -50,7 +49,6 @@ export default function App() {
       <Switch>
         <Route exact path="/" component={ShopsMenu} />
         <Route exact path="/about" component={About} />
-        <Route exact path="/order" component={OrderView} />
         <Redirect to="/" />
       </Switch>
       <ErrorPopup />

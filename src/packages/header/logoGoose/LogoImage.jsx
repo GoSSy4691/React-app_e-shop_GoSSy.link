@@ -24,6 +24,7 @@ export default function LogoImg() {
         onClick={() => setBuffer(buffer.concat([blaster]))}
         alt={"logo"}
         title={t("Don't click")}
+        draggable="false"
       />
       {buffer.map((p) => (
         <img src={p.src} className={p.className} alt={p.alt} key={p.key} />

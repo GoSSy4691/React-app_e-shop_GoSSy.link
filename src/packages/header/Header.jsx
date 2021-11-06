@@ -90,7 +90,12 @@ export default function Header() {
             className={s.shopIcoButton}
             onClick={() => setShowCart(true)}
           >
-            <img alt={"CartImage"} src={shopCartIco} className={s.shopIco} />
+            <img
+              alt={"CartImage"}
+              src={shopCartIco}
+              className={s.shopIco}
+              draggable="false"
+            />
             {store.itemsCount > 0 ? (
               <div className={s.shopIcoCount}>{store.itemsCount}</div>
             ) : null}

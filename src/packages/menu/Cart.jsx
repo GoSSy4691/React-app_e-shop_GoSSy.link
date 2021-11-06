@@ -1,66 +1,99 @@
 import s from "./CSS/cart.module.css";
-import patternCSS from "../patternMenu.module.css";
-import { withRouter } from "react-router-dom";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import styled from "styled-components";
 import useDetectClickOut from "../../files/useDetectClickOut.js";
 import { ButtonAdd, ButtonDelete } from "./ButtonAddDelete.jsx";
 
-function Cart(props) {
-  const cart = useSelector((state) => state.cart);
+import polygonBack from "../../files/img/polygonBack.svg";
+import polygonForward from "../../files/img/polygonForward.svg";
+
+export default function Cart(props) {
+  const selectedFood = useSelector((state) => state.cart.selectedFood);
+  const [isNeedDelivery, setNeedDelivery] = useState(false);
   const refCart = useDetectClickOut(props.setShowCart);
   const { t } = useTranslation();
 
   function goToOrder() {
     props.setShowCart(false);
-    props.history.push("/order");
   }
 
   return (
-    <div className={patternCSS.darkenBackground}>
-      <div className={s.showCart} ref={refCart}>
-        <button
-          className={patternCSS.closeButton}
-          onClick={() => props.setShowCart(false)}
-        >
-          ✖
-        </button>
-        <div className={s.shoppingCartTitle}>{t("Your choose")}:</div>
-        <div className={s.scrollAbleCart}>
-          {cart.selectedFood.length > 0 ? (
-            cart.selectedFood.map((p, index) => (
+    <div className={s.showCart} ref={refCart}>
+      <div className={s.scrollAbleCart}>
+        {selectedFood.length > 0 ? (
+          <>
+            {selectedFood.map((p, index) => (
               <div className={s.foodElement} key={index}>
-                <div className={s.selectedFood}>
-                  {index + 1} ) {p.name}
-                </div>
-                <div className={s.priceFood}>{p.costAll} ₽</div>
+                <div className={s.foodName}>{p.name}</div>
                 <div className={s.buttonsBox}>
                   <ButtonDelete
                     name={p.name}
                     cost={p.costOne}
-                    style={`${s.button} ${s.Delete} ${s._style}`}
+                    style={s.button}
+                    text={<img alt={"add"} src={polygonBack} />}
                   />
                   <div className={s.countFood}>{p.amount}</div>
                   <ButtonAdd
                     name={p.name}
                     cost={p.costOne}
-                    style={`${s.button} ${s.Add} ${s._style}`}
+                    style={s.button}
+                    text={<img alt={"add"} src={polygonForward} />}
                   />
                 </div>
+                <div className={s.priceFood}>{p.costAll} ₽</div>
               </div>
-            ))
-          ) : (
-            <div>{t("Empty")}</div>
-          )}
-        </div>
-        {cart.selectedFood.length > 0 ? (
-          <button className={s.buttonToOrder} onClick={goToOrder}>
-            {t("Order")} {cart.selectedFood.reduce((a, b) => a + b.costAll, 0)} ₽
-          </button>
-        ) : null}
+            ))}
+            <DeliveryBtn
+              isNeedDelivery={isNeedDelivery}
+              onClick={() => setNeedDelivery(!isNeedDelivery)}
+            >
+              <div className={s.switchText}>
+                <p>{t("Take out")}</p>
+                <p>{t("Delivery")}</p>
+              </div>
+            </DeliveryBtn>
+            <button className={s.buttonToOrder} onClick={goToOrder}>
+              <p>{t("Order")} </p>
+              <p>{selectedFood.reduce((a, b) => a + b.costAll, 0)} ₽ </p>
+            </button>
+          </>
+        ) : (
+          <div>{t("Empty")}</div>
+        )}
       </div>
     </div>
   );
 }
 
-export default withRouter(Cart);
+const DeliveryBtn = styled.button`
+  width: 310px;
+  height: 25px;
+  position: absolute;
+  content: "41241";
+
+  // transform: translateX(-50%);
+  bottom: 50px;
+  right: 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  outline: none;
+  background-color: #353b48;
+  // border: 3px solid white;
+
+  &::after {
+    width: 155px;
+    height: 21px;
+    content: "";
+    position: absolute;
+    top: 0;
+    will-change: transform;
+    transform: translate(${(props) => (props.isNeedDelivery ? -8 : -150)}px);
+    transition: transform 0.2s ease-out;
+    background: white;
+    border: 2px solid #7f8fa6;
+    outline: none;
+    border-radius: 5px;
+  }
+`;

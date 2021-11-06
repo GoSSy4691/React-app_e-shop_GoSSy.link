@@ -11,7 +11,7 @@ import Settings from "../Settings.jsx";
 
 export default function Header() {
   const headerStatus = useSelector((state) => state.user.headerStatus);
-  const isLoginShow = useSelector((state) => state.user.isDialogOpen);
+  const isLoginShow = useSelector((state) => state.user.isLoginShow);
   const [isShowSettings, setShowSettings] = useState(false);
   const dispatch = useDispatch();
   const cookies = new Cookies();

@@ -7,6 +7,7 @@ import Header from "./packages/header/Header.jsx";
 import About from "./packages/about/About.jsx";
 import ShopsMenu from "./packages/menu/ShopsMenu.jsx";
 import ErrorPopup from "./packages/popup/ErrorPopup.jsx";
+import Footer from "./packages/footer/Footer.jsx";
 
 import cursorAuto from "./files/img/cursor/cursorAuto.png";
 import cursorPointer from "./files/img/cursor/cursorPointer.png";
@@ -51,6 +52,7 @@ export default function App() {
         <Route exact path="/about" component={About} />
         <Redirect to="/" />
       </Switch>
+      <Footer/>
       <ErrorPopup />
     </CustomCursorDiv>
   );

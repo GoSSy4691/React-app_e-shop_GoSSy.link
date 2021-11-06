@@ -1,22 +1,17 @@
 import s from "./header.module.css";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, Route } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Cookies from "universal-cookie";
 import { useTranslation } from "react-i18next";
 import API from "../../files/API/api.js";
 import LogoImg from "./logoGoose/LogoImage.jsx";
-import Cart from "../menu/Cart.jsx";
 import Login from "../login/Login.jsx";
 import Settings from "../Settings.jsx";
 
-import shopCartIco from "../../files/img/shopCart.png";
-
 export default function Header() {
-  const store = useSelector((state) => state.cart);
   const headerStatus = useSelector((state) => state.user.headerStatus);
-  const isDialogOpen = useSelector((state) => state.user.isDialogOpen);
-  const [isShowCart, setShowCart] = useState(false);
+  const isLoginShow = useSelector((state) => state.user.isDialogOpen);
   const [isShowSettings, setShowSettings] = useState(false);
   const dispatch = useDispatch();
   const cookies = new Cookies();
@@ -40,6 +35,7 @@ export default function Header() {
   return (
     <>
       {isShowSettings && <Settings setShowSettings={setShowSettings} />}
+      {isLoginShow && <Login />}
       <div className={s.nav}>
         <div className={s.leftSide}>
           <LogoImg />
@@ -84,25 +80,6 @@ export default function Header() {
             {t("Settings")}
           </button>
         </div>
-        <Route exact path="/">
-          <button
-            title={"Cart"}
-            className={s.shopIcoButton}
-            onClick={() => setShowCart(true)}
-          >
-            <img
-              alt={"CartImage"}
-              src={shopCartIco}
-              className={s.shopIco}
-              draggable="false"
-            />
-            {store.itemsCount > 0 ? (
-              <div className={s.shopIcoCount}>{store.itemsCount}</div>
-            ) : null}
-          </button>
-        </Route>
-        {isDialogOpen ? <Login /> : null}
-        {isShowCart ? <Cart setShowCart={setShowCart} /> : null}
       </div>
     </>
   );

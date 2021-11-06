@@ -12,12 +12,8 @@ import polygonForward from "../../files/img/polygonForward.svg";
 export default function Cart(props) {
   const selectedFood = useSelector((state) => state.cart.selectedFood);
   const [isNeedDelivery, setNeedDelivery] = useState(false);
-  const refCart = useDetectClickOut(props.setShowCart);
+  const refCart = useDetectClickOut(props.setFooterShow);
   const { t } = useTranslation();
-
-  function goToOrder() {
-    props.setShowCart(false);
-  }
 
   return (
     <div className={s.showCart} ref={refCart}>
@@ -54,13 +50,18 @@ export default function Cart(props) {
                 <p>{t("Delivery")}</p>
               </div>
             </DeliveryBtn>
-            <button className={s.buttonToOrder} onClick={goToOrder}>
+            <button
+              className={s.buttonToOrder}
+              onClick={() =>
+                props.setFooterShow(isNeedDelivery ? "delivery" : "takeOut")
+              }
+            >
               <p>{t("Order")} </p>
               <p>{selectedFood.reduce((a, b) => a + b.costAll, 0)} ₽ </p>
             </button>
           </>
         ) : (
-          <div>{t("Empty")}</div>
+          <div style={{ marginTop: 20 }}>{t("Empty")}</div>
         )}
       </div>
     </div>

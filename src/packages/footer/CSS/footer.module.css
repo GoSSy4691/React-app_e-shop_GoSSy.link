@@ -1,0 +1,30 @@
+.shopIcoButton {
+    display: flex;
+    width: 80px;
+    height: 80px;
+    position: fixed;
+    bottom: 21px;
+    right: 25px;
+    z-index: 3;
+    border-radius: 50%;
+    background: #1b1d23;
+}
+
+.shopIco {
+    width: 40px;
+    height: 40px;
+    margin: auto;
+}
+
+.shopIcoCount {
+    position: absolute;
+    width: 23px;
+    height: 23px;
+    right: 1px;
+    top: 60px;
+    border: solid #adb4b0;
+    border-radius: 20px;
+    color: white;
+    line-height: 24px;
+    text-align: center;
+}

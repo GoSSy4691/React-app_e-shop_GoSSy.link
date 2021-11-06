@@ -4,14 +4,14 @@ const cookies = new Cookies();
 let user = {
   userData: false,
   headerStatus: cookies.get("Token") === undefined ? "Log in" : "Loading",
-  isDialogOpen: false,
+  isLoginShow: false,
   dialogState: "byPhone",
 };
 
 export const userReducer = (state = user, action) => {
   switch (action.type) {
     case "PROFILE_DIALOG_SHOW":
-      return { ...state, isDialogOpen: !state.isDialogOpen };
+      return { ...state, isLoginShow: !state.isLoginShow };
     case "PROFILE_DIALOG_STATE":
       return { ...state, dialogState: action.payload };
     case "LOAD_PROFILE":

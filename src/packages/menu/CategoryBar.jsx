@@ -1,11 +1,13 @@
 import s from "./CSS/categoryBar.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import API from "../../files/API/api";
+import { useTranslation } from "react-i18next";
+import API from "../../files/API/api.js";
 
 export default function CategoryBar() {
   const menu = useSelector((state) => state.menu);
   const isCategoryMoved = useSelector((state) => state.scroll.isCategoryMoved);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   function changeCategory(id) {
     if (id === 0) {
@@ -13,7 +15,7 @@ export default function CategoryBar() {
     } else {
       //if you haven't all menu
       if (menu.unloadedPages > 0) {
-        dispatch({ type: "SUCCESS_MESSAGE", payload: "Search in all menu" });
+        dispatch({ type: "SUCCESS_MESSAGE", payload: t("Search in all menu") });
         API.getMenu(1, 100, menu.shopId)
           .then((res) => {
             dispatch({
@@ -30,7 +32,7 @@ export default function CategoryBar() {
           })
           .catch((err) => {
             console.error(err);
-            dispatch({ type: "ERROR_MESSAGE", payload: "Can't load category" });
+            dispatch({ type: "ERROR_MESSAGE", payload: t("Can't load category") });
           });
       } else {
         //if you have loaded menu

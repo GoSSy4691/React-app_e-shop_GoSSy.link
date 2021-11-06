@@ -26,7 +26,7 @@ export default function ShopsMenu() {
       })
       .catch((err) => {
         console.error(err.message);
-        dispatch({ type: "ERROR_MESSAGE", payload: "Error get points" });
+        dispatch({ type: "ERROR_MESSAGE", payload: t("Error get points") });
         dispatch({ type: "CHANGE_DISPLAY_NOW", payload: "Error" });
       });
   }
@@ -43,7 +43,7 @@ export default function ShopsMenu() {
         })
         .catch((err) => {
           console.error(err);
-          dispatch({ type: "ERROR_MESSAGE", payload: "Can't get category" });
+          dispatch({ type: "ERROR_MESSAGE", payload: t("Can't get category") });
         });
       let howManyLoad = Math.round((window.innerWidth / 250) * 3);
       API.getMenu(1, howManyLoad, shopIndex)

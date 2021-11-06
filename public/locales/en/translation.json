@@ -47,5 +47,25 @@
     "part1": "this site created for learning React's capabilities.",
     "part2": "I am a beginner at developing and in the future want to know more about front development.",
     "part3": "Go easy on me and my code."
-  }
+  },
+  "_message": null,
+  "Checking phone": "Checking phone",
+  "Checking code": "Checking code",
+  "Code sent": "Code sent",
+  "Code confirmed": "Code confirmed",
+  "Log in confirmed": "Log in confirmed",
+  "Log out confirmed": "Log out confirmed",
+  "Token received": "Token received",
+  "Search in all menu": "Search in all menu",
+  "Token expired": "Token expired",
+  "login / password don't match": "login / password don't match",
+  "Wrong phone number": "Wrong phone number",
+  "Wrong code": "Wrong code",
+  "Didn't get token": "Didn't get token",
+  "Didn't work yet": "Didn't work yet",
+  "Can't load category": "Can't load category",
+  "Can't load more foods": "Can't load more foods",
+  "Can't load all menu for search": "Can't load all menu for search",
+  "Error get points": "Error get points",
+  "Can't get category": "Can't get category"
 }

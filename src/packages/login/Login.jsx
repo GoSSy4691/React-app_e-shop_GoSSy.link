@@ -20,18 +20,18 @@ export default function Login() {
   const { t } = useTranslation();
 
   function logoutBtn() {
-    dispatch({ type: "SUCCESS_MESSAGE", payload: "Log out confirmed" });
+    dispatch({ type: "SUCCESS_MESSAGE", payload: t("Log out confirmed") });
     dispatch({ type: "LOGOUT_CONFIRM" });
     dispatch({ type: "PROFILE_DIALOG_SHOW" });
   }
 
   function closeAndRefresh() {
     if (cookies.get("Token") !== undefined) {
-      dispatch({ type: "SUCCESS_MESSAGE", payload: "Token received" });
+      dispatch({ type: "SUCCESS_MESSAGE", payload: t("Token received") });
       dispatch({ type: "PROFILE_DIALOG_SHOW" });
       dispatch({ type: "LOAD_PROFILE" });
     } else {
-      dispatch({ type: "ERROR_MESSAGE", payload: "Didn't get token" });
+      dispatch({ type: "ERROR_MESSAGE", payload: t("Didn't get token") });
       dispatch({ type: "PROFILE_DIALOG_STATE", payload: "byPhone" });
     }
   }
@@ -77,7 +77,7 @@ export default function Login() {
                         onClick={() =>
                           dispatch({
                             type: "ERROR_MESSAGE",
-                            payload: "Didn't work yet",
+                            payload: t("Didn't work yet"),
                           })
                         }
                       />

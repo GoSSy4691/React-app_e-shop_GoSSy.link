@@ -25,14 +25,14 @@ export default function FoodsMenu() {
       })
       .catch((err) => {
         console.error(err);
-        dispatch({ type: "ERROR_MESSAGE", payload: "Can't load more foods" });
+        dispatch({ type: "ERROR_MESSAGE", payload: t("Can't load more foods") });
       });
   }
 
   function searchFood(input) {
     setSearch(input);
     if (menu.unloadedPages > 0) {
-      dispatch({ type: "SUCCESS_MESSAGE", payload: "Search in all menu" });
+      dispatch({ type: "SUCCESS_MESSAGE", payload: t("Search in all menu") });
       API.getMenu(1, 100, menu.shopId)
         .then((res) => {
           dispatch({
@@ -51,7 +51,7 @@ export default function FoodsMenu() {
           console.error(err);
           dispatch({
             type: "ERROR_MESSAGE",
-            payload: "Can't load all menu for search",
+            payload: t("Can't load all menu for search"),
           });
         });
     }

@@ -26,16 +26,16 @@ export default function ByPhone() {
   function sendPhoneNumber() {
     if (phone.indexOf("_") !== -1) {
       setPhoneWrong(true);
-      dispatch({ type: "ERROR_MESSAGE", payload: "Wrong phone number" });
+      dispatch({ type: "ERROR_MESSAGE", payload: t("Wrong phone number") });
     } else {
       let preparedPhone = phone.split("").filter((e) => !isNaN(Number(e)));
       preparedPhone = "+7" + preparedPhone.join("").slice(1);
-      dispatch({ type: "SUCCESS_MESSAGE", payload: "Checking phone" });
+      dispatch({ type: "SUCCESS_MESSAGE", payload: t("Checking phone") });
       API.authByPhone(preparedPhone)
         .then(() => {
           setInputType("Code");
           setShowVYG(false);
-          dispatch({ type: "SUCCESS_MESSAGE", payload: "Code sent" });
+          dispatch({ type: "SUCCESS_MESSAGE", payload: t("Code sent") });
         })
         .catch((err) => {
           dispatch({ type: "ERROR_MESSAGE", payload: err.message });
@@ -46,13 +46,13 @@ export default function ByPhone() {
   function sendCode() {
     if (code.indexOf("_") !== -1) {
       setCodeWrong(true);
-      dispatch({ type: "ERROR_MESSAGE", payload: "Wrong code" });
+      dispatch({ type: "ERROR_MESSAGE", payload: t("Wrong code") });
     } else {
-      dispatch({ type: "SUCCESS_MESSAGE", payload: "Checking code" });
+      dispatch({ type: "SUCCESS_MESSAGE", payload: t("Checking code") });
       API.authByCode(code)
         .then((res) => {
           console.log("Your token is " + res.data.token);
-          dispatch({ type: "SUCCESS_MESSAGE", payload: "Code confirmed" });
+          dispatch({ type: "SUCCESS_MESSAGE", payload: t("Code confirmed") });
           cookies.set("Token", res.data.token, { path: "/" });
           dispatch({ type: "LOGIN_CONFIRM", payload: res.data[0] });
           dispatch({ type: "PROFILE_DIALOG_SHOW" });

@@ -33,7 +33,7 @@ export default function Header() {
       .catch((err) => {
         console.error(err.message);
         dispatch({ type: "LOGOUT_CONFIRM" });
-        dispatch({ type: "ERROR_MESSAGE", payload: "Token expired" });
+        dispatch({ type: "ERROR_MESSAGE", payload: t("Token expired") });
       });
   }
 

@@ -2,6 +2,7 @@ import s from "./login.module.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import Cookies from "universal-cookie";
+import { useTranslation } from "react-i18next";
 import API from "../../files/API/api.js";
 
 import eye_show from "../../files/img/visible_show.png";
@@ -14,6 +15,7 @@ export default function ByPass() {
   const [isPassShow, setPassShow] = useState(false);
   const dispatch = useDispatch();
   const cookies = new Cookies();
+  const { t } = useTranslation();
 
   function getAnswerPass() {
     dispatch({ type: "SUCCESS_MESSAGE", payload: "Loading" });
@@ -52,7 +54,7 @@ export default function ByPass() {
           className={s.loginInput}
           style={isPassWrong ? { color: "red" } : null}
           autoFocus
-          placeholder="Login"
+          placeholder={t("Login")}
           value={login}
           onChange={(e) => loginValidation(e.target.value)}
           onKeyPress={(e) =>
@@ -65,7 +67,7 @@ export default function ByPass() {
           name={"Password"}
           className={s.passwordInput}
           style={isPassWrong ? { color: "red" } : null}
-          placeholder="Password"
+          placeholder={t("Password")}
           type={isPassShow ? "text" : "password"}
           value={password}
           onChange={(e) => passwordValidation(e.target.value)}
@@ -73,7 +75,7 @@ export default function ByPass() {
             e.nativeEvent.key === "Enter" ? getAnswerPass() : null
           }
         />
-        <button tabindex="-1">
+        <button tabIndex="-1">
           <img
             alt={"showHideEye"}
             src={isPassShow ? eye_show : eye_hide}
@@ -88,7 +90,7 @@ export default function ByPass() {
         className={`${s.loginBtn} ${s.loginBtnPass}`}
         onClick={getAnswerPass}
       >
-        Sign in
+        {t("Sign in")}
       </button>
       <button
         className={s.loginByPassLink}
@@ -96,7 +98,7 @@ export default function ByPass() {
           dispatch({ type: "PROFILE_DIALOG_STATE", payload: "byPhone" })
         }
       >
-        Sign in by phone
+        {t("Sign in by phone")}
       </button>
     </div>
   );

@@ -2,6 +2,7 @@ import s from "./CSS/menuFoods.module.css";
 import patternCSS from "../patternMenu.module.css";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import API from "../../files/API/api.js";
 import GetImgFood from "./GetImgFood.jsx";
 import CategoryBar from "./CategoryBar.jsx";
@@ -14,6 +15,7 @@ export default function FoodsMenu() {
   const [chosenFood, setChosenFood] = useState({ isShow: false }); //need object?
   const [search, setSearch] = useState("");
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   //load more foods when scroll to the bottom
   if (menu.isReachedBottom && menu.unloadedPages > 0) {
@@ -73,7 +75,7 @@ export default function FoodsMenu() {
       </div>
       <input
         className={s.searchBar}
-        placeholder="Search"
+        placeholder={t("Search")}
         value={search}
         onChange={(e) => searchFood(e.target.value.toLowerCase())}
       />

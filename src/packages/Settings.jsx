@@ -1,6 +1,8 @@
 import patternDashboard from "./dashboard/CSS/patternDashboard.module.css";
 import patternMenu from "./patternMenu.module.css";
 import { useDispatch, useSelector } from "react-redux";
+import i18next from "i18next";
+import { useTranslation } from "react-i18next";
 import useDetectClickOut from "../files/useDetectClickOut.js";
 import styled from "styled-components";
 
@@ -8,6 +10,7 @@ export default function Settings(props) {
   const settings = useSelector((state) => state.settings);
   const refBox = useDetectClickOut(props.setShowSettings);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   return (
     <div className={patternMenu.darkenBackground}>
@@ -18,10 +21,43 @@ export default function Settings(props) {
         >
           ✖
         </button>
-        <div className={patternDashboard.usersTitle}>Settings:</div>
+        <div className={patternDashboard.usersTitle}>{t("Settings")}:</div>
         <LineLi>
-          <p>Custom cursor</p>
-          <Toggle
+          <p>{t("Language")}</p>
+          <LangBtn
+            onClick={() => i18next.changeLanguage("en")}
+            style={
+              i18next.language === "en"
+                ? {
+                    color: "black",
+                    background: "#747474",
+                    borderRadius: "25px",
+                    padding: "5px 5px",
+                  }
+                : null
+            }
+          >
+            {t("English")}
+          </LangBtn>
+          <LangBtn
+            onClick={() => i18next.changeLanguage("ru")}
+            style={
+              i18next.language === "ru"
+                ? {
+                    color: "black",
+                    background: "#747474",
+                    borderRadius: "25px",
+                    padding: "5px 5px",
+                  }
+                : null
+            }
+          >
+            {t("Russian")}
+          </LangBtn>
+        </LineLi>
+        <LineLi>
+          <p>{t("Custom cursor")}</p>
+          <ToggleBtn
             isCursorCustom={settings.isCursorCustom}
             onClick={() => dispatch({ type: "CHANGE_CURSOR" })}
           />
@@ -38,7 +74,12 @@ const LineLi = styled.li`
   align-items: center;
 `;
 
-const Toggle = styled.button`
+const LangBtn = styled.button`
+  margin-left: 10px;
+  color: white;
+`;
+
+const ToggleBtn = styled.button`
   width: 50px;
   height: 25px;
   margin-left: 20px;

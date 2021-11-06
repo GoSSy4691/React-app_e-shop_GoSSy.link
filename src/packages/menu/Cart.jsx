@@ -2,12 +2,14 @@ import s from "./CSS/cart.module.css";
 import patternCSS from "../patternMenu.module.css";
 import { withRouter } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import useDetectClickOut from "../../files/useDetectClickOut.js";
 import { ButtonAdd, ButtonDelete } from "./ButtonAddDelete.jsx";
 
 function Cart(props) {
   const cart = useSelector((state) => state.cart);
   const refCart = useDetectClickOut(props.setShowCart);
+  const { t } = useTranslation();
 
   function goToOrder() {
     props.setShowCart(false);
@@ -23,7 +25,7 @@ function Cart(props) {
         >
           ✖
         </button>
-        <div className={s.shoppingCartTitle}>Your choose:</div>
+        <div className={s.shoppingCartTitle}>{t("Your choose")}:</div>
         <div className={s.scrollAbleCart}>
           {cart.selectedFood.length > 0 ? (
             cart.selectedFood.map((p, index) => (
@@ -48,12 +50,12 @@ function Cart(props) {
               </div>
             ))
           ) : (
-            <div>Empty</div>
+            <div>{t("Empty")}</div>
           )}
         </div>
         {cart.selectedFood.length > 0 ? (
           <button className={s.buttonToOrder} onClick={goToOrder}>
-            Order {cart.selectedFood.reduce((a, b) => a + b.costAll, 0)} ₽
+            {t("Order")} {cart.selectedFood.reduce((a, b) => a + b.costAll, 0)} ₽
           </button>
         ) : null}
       </div>

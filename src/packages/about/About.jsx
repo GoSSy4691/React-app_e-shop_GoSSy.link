@@ -1,10 +1,14 @@
 import s from "./about.module.css";
+import { useTranslation } from "react-i18next";
+
 import welcomeImg from "../../files/img/welcomeImg.png";
 
 function About() {
+  const { t } = useTranslation();
+
   return (
     <div className={s.divContainer}>
-      <div className={s.welocmeImgback}>
+      <div className={s.welcomeImgDiv}>
         <img
           src={welcomeImg}
           className={s.welcomeImg}
@@ -13,12 +17,11 @@ function About() {
         />
       </div>
       <div className={s.description}>
-        Hi &#128400; this site created for learning React's capabilities.
+        {t("description.Hi")} &#128400; {t("description.part1")}
         <br />
-        I am a beginner at developing and in the future want to know more about
-        front development.
+        {t("description.part2")}
         <br />
-        Go easy on me and my code.
+        {t("description.part3")}
       </div>
       <div className={s.ps}>It's goose TIME</div>
     </div>

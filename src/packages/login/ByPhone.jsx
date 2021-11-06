@@ -2,6 +2,7 @@ import s from "./login.module.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import Cookies from "universal-cookie";
+import { useTranslation } from "react-i18next";
 import API from "../../files/API/api.js";
 import InputPhone from "./InputPhone.jsx";
 import InputCode from "./InputCode.jsx";
@@ -20,6 +21,7 @@ export default function ByPhone() {
   const [inputType, setInputType] = useState("Phone");
   const dispatch = useDispatch();
   const cookies = new Cookies();
+  const { t } = useTranslation();
 
   function sendPhoneNumber() {
     if (phone.indexOf("_") !== -1) {
@@ -96,7 +98,7 @@ export default function ByPhone() {
           className={s.loginBtn}
           onClick={inputType === "Phone" ? sendPhoneNumber : sendCode}
         >
-          Next
+          {t("Next")}
         </button>
       </div>
       <button
@@ -105,11 +107,11 @@ export default function ByPhone() {
           dispatch({ type: "PROFILE_DIALOG_STATE", payload: "byPass" })
         }
       >
-        Sign in by password
+        {t("Sign in by password")}
       </button>
       {isShowVYG && (
         <>
-          <div className={s.loginByToken}>Sign in with:</div>
+          <div className={s.loginByToken}>{t("Sign in with")}:</div>
           <div className={s.tokenImg}>
             <button>
               <img

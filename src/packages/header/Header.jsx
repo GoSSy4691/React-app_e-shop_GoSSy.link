@@ -3,13 +3,14 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Route } from "react-router-dom";
 import Cookies from "universal-cookie";
+import { useTranslation } from "react-i18next";
 import API from "../../files/API/api.js";
 import LogoImg from "./logoGoose/LogoImage.jsx";
 import Cart from "../menu/Cart.jsx";
 import Login from "../login/Login.jsx";
+import Settings from "../Settings.jsx";
 
 import shopCartIco from "../../files/img/shopCart.png";
-import Settings from "../Settings";
 
 export default function Header() {
   const store = useSelector((state) => state.cart);
@@ -19,6 +20,7 @@ export default function Header() {
   const [isShowSettings, setShowSettings] = useState(false);
   const dispatch = useDispatch();
   const cookies = new Cookies();
+  const { t } = useTranslation();
 
   //load profile
   if (headerStatus === "Loading") {
@@ -37,7 +39,7 @@ export default function Header() {
 
   return (
     <>
-      {isShowSettings && <Settings setShowSettings={setShowSettings}/>}
+      {isShowSettings && <Settings setShowSettings={setShowSettings} />}
       <div className={s.nav}>
         <div className={s.leftSide}>
           <LogoImg />
@@ -52,7 +54,7 @@ export default function Header() {
                   dispatch({ type: "CHANGE_DISPLAY_NOW", payload: "Shops" })
                 }
               >
-                Menu
+                {t("Menu")}
               </NavLink>
             </li>
             <li>
@@ -62,7 +64,7 @@ export default function Header() {
                 activeClassName={s.textActive}
                 to="/about"
               >
-                About
+                {t("About")}
               </NavLink>
             </li>
           </div>
@@ -76,10 +78,10 @@ export default function Header() {
                 : () => dispatch({ type: "PROFILE_DIALOG_SHOW" })
             }
           >
-            {headerStatus}
+            {t(headerStatus)}
           </button>
           <button className={s.userIco} onClick={() => setShowSettings(true)}>
-            Settings
+            {t("Settings")}
           </button>
         </div>
         <Route exact path="/">

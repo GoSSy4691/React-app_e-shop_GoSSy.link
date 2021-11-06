@@ -1,6 +1,7 @@
 import s from "./CSS/menuShops.module.css";
 import patternCSS from "../patternMenu.module.css";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import API from "../../files/API/api.js";
 import GetImgFood from "./GetImgFood.jsx";
 import FoodsMenu from "./FoodsMenu.jsx";
@@ -14,8 +15,8 @@ export default function ShopsMenu() {
   const points = useSelector((state) => state.menu.points);
   const shopId = useSelector((state) => state.menu.shopId);
   const unloadedPages = useSelector((state) => state.menu.unloadedPages);
-  // const [isShowLoad, setShowLoad] = useState(true);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   function getPoints() {
     API.getPoints()
@@ -69,22 +70,25 @@ export default function ShopsMenu() {
   }
 
   function isAdminLogin() {
-    return userData !== undefined && userData.login === "admin"
+    return userData !== undefined && userData.login === "admin";
   }
 
   return (
     <>
       {isAdminLogin() && <AdminBar />}
-      <div className={s.showRoom} style={isAdminLogin() ? {margin: "0 60px 0 100px"} : null}>
+      <div
+        className={s.showRoom}
+        style={isAdminLogin() ? { margin: "0 60px 0 100px" } : null}
+      >
         {(() => {
           switch (userView) {
             case "Loading":
               if (points.length === 0) getPoints();
-              return <div className={patternCSS.roomName}/>;
+              return <div className={patternCSS.roomName} />;
             case "Shops":
               return (
                 <>
-                  <div className={patternCSS.roomName}>Shops:</div>
+                  <div className={patternCSS.roomName}>{t("Shops")}:</div>
                   <div
                     className={patternCSS.grid}
                     style={{ marginTop: "44px" }}
@@ -114,12 +118,15 @@ export default function ShopsMenu() {
               console.error("User can't view it = " + userView);
           }
         })()}
-        <div className={s.loadingDiv} style={userView === "Loading" ||
-        (userView === "Menu" && unloadedPages > 0)
-          ? null
-          : { display: "none" }
-        }>
-          <h3 className={s.nameOnTop}>Loading</h3>
+        <div
+          className={s.loadingDiv}
+          style={
+            userView === "Loading" || (userView === "Menu" && unloadedPages > 0)
+              ? null
+              : { display: "none" }
+          }
+        >
+          <h3 className={s.nameOnTop}>{t("Loading")}</h3>
           <img
             alt={"loadingImg"}
             className={s.loadingImg}

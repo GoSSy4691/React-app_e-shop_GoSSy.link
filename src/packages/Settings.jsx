@@ -25,9 +25,9 @@ export default function Settings(props) {
         <LineLi>
           <p>{t("Language")}</p>
           <LangBtn
-            onClick={() => i18next.changeLanguage("en")}
+            onClick={() => i18next.changeLanguage("en-US")}
             style={
-              i18next.language === "en"
+              i18next.language === "en-US"
                 ? {
                     color: "black",
                     background: "#747474",
@@ -40,9 +40,9 @@ export default function Settings(props) {
             {t("English")}
           </LangBtn>
           <LangBtn
-            onClick={() => i18next.changeLanguage("ru")}
+            onClick={() => i18next.changeLanguage("ru-RU")}
             style={
-              i18next.language === "ru"
+              i18next.language === "ru-RU"
                 ? {
                     color: "black",
                     background: "#747474",

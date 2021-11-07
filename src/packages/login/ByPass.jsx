@@ -58,7 +58,7 @@ export default function ByPass() {
           value={login}
           onChange={(e) => loginValidation(e.target.value)}
           onKeyPress={(e) =>
-            e.nativeEvent.key === "Enter" ? getAnswerPass() : null
+            e.nativeEvent.key === "Enter" && getAnswerPass()
           }
         />
       </div>
@@ -72,7 +72,7 @@ export default function ByPass() {
           value={password}
           onChange={(e) => passwordValidation(e.target.value)}
           onKeyPress={(e) =>
-            e.nativeEvent.key === "Enter" ? getAnswerPass() : null
+            e.nativeEvent.key === "Enter" && getAnswerPass()
           }
         />
         <button tabIndex="-1">

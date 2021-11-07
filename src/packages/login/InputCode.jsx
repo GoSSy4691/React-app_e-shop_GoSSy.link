@@ -42,7 +42,7 @@ export default function InputPhone(props) {
       inputMode="numeric"
       onChange={(e) => codeChecker(e.nativeEvent.data)}
       onKeyPress={(e) =>
-        e.nativeEvent.key === "Enter" ? props.sendCode() : null
+        e.nativeEvent.key === "Enter" && props.sendCode()
       }
     />
   );

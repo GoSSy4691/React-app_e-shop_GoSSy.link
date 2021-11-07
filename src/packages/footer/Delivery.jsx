@@ -19,6 +19,14 @@ export default function Delivery(props) {
   const refCart = useDetectClickOut(props.setFooterShow);
   const { t } = useTranslation();
 
+  // need rework for call only one time
+  let allFoodsPrice = selectedFood.reduce((a, b) => a + b.costAll, 0);
+  let deliveryCalculate = selectedFood
+    .map((el) => el.delivery)
+    .filter((v, i, a) => a.findIndex((t) => t.shopId === v.shopId) === i)
+    .reduce((a, b) => a + b.cost, 0);
+
+  //need rework for call only one time
   function roundTime() {
     let hoursNow = new Date().getHours();
     let minutesNow = new Date().getMinutes();
@@ -176,15 +184,15 @@ export default function Delivery(props) {
       </div>
       <div className={s.inlineOrder}>
         <p>{t("Order_Noun")}</p>
-        <p>{selectedFood.reduce((a, b) => a + b.costAll, 0)} ₽</p>
+        <p>{allFoodsPrice} ₽</p>
       </div>
       <div className={s.inlineDelivery}>
         <p>{t("Delivery")}</p>
-        <p>0 ₽</p>
+        <p>{deliveryCalculate} ₽</p>
       </div>
       <div className={s.inlineTotal}>
         <p>{t("Total")}</p>
-        <p>0 ₽</p>
+        <p>{allFoodsPrice + deliveryCalculate} ₽</p>
       </div>
       <button
         className={patternCart.buttonToOrder}

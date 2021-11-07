@@ -1,6 +1,8 @@
 let cart = {
   itemsCount: 0,
   selectedFood: [],
+  shopDelivery: [],
+  isNeedDelivery: false
 };
 
 export const cartReducer = (state = cart, action) => {
@@ -23,6 +25,7 @@ export const cartReducer = (state = cart, action) => {
           costOne: payload.cost,
           amount: 1,
           costAll: payload.cost,
+          delivery: action.delivery,
         });
       } else {
         let index = findIndex();
@@ -42,6 +45,8 @@ export const cartReducer = (state = cart, action) => {
           state.selectedFood[index].costAll - state.selectedFood[index].costOne;
       }
       return { ...state, itemsCount: state.itemsCount - 1 };
+    case "CHANGE_DELIVERY":
+      return { ...state, isNeedDelivery: !state.isNeedDelivery };
     default:
       return state;
   }

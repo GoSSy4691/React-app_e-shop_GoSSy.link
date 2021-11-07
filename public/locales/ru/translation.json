@@ -13,6 +13,7 @@
   "Empty": "Ничего",
   "Take out": "На вынос",
   "Delivery": "Доставка",
+  "Can't deliver some kind of food": "Невозможна доставка какой-то еды",
   "_delivery": null,
   "phone" : "телефон",
   "street": "улица",

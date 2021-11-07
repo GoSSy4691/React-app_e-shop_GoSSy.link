@@ -13,6 +13,7 @@
   "Empty": "Empty",
   "Take out": "Take out",
   "Delivery": "Delivery",
+  "Can't deliver some kind of food": "Can't deliver some kind of food",
   "_delivery": null,
   "phone" : "phone",
   "street": "street",

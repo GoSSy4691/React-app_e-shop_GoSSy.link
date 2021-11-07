@@ -9,6 +9,7 @@ import GetImgFood from "./GetImgFood.jsx";
 import exitImg from "../../files/img/exit.svg";
 
 export default function FoodDialog(props) {
+  const menu = useSelector((state) => state.menu);
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const refFoodBox = useDetectClickOut(props.setChosenFood);
@@ -50,6 +51,12 @@ export default function FoodDialog(props) {
                 payload: {
                   name: props.chosenFood.name,
                   cost: props.chosenFood.cost,
+                },
+                delivery: {
+                  shopName: menu.shopName,
+                  shopId: menu.shopId,
+                  cost: menu.points[menu.shopIndex].delivery_cost,
+                  isDelivery: menu.points[menu.shopIndex].is_delivering,
                 },
               })
             }

@@ -1,7 +1,6 @@
 import s from "./CSS/cart.module.css";
 import patternCart from "./CSS/patternCart.module.css";
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import useDetectClickOut from "../../files/useDetectClickOut.js";
@@ -12,51 +11,68 @@ import polygonForward from "../../files/img/polygonForward.svg";
 
 export default function Cart(props) {
   const selectedFood = useSelector((state) => state.cart.selectedFood);
-  const [isNeedDelivery, setNeedDelivery] = useState(false);
+  const isNeedDelivery = useSelector((state) => state.cart.isNeedDelivery);
   const refCart = useDetectClickOut(props.setFooterShow);
+  const dispatch = useDispatch();
   const { t } = useTranslation();
+
+  function orderFoods() {
+    if (!isNeedDelivery) {
+      props.setFooterShow("takeOut");
+    } else {
+      if (selectedFood.find((el) => el.delivery.isDelivery === false)) {
+        dispatch({
+          type: "ERROR_MESSAGE",
+          payload: t("Can't deliver some kind of food"),
+        });
+      } else props.setFooterShow("delivery");
+    }
+  }
 
   return (
     <div className={s.showCart} ref={refCart}>
       <div className={s.scrollAbleCart}>
         {selectedFood.length > 0 ? (
           <>
-            {selectedFood.map((p, index) => (
-              <div className={s.foodElement} key={index}>
-                <div className={s.foodName}>{p.name}</div>
+            {selectedFood.map((el, index) => (
+              <div
+                className={s.foodElement}
+                key={index}
+                style={
+                  !el.delivery.isDelivery && isNeedDelivery
+                    ? { color: "red" }
+                    : null
+                }
+              >
+                <div className={s.foodName}>{el.name}</div>
                 <div className={s.buttonsBox}>
                   <ButtonDelete
-                    name={p.name}
-                    cost={p.costOne}
+                    name={el.name}
+                    cost={el.costOne}
                     style={s.button}
                     text={<img alt={"add"} src={polygonBack} />}
                   />
-                  <div className={s.countFood}>{p.amount}</div>
+                  <div className={s.countFood}>{el.amount}</div>
                   <ButtonAdd
-                    name={p.name}
-                    cost={p.costOne}
+                    name={el.name}
+                    cost={el.costOne}
                     style={s.button}
                     text={<img alt={"add"} src={polygonForward} />}
                   />
                 </div>
-                <div className={s.priceFood}>{p.costAll} ₽</div>
+                <div className={s.priceFood}>{el.costAll} ₽</div>
               </div>
             ))}
             <DeliveryBtn
               isNeedDelivery={isNeedDelivery}
-              onClick={() => setNeedDelivery(!isNeedDelivery)}
+              onClick={() => dispatch({ type: "CHANGE_DELIVERY" })}
             >
               <div className={s.switchText}>
                 <p>{t("Take out")}</p>
                 <p>{t("Delivery")}</p>
               </div>
             </DeliveryBtn>
-            <button
-              className={patternCart.buttonToOrder}
-              onClick={() =>
-                props.setFooterShow(isNeedDelivery ? "delivery" : "takeOut")
-              }
-            >
+            <button className={patternCart.buttonToOrder} onClick={orderFoods}>
               <p>{t("Order_Verb")} </p>
               <p>{selectedFood.reduce((a, b) => a + b.costAll, 0)} ₽ </p>
             </button>

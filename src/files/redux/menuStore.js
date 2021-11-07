@@ -42,7 +42,6 @@ export const menuReducer = (state = menu, action) => {
       return { ...state, points: state.points };
     case "LOAD_MENU":
       state.points[action.payload.shopIndex].menu = action.payload.menu;
-      console.log(state);
       return {
         ...state,
         shopName: action.payload.shopName,

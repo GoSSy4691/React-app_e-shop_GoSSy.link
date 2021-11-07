@@ -1,10 +1,11 @@
 import s from "./CSS/cart.module.css";
+import patternCart from "./CSS/patternCart.module.css";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import useDetectClickOut from "../../files/useDetectClickOut.js";
-import { ButtonAdd, ButtonDelete } from "./ButtonAddDelete.jsx";
+import { ButtonAdd, ButtonDelete } from "../menu/ButtonAddDelete.jsx";
 
 import polygonBack from "../../files/img/polygonBack.svg";
 import polygonForward from "../../files/img/polygonForward.svg";
@@ -51,12 +52,12 @@ export default function Cart(props) {
               </div>
             </DeliveryBtn>
             <button
-              className={s.buttonToOrder}
+              className={patternCart.buttonToOrder}
               onClick={() =>
                 props.setFooterShow(isNeedDelivery ? "delivery" : "takeOut")
               }
             >
-              <p>{t("Order")} </p>
+              <p>{t("Order_Verb")} </p>
               <p>{selectedFood.reduce((a, b) => a + b.costAll, 0)} ₽ </p>
             </button>
           </>

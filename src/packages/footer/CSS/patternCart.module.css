@@ -1,0 +1,28 @@
+.buttonToOrder {
+    font-size: 24px;
+    color: black;
+    background: #747474;
+    border-radius: 10px;
+    padding: 0 8px;
+    width: 310px;
+    height: 37px;
+    position: absolute;
+    bottom: 1%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: solid #1b1d23;
+    text-decoration: none;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.buttonToOrder p {
+    margin: 0;
+}
+
+.buttonToOrder:active {
+    box-shadow: 0 0 16px 4px rgba(0, 0, 0, 0.75);
+    transform: translate(-50%, 5%);
+}

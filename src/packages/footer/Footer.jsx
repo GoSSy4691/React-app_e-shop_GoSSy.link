@@ -2,8 +2,8 @@ import s from "./CSS/footer.module.css";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Route } from "react-router-dom";
-import Cart from "../menu/Cart.jsx";
-import Delivery from "../menu/Delivery.jsx";
+import Cart from "./Cart.jsx";
+import Delivery from "./Delivery.jsx";
 
 import shopCartIco from "../../files/img/shopCart.png";
 

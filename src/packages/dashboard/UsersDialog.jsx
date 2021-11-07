@@ -15,7 +15,7 @@ export default function UsersDialog() {
 
   function loadingUsers() {
     API.getUsers(cookies.get("Token"))
-      .then((res) => dispatch({ type: "LOAD_ALL_USERS", payload: res.data }))
+      .then((res) => dispatch({ type: "LOAD_ALL_USERS", payload: res.data.data }))
       .catch((error) => console.error(error));
     return <p>Loading...</p>;
   }
@@ -36,6 +36,7 @@ export default function UsersDialog() {
           <>
             <li className={patternDashboard.line} key={"title"}>
               <p style={{ width: 30 }}>№</p>
+              <p style={{ width: 120 }}>Login</p>
               <p style={{ width: 120 }}>Name</p>
               <p style={{ width: 130 }}>Last name</p>
               <p style={{ width: 180 }}>Phone</p>
@@ -45,10 +46,13 @@ export default function UsersDialog() {
               {usersData.map((el, index) => (
                 <li className={patternDashboard.line} key={index}>
                   <p style={{ width: 30 }}>{index + 1}</p>
-                  <p style={{ width: 130 }}>
-                    {el.name.length > 0 ? el.name : "None"}
+                  <p style={{ width: 120 }}>
+                    {el.login ? el.login : "None"}
                   </p>
                   <p style={{ width: 120 }}>
+                    {el.name.length > 0 ? el.name : "None"}
+                  </p>
+                  <p style={{ width: 130 }}>
                     {el.lastname.length > 0 ? el.lastname : "None"}
                   </p>
                   <p style={{ width: 180 }}>

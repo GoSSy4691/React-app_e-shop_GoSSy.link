@@ -22,10 +22,15 @@ export const menuReducer = (state = menu, action) => {
       return {
         ...state,
         userView: action.payload,
-        shopName: action.shopName,
-        shopIndex: action.shopIndex,
-        shopId: action.shopId ? action.shopId : state.shopId,
-        menuOnDisplay: action.menuOnDisplay,
+        shopName:
+          action.shopName === undefined ? state.shopName : action.shopName,
+        shopIndex:
+          action.shopIndex === undefined ? state.shopIndex : action.shopIndex,
+        shopId: action.shopId === undefined ? state.shopId : action.shopId,
+        menuOnDisplay:
+          action.menuOnDisplay === undefined
+            ? state.menuOnDisplay
+            : action.menuOnDisplay,
         categoryNow: 0,
       };
     case "LOAD_POINTS":

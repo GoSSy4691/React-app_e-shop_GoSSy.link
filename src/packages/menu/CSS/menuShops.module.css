@@ -7,31 +7,3 @@
   position: relative;
   padding-bottom: 60px;
 }
-
-.loadingDiv {
-  position: absolute;
-  bottom: 0;
-  width: fit-content;
-  animation: run 10s infinite;
-}
-
-.nameOnTop {
-  width: fit-content;
-  margin: 0;
-  padding-left: 70px;
-}
-
-.loadingImg {
-  width: 224px;
-  height: 100px;
-  position: absolute;
-}
-
-@keyframes run {
-  0% {
-    left: -40%;
-  }
-  100% {
-    left: 110%;
-  }
-}

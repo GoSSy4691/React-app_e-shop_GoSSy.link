@@ -29,21 +29,9 @@ export default function App() {
     window.close();
   }
 
-  function scrollObserver(el) {
-    if (el.scrollTop > 220) {
-      dispatch({ type: "MOVE_CATEGORY_DIV", payload: true });
-    } else {
-      dispatch({ type: "MOVE_CATEGORY_DIV", payload: false });
-    }
-    if (el.scrollHeight - el.scrollTop - el.clientHeight <= 200) {
-      dispatch({ type: "NEAR_TO_BOTTOM", payload: true });
-    }
-  }
-
   return (
     <CustomCursorDiv
       className="app"
-      onScroll={(e) => scrollObserver(e.target)}
       settings={settings}
     >
       <Header />

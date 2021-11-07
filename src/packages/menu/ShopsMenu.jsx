@@ -7,14 +7,10 @@ import GetImgFood from "./GetImgFood.jsx";
 import FoodsMenu from "./FoodsMenu.jsx";
 import AdminBar from "../dashboard/AdminBar.jsx";
 
-import loadingGoose from "../../files/img/loadingGoose.png";
-
 export default function ShopsMenu() {
   const userData = useSelector((state) => state.user.userData);
   const userView = useSelector((state) => state.menu.userView);
   const points = useSelector((state) => state.menu.points);
-  const shopId = useSelector((state) => state.menu.shopId);
-  const unloadedPages = useSelector((state) => state.menu.unloadedPages);
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
@@ -22,45 +18,42 @@ export default function ShopsMenu() {
     API.getPoints()
       .then((res) => {
         dispatch({ type: "LOAD_POINTS", payload: res.data.data });
-        dispatch({ type: "CHANGE_DISPLAY_NOW", payload: "Shops" });
       })
       .catch((err) => {
         console.error(err.message);
-        dispatch({ type: "ERROR_MESSAGE", payload: t("Error get points") });
         dispatch({ type: "CHANGE_DISPLAY_NOW", payload: "Error" });
       });
   }
 
-  async function openMenu(shopName, shopIndex) {
-    if (shopId === shopIndex) {
-      dispatch({ type: "CHANGE_DISPLAY_NOW", payload: "Menu" });
+  function openMenu(shopName, shopId, shopIndex) {
+    if (points[shopIndex].menu !== undefined) {
+      dispatch({
+        type: "CHANGE_DISPLAY_NOW",
+        payload: "Menu",
+        shopName: shopName,
+        shopIndex: shopIndex,
+        shopId: shopId,
+        menuOnDisplay: points[shopIndex].menu,
+      });
     } else {
-      let categoryBuffer = [];
       dispatch({ type: "CHANGE_DISPLAY_NOW", payload: "Loading" });
-      await API.getCategory(shopIndex)
+      API.getCategory(shopId)
         .then((res) => {
-          categoryBuffer = res.data.data;
+          dispatch({
+            type: "LOAD_CATEGORY",
+            payload: { shopIndex, categoryData: res.data.data },
+          });
         })
         .catch((err) => {
           console.error(err);
           dispatch({ type: "ERROR_MESSAGE", payload: t("Can't get category") });
         });
-      let howManyLoad = Math.round((window.innerWidth / 250) * 3);
-      API.getMenu(1, howManyLoad, shopIndex)
+      API.getMenu(1, 100, shopId)
         .then((res) => {
           dispatch({
             type: "LOAD_MENU",
-            payload: {
-              shopName,
-              id: shopIndex,
-              menu: res.data.data,
-              categoryBuffer,
-              loadedPages: 1,
-              unloadedPages: res.data.meta.pages - 1,
-              howManyLoad,
-            },
+            payload: { shopName, shopId, shopIndex, menu: res.data.data },
           });
-          dispatch({ type: "CHANGE_DISPLAY_NOW", payload: "Menu" });
         })
         .catch((err) => {
           console.error(err);
@@ -69,16 +62,12 @@ export default function ShopsMenu() {
     }
   }
 
-  function isAdminLogin() {
-    return userData !== undefined && userData.login === "admin";
-  }
-
   return (
     <>
-      {isAdminLogin() && <AdminBar />}
+      {userData.login === "admin" && <AdminBar />}
       <div
         className={s.showRoom}
-        style={isAdminLogin() ? { margin: "0 60px 0 100px" } : null}
+        style={userData.login === "admin" ? { margin: "0 60px 0 100px" } : null}
       >
         {(() => {
           switch (userView) {
@@ -93,11 +82,11 @@ export default function ShopsMenu() {
                     className={patternCSS.grid}
                     style={{ marginTop: "44px" }}
                   >
-                    {points.map((el) => (
+                    {points.map((el, index) => (
                       <button
                         className={patternCSS.shopOrFood}
                         key={el.id}
-                        onClick={() => openMenu(el.name, el.id)}
+                        onClick={() => openMenu(el.name, el.id, index)}
                       >
                         <GetImgFood imgName={el.icon} style={patternCSS.img} />
                         <div className={patternCSS.footerItem}>
@@ -118,22 +107,6 @@ export default function ShopsMenu() {
               console.error("User can't view it = " + userView);
           }
         })()}
-        <div
-          className={s.loadingDiv}
-          style={
-            userView === "Loading" || (userView === "Menu" && unloadedPages > 0)
-              ? null
-              : { display: "none" }
-          }
-        >
-          <h3 className={s.nameOnTop}>{t("Loading")}</h3>
-          <img
-            alt={"loadingImg"}
-            className={s.loadingImg}
-            src={loadingGoose}
-            key={Math.random()}
-          />
-        </div>
       </div>
     </>
   );

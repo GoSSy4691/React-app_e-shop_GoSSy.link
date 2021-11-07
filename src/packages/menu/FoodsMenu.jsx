@@ -3,7 +3,6 @@ import patternCSS from "../patternMenu.module.css";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import API from "../../files/API/api.js";
 import GetImgFood from "./GetImgFood.jsx";
 import CategoryBar from "./CategoryBar.jsx";
 import FoodDialog from "./FoodDialog.jsx";
@@ -16,46 +15,6 @@ export default function FoodsMenu() {
   const [search, setSearch] = useState("");
   const dispatch = useDispatch();
   const { t } = useTranslation();
-
-  //load more foods when scroll to the bottom
-  if (menu.isReachedBottom && menu.unloadedPages > 0) {
-    API.getMenu(menu.loadedPages + 1, menu.howManyLoad, menu.shopId)
-      .then((res) => {
-        dispatch({ type: "LOAD_MENU_MORE", payload: { menu: res.data.data } });
-      })
-      .catch((err) => {
-        console.error(err);
-        dispatch({ type: "ERROR_MESSAGE", payload: t("Can't load more foods") });
-      });
-  }
-
-  function searchFood(input) {
-    setSearch(input);
-    if (menu.unloadedPages > 0) {
-      dispatch({ type: "SUCCESS_MESSAGE", payload: t("Search in all menu") });
-      API.getMenu(1, 100, menu.shopId)
-        .then((res) => {
-          dispatch({
-            type: "LOAD_MENU",
-            payload: {
-              shopName: menu.shopName,
-              id: menu.shopId,
-              menu: res.data.data,
-              loadedPages: 1,
-              unloadedPages: res.data.meta.pages - 1,
-              setCategory: menu.categoryNow,
-            },
-          });
-        })
-        .catch((err) => {
-          console.error(err);
-          dispatch({
-            type: "ERROR_MESSAGE",
-            payload: t("Can't load all menu for search"),
-          });
-        });
-    }
-  }
 
   const menuChosen = menu.menuOnDisplay.filter(
     (el) => el.name.toLowerCase().search(search) >= 0
@@ -77,7 +36,7 @@ export default function FoodsMenu() {
         className={s.searchBar}
         placeholder={t("Search")}
         value={search}
-        onChange={(e) => searchFood(e.target.value.toLowerCase())}
+        onChange={(e) => setSearch(e.target.value.toLowerCase())}
       />
       <CategoryBar />
       {menuChosen.length === 0 ? (

@@ -1,66 +1,40 @@
 import s from "./CSS/categoryBar.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { useTranslation } from "react-i18next";
-import API from "../../files/API/api.js";
 
 export default function CategoryBar() {
   const menu = useSelector((state) => state.menu);
   const isCategoryMoved = useSelector((state) => state.scroll.isCategoryMoved);
   const dispatch = useDispatch();
-  const { t } = useTranslation();
 
   function changeCategory(id) {
     if (id === 0) {
       dispatch({ type: "CHANGE_CATEGORY", payload: id });
     } else {
-      //if you haven't all menu
-      if (menu.unloadedPages > 0) {
-        dispatch({ type: "SUCCESS_MESSAGE", payload: t("Search in all menu") });
-        API.getMenu(1, 100, menu.shopId)
-          .then((res) => {
-            dispatch({
-              type: "LOAD_MENU",
-              payload: {
-                shopName: menu.shopName,
-                id: menu.shopId,
-                menu: res.data.data,
-                loadedPages: 1,
-                unloadedPages: res.data.meta.pages - 1,
-                setCategory: id,
-              },
-            });
-          })
-          .catch((err) => {
-            console.error(err);
-            dispatch({ type: "ERROR_MESSAGE", payload: t("Can't load category") });
-          });
-      } else {
-        //if you have loaded menu
-        dispatch({ type: "CHANGE_CATEGORY", payload: id });
-      }
+      dispatch({ type: "CHANGE_CATEGORY", payload: id });
     }
   }
 
   return (
     <div className={`${s.barWrapper} ${isCategoryMoved && s.boxFly}`}>
-      {menu.category.map((p) => (
-        <div
-          className={s.categoryBox}
-          style={
-            p.id === menu.categoryNow
-              ? { borderBottom: "solid 2px #414EBB" }
-              : { borderBottom: "solid 2px #c4c4c4" }
-          }
-          key={p.id}
-        >
-          <button
-            className={s.categoryName}
-            onClick={() => changeCategory(p.id)}
+      {menu.points[menu.shopIndex].category &&
+        menu.points[menu.shopIndex].category.map((el) => (
+          <div
+            className={s.categoryBox}
+            style={
+              el.id === menu.categoryNow
+                ? { borderBottom: "solid 2px #414EBB" }
+                : { borderBottom: "solid 2px #c4c4c4" }
+            }
+            key={el.id}
           >
-            {p.name}
-          </button>
-        </div>
-      ))}
+            <button
+              className={s.categoryName}
+              onClick={() => changeCategory(el.id)}
+            >
+              {el.name}
+            </button>
+          </div>
+        ))}
     </div>
   );
 }

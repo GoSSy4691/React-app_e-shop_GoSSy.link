@@ -8,15 +8,15 @@ i18n
   .use(LanguageDetector) // detect user language
   .use(initReactI18next) // pass the i18n instance to react-i18next.
   .init({
-    fallbackLng: ["en-US"], // fallback language is english.
+    fallbackLng: false, // download only detected/chosen language.
+    whitelist: ["en", "ru"],
+    load: 'languageOnly',
 
     detection: {
       checkWhitelist: true, // options for language detection
     },
 
     debug: false,
-
-    whitelist: ["en-US", "ru-RU"],
 
     interpolation: {
       escapeValue: false, // no need for react. it escapes by default

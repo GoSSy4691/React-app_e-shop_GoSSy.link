@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import UsersDialog from "./UsersDialog.jsx";
 import PointsDialog from "./PointsDialog.jsx";
 import MenuDialog from "./MenuDialog.jsx";
+import OrdersDialog from "./OrdersDialog.jsx";
+import OrderContentDialog from './OrderContentDialog.jsx';
 
 import menuOpenSVG from "../../files/img/adminBar/00_menuOpen.svg";
 import userSVG from "../../files/img/adminBar/01_user.svg";
@@ -23,6 +25,8 @@ export default function AdminBar() {
       {barShow === "users" && <UsersDialog />}
       {barShow === "points" && <PointsDialog />}
       {barShow === "menu" && <MenuDialog />}
+      {barShow === "orders" && <OrdersDialog />}
+      {barShow === "orderContent" && <OrderContentDialog />}
       <div
         className={s.box}
         style={isBarOpen ? { width: "108px" } : { width: "40px" }}
@@ -47,8 +51,10 @@ export default function AdminBar() {
           <img alt={"menu"} src={menuSVG} />
           {isBarOpen && <p>Menu</p>}
         </button>
-        <button>
-          <img alt={"orders"} src={cartSVG} style={{ opacity: 0.3 }} />
+        <button
+          onClick={() => dispatch({ type: "SET_BAR_SHOW", payload: "orders" })}
+        >
+          <img alt={"orders"} src={cartSVG} />
           {isBarOpen && <p>Orders</p>}
         </button>
         <button>

@@ -32,6 +32,20 @@
     transform: translateY(5%);
 }
 
+.updateButton {
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    top: -5%;
+    right: 8%;
+    padding: 0;
+}
+
+.updateButton img {
+    height: inherit;
+    width: inherit;
+}
+
 .roomName {
     display: inline-flex;
     font-size: 21px;

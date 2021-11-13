@@ -1,11 +1,15 @@
-import s from "./login.module.css";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 export default function InputPhone(props) {
+  const [isPhoneWrong, setPhoneWrong] = useState(false);
   const inputElement = useRef(null);
+  const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   function phoneChecker(input) {
-    props.setPhoneWrong(false);
+    setPhoneWrong(false);
     let array = props.phone.split("");
     let lastEmptyIndex = array.findIndex((e) => e === "_");
     if (input === null) {
@@ -31,6 +35,15 @@ export default function InputPhone(props) {
     }
   }
 
+  function enterEvent() {
+    if (props.phone.indexOf("_") !== -1) {
+      setPhoneWrong(true);
+      dispatch({ type: "ERROR_MESSAGE", payload: t("Wrong phone number") });
+    } else {
+      props.doNext();
+    }
+  }
+
   useEffect(() => {
     if (props.phone !== undefined) {
       let array = props.phone.split("");
@@ -43,14 +56,12 @@ export default function InputPhone(props) {
       name={"phoneCode"}
       autoFocus
       ref={inputElement}
-      className={s.phoneForm}
-      style={props.isPhoneWrong ? { color: "red" } : null}
+      className={props.className}
+      style={isPhoneWrong ? { color: "red" } : null}
       value={props.phone}
       inputMode="numeric"
       onChange={(e) => phoneChecker(e.nativeEvent.data)}
-      onKeyPress={(e) =>
-        e.nativeEvent.key === "Enter" && props.sendPhoneNumber()
-      }
+      onKeyPress={(e) => e.nativeEvent.key === "Enter" && enterEvent()}
     />
   );
 }

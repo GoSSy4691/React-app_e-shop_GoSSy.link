@@ -15,55 +15,41 @@ export default function ByPhone() {
   const [phone, setPhone] = useState("8(___)___-__-__");
   const [code, setCode] = useState("____");
   const [isShowVYG, setShowVYG] = useState(true);
-  // move isPhoneWrong and isCodeWrong in child component
-  const [isPhoneWrong, setPhoneWrong] = useState(false);
-  const [isCodeWrong, setCodeWrong] = useState(false);
   const [inputType, setInputType] = useState("Phone");
   const dispatch = useDispatch();
   const cookies = new Cookies();
   const { t } = useTranslation();
 
   function sendPhoneNumber() {
-    if (phone.indexOf("_") !== -1) {
-      setPhoneWrong(true);
-      dispatch({ type: "ERROR_MESSAGE", payload: t("Wrong phone number") });
-    } else {
-      let preparedPhone = phone.split("").filter((e) => !isNaN(Number(e)));
-      preparedPhone = "+7" + preparedPhone.join("").slice(1);
-      dispatch({ type: "SUCCESS_MESSAGE", payload: t("Checking phone") });
-      API.authByPhone(preparedPhone)
-        .then(() => {
-          setInputType("Code");
-          setShowVYG(false);
-          dispatch({ type: "SUCCESS_MESSAGE", payload: t("Code sent") });
-        })
-        .catch((err) => {
-          dispatch({ type: "ERROR_MESSAGE", payload: err.message });
-        });
-    }
+    let preparedPhone = phone.split("").filter((e) => !isNaN(Number(e)));
+    preparedPhone = "+7" + preparedPhone.join("").slice(1);
+    dispatch({ type: "SUCCESS_MESSAGE", payload: t("Checking phone") });
+    API.authByPhone(preparedPhone)
+      .then(() => {
+        setInputType("Code");
+        setShowVYG(false);
+        dispatch({ type: "SUCCESS_MESSAGE", payload: t("Code sent") });
+      })
+      .catch((err) => {
+        dispatch({ type: "ERROR_MESSAGE", payload: err.message });
+      });
   }
 
   function sendCode() {
-    if (code.indexOf("_") !== -1) {
-      setCodeWrong(true);
-      dispatch({ type: "ERROR_MESSAGE", payload: t("Wrong code") });
-    } else {
-      dispatch({ type: "SUCCESS_MESSAGE", payload: t("Checking code") });
-      API.authByCode(code)
-        .then((res) => {
-          console.log("Your token is " + res.data.token);
-          dispatch({ type: "SUCCESS_MESSAGE", payload: t("Code confirmed") });
-          cookies.set("Token", res.data.token, { path: "/" });
-          dispatch({ type: "LOGIN_CONFIRM", payload: res.data[0] });
-          dispatch({ type: "PROFILE_DIALOG_SHOW" });
-          dispatch({ type: "PROFILE_DIALOG_STATE", payload: "Profile" });
-          dispatch({ type: "LOAD_PROFILE" });
-        })
-        .catch((err) => {
-          setCodeWrong(true);
-          dispatch({ type: "ERROR_MESSAGE", payload: err.message });
-        });
-    }
+    dispatch({ type: "SUCCESS_MESSAGE", payload: t("Checking code") });
+    API.authByCode(code)
+      .then((res) => {
+        console.log("Your token is " + res.data.token);
+        dispatch({ type: "SUCCESS_MESSAGE", payload: t("Code confirmed") });
+        cookies.set("Token", res.data.token, { path: "/" });
+        dispatch({ type: "LOGIN_CONFIRM", payload: res.data[0] });
+        dispatch({ type: "PROFILE_DIALOG_SHOW" });
+        dispatch({ type: "PROFILE_DIALOG_STATE", payload: "Profile" });
+        dispatch({ type: "LOAD_PROFILE" });
+      })
+      .catch((err) => {
+        dispatch({ type: "ERROR_MESSAGE", payload: err.message });
+      });
   }
 
   function getAnswerToken(method) {
@@ -80,17 +66,15 @@ export default function ByPhone() {
             <InputPhone
               phone={phone}
               setPhone={setPhone}
-              isPhoneWrong={isPhoneWrong}
-              setPhoneWrong={setPhoneWrong}
-              sendPhoneNumber={sendPhoneNumber}
+              doNext={sendPhoneNumber}
+              className={s.phoneForm}
             />
           ) : (
             <InputCode
               code={code}
               setCode={setCode}
-              isCodeWrong={isCodeWrong}
-              setCodeWrong={setCodeWrong}
-              sendCode={sendCode}
+              doNext={sendCode}
+              className={s.codeAfterNumber}
             />
           )}
         </div>

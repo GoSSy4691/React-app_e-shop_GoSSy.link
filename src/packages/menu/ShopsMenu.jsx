@@ -64,10 +64,10 @@ export default function ShopsMenu() {
 
   return (
     <>
-      {userData.login === "admin" && <AdminBar />}
+      {userData?.login === "admin" && <AdminBar />}
       <div
         className={s.showRoom}
-        style={userData.login === "admin" ? { margin: "0 60px 0 100px" } : null}
+        style={userData?.login === "admin" ? { margin: "0 60px 0 100px" } : null}
       >
         {(() => {
           switch (userView) {

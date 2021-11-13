@@ -1,11 +1,15 @@
-import s from "./login.module.css";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 export default function InputPhone(props) {
+  const [isCodeWrong, setCodeWrong] = useState(false);
   const inputElement = useRef(null);
+  const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   function codeChecker(input) {
-    props.setCodeWrong(false);
+    setCodeWrong(false);
     let array = props.code.split("");
     let lastEmptyIndex = array.findIndex((e) => e === "_");
     if (input === null) {
@@ -20,13 +24,22 @@ export default function InputPhone(props) {
     }
   }
 
+  function enterEvent() {
+    if (props.code.indexOf("_") !== -1) {
+      setCodeWrong(true);
+      dispatch({ type: "ERROR_MESSAGE", payload: t("Wrong code") });
+    } else {
+      props.doNext();
+    }
+  }
+
   useEffect(() => {
     if (props.code !== undefined) {
       let array = props.code.split("");
       inputElement.current.selectionEnd = array.findIndex((e) => e === "_");
     }
     if (props.code.split("").findIndex((e) => e === "_") === -1) {
-      props.sendCode();
+      props.doNext();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.code]);
@@ -36,14 +49,12 @@ export default function InputPhone(props) {
       name={"phoneCode"}
       autoFocus
       ref={inputElement}
-      className={s.codeAfterNumber}
-      style={props.isCodeWrong ? { color: "red" } : null}
+      className={props.className}
+      style={isCodeWrong ? { color: "red" } : null}
       value={props.code}
       inputMode="numeric"
       onChange={(e) => codeChecker(e.nativeEvent.data)}
-      onKeyPress={(e) =>
-        e.nativeEvent.key === "Enter" && props.sendCode()
-      }
+      onKeyPress={(e) => e.nativeEvent.key === "Enter" && enterEvent()}
     />
   );
 }

@@ -1,17 +1,13 @@
-import "./App.css";
+import s from "./app.module.css";
+import cursorCSS from "./cursor.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
 import Cookies from "universal-cookie";
-import styled from "styled-components";
 import Header from "./packages/header/Header.jsx";
 import About from "./packages/about/About.jsx";
 import ShopsMenu from "./packages/menu/ShopsMenu.jsx";
 import ErrorPopup from "./packages/popup/ErrorPopup.jsx";
 import Footer from "./packages/footer/Footer.jsx";
-
-import cursorAuto from "./files/img/cursor/cursorAuto.png";
-import cursorPointer from "./files/img/cursor/cursorPointer.png";
-import cursorInput from "./files/img/cursor/cursorInput.png";
 
 export default function App() {
   const settings = useSelector((state) => state.settings);
@@ -30,41 +26,15 @@ export default function App() {
   }
 
   return (
-    <CustomCursorDiv
-      className="app"
-      settings={settings}
-    >
+    <div className={`${s.app} ${settings.isCursorCustom && cursorCSS.app}`}>
       <Header />
       <Switch>
         <Route exact path="/" component={ShopsMenu} />
         <Route exact path="/about" component={About} />
         <Redirect to="/" />
       </Switch>
-      <Footer/>
+      <Footer />
       <ErrorPopup />
-    </CustomCursorDiv>
+    </div>
   );
 }
-
-const CustomCursorDiv = styled.div`
-  ${(props) =>
-    props.settings.isCursorCustom
-      ? `cursor: url(${cursorAuto}), auto;
-  * button {
-    cursor: url(${cursorPointer}), auto;
-  }
-  * a {
-    cursor: url(${cursorPointer}), auto;
-  }
-  * input {
-    cursor: url(${cursorInput}), auto;
-  }`
-      : `
-  * button {
-    cursor: pointer;
-  }
-  * a {
-    cursor: pointer;
-  }
-  `}
-`;

@@ -1,0 +1,14 @@
+.app {
+  cursor: url("files/img/cursor/cursorAuto.png"), auto;
+}
+.app button {
+  cursor: url("files/img/cursor/cursorPointer.png"), auto;
+}
+
+.app a {
+  cursor: url("files/img/cursor/cursorPointer.png"), auto;
+}
+
+.app input {
+  cursor: url("files/img/cursor/cursorInput.png"), auto;
+}

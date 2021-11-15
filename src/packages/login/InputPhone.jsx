@@ -35,12 +35,12 @@ export default function InputPhone(props) {
     }
   }
 
-  function enterEvent() {
+  function enterEvent(e) {
     if (props.phone.indexOf("_") !== -1) {
       setPhoneWrong(true);
       dispatch({ type: "ERROR_MESSAGE", payload: t("Wrong phone number") });
     } else {
-      props.doNext();
+      props.doNext(e);
     }
   }
 
@@ -61,7 +61,7 @@ export default function InputPhone(props) {
       value={props.phone}
       inputMode="numeric"
       onChange={(e) => phoneChecker(e.nativeEvent.data)}
-      onKeyPress={(e) => e.nativeEvent.key === "Enter" && enterEvent()}
+      onKeyPress={(e) => e.nativeEvent.key === "Enter" && enterEvent(e)}
     />
   );
 }

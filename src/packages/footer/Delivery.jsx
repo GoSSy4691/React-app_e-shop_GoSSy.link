@@ -5,10 +5,11 @@ import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import useDetectClickOut from "../../files/useDetectClickOut.js";
+import InputPhone from "../login/InputPhone.jsx";
 
 export default function Delivery(props) {
   const selectedFood = useSelector((state) => state.cart.selectedFood);
-  const [phone, setPhone] = useState("");
+  const [phone, setPhone] = useState("8(___)___-__-__");
   const [street, setStreet] = useState("");
   const [house, setHouse] = useState("");
   const [floor, setFloor] = useState("");
@@ -39,7 +40,6 @@ export default function Delivery(props) {
     }
     return { hours: hoursNow, minutes: minutesNow };
   }
-
   let timeForSelect = roundTime();
   const [hoursState, setHoursState] = useState(timeForSelect.hours);
   const [minutesState, setMinutesState] = useState(timeForSelect.minutes);
@@ -47,16 +47,11 @@ export default function Delivery(props) {
   return (
     <div className={s.boxDelivery} ref={refCart}>
       <div className={s.title}>{t("Delivery")}</div>
-      <input
-        name={"Phone"}
+      <InputPhone
+        phone={phone}
+        setPhone={setPhone}
+        doNext={(e) => e.target.nextSibling.focus()}
         className={s.input}
-        autoFocus
-        placeholder={t("phone")}
-        value={phone}
-        onChange={(e) => setPhone(e.target.value)}
-        onKeyPress={(e) =>
-          e.nativeEvent.key === "Enter" && console.log("Enter")
-        }
       />
       <input
         name={"Street"}
@@ -65,7 +60,8 @@ export default function Delivery(props) {
         value={street}
         onChange={(e) => setStreet(e.target.value)}
         onKeyPress={(e) =>
-          e.nativeEvent.key === "Enter" && console.log("Enter")
+          e.nativeEvent.key === "Enter" &&
+          e.target.nextElementSibling.firstChild.focus()
         }
       />
       <div className={s.inline}>
@@ -76,7 +72,7 @@ export default function Delivery(props) {
           value={house}
           onChange={(e) => setHouse(e.target.value)}
           onKeyPress={(e) =>
-            e.nativeEvent.key === "Enter" && console.log("Enter")
+            e.nativeEvent.key === "Enter" && e.target.nextSibling.focus()
           }
         />
         <input
@@ -86,7 +82,7 @@ export default function Delivery(props) {
           value={floor}
           onChange={(e) => setFloor(e.target.value)}
           onKeyPress={(e) =>
-            e.nativeEvent.key === "Enter" && console.log("Enter")
+            e.nativeEvent.key === "Enter" && e.target.nextSibling.focus()
           }
         />
         <input
@@ -96,7 +92,7 @@ export default function Delivery(props) {
           value={apart}
           onChange={(e) => setApart(e.target.value)}
           onKeyPress={(e) =>
-            e.nativeEvent.key === "Enter" && console.log("Enter")
+            e.nativeEvent.key === "Enter" && e.target.parentElement.nextSibling.focus()
           }
         />
       </div>
@@ -106,9 +102,9 @@ export default function Delivery(props) {
         placeholder={t("comment")}
         value={comment}
         onChange={(e) => setComment(e.target.value)}
-        onKeyPress={(e) =>
-          e.nativeEvent.key === "Enter" && console.log("Enter")
-        }
+        // onKeyPress={(e) =>
+        //   e.nativeEvent.key === "Enter" && console.log("Enter")
+        // }
       />
       <div className={s.timeTitle}>{t("Delivery time")}:</div>
       <div

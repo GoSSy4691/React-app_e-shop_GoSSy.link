@@ -7,7 +7,6 @@ import { cartReducer } from "./cartStore.js";
 import { menuReducer } from "./menuStore.js";
 import { userReducer } from "./userStore.js";
 import { errorReducer } from "./errorStore.js";
-import { scrollReducer } from "./scrollStore.js";
 import { adminReducer } from "./adminStore.js";
 import { settingsReducer } from "./settingsStore.js";
 
@@ -27,7 +26,6 @@ const rootReducer = combineReducers({
   menu: menuReducer,
   user: userReducer,
   error: errorReducer,
-  scroll: scrollReducer,
   admin: adminReducer,
   settings: persistReducer(localPersistConfig, settingsReducer)
 });

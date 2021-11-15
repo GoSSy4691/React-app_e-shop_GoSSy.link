@@ -25,8 +25,19 @@ export default function App() {
     window.close();
   }
 
+  function scrollObserver(el) {
+    if (el.scrollTop > 220) {
+      dispatch({ type: "MOVE_CATEGORY_DIV", payload: true });
+    } else {
+      dispatch({ type: "MOVE_CATEGORY_DIV", payload: false });
+    }
+  }
+
   return (
-    <div className={`${s.app} ${settings.isCursorCustom && cursorCSS.app}`}>
+    <div
+      className={`${s.app} ${settings.isCursorCustom && cursorCSS.app}`}
+      onScroll={(e) => scrollObserver(e.target)}
+    >
       <Header />
       <Switch>
         <Route exact path="/" component={ShopsMenu} />

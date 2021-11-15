@@ -15,10 +15,13 @@ export default function PointsDialog() {
 
   function loadingOrders() {
     API.getOrders(cookies.get("Token"))
-      .then((res) =>
-        dispatch({ type: "LOAD_ALL_ORDERS", payload: res.data.data })
-      )
-      .catch((error) => console.error(error));
+      .then((res) => {
+        dispatch({ type: "LOAD_ALL_ORDERS", payload: res.data.data });
+      })
+      .catch((error) => {
+        console.error(error);
+        dispatch({ type: "ERROR_MESSAGE", payload: "Loading orders error" });
+      });
     return <p>Loading...</p>;
   }
 
@@ -39,7 +42,10 @@ export default function PointsDialog() {
         >
           ✖
         </button>
-        <button className={patternMenu.updateButton} onClick={loadingOrders}>
+        <button
+          className={patternMenu.updateButton}
+          onClick={() => dispatch({ type: "REFRESH_AND_OPEN_ORDERS" })}
+        >
           <img alt={"update"} src={updateSVG} />
         </button>
         <div className={patternDashboard.usersTitle}>Orders:</div>
@@ -63,6 +69,7 @@ export default function PointsDialog() {
                     dispatch({
                       type: "SHOW_ORDER_CONTENT",
                       payload: el.content,
+                      id: el.id,
                     })
                   }
                 >

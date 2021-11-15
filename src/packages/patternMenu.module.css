@@ -41,6 +41,12 @@
     padding: 0;
 }
 
+.updateButton:active {
+    box-shadow: 0 0 16px 4px rgba(0, 0, 0, 0.75);
+    transform: translateY(5%);
+    border-radius:25px;
+}
+
 .updateButton img {
     height: inherit;
     width: inherit;

@@ -43,3 +43,23 @@
     padding-bottom: 20px;
     overflow-y: auto;
 }
+
+.closeOrderButton {
+    font-size: 24px;
+    color: black;
+    background: #747474;
+    border-radius: 10px;
+    padding: 0 8px;
+    width: 250px;
+    height: 37px;
+    border: solid #1b1d23;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 480px;
+}
+
+.closeOrderButton:active {
+    box-shadow: 0 0 16px 4px rgba(0, 0, 0, 0.75);
+    transform: translate(-50%, 5%);
+}

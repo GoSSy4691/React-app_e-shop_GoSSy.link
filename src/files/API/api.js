@@ -69,8 +69,20 @@ export default class API {
 
   static getOrders(token) {
     return axios.get("https://zloi.space/restaurant/api/orders", {
-      headers: { Authorization: `Bearer ${token}` },
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Cache-Control": "no-cache",
+      },
       params: { expand: "user,content,content.menu" },
     });
+  }
+
+  static deleteOrder(token, order_id) {
+    return axios.delete(
+      "https://zloi.space/restaurant/api/orders/" + order_id,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
   }
 }

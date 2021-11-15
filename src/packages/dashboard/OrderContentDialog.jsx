@@ -1,14 +1,32 @@
 import patternDashboard from "./CSS/patternDashboard.module.css";
 import patternMenu from "../patternMenu.module.css";
 import { useDispatch, useSelector } from "react-redux";
+import Cookies from "universal-cookie";
 import useDetectClickOut from "../../files/useDetectClickOut.js";
+import API from "../../files/API/api.js";
 
 export default function OrderContentDialog() {
-  const orderContent = useSelector((state) => state.admin.orderContent);
+  const theOrder = useSelector((state) => state.admin.theOrder);
   const dispatch = useDispatch();
   const refBox = useDetectClickOut(() =>
     dispatch({ type: "SET_BAR_SHOW", payload: "orders" })
   );
+  const cookies = new Cookies();
+
+  function closeOrder() {
+    API.deleteOrder(cookies.get("Token"), theOrder.id)
+      .then(() => {
+        dispatch({
+          type: "SUCCESS_MESSAGE",
+          payload: "Order " + theOrder.id + " deleted",
+        });
+        dispatch({ type: "REFRESH_AND_OPEN_ORDERS" });
+      })
+      .catch((error) => {
+        console.error(error);
+        dispatch({ type: "ERROR_MESSAGE", payload: "Delete order error" });
+      });
+  }
 
   return (
     <div className={patternMenu.darkenBackground}>
@@ -19,7 +37,9 @@ export default function OrderContentDialog() {
         >
           ✖
         </button>
-        <div className={patternDashboard.usersTitle}>Points:</div>
+        <div className={patternDashboard.usersTitle}>
+          Order id - {theOrder.id}:
+        </div>
         <li className={patternDashboard.line} key={"title"}>
           <p style={{ width: 30 }}>№</p>
           <p style={{ width: 300 }}>Food</p>
@@ -27,7 +47,7 @@ export default function OrderContentDialog() {
           <p style={{ width: 80 }}>Cost</p>
         </li>
         <div className={patternDashboard.scrollAbleDashboard}>
-          {orderContent.map((el, index) => (
+          {theOrder.content.map((el, index) => (
             <li
               className={`${patternDashboard.line} ${patternDashboard.hover}`}
               key={index}
@@ -39,6 +59,12 @@ export default function OrderContentDialog() {
             </li>
           ))}
         </div>
+        <button
+          className={patternDashboard.closeOrderButton}
+          onClick={closeOrder}
+        >
+          Close order
+        </button>
       </div>
     </div>
   );

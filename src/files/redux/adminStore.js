@@ -5,7 +5,7 @@ let adminStore = {
   menu: [],
   pointId: 0,
   orders: [],
-  orderContent: []
+  theOrder: [],
 };
 
 export const adminReducer = (state = adminStore, action) => {
@@ -29,8 +29,14 @@ export const adminReducer = (state = adminStore, action) => {
         : { ...state, menu: action.payload };
     case "LOAD_ALL_ORDERS":
       return { ...state, orders: action.payload };
+    case "REFRESH_AND_OPEN_ORDERS":
+      return { ...state, orders: [], barShow: "orders" };
     case "SHOW_ORDER_CONTENT":
-      return { ...state, barShow: "orderContent", orderContent: action.payload}
+      return {
+        ...state,
+        barShow: "orderContent",
+        theOrder: { id: action.id, content: action.payload },
+      };
     default:
       return state;
   }

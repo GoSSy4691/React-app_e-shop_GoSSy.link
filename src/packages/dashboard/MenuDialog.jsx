@@ -2,7 +2,7 @@ import patternDashboard from "./CSS/patternDashboard.module.css";
 import patternMenu from "../patternMenu.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import useDetectClickOut from "../../files/useDetectClickOut.js";
-import API from "../../files/API/api.js";
+import zloiAPI from "../../files/API/zloiAPI.js";
 
 import imageSVG from "../../files/img/adminBar/images.svg";
 
@@ -15,7 +15,7 @@ export default function MenuDialog() {
   );
 
   function loadingMenu() {
-    API.getMenu(1, 100, pointId)
+    zloiAPI.getMenu(1, 100, pointId)
       .then((res) =>
         dispatch({ type: "LOAD_ALL_MENU", payload: res.data.data })
       )

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import Cookies from "universal-cookie";
 import { useTranslation } from "react-i18next";
-import API from "../../files/API/api.js";
+import zloiAPI from "../../files/API/zloiAPI.js";
 import InputPhone from "./InputPhone.jsx";
 import InputCode from "./InputCode.jsx";
 
@@ -24,7 +24,7 @@ export default function ByPhone() {
     let preparedPhone = phone.split("").filter((e) => !isNaN(Number(e)));
     preparedPhone = "+7" + preparedPhone.join("").slice(1);
     dispatch({ type: "SUCCESS_MESSAGE", payload: t("Checking phone") });
-    API.authByPhone(preparedPhone)
+    zloiAPI.authByPhone(preparedPhone)
       .then(() => {
         setInputType("Code");
         setShowVYG(false);
@@ -37,7 +37,7 @@ export default function ByPhone() {
 
   function sendCode() {
     dispatch({ type: "SUCCESS_MESSAGE", payload: t("Checking code") });
-    API.authByCode(code)
+    zloiAPI.authByCode(code)
       .then((res) => {
         console.log("Your token is " + res.data.token);
         dispatch({ type: "SUCCESS_MESSAGE", payload: t("Code confirmed") });
@@ -53,7 +53,7 @@ export default function ByPhone() {
   }
 
   function getAnswerToken(method) {
-    API.authByOAuth(method);
+    zloiAPI.authByOAuth(method);
     dispatch({ type: "PROFILE_DIALOG_STATE", payload: "Wait" });
   }
 

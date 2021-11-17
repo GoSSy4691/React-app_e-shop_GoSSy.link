@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import Cookies from "universal-cookie";
 import useDetectClickOut from "../../files/useDetectClickOut.js";
-import API from "../../files/API/api.js";
+import zloiAPI from "../../files/API/zloiAPI.js";
 import InputPhone from "../login/InputPhone.jsx";
 
 export default function Delivery(props) {
@@ -52,7 +52,7 @@ export default function Delivery(props) {
     if (cookies.get("Token") === undefined) {
       dispatch({ type: "ERROR_MESSAGE", payload: t("Please log in") });
     } else {
-      API.createOrder(cookies.get("Token"), {
+      zloiAPI.createOrder(cookies.get("Token"), {
         menu: selectedFood.map((el) => ({ id: el.id, count: el.amount })),
         comment,
       })

@@ -2,7 +2,7 @@ import patternDashboard from "./CSS/patternDashboard.module.css";
 import patternMenu from "../patternMenu.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import useDetectClickOut from "../../files/useDetectClickOut.js";
-import API from "../../files/API/api.js";
+import zloiAPI from "../../files/API/zloiAPI.js";
 
 export default function PointsDialog() {
   const pointsData = useSelector((state) => state.admin.points);
@@ -12,7 +12,7 @@ export default function PointsDialog() {
   );
 
   function loadingPoints() {
-    API.getPoints()
+    zloiAPI.getPoints()
       .then((res) =>
         dispatch({ type: "LOAD_ALL_POINTS", payload: res.data.data })
       )

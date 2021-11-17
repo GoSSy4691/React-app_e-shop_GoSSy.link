@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import Cookies from "universal-cookie";
 import { useTranslation } from "react-i18next";
-import API from "../../files/API/api.js";
+import zloiAPI from "../../files/API/zloiAPI.js";
 import LogoImg from "./logoGoose/LogoImage.jsx";
 import Login from "../login/Login.jsx";
 import Settings from "../Settings.jsx";
@@ -20,7 +20,7 @@ export default function Header() {
   //load profile
   if (headerStatus === "Loading") {
     console.log("Loading profile");
-    API.getProfile(cookies.get("Token"))
+    zloiAPI.getProfile(cookies.get("Token"))
       .then((res) => {
         dispatch({ type: "LOGIN_CONFIRM", payload: res.data[0] });
         dispatch({ type: "PROFILE_DIALOG_STATE", payload: "Profile" });

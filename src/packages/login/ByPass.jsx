@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import Cookies from "universal-cookie";
 import { useTranslation } from "react-i18next";
-import API from "../../files/API/api.js";
+import zloiAPI from "../../files/API/zloiAPI.js";
 
 import eye_show from "../../files/img/visible_show.png";
 import eye_hide from "../../files/img/visible_hide.png";
@@ -19,7 +19,7 @@ export default function ByPass() {
 
   function getAnswerPass() {
     dispatch({ type: "SUCCESS_MESSAGE", payload: t("Loading") });
-    API.authByPassword(login, password)
+    zloiAPI.authByPassword(login, password)
       .then((res) => {
         console.log("You token is " + res.data.token);
         dispatch({ type: "SUCCESS_MESSAGE", payload: t("Log in confirmed") });

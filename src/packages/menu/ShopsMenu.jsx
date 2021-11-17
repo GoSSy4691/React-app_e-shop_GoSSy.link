@@ -2,7 +2,7 @@ import s from "./CSS/menuShops.module.css";
 import patternCSS from "../patternMenu.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import API from "../../files/API/api.js";
+import zloiAPI from "../../files/API/zloiAPI.js";
 import GetImgFood from "./GetImgFood.jsx";
 import FoodsMenu from "./FoodsMenu.jsx";
 import AdminBar from "../dashboard/AdminBar.jsx";
@@ -15,7 +15,7 @@ export default function ShopsMenu() {
   const { t } = useTranslation();
 
   function getPoints() {
-    API.getPoints()
+    zloiAPI.getPoints()
       .then((res) => {
         dispatch({ type: "LOAD_POINTS", payload: res.data.data });
       })
@@ -37,7 +37,7 @@ export default function ShopsMenu() {
       });
     } else {
       dispatch({ type: "CHANGE_DISPLAY_NOW", payload: "Loading" });
-      API.getCategory(shopId)
+      zloiAPI.getCategory(shopId)
         .then((res) => {
           dispatch({
             type: "LOAD_CATEGORY",
@@ -48,7 +48,7 @@ export default function ShopsMenu() {
           console.error(err);
           dispatch({ type: "ERROR_MESSAGE", payload: t("Can't get category") });
         });
-      API.getMenu(1, 100, shopId)
+      zloiAPI.getMenu(1, 100, shopId)
         .then((res) => {
           dispatch({
             type: "LOAD_MENU",

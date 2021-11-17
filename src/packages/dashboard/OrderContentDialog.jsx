@@ -3,7 +3,7 @@ import patternMenu from "../patternMenu.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import Cookies from "universal-cookie";
 import useDetectClickOut from "../../files/useDetectClickOut.js";
-import API from "../../files/API/api.js";
+import zloiAPI from "../../files/API/zloiAPI.js";
 
 export default function OrderContentDialog() {
   const theOrder = useSelector((state) => state.admin.theOrder);
@@ -14,7 +14,7 @@ export default function OrderContentDialog() {
   const cookies = new Cookies();
 
   function closeOrder() {
-    API.deleteOrder(cookies.get("Token"), theOrder.id)
+    zloiAPI.deleteOrder(cookies.get("Token"), theOrder.id)
       .then(() => {
         dispatch({
           type: "SUCCESS_MESSAGE",

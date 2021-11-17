@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export default class API {
+export default class zloiAPI {
   constructor() {
     this._phone = "";
   }

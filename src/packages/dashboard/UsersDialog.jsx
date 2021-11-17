@@ -3,7 +3,7 @@ import patternMenu from "../patternMenu.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import Cookies from "universal-cookie";
 import useDetectClickOut from "../../files/useDetectClickOut.js";
-import API from "../../files/API/api.js";
+import zloiAPI from "../../files/API/zloiAPI.js";
 
 export default function UsersDialog() {
   const usersData = useSelector((state) => state.admin.users);
@@ -14,7 +14,7 @@ export default function UsersDialog() {
   );
 
   function loadingUsers() {
-    API.getUsers(cookies.get("Token"))
+    zloiAPI.getUsers(cookies.get("Token"))
       .then((res) => dispatch({ type: "LOAD_ALL_USERS", payload: res.data.data }))
       .catch((error) => console.error(error));
     return <p>Loading...</p>;

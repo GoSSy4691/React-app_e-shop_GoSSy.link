@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Cookies from "universal-cookie";
 import useDetectClickOut from "../../files/useDetectClickOut.js";
 
-import API from "../../files/API/api.js";
+import zloiAPI from "../../files/API/zloiAPI.js";
 import updateSVG from "../../files/img/update-arrows.svg";
 
 export default function PointsDialog() {
@@ -17,7 +17,7 @@ export default function PointsDialog() {
   const scrollAbleDiv = useRef(null);
 
   function loadingOrders() {
-    API.getOrders(cookies.get("Token"))
+    zloiAPI.getOrders(cookies.get("Token"))
       .then((res) => {
         dispatch({ type: "LOAD_ALL_ORDERS", payload: res.data.data });
       })

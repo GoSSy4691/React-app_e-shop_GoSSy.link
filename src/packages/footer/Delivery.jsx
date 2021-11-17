@@ -49,17 +49,21 @@ export default function Delivery(props) {
   const [minutesState, setMinutesState] = useState(timeForSelect.minutes);
 
   function createOrder() {
-    API.createOrder(cookies.get("Token"), {
-      menu: selectedFood.map((el) => ({ id: el.id, count: el.amount })),
-      comment,
-    })
-      .then(() => {
-        dispatch({ type: "SUCCESS_MESSAGE", payload: t("Order confirmed") });
+    if (cookies.get("Token") === undefined) {
+      dispatch({ type: "ERROR_MESSAGE", payload: t("Please log in") });
+    } else {
+      API.createOrder(cookies.get("Token"), {
+        menu: selectedFood.map((el) => ({ id: el.id, count: el.amount })),
+        comment,
       })
-      .catch((error) => {
-        console.error(error.response);
-        dispatch({ type: "ERROR_MESSAGE", payload: t("Create order error") });
-      });
+        .then(() => {
+          dispatch({ type: "SUCCESS_MESSAGE", payload: t("Order confirmed") });
+        })
+        .catch((error) => {
+          console.error(error.response);
+          dispatch({ type: "ERROR_MESSAGE", payload: t("Create order error") });
+        });
+    }
   }
 
   return (

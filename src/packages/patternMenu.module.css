@@ -11,7 +11,7 @@
     backdrop-filter: blur(10px);
 }
 
-.closeButton {
+.exitButtonBig {
     height: 55px;
     width: 55px;
     position: absolute;
@@ -27,7 +27,7 @@
     background: white;
 }
 
-.closeButton:active {
+.exitButtonBig:active {
     box-shadow: 0 0 16px 4px rgba(0, 0, 0, 0.75);
     transform: translateY(5%);
 }
@@ -82,6 +82,7 @@
     display: flex;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.75);
     border-radius: 10px;
+    padding: 0;
 }
 
 .shopOrFood:active {

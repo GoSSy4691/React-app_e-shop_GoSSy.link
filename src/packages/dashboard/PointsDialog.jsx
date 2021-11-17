@@ -24,7 +24,7 @@ export default function PointsDialog() {
     <div className={patternMenu.darkenBackground}>
       <div className={patternDashboard.showBox} ref={refBox}>
         <button
-          className={patternMenu.closeButton}
+          className={patternMenu.exitButtonBig}
           onClick={() => dispatch({ type: "SET_BAR_SHOW" })}
         >
           ✖

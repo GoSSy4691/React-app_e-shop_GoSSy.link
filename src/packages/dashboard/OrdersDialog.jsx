@@ -46,7 +46,7 @@ export default function PointsDialog() {
     <div className={patternMenu.darkenBackground}>
       <div className={patternDashboard.showBox} ref={refBox}>
         <button
-          className={patternMenu.closeButton}
+          className={patternMenu.exitButtonBig}
           onClick={() => dispatch({ type: "SET_BAR_SHOW" })}
         >
           ✖
@@ -55,7 +55,7 @@ export default function PointsDialog() {
           className={patternMenu.updateButton}
           onClick={() => dispatch({ type: "REFRESH_AND_OPEN_ORDERS" })}
         >
-          <img alt={"update"} src={updateSVG} />
+          <img alt={"update"} src={updateSVG} draggable="false"/>
         </button>
         <div className={patternDashboard.usersTitle}>Orders:</div>
         {orders.length === 0 ? (

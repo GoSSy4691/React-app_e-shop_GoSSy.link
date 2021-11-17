@@ -28,7 +28,7 @@ export default function FoodsMenu() {
             dispatch({ type: "CHANGE_DISPLAY_NOW", payload: "Shops" })
           }
         >
-          <img alt={"Back"} src={arrowBack} />
+          <img alt={"Back"} src={arrowBack} draggable="false"/>
         </button>
         <span>{menu.shopName}</span>
       </div>

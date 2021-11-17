@@ -16,7 +16,7 @@ export default function Settings(props) {
     <div className={patternMenu.darkenBackground}>
       <div className={patternDashboard.showBox} ref={refBox}>
         <button
-          className={patternMenu.closeButton}
+          className={patternMenu.exitButtonBig}
           onClick={() => props.setShowSettings(false)}
         >
           ✖

@@ -51,6 +51,7 @@ export default function FoodsMenu() {
                 setChosenFood({
                   isShow: true,
                   name: el.name,
+                  id: el.id,
                   cost: el.cost,
                   icon: el.icon,
                   description: el.description,

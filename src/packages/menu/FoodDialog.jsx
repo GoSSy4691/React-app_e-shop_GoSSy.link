@@ -51,6 +51,7 @@ export default function FoodDialog(props) {
                 payload: {
                   name: props.chosenFood.name,
                   cost: props.chosenFood.cost,
+                  id: props.chosenFood.id
                 },
                 delivery: {
                   shopName: menu.shopName,

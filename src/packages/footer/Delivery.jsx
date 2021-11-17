@@ -1,10 +1,12 @@
 import s from "./CSS/delivery.module.css";
 import patternCart from "./CSS/patternCart.module.css";
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
+import Cookies from "universal-cookie";
 import useDetectClickOut from "../../files/useDetectClickOut.js";
+import API from "../../files/API/api.js";
 import InputPhone from "../login/InputPhone.jsx";
 
 export default function Delivery(props) {
@@ -18,7 +20,9 @@ export default function Delivery(props) {
   const [promocode, setPromocode] = useState("");
   const [isDeliveryNow, setDeliveryNow] = useState(true);
   const refCart = useDetectClickOut(props.setFooterShow);
+  const dispatch = useDispatch();
   const { t } = useTranslation();
+  const cookies = new Cookies();
 
   // need rework for call only one time
   let allFoodsPrice = selectedFood.reduce((a, b) => a + b.costAll, 0);
@@ -43,6 +47,20 @@ export default function Delivery(props) {
   let timeForSelect = roundTime();
   const [hoursState, setHoursState] = useState(timeForSelect.hours);
   const [minutesState, setMinutesState] = useState(timeForSelect.minutes);
+
+  function createOrder() {
+    API.createOrder(cookies.get("Token"), {
+      menu: selectedFood.map((el) => ({ id: el.id, count: el.amount })),
+      comment,
+    })
+      .then(() => {
+        dispatch({ type: "SUCCESS_MESSAGE", payload: t("Order confirmed") });
+      })
+      .catch((error) => {
+        console.error(error.response);
+        dispatch({ type: "ERROR_MESSAGE", payload: t("Create order error") });
+      });
+  }
 
   return (
     <div className={s.boxDelivery} ref={refCart}>
@@ -92,7 +110,8 @@ export default function Delivery(props) {
           value={apart}
           onChange={(e) => setApart(e.target.value)}
           onKeyPress={(e) =>
-            e.nativeEvent.key === "Enter" && e.target.parentElement.nextSibling.focus()
+            e.nativeEvent.key === "Enter" &&
+            e.target.parentElement.nextSibling.focus()
           }
         />
       </div>
@@ -193,7 +212,7 @@ export default function Delivery(props) {
       <button
         className={patternCart.buttonToOrder}
         style={{}}
-        onClick={() => console.log("Button")}
+        onClick={createOrder}
       >
         <p style={{ width: "100%" }}>{t("Order_Verb")}</p>
       </button>

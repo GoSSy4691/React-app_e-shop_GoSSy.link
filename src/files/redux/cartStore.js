@@ -22,6 +22,7 @@ export const cartReducer = (state = cart, action) => {
       if (howManyItems() === 0) {
         state.selectedFood.push({
           name: payload.name,
+          id: payload.id,
           costOne: payload.cost,
           amount: 1,
           costAll: payload.cost,

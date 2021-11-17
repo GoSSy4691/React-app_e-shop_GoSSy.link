@@ -85,4 +85,13 @@ export default class API {
       }
     );
   }
+
+  static createOrder(token, order) {
+    return axios.post("https://zloi.space/restaurant/api/orders", order,{
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+  }
 }

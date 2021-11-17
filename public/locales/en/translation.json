@@ -85,5 +85,7 @@
   "Can't load more foods": "Can't load more foods",
   "Can't load all menu for search": "Can't load all menu for search",
   "Error get points": "Error get points",
-  "Can't get category": "Can't get category"
+  "Can't get category": "Can't get category",
+  "Order confirmed": "Order confirmed",
+  "Create order error": "Create order error"
 }

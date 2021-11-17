@@ -39,11 +39,11 @@
 .imgBox span {
     position: absolute;
     font-size: 21px;
-    width: 480px;
     color: white;
 }
 
 .nameBox {
+    width: 480px;
     height: 63px;
     background: linear-gradient(180deg, #000000 0%, rgba(196, 196, 196, 0) 100%);
     border-radius: 10px 10px 0 0;
@@ -57,8 +57,10 @@
 
 .cost {
     bottom: 0;
-    margin-left: 15px;
-    margin-bottom: 15px;
+    padding-left: 15px;
+    padding-bottom: 15px;
+    width: 465px;
+    background: linear-gradient(180deg, rgba(196, 196, 196, 0) 0%, #101010 100%);
 }
 
 .middleBox {

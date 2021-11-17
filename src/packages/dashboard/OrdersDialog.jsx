@@ -1,17 +1,20 @@
 import patternDashboard from "./CSS/patternDashboard.module.css";
 import patternMenu from "../patternMenu.module.css";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Cookies from "universal-cookie";
 import useDetectClickOut from "../../files/useDetectClickOut.js";
-import API from "../../files/API/api.js";
 
+import API from "../../files/API/api.js";
 import updateSVG from "../../files/img/update-arrows.svg";
 
 export default function PointsDialog() {
   const orders = useSelector((state) => state.admin.orders);
+  const scrollInOrders = useSelector((state) => state.admin.scrollInOrders);
   const dispatch = useDispatch();
   const cookies = new Cookies();
   const refBox = useDetectClickOut(() => dispatch({ type: "SET_BAR_SHOW" }));
+  const scrollAbleDiv = useRef(null);
 
   function loadingOrders() {
     API.getOrders(cookies.get("Token"))
@@ -32,6 +35,12 @@ export default function PointsDialog() {
       time: t[3] + ":" + t[4],
     };
   }
+
+  useEffect(() => {
+    if (scrollAbleDiv.current !== null) {
+      scrollAbleDiv.current.scrollTop = scrollInOrders;
+    }
+  }, [scrollInOrders]);
 
   return (
     <div className={patternMenu.darkenBackground}>
@@ -60,18 +69,25 @@ export default function PointsDialog() {
               <p style={{ width: 120 }}>Total cost</p>
               <p style={{ width: 100 }}>Status</p>
             </li>
-            <div className={patternDashboard.scrollAbleDashboard}>
+            <div
+              className={patternDashboard.scrollAbleDashboard}
+              ref={scrollAbleDiv}
+            >
               {orders.map((el, index) => (
                 <li
                   className={`${patternDashboard.line} ${patternDashboard.hover}`}
                   key={index}
-                  onClick={() =>
+                  onClick={(e) => {
                     dispatch({
                       type: "SHOW_ORDER_CONTENT",
                       payload: el.content,
                       id: el.id,
-                    })
-                  }
+                      scrollPosition:
+                        e.target.nodeName === "P"
+                          ? e.target.parentElement.parentElement.scrollTop
+                          : e.target.parentElement.scrollTop,
+                    });
+                  }}
                 >
                   <p style={{ width: 30 }}>{el.id}</p>
                   <p style={{ width: 120 }}>

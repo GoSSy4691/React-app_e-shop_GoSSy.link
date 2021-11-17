@@ -5,6 +5,7 @@ let adminStore = {
   menu: [],
   pointId: 0,
   orders: [],
+  scrollInOrders: 0,
   theOrder: [],
 };
 
@@ -35,7 +36,11 @@ export const adminReducer = (state = adminStore, action) => {
       return {
         ...state,
         barShow: "orderContent",
-        theOrder: { id: action.id, content: action.payload },
+        theOrder: {
+          id: action.id,
+          content: action.payload,
+        },
+        scrollInOrders: action.scrollPosition,
       };
     default:
       return state;

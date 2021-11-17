@@ -64,57 +64,69 @@ export default function Delivery(props) {
 
   return (
     <div className={s.boxDelivery} ref={refCart}>
-      <div className={s.title}>{t("Delivery")}</div>
-      <InputPhone
-        phone={phone}
-        setPhone={setPhone}
-        doNext={(e) => e.target.nextSibling.focus()}
-        className={s.input}
-      />
-      <input
-        name={"Street"}
-        className={s.input}
-        placeholder={t("street")}
-        value={street}
-        onChange={(e) => setStreet(e.target.value)}
-        onKeyPress={(e) =>
-          e.nativeEvent.key === "Enter" &&
-          e.target.nextElementSibling.firstChild.focus()
-        }
-      />
-      <div className={s.inline}>
-        <input
-          name={"House"}
-          className={s.inputHalf}
-          placeholder={t("house")}
-          value={house}
-          onChange={(e) => setHouse(e.target.value)}
-          onKeyPress={(e) =>
-            e.nativeEvent.key === "Enter" && e.target.nextSibling.focus()
-          }
-        />
-        <input
-          name={"Floor"}
-          className={s.inputHalf}
-          placeholder={t("floor")}
-          value={floor}
-          onChange={(e) => setFloor(e.target.value)}
-          onKeyPress={(e) =>
-            e.nativeEvent.key === "Enter" && e.target.nextSibling.focus()
-          }
-        />
-        <input
-          name={"Apart"}
-          className={s.inputHalf}
-          placeholder={t("apart")}
-          value={apart}
-          onChange={(e) => setApart(e.target.value)}
-          onKeyPress={(e) =>
-            e.nativeEvent.key === "Enter" &&
-            e.target.parentElement.nextSibling.focus()
-          }
-        />
-      </div>
+      {props.footerShow === "delivery" && (
+        <>
+          <div className={s.title}>{t("Delivery")}</div>
+          <InputPhone
+            phone={phone}
+            setPhone={setPhone}
+            doNext={(e) => e.target.nextSibling.focus()}
+            className={s.input}
+          />
+          <input
+            name={"Street"}
+            className={s.input}
+            placeholder={t("street")}
+            value={street}
+            onChange={(e) => setStreet(e.target.value)}
+            onKeyPress={(e) =>
+              e.nativeEvent.key === "Enter" &&
+              e.target.nextElementSibling.firstChild.focus()
+            }
+          />
+          <div className={s.inline}>
+            <input
+              name={"House"}
+              className={s.inputHalf}
+              placeholder={t("house")}
+              value={house}
+              onChange={(e) => setHouse(e.target.value)}
+              onKeyPress={(e) =>
+                e.nativeEvent.key === "Enter" && e.target.nextSibling.focus()
+              }
+            />
+            <input
+              name={"Floor"}
+              className={s.inputHalf}
+              placeholder={t("floor")}
+              value={floor}
+              onChange={(e) => setFloor(e.target.value)}
+              onKeyPress={(e) =>
+                e.nativeEvent.key === "Enter" && e.target.nextSibling.focus()
+              }
+            />
+            <input
+              name={"Apart"}
+              className={s.inputHalf}
+              placeholder={t("apart")}
+              value={apart}
+              onChange={(e) => setApart(e.target.value)}
+              onKeyPress={(e) =>
+                e.nativeEvent.key === "Enter" &&
+                e.target.parentElement.nextSibling.focus()
+              }
+            />
+          </div>
+        </>
+      )}
+      {props.footerShow === "takeOut" && (
+        <>
+          <div className={s.title}>{t("Take out")}</div>
+          <div className={s.shopAddress}>
+            <p>shop's address</p>
+          </div>
+        </>
+      )}
       <input
         name={"Comment"}
         className={s.commentInput}
@@ -180,34 +192,38 @@ export default function Delivery(props) {
           </select>
         </div>
       </div>
-      <div className={s.inline}>
-        <input
-          name={"Promocode"}
-          className={s.promocodeInput}
-          placeholder={t("PROMOCODE")}
-          value={promocode}
-          onChange={(e) => setPromocode(e.target.value)}
-          onKeyPress={(e) =>
-            e.nativeEvent.key === "Enter" && console.log("Enter")
-          }
-        />
-        <div className={s.cartTitle}>{t("Payment method")}</div>
-        <select className={s.payment}>
-          <option>{t("Cart_Preposition")}</option>
-          <option>{t("Cash_Preposition")}</option>
-        </select>
-      </div>
-      <div className={s.inlineOrder}>
-        <p>{t("Order_Noun")}</p>
-        <p>{allFoodsPrice} ₽</p>
-      </div>
-      <div className={s.inlineDelivery}>
-        <p>{t("Delivery")}</p>
-        <p>{deliveryCalculate} ₽</p>
-      </div>
-      <div className={s.inlineTotal}>
-        <p>{t("Total")}</p>
-        <p>{allFoodsPrice + deliveryCalculate} ₽</p>
+      <div className={s.footer}>
+        <div className={s.inline}>
+          <input
+            name={"Promocode"}
+            className={s.promocodeInput}
+            placeholder={t("PROMOCODE")}
+            value={promocode}
+            onChange={(e) => setPromocode(e.target.value)}
+            onKeyPress={(e) =>
+              e.nativeEvent.key === "Enter" && console.log("Enter")
+            }
+          />
+          <div className={s.cartTitle}>{t("Payment method")}</div>
+          <select className={s.payment}>
+            <option>{t("Cart_Preposition")}</option>
+            <option>{t("Cash_Preposition")}</option>
+          </select>
+        </div>
+        <div className={s.inlineOrder}>
+          <p>{t("Order_Noun")}</p>
+          <p>{allFoodsPrice} ₽</p>
+        </div>
+        {props.footerShow === "delivery" && (
+          <div className={s.inlineDelivery}>
+            <p>{t("Delivery")}</p>
+            <p>{deliveryCalculate} ₽</p>
+          </div>
+        )}
+        <div className={s.inlineTotal}>
+          <p>{t("Total")}</p>
+          <p>{allFoodsPrice + deliveryCalculate} ₽</p>
+        </div>
       </div>
       <button
         className={patternCart.buttonToOrder}

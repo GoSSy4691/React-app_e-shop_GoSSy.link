@@ -18,7 +18,9 @@ export default function Footer() {
   return (
     <Route exact path="/">
       {footerShow === "cart" && <Cart setFooterShow={setFooterShow} />}
-      {footerShow === "delivery" && <Delivery setFooterShow={setFooterShow} />}
+      {(footerShow === "delivery" || footerShow === "takeOut") && (
+        <Delivery footerShow={footerShow} setFooterShow={setFooterShow} />
+      )}
       <button
         title={"Cart"}
         className={s.shopIcoButton}

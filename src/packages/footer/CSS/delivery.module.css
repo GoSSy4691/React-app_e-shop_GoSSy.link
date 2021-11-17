@@ -17,8 +17,22 @@
     margin-top: 13px;
 }
 
+.shopAddress {
+    width: 310px;
+    height: 65px;
+}
+
+.shopAddress p {
+    padding-top: 15px;
+}
+
 .inline {
     display: inline-flex;
+}
+
+.footer{
+    position: absolute;
+    bottom: 52px;
 }
 
 .boxDelivery input {
@@ -60,8 +74,8 @@
 .cartTitle {
     font-size: 12px;
     position: absolute;
-    bottom: 170px;
-    left: 210px;
+    bottom: 120px;
+    left: 195px;
 }
 
 .payment {

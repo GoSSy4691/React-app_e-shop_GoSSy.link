@@ -18,6 +18,7 @@ export default function Delivery(props) {
   const [apart, setApart] = useState("");
   const [comment, setComment] = useState("");
   const [promocode, setPromocode] = useState("");
+  const [isPromocodeRight, setPromocodeRight] = useState(true);
   const [isDeliveryNow, setDeliveryNow] = useState(true);
   const refCart = useDetectClickOut(props.setFooterShow);
   const dispatch = useDispatch();
@@ -64,6 +65,22 @@ export default function Delivery(props) {
           console.error(error.response);
           dispatch({ type: "ERROR_MESSAGE", payload: t("Create order error") });
         });
+    }
+  }
+
+  function promocodeInput(input) {
+    setPromocodeRight(true);
+    if (input.length <= 8) {
+      if (input.toUpperCase().match(/[А-Я]/g)) {
+        dispatch({
+          type: "ERROR_MESSAGE",
+          payload: t("Use digits and english letters"),
+        });
+        setPromocodeRight(false);
+      }
+      let filterLetter = input.toUpperCase().match(/[A-Z,1-9]/g);
+      let checkedInput = filterLetter ? filterLetter.join("") : "";
+      setPromocode(checkedInput);
     }
   }
 
@@ -202,9 +219,10 @@ export default function Delivery(props) {
           <input
             name={"Promocode"}
             className={s.promocodeInput}
+            style={isPromocodeRight ? null : { boxShadow: "0 1px 21px red" }}
             placeholder={t("PROMOCODE")}
             value={promocode}
-            onChange={(e) => setPromocode(e.target.value)}
+            onChange={(e) => promocodeInput(e.target.value)}
             onKeyPress={(e) =>
               e.nativeEvent.key === "Enter" && console.log("Enter")
             }

@@ -69,6 +69,13 @@
     width: 152px;
     height: 50px;
     text-align: center;
+    font-size: 21px;
+    /*box-shadow: 0 0 16px 4px red;*/
+    /*box-shadow: 0 1px 21px red*/
+}
+
+.promocodeInput::placeholder {
+    font-size: 14px;
 }
 
 .cartTitle {

@@ -88,5 +88,6 @@
   "Can't get category": "Не удается получить список категорий меню",
   "Order confirmed": "Заказ оформлен",
   "Create order error": "Не удалось сформировать заказ",
-  "Please log in": "Необходимо регистрация на сайте"
+  "Please log in": "Необходимо регистрация на сайте",
+  "Use digits and english letters": "Используйте цифры и англ буквы"
 }

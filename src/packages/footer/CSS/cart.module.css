@@ -5,11 +5,11 @@
   width: 350px;
   height: 552px;
   background: #1b1d23;
-  /*overflow-y: scroll;*/
   text-align: center;
   color: #adb4b0;
   z-index: 4;
   border-radius: 10px;
+  box-shadow: 0 0 16px 4px rgba(0, 0, 0, 0.75);
 }
 
 .showCart li {

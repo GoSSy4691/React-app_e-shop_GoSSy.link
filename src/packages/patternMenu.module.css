@@ -114,4 +114,14 @@
     margin: 0 7px;
     display: flex;
     align-items: flex-end;
+    width: 100%;
+}
+
+.nameFood p {
+    max-width: 98%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding: 0;
+    margin: 0;
 }

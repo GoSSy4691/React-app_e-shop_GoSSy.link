@@ -60,7 +60,7 @@ export default function FoodsMenu() {
             >
               <GetImgFood imgName={el.icon} style={patternCSS.img} />
               <div className={patternCSS.footerItem}>
-                <span className={patternCSS.nameFood}>{el.name}</span>
+                <span className={patternCSS.nameFood}><p>{el.name}</p></span>
                 <div className={s.costBox}>
                   <span>{el.cost}&nbsp;р.</span>
                 </div>

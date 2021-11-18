@@ -230,7 +230,7 @@ export default function Delivery(props) {
           <div className={s.cartTitle}>{t("Payment method")}</div>
           <select className={s.payment}>
             <option>{t("Cart_Preposition")}</option>
-            <option>{t("Cash_Preposition")}</option>
+            {/*<option>{t("Cash_Preposition")}</option>*/}
           </select>
         </div>
         <div className={s.inlineOrder}>

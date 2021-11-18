@@ -52,10 +52,11 @@ export default function Delivery(props) {
     if (cookies.get("Token") === undefined) {
       dispatch({ type: "ERROR_MESSAGE", payload: t("Please log in") });
     } else {
-      zloiAPI.createOrder(cookies.get("Token"), {
-        menu: selectedFood.map((el) => ({ id: el.id, count: el.amount })),
-        comment,
-      })
+      zloiAPI
+        .createOrder(cookies.get("Token"), {
+          menu: selectedFood.map((el) => ({ id: el.id, count: el.amount })),
+          comment,
+        })
         .then(() => {
           dispatch({ type: "SUCCESS_MESSAGE", payload: t("Order confirmed") });
         })
@@ -226,7 +227,11 @@ export default function Delivery(props) {
         )}
         <div className={s.inlineTotal}>
           <p>{t("Total")}</p>
-          <p>{allFoodsPrice + deliveryCalculate} ₽</p>
+          <p>
+            {props.footerShow === "delivery" &&
+              allFoodsPrice + deliveryCalculate + " ₽"}
+            {props.footerShow === "takeOut" && allFoodsPrice + " ₽"}
+          </p>
         </div>
       </div>
       <button

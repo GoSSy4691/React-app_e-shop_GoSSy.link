@@ -5,7 +5,7 @@ import UsersDialog from "./UsersDialog.jsx";
 import PointsDialog from "./PointsDialog.jsx";
 import MenuDialog from "./MenuDialog.jsx";
 import OrdersDialog from "./OrdersDialog.jsx";
-import OrderContentDialog from './OrderContentDialog.jsx';
+import OrderContentDialog from "./OrderContentDialog.jsx";
 
 import menuOpenSVG from "../../files/img/adminBar/00_menuOpen.svg";
 import userSVG from "../../files/img/adminBar/01_user.svg";
@@ -15,7 +15,7 @@ import statsSVG from "../../files/img/adminBar/04_stats.svg";
 import dialogSVG from "../../files/img/adminBar/05_dialog.svg";
 import warehouseSVG from "../../files/img/adminBar/06_warehouse.svg";
 
-export default function AdminBar() {
+export default function AdminBar(props) {
   const barShow = useSelector((state) => state.admin.barShow);
   const [isBarOpen, setBarOpen] = useState(false);
   const dispatch = useDispatch();
@@ -29,7 +29,10 @@ export default function AdminBar() {
       {barShow === "orderContent" && <OrderContentDialog />}
       <div
         className={s.box}
-        style={isBarOpen ? { width: "108px" } : { width: "40px" }}
+        style={`
+        ${isBarOpen ? { width: "108px" } : { width: "40px" }}
+        ${props?.isNeedHide ? { display: "none" } : null}
+        `}
       >
         <button onClick={() => setBarOpen(!isBarOpen)}>
           <img

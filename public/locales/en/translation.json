@@ -86,8 +86,11 @@
   "Can't load all menu for search": "Can't load all menu for search",
   "Error get points": "Error get points",
   "Can't get category": "Can't get category",
-  "Order confirmed": "Order confirmed",
   "Create order error": "Create order error",
   "Please log in": "Please log in",
-  "Use digits and english letters": "Use digits and english letters"
+  "Use digits and english letters": "Use digits and english letters",
+  "_unused": null,
+  "_unusedStorage": {
+    "Order confirmed": "Order confirmed"
+  }
 }

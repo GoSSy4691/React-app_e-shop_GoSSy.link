@@ -8,6 +8,7 @@ import About from "./packages/about/About.jsx";
 import ShopsMenu from "./packages/menu/ShopsMenu.jsx";
 import ErrorPopup from "./packages/popup/ErrorPopup.jsx";
 import Footer from "./packages/footer/Footer.jsx";
+import Payment from "./packages/footer/Payment.jsx";
 
 export default function App() {
   const settings = useSelector((state) => state.settings);
@@ -42,6 +43,7 @@ export default function App() {
       <Switch>
         <Route exact path="/" component={ShopsMenu} />
         <Route exact path="/about" component={About} />
+        <Route exact path="/orders" component={Payment} />
         <Redirect to="/" />
       </Switch>
       <Footer />

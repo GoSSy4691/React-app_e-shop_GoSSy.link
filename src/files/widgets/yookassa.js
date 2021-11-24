@@ -1,8 +1,7 @@
 export default function yookassaWidget(confirmation_token) {
   return new window.YooMoneyCheckoutWidget({
     confirmation_token,
-    // return_url: "https://gossy.link/orders",
-    return_url: "http://localhost:3000/orders",
+    return_url: window.location.origin + "/orders",
     customization: {
       colors: {
         // Text color

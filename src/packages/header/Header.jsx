@@ -47,9 +47,7 @@ export default function Header() {
                 exact
                 activeClassName={s.textActive}
                 to="/"
-                onClick={() =>
-                  dispatch({ type: "CHANGE_DISPLAY_NOW", payload: "Shops" })
-                }
+                onClick={() => dispatch({ type: "HEADER_MENU_CLICK" })}
               >
                 {t("Menu")}
               </NavLink>

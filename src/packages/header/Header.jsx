@@ -6,7 +6,7 @@ import Cookies from "universal-cookie";
 import { useTranslation } from "react-i18next";
 import zloiAPI from "../../files/API/zloiAPI.js";
 import LogoImg from "./logoGoose/LogoImage.jsx";
-import Login from "../login/Login.jsx";
+import Login from "../header/login/Login.jsx";
 import Settings from "../Settings.jsx";
 
 export default function Header() {
@@ -20,9 +20,10 @@ export default function Header() {
   //load profile
   if (headerStatus === "Loading") {
     console.log("Loading profile");
-    zloiAPI.getProfile(cookies.get("Token"))
+    zloiAPI
+      .getProfile(cookies.get("Token"))
       .then((res) => {
-        dispatch({ type: "LOGIN_CONFIRM", payload: res.data[0] });
+        dispatch({ type: "LOGIN_CONFIRM", payload: res.data.data[0] });
         dispatch({ type: "PROFILE_DIALOG_STATE", payload: "Profile" });
       })
       .catch((err) => {
@@ -46,9 +47,7 @@ export default function Header() {
                 exact
                 activeClassName={s.textActive}
                 to="/"
-                onClick={() =>
-                  dispatch({ type: "CHANGE_DISPLAY_NOW", payload: "Shops" })
-                }
+                onClick={() => dispatch({ type: "HEADER_MENU_CLICK" })}
               >
                 {t("Menu")}
               </NavLink>

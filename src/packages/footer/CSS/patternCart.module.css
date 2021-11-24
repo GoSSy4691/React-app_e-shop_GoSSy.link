@@ -20,6 +20,7 @@
 
 .buttonToOrder p {
     margin: 0;
+    width: 100%;
 }
 
 .buttonToOrder:active {

@@ -73,7 +73,7 @@ export default class zloiAPI {
         Authorization: `Bearer ${token}`,
         "Cache-Control": "no-cache",
       },
-      params: { expand: "user,content,content.menu" },
+      params: { expand: "user,content,content.menu,payments" },
     });
   }
 
@@ -87,7 +87,7 @@ export default class zloiAPI {
   }
 
   static createOrder(token, order) {
-    return axios.post("https://zloi.space/restaurant/api/orders", order,{
+    return axios.post("https://zloi.space/restaurant/api/orders", order, {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",

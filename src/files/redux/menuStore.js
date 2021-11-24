@@ -33,6 +33,8 @@ export const menuReducer = (state = menu, action) => {
             : action.menuOnDisplay,
         categoryNow: 0,
       };
+    case "HEADER_MENU_CLICK":
+      return { ...state, userView: state.points.length ? "Shops" : "Loading" };
     case "LOAD_POINTS":
       return { ...state, points: action.payload, userView: "Shops" };
     case "LOAD_CATEGORY":

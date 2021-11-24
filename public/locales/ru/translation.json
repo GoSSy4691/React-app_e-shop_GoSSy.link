@@ -14,6 +14,7 @@
   "Take out": "На вынос",
   "Delivery": "Доставка",
   "Can't deliver some kind of food": "Невозможна доставка какой-то еды",
+  "Show unpaid orders": "Показать неоплаченные заказы",
   "_delivery": null,
   "phone" : "телефон",
   "street": "улица",
@@ -45,6 +46,7 @@
   "Sign in by password": "Войти с помощью пароля",
   "Sign in with": "Войти через",
   "Next": "Далее",
+  "Show orders": "Показать заказы",
   "_settings": null,
   "Language": "Язык",
   "English": "English",
@@ -86,8 +88,11 @@
   "Can't load all menu for search": "Не удалось прогрузить все меню для поиска",
   "Error get points": "Ошибка при получении списка магазинов",
   "Can't get category": "Не удается получить список категорий меню",
-  "Order confirmed": "Заказ оформлен",
   "Create order error": "Не удалось сформировать заказ",
   "Please log in": "Необходимо регистрация на сайте",
-  "Use digits and english letters": "Используйте цифры и англ буквы"
+  "Use digits and english letters": "Используйте цифры и англ буквы",
+  "_unused": null,
+  "_unusedStorage": {
+    "Order confirmed": "Заказ оформлен"
+  }
 }

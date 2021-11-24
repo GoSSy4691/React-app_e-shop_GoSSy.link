@@ -3,18 +3,23 @@ import patternCart from "./CSS/patternCart.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
+import { NavLink } from "react-router-dom";
+import Cookies from "universal-cookie";
 import useDetectClickOut from "../../files/useDetectClickOut.js";
+import zloiAPI from "../../files/API/zloiAPI.js";
 import { ButtonAdd, ButtonDelete } from "../menu/ButtonAddDelete.jsx";
 
 import polygonBack from "../../files/img/polygonBack.svg";
 import polygonForward from "../../files/img/polygonForward.svg";
 
 export default function Cart(props) {
+  const { t } = useTranslation();
   const selectedFood = useSelector((state) => state.cart.selectedFood);
   const isNeedDelivery = useSelector((state) => state.cart.isNeedDelivery);
+  const isUnpaidShow = useSelector((state) => state.admin.isUnpaidSomething);
   const refCart = useDetectClickOut(props.setFooterShow);
   const dispatch = useDispatch();
-  const { t } = useTranslation();
+  const cookies = new Cookies();
 
   function orderFoods() {
     if (!isNeedDelivery) {
@@ -29,8 +34,36 @@ export default function Cart(props) {
     }
   }
 
+  //search unpaid order
+  if (!isUnpaidShow && cookies.get("Token")) {
+    zloiAPI
+      .getOrders(cookies.get("Token"))
+      .then((res) => {
+        let isFindUnpaid = !!res.data.data
+          .map((el) => el.status)
+          .find((el) => el === "accepted");
+        if (isFindUnpaid) {
+          dispatch({ type: "SET_UNPAID_SOMETHING" });
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
   return (
     <div className={s.showCart} ref={refCart}>
+      <div className={s.unpaidOrdersLink}>
+        {isUnpaidShow && (
+          <NavLink
+            exact
+            to="/orders"
+            onClick={() => props.setFooterShow(false)}
+          >
+            {t("Show unpaid orders")}
+          </NavLink>
+        )}
+      </div>
       <div className={s.scrollAbleCart}>
         {selectedFood.length > 0 ? (
           <>

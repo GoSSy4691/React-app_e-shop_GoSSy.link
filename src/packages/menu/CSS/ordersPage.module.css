@@ -1,0 +1,21 @@
+.wrapFlex {
+    color: #adb4b0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    margin: 20px;
+}
+
+.orderElement {
+    margin: 5px;
+    display: flex;
+    font-size: 16px;
+    border: solid 5px black;
+    /*text-align: center;*/
+    justify-content: center;
+    gap: 27px;
+}
+
+.orderElement:hover{
+    background: #777777;
+}

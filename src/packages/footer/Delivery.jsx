@@ -7,7 +7,8 @@ import styled from "styled-components";
 import Cookies from "universal-cookie";
 import useDetectClickOut from "../../files/useDetectClickOut.js";
 import zloiAPI from "../../files/API/zloiAPI.js";
-import InputPhone from "../login/InputPhone.jsx";
+import yookassaWidget from "../../files/widgets/yookassa.js";
+import InputPhone from "../header/login/InputPhone.jsx";
 
 export default function Delivery(props) {
   const selectedFood = useSelector((state) => state.cart.selectedFood);
@@ -20,6 +21,7 @@ export default function Delivery(props) {
   const [promocode, setPromocode] = useState("");
   const [isPromocodeRight, setPromocodeRight] = useState(true);
   const [isDeliveryNow, setDeliveryNow] = useState(true);
+  const [isPaymentShow, setPaymentShow] = useState(false);
   const refCart = useDetectClickOut(props.setFooterShow);
   const dispatch = useDispatch();
   const { t } = useTranslation();
@@ -50,6 +52,7 @@ export default function Delivery(props) {
   const [minutesState, setMinutesState] = useState(timeForSelect.minutes);
 
   function createOrder() {
+    setPaymentShow(true);
     if (cookies.get("Token") === undefined) {
       dispatch({ type: "ERROR_MESSAGE", payload: t("Please log in") });
     } else {
@@ -58,8 +61,8 @@ export default function Delivery(props) {
           menu: selectedFood.map((el) => ({ id: el.id, count: el.amount })),
           comment,
         })
-        .then(() => {
-          dispatch({ type: "SUCCESS_MESSAGE", payload: t("Order confirmed") });
+        .then((res) => {
+          yookassaWidget(res.data.confirmation_token).render("payment-form");
         })
         .catch((error) => {
           console.error(error.response);
@@ -85,180 +88,189 @@ export default function Delivery(props) {
   }
 
   return (
-    <div className={s.boxDelivery} ref={refCart}>
-      {props.footerShow === "delivery" && (
+    <div
+      className={s.boxDelivery}
+      ref={refCart}
+      style={isPaymentShow ? { width: 400 } : null}
+    >
+      <div id={"payment-form"} className={s.paymentForm} />
+      {!isPaymentShow && (
         <>
-          <div className={s.title}>{t("Delivery")}</div>
-          <InputPhone
-            phone={phone}
-            setPhone={setPhone}
-            doNext={(e) => e.target.nextSibling.focus()}
-            className={s.input}
-          />
+          {props.footerShow === "delivery" && (
+            <>
+              <div className={s.title}>{t("Delivery")}</div>
+              <InputPhone
+                phone={phone}
+                setPhone={setPhone}
+                doNext={(e) => e.target.nextSibling.focus()}
+                className={s.input}
+              />
+              <input
+                name={"Street"}
+                className={s.input}
+                placeholder={t("street")}
+                value={street}
+                onChange={(e) => setStreet(e.target.value)}
+                onKeyPress={(e) =>
+                  e.nativeEvent.key === "Enter" &&
+                  e.target.nextElementSibling.firstChild.focus()
+                }
+              />
+              <div className={s.inline}>
+                <input
+                  name={"House"}
+                  className={s.inputHalf}
+                  placeholder={t("house")}
+                  value={house}
+                  onChange={(e) => setHouse(e.target.value)}
+                  onKeyPress={(e) =>
+                    e.nativeEvent.key === "Enter" &&
+                    e.target.nextSibling.focus()
+                  }
+                />
+                <input
+                  name={"Floor"}
+                  className={s.inputHalf}
+                  placeholder={t("floor")}
+                  value={floor}
+                  onChange={(e) => setFloor(e.target.value)}
+                  onKeyPress={(e) =>
+                    e.nativeEvent.key === "Enter" &&
+                    e.target.nextSibling.focus()
+                  }
+                />
+                <input
+                  name={"Apart"}
+                  className={s.inputHalf}
+                  placeholder={t("apart")}
+                  value={apart}
+                  onChange={(e) => setApart(e.target.value)}
+                  onKeyPress={(e) =>
+                    e.nativeEvent.key === "Enter" &&
+                    e.target.parentElement.nextSibling.focus()
+                  }
+                />
+              </div>
+            </>
+          )}
+          {props.footerShow === "takeOut" && (
+            <>
+              <div className={s.title}>{t("Take out")}</div>
+              <div className={s.shopAddress}>
+                <p>shop's address</p>
+              </div>
+            </>
+          )}
           <input
-            name={"Street"}
-            className={s.input}
-            placeholder={t("street")}
-            value={street}
-            onChange={(e) => setStreet(e.target.value)}
-            onKeyPress={(e) =>
-              e.nativeEvent.key === "Enter" &&
-              e.target.nextElementSibling.firstChild.focus()
-            }
+            name={"Comment"}
+            className={s.commentInput}
+            placeholder={t("comment")}
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+            // onKeyPress={(e) =>
+            //   e.nativeEvent.key === "Enter" && console.log("Enter")
+            // }
           />
-          <div className={s.inline}>
-            <input
-              name={"House"}
-              className={s.inputHalf}
-              placeholder={t("house")}
-              value={house}
-              onChange={(e) => setHouse(e.target.value)}
-              onKeyPress={(e) =>
-                e.nativeEvent.key === "Enter" && e.target.nextSibling.focus()
+          <div className={s.timeTitle}>{t("Delivery time")}:</div>
+          <div
+            className={s.tomorrowTitle}
+            style={isDeliveryNow ? null : { color: "white" }}
+          >
+            <p
+              style={
+                new Date().getHours() > hoursState ? null : { display: "none" }
               }
-            />
-            <input
-              name={"Floor"}
-              className={s.inputHalf}
-              placeholder={t("floor")}
-              value={floor}
-              onChange={(e) => setFloor(e.target.value)}
-              onKeyPress={(e) =>
-                e.nativeEvent.key === "Enter" && e.target.nextSibling.focus()
-              }
-            />
-            <input
-              name={"Apart"}
-              className={s.inputHalf}
-              placeholder={t("apart")}
-              value={apart}
-              onChange={(e) => setApart(e.target.value)}
-              onKeyPress={(e) =>
-                e.nativeEvent.key === "Enter" &&
-                e.target.parentElement.nextSibling.focus()
-              }
-            />
+            >
+              {t("Tomorrow")}
+            </p>
           </div>
+          <div className={s.timeInline}>
+            <div
+              className={s.asSoon}
+              style={isDeliveryNow ? { color: "white" } : null}
+            >
+              {t("As soon as possible")}
+            </div>
+            <ToggleBtn
+              isDeliveryNow={isDeliveryNow}
+              onClick={() => setDeliveryNow(!isDeliveryNow)}
+            />
+            <div className={s.timeDiv}>
+              <select
+                className={s.timeSelect}
+                value={hoursState}
+                disabled={isDeliveryNow}
+                onChange={(e) => setHoursState(Number(e.target.value))}
+              >
+                {[
+                  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
+                  18, 19, 20, 21, 22, 23,
+                ].map((i) => (
+                  <option key={i} value={i}>
+                    {i}
+                  </option>
+                ))}
+              </select>
+              &nbsp;:&nbsp;
+              <select
+                className={s.timeSelect}
+                value={minutesState}
+                disabled={isDeliveryNow}
+                onChange={(e) => setMinutesState(Number(e.target.value))}
+              >
+                {[0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55].map((i) => (
+                  <option key={i} value={i}>
+                    {i}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+          <div className={s.footer}>
+            <div className={s.inline}>
+              <input
+                name={"Promocode"}
+                className={s.promocodeInput}
+                style={
+                  isPromocodeRight ? null : { boxShadow: "0 1px 21px red" }
+                }
+                placeholder={t("PROMOCODE")}
+                value={promocode}
+                onChange={(e) => promocodeInput(e.target.value)}
+                onKeyPress={(e) =>
+                  e.nativeEvent.key === "Enter" && console.log("Enter")
+                }
+              />
+              <div className={s.cartTitle}>{t("Payment method")}</div>
+              <select className={s.payment}>
+                <option>{t("Cart_Preposition")}</option>
+                {/*<option>{t("Cash_Preposition")}</option>*/}
+              </select>
+            </div>
+            <div className={s.inlineOrder}>
+              <p>{t("Order_Noun")}</p>
+              <p>{allFoodsPrice} ₽</p>
+            </div>
+            {props.footerShow === "delivery" && (
+              <div className={s.inlineDelivery}>
+                <p>{t("Delivery")}</p>
+                <p>{deliveryCalculate} ₽</p>
+              </div>
+            )}
+            <div className={s.inlineTotal}>
+              <p>{t("Total")}</p>
+              <p>
+                {props.footerShow === "delivery" &&
+                  allFoodsPrice + deliveryCalculate + " ₽"}
+                {props.footerShow === "takeOut" && allFoodsPrice + " ₽"}
+              </p>
+            </div>
+          </div>
+          <button className={patternCart.buttonToOrder} onClick={createOrder}>
+            <p>{t("Order_Verb")}</p>
+          </button>
         </>
       )}
-      {props.footerShow === "takeOut" && (
-        <>
-          <div className={s.title}>{t("Take out")}</div>
-          <div className={s.shopAddress}>
-            <p>shop's address</p>
-          </div>
-        </>
-      )}
-      <input
-        name={"Comment"}
-        className={s.commentInput}
-        placeholder={t("comment")}
-        value={comment}
-        onChange={(e) => setComment(e.target.value)}
-        // onKeyPress={(e) =>
-        //   e.nativeEvent.key === "Enter" && console.log("Enter")
-        // }
-      />
-      <div className={s.timeTitle}>{t("Delivery time")}:</div>
-      <div
-        className={s.tomorrowTitle}
-        style={isDeliveryNow ? null : { color: "white" }}
-      >
-        <p
-          style={
-            new Date().getHours() > hoursState ? null : { display: "none" }
-          }
-        >
-          {t("Tomorrow")}
-        </p>
-      </div>
-      <div className={s.timeInline}>
-        <div
-          className={s.asSoon}
-          style={isDeliveryNow ? { color: "white" } : null}
-        >
-          {t("As soon as possible")}
-        </div>
-        <ToggleBtn
-          isDeliveryNow={isDeliveryNow}
-          onClick={() => setDeliveryNow(!isDeliveryNow)}
-        />
-        <div className={s.timeDiv}>
-          <select
-            className={s.timeSelect}
-            value={hoursState}
-            disabled={isDeliveryNow}
-            onChange={(e) => setHoursState(Number(e.target.value))}
-          >
-            {[
-              0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
-              19, 20, 21, 22, 23,
-            ].map((i) => (
-              <option key={i} value={i}>
-                {i}
-              </option>
-            ))}
-          </select>
-          &nbsp;:&nbsp;
-          <select
-            className={s.timeSelect}
-            value={minutesState}
-            disabled={isDeliveryNow}
-            onChange={(e) => setMinutesState(Number(e.target.value))}
-          >
-            {[0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55].map((i) => (
-              <option key={i} value={i}>
-                {i}
-              </option>
-            ))}
-          </select>
-        </div>
-      </div>
-      <div className={s.footer}>
-        <div className={s.inline}>
-          <input
-            name={"Promocode"}
-            className={s.promocodeInput}
-            style={isPromocodeRight ? null : { boxShadow: "0 1px 21px red" }}
-            placeholder={t("PROMOCODE")}
-            value={promocode}
-            onChange={(e) => promocodeInput(e.target.value)}
-            onKeyPress={(e) =>
-              e.nativeEvent.key === "Enter" && console.log("Enter")
-            }
-          />
-          <div className={s.cartTitle}>{t("Payment method")}</div>
-          <select className={s.payment}>
-            <option>{t("Cart_Preposition")}</option>
-            {/*<option>{t("Cash_Preposition")}</option>*/}
-          </select>
-        </div>
-        <div className={s.inlineOrder}>
-          <p>{t("Order_Noun")}</p>
-          <p>{allFoodsPrice} ₽</p>
-        </div>
-        {props.footerShow === "delivery" && (
-          <div className={s.inlineDelivery}>
-            <p>{t("Delivery")}</p>
-            <p>{deliveryCalculate} ₽</p>
-          </div>
-        )}
-        <div className={s.inlineTotal}>
-          <p>{t("Total")}</p>
-          <p>
-            {props.footerShow === "delivery" &&
-              allFoodsPrice + deliveryCalculate + " ₽"}
-            {props.footerShow === "takeOut" && allFoodsPrice + " ₽"}
-          </p>
-        </div>
-      </div>
-      <button
-        className={patternCart.buttonToOrder}
-        style={{}}
-        onClick={createOrder}
-      >
-        <p style={{ width: "100%" }}>{t("Order_Verb")}</p>
-      </button>
     </div>
   );
 }

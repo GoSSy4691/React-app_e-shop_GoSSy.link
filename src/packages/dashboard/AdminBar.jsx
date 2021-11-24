@@ -5,7 +5,7 @@ import UsersDialog from "./UsersDialog.jsx";
 import PointsDialog from "./PointsDialog.jsx";
 import MenuDialog from "./MenuDialog.jsx";
 import OrdersDialog from "./OrdersDialog.jsx";
-import OrderContentDialog from './OrderContentDialog.jsx';
+import OrderContentDialog from "./OrderContentDialog.jsx";
 
 import menuOpenSVG from "../../files/img/adminBar/00_menuOpen.svg";
 import userSVG from "../../files/img/adminBar/01_user.svg";
@@ -20,13 +20,19 @@ export default function AdminBar() {
   const [isBarOpen, setBarOpen] = useState(false);
   const dispatch = useDispatch();
 
+  function closeOrderContentDialog() {
+    dispatch({ type: "SET_BAR_SHOW", payload: "orders" });
+  }
+
   return (
     <>
       {barShow === "users" && <UsersDialog />}
       {barShow === "points" && <PointsDialog />}
       {barShow === "menu" && <MenuDialog />}
       {barShow === "orders" && <OrdersDialog />}
-      {barShow === "orderContent" && <OrderContentDialog />}
+      {barShow === "orderContent" && (
+        <OrderContentDialog setOrderContentShow={closeOrderContentDialog} />
+      )}
       <div
         className={s.box}
         style={isBarOpen ? { width: "108px" } : { width: "40px" }}

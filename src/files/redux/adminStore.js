@@ -39,6 +39,7 @@ export const adminReducer = (state = adminStore, action) => {
         theOrder: {
           id: action.id,
           content: action.payload,
+          payments: action.payments,
         },
         scrollInOrders: action.scrollPosition,
       };

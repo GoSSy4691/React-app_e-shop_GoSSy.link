@@ -61,6 +61,7 @@ export default function OrdersPage() {
                 type: "SET_ORDER_CONTENT",
                 payload: el.content,
                 id: el.id,
+                payments: el.payments,
                 scrollPosition:
                   e.target.nodeName === "P"
                     ? e.target.parentElement.parentElement.scrollTop

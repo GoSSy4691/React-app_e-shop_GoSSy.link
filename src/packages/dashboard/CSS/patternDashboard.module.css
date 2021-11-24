@@ -44,22 +44,31 @@
     overflow-y: auto;
 }
 
-.closeOrderButton {
+.footerTheOrderDialog {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    border-radius: 0 0 10px 10px;
+}
+
+.footerTheOrderDialogButton {
     font-size: 24px;
     color: black;
     background: #747474;
-    border-radius: 10px;
+    border-radius: 0 0 10px 10px;
     padding: 0 8px;
     width: 250px;
     height: 37px;
     border: solid #1b1d23;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 480px;
 }
 
-.closeOrderButton:active {
+.footerTheOrderDialogButton:active {
     box-shadow: 0 0 16px 4px rgba(0, 0, 0, 0.75);
-    transform: translate(-50%, 5%);
+    transform: translate(0, -10%);
+}
+
+.paymentFormOrderContent {
+    position: absolute;
+    top: 40px;
+    width: 100%;
 }

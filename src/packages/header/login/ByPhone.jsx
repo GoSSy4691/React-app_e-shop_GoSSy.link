@@ -3,13 +3,13 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import Cookies from "universal-cookie";
 import { useTranslation } from "react-i18next";
-import zloiAPI from "../../files/API/zloiAPI.js";
+import zloiAPI from "../../../files/API/zloiAPI.js";
 import InputPhone from "./InputPhone.jsx";
 import InputCode from "./InputCode.jsx";
 
-import vkIco from "../../files/img/token/vk.png";
-import yandexIco from "../../files/img/token/ya.png";
-import googleIco from "../../files/img/token/gog.png";
+import vkIco from "../../../files/img/token/vk.png";
+import yandexIco from "../../../files/img/token/ya.png";
+import googleIco from "../../../files/img/token/gog.png";
 
 export default function ByPhone() {
   const [phone, setPhone] = useState("8(___)___-__-__");
@@ -24,7 +24,8 @@ export default function ByPhone() {
     let preparedPhone = phone.split("").filter((e) => !isNaN(Number(e)));
     preparedPhone = "+7" + preparedPhone.join("").slice(1);
     dispatch({ type: "SUCCESS_MESSAGE", payload: t("Checking phone") });
-    zloiAPI.authByPhone(preparedPhone)
+    zloiAPI
+      .authByPhone(preparedPhone)
       .then(() => {
         setInputType("Code");
         setShowVYG(false);
@@ -37,7 +38,8 @@ export default function ByPhone() {
 
   function sendCode() {
     dispatch({ type: "SUCCESS_MESSAGE", payload: t("Checking code") });
-    zloiAPI.authByCode(code)
+    zloiAPI
+      .authByCode(code)
       .then((res) => {
         console.log("Your token is " + res.data.token);
         dispatch({ type: "SUCCESS_MESSAGE", payload: t("Code confirmed") });

@@ -1,13 +1,13 @@
 import s from "./login.module.css";
-import patternCSS from "../patternMenu.module.css";
+import patternCSS from "../../patternMenu.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import Cookies from "universal-cookie";
 import { useTranslation } from "react-i18next";
-import useDetectClickOut from "../../files/useDetectClickOut.js";
+import useDetectClickOut from "../../../files/useDetectClickOut.js";
 import ByPass from "./ByPass.jsx";
 import ByPhone from "./ByPhone.jsx";
 
-import penEdit from "../../files/img/penEdit.svg";
+import penEdit from "../../../files/img/penEdit.svg";
 
 export default function Login() {
   const user = useSelector((state) => state.user);

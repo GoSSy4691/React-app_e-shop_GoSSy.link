@@ -6,7 +6,7 @@ import Cookies from "universal-cookie";
 import { useTranslation } from "react-i18next";
 import zloiAPI from "../../files/API/zloiAPI.js";
 import LogoImg from "./logoGoose/LogoImage.jsx";
-import Login from "../login/Login.jsx";
+import Login from "../header/login/Login.jsx";
 import Settings from "../Settings.jsx";
 
 export default function Header() {

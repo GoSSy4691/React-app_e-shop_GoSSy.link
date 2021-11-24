@@ -3,10 +3,10 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import Cookies from "universal-cookie";
 import { useTranslation } from "react-i18next";
-import zloiAPI from "../../files/API/zloiAPI.js";
+import zloiAPI from "../../../files/API/zloiAPI.js";
 
-import eye_show from "../../files/img/visible_show.png";
-import eye_hide from "../../files/img/visible_hide.png";
+import eye_show from "../../../files/img/visible_show.png";
+import eye_hide from "../../../files/img/visible_hide.png";
 
 export default function ByPass() {
   const [login, setLogin] = useState("");
@@ -19,7 +19,8 @@ export default function ByPass() {
 
   function getAnswerPass() {
     dispatch({ type: "SUCCESS_MESSAGE", payload: t("Loading") });
-    zloiAPI.authByPassword(login, password)
+    zloiAPI
+      .authByPassword(login, password)
       .then((res) => {
         console.log("You token is " + res.data.token);
         dispatch({ type: "SUCCESS_MESSAGE", payload: t("Log in confirmed") });
@@ -57,9 +58,7 @@ export default function ByPass() {
           placeholder={t("Login")}
           value={login}
           onChange={(e) => loginValidation(e.target.value)}
-          onKeyPress={(e) =>
-            e.nativeEvent.key === "Enter" && getAnswerPass()
-          }
+          onKeyPress={(e) => e.nativeEvent.key === "Enter" && getAnswerPass()}
         />
       </div>
       <div className={s.passwordLine}>
@@ -71,9 +70,7 @@ export default function ByPass() {
           type={isPassShow ? "text" : "password"}
           value={password}
           onChange={(e) => passwordValidation(e.target.value)}
-          onKeyPress={(e) =>
-            e.nativeEvent.key === "Enter" && getAnswerPass()
-          }
+          onKeyPress={(e) => e.nativeEvent.key === "Enter" && getAnswerPass()}
         />
         <button tabIndex="-1">
           <img

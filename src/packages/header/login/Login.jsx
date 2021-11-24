@@ -3,6 +3,7 @@ import patternCSS from "../../patternMenu.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import Cookies from "universal-cookie";
 import { useTranslation } from "react-i18next";
+import { NavLink } from "react-router-dom";
 import useDetectClickOut from "../../../files/useDetectClickOut.js";
 import ByPass from "./ByPass.jsx";
 import ByPhone from "./ByPhone.jsx";
@@ -93,6 +94,14 @@ export default function Login() {
                       ? user.userData.birthday
                       : t("Birthday not set")}
                   </div>
+                  <NavLink
+                    className={s.ordersLink}
+                    exact
+                    to="/orders"
+                    onClick={() => dispatch({ type: "PROFILE_DIALOG_SHOW" })}
+                  >
+                    {t("Show orders")}
+                  </NavLink>
                   <button className={s.logoutBtn} onClick={logoutBtn}>
                     {t("Log out")}
                   </button>

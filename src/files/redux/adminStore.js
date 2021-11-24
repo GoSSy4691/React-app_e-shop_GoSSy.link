@@ -7,6 +7,7 @@ let adminStore = {
   orders: [],
   scrollInOrders: 0,
   theOrder: [],
+  isUnpaidSomething: false,
 };
 
 export const adminReducer = (state = adminStore, action) => {
@@ -43,6 +44,8 @@ export const adminReducer = (state = adminStore, action) => {
       };
     case "SHOW_ORDER_CONTENT":
       return { ...state, barShow: "orderContent" };
+    case "SET_UNPAID_SOMETHING":
+      return { ...state, isUnpaidSomething: !state.isUnpaidSomething };
     default:
       return state;
   }

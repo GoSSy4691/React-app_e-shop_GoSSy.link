@@ -16,6 +16,14 @@
   list-style-type: none;
 }
 
+.unpaidOrdersLink {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  background: gold;
+  border-radius: 10px 10px 0 0;
+}
+
 .scrollAbleCart {
   height: calc(552px - 80px);
   overflow-y: auto;

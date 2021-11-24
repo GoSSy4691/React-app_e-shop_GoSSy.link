@@ -14,6 +14,7 @@
   "Take out": "На вынос",
   "Delivery": "Доставка",
   "Can't deliver some kind of food": "Невозможна доставка какой-то еды",
+  "Show unpaid orders": "Показать неоплаченные заказы",
   "_delivery": null,
   "phone" : "телефон",
   "street": "улица",

@@ -15,10 +15,14 @@ import statsSVG from "../../files/img/adminBar/04_stats.svg";
 import dialogSVG from "../../files/img/adminBar/05_dialog.svg";
 import warehouseSVG from "../../files/img/adminBar/06_warehouse.svg";
 
-export default function AdminBar(props) {
+export default function AdminBar() {
   const barShow = useSelector((state) => state.admin.barShow);
   const [isBarOpen, setBarOpen] = useState(false);
   const dispatch = useDispatch();
+
+  function closeOrderContentDialog() {
+    dispatch({ type: "SET_BAR_SHOW", payload: "orders" });
+  }
 
   return (
     <>
@@ -26,13 +30,12 @@ export default function AdminBar(props) {
       {barShow === "points" && <PointsDialog />}
       {barShow === "menu" && <MenuDialog />}
       {barShow === "orders" && <OrdersDialog />}
-      {barShow === "orderContent" && <OrderContentDialog />}
+      {barShow === "orderContent" && (
+        <OrderContentDialog setOrderContentShow={closeOrderContentDialog} />
+      )}
       <div
         className={s.box}
-        style={`
-        ${isBarOpen ? { width: "108px" } : { width: "40px" }}
-        ${props?.isNeedHide ? { display: "none" } : null}
-        `}
+        style={isBarOpen ? { width: "108px" } : { width: "40px" }}
       >
         <button onClick={() => setBarOpen(!isBarOpen)}>
           <img

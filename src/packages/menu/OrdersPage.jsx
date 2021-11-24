@@ -1,23 +1,23 @@
-import s from "./CSS/payment.module.css";
+import s from "./CSS/ordersPage.module.css";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import Cookies from "universal-cookie";
 import zloiAPI from "../../files/API/zloiAPI.js";
+import OrderContentDialog from "../dashboard/OrderContentDialog.jsx";
 
 import rejected from "../../files/img/payment/rejected.svg";
 import checking from "../../files/img/payment/checking.svg";
 import confirmed from "../../files/img/payment/confirmed.svg";
 import exitImg from "../../files/img/exit.svg";
-import AdminBar from "../dashboard/AdminBar";
 
-export default function Payment() {
+export default function OrdersPage() {
   const { t } = useTranslation();
+  const orders = useSelector((state) => state.admin.orders);
+  const [isOrderShow, setOrderShow] = useState(false);
   const [title, setTitle] = useState(t("Loading"));
   const dispatch = useDispatch();
   const cookies = new Cookies();
-  const orders = useSelector((state) => state.admin.orders);
-  const userData = useSelector((state) => state.user.userData);
 
   if (cookies.get("Token") && orders.length === 0) {
     zloiAPI
@@ -49,7 +49,7 @@ export default function Payment() {
 
   return (
     <>
-      {userData?.login === "admin" && <AdminBar />}
+      {isOrderShow && <OrderContentDialog setOrderContentShow={setOrderShow} />}
       <ul className={s.wrapFlex}>
         {orders.length === 0 && <div className={s.noOrderTitle}>{title}</div>}
         {reversedArray.map((el, index) => (
@@ -58,7 +58,7 @@ export default function Payment() {
             key={index}
             onClick={(e) => {
               dispatch({
-                type: "SHOW_ORDER_CONTENT",
+                type: "SET_ORDER_CONTENT",
                 payload: el.content,
                 id: el.id,
                 scrollPosition:
@@ -66,6 +66,7 @@ export default function Payment() {
                     ? e.target.parentElement.parentElement.scrollTop
                     : e.target.parentElement.scrollTop,
               });
+              setOrderShow(true);
             }}
           >
             <p>{el.id}</p>

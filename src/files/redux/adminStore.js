@@ -32,16 +32,17 @@ export const adminReducer = (state = adminStore, action) => {
       return { ...state, orders: action.payload };
     case "REFRESH_AND_OPEN_ORDERS":
       return { ...state, orders: [], barShow: "orders" };
-    case "SHOW_ORDER_CONTENT":
+    case "SET_ORDER_CONTENT":
       return {
         ...state,
-        barShow: "orderContent",
         theOrder: {
           id: action.id,
           content: action.payload,
         },
         scrollInOrders: action.scrollPosition,
       };
+    case "SHOW_ORDER_CONTENT":
+      return { ...state, barShow: "orderContent" };
     default:
       return state;
   }

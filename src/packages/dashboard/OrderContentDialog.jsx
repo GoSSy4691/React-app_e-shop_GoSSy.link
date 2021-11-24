@@ -5,16 +5,15 @@ import Cookies from "universal-cookie";
 import useDetectClickOut from "../../files/useDetectClickOut.js";
 import zloiAPI from "../../files/API/zloiAPI.js";
 
-export default function OrderContentDialog() {
+export default function OrderContentDialog(props) {
   const theOrder = useSelector((state) => state.admin.theOrder);
+  const refBox = useDetectClickOut(props.setOrderContentShow);
   const dispatch = useDispatch();
-  const refBox = useDetectClickOut(() =>
-    dispatch({ type: "SET_BAR_SHOW", payload: "orders" })
-  );
   const cookies = new Cookies();
 
-  function closeOrder() {
-    zloiAPI.deleteOrder(cookies.get("Token"), theOrder.id)
+  function removeOrder() {
+    zloiAPI
+      .deleteOrder(cookies.get("Token"), theOrder.id)
       .then(() => {
         dispatch({
           type: "SUCCESS_MESSAGE",
@@ -33,7 +32,7 @@ export default function OrderContentDialog() {
       <div className={patternDashboard.showBox} ref={refBox}>
         <button
           className={patternMenu.exitButtonBig}
-          onClick={() => dispatch({ type: "SET_BAR_SHOW", payload: "orders" })}
+          onClick={() => props.setOrderContentShow(false)}
         >
           ✖
         </button>
@@ -61,7 +60,7 @@ export default function OrderContentDialog() {
         </div>
         <button
           className={patternDashboard.closeOrderButton}
-          onClick={closeOrder}
+          onClick={removeOrder}
         >
           Close order
         </button>

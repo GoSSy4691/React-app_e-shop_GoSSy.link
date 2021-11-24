@@ -17,7 +17,8 @@ export default function PointsDialog() {
   const scrollAbleDiv = useRef(null);
 
   function loadingOrders() {
-    zloiAPI.getOrders(cookies.get("Token"))
+    zloiAPI
+      .getOrders(cookies.get("Token"))
       .then((res) => {
         dispatch({ type: "LOAD_ALL_ORDERS", payload: res.data.data });
       })
@@ -55,7 +56,7 @@ export default function PointsDialog() {
           className={patternMenu.updateButton}
           onClick={() => dispatch({ type: "REFRESH_AND_OPEN_ORDERS" })}
         >
-          <img alt={"update"} src={updateSVG} draggable="false"/>
+          <img alt={"update"} src={updateSVG} draggable="false" />
         </button>
         <div className={patternDashboard.usersTitle}>Orders:</div>
         {orders.length === 0 ? (
@@ -79,7 +80,7 @@ export default function PointsDialog() {
                   key={index}
                   onClick={(e) => {
                     dispatch({
-                      type: "SHOW_ORDER_CONTENT",
+                      type: "SET_ORDER_CONTENT",
                       payload: el.content,
                       id: el.id,
                       scrollPosition:
@@ -87,6 +88,7 @@ export default function PointsDialog() {
                           ? e.target.parentElement.parentElement.scrollTop
                           : e.target.parentElement.scrollTop,
                     });
+                    dispatch({ type: "SHOW_ORDER_CONTENT" });
                   }}
                 >
                   <p style={{ width: 30 }}>{el.id}</p>

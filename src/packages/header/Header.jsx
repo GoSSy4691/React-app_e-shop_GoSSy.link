@@ -20,9 +20,10 @@ export default function Header() {
   //load profile
   if (headerStatus === "Loading") {
     console.log("Loading profile");
-    zloiAPI.getProfile(cookies.get("Token"))
+    zloiAPI
+      .getProfile(cookies.get("Token"))
       .then((res) => {
-        dispatch({ type: "LOGIN_CONFIRM", payload: res.data[0] });
+        dispatch({ type: "LOGIN_CONFIRM", payload: res.data.data[0] });
         dispatch({ type: "PROFILE_DIALOG_STATE", payload: "Profile" });
       })
       .catch((err) => {

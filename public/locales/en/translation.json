@@ -61,6 +61,8 @@
   "Add": "Add",
   "pcs": "pcs",
   "Total": "Total",
+  "_ordersPage" : null,
+  "No orders": "No orders",
   "_about": null,
   "description": {
     "Hi": "Hi",

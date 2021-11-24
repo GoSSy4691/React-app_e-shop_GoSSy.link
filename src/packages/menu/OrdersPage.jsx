@@ -1,5 +1,5 @@
 import s from "./CSS/ordersPage.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import Cookies from "universal-cookie";
@@ -19,22 +19,28 @@ export default function OrdersPage() {
   const dispatch = useDispatch();
   const cookies = new Cookies();
 
-  if (cookies.get("Token") && orders.length === 0) {
-    zloiAPI
-      .getOrders(cookies.get("Token"))
-      .then((res) => {
-        dispatch({ type: "LOAD_ALL_ORDERS", payload: res.data.data });
-      })
-      .catch((error) => {
-        console.error(error);
-        dispatch({ type: "ERROR_MESSAGE", payload: "Loading orders error" });
-        setTitle("Error");
-      });
-  } else {
-    if (title !== "Your login doesn't have any order") {
-      setTitle("Your login doesn't have any order");
+  useEffect(() => {
+    if (cookies.get("Token") && orders.length === 0) {
+      zloiAPI
+        .getOrders(cookies.get("Token"))
+        .then((res) => {
+          if (res.data.data.length !== 0) {
+            dispatch({ type: "LOAD_ALL_ORDERS", payload: res.data.data });
+          } else {
+            setTitle(t("No orders"));
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+          dispatch({ type: "ERROR_MESSAGE", payload: "Loading orders error" });
+          setTitle("Error");
+        });
+    } else {
+      if (title !== "Your login doesn't have any order") {
+        setTitle("Your login doesn't have any order");
+      }
     }
-  }
+  }, [orders.length]);
 
   //repeated in OrdersDialog.jsx
   function formattedDate(el_date) {

@@ -144,7 +144,8 @@ export default function Delivery() {
                 className={s.input}
                 placeholder={t("street")}
                 value={street}
-                onChange={(e) => setStreet(e.target.value)}
+                maxLength={"20"}
+                onChange={(e) => setStreet(e.target.value.toLowerCase())}
                 onKeyPress={(e) =>
                   e.nativeEvent.key === "Enter" &&
                   e.target.nextElementSibling.firstChild.focus()
@@ -156,7 +157,8 @@ export default function Delivery() {
                   className={s.inputHalf}
                   placeholder={t("house")}
                   value={house}
-                  onChange={(e) => setHouse(e.target.value)}
+                  maxLength={"5"}
+                  onChange={(e) => setHouse(e.target.value.toLowerCase())}
                   onKeyPress={(e) =>
                     e.nativeEvent.key === "Enter" &&
                     e.target.nextSibling.focus()
@@ -167,7 +169,10 @@ export default function Delivery() {
                   className={s.inputHalf}
                   placeholder={t("floor")}
                   value={floor}
-                  onChange={(e) => setFloor(e.target.value)}
+                  maxLength={"3"}
+                  onChange={(e) =>
+                    !e.target.value.match(/\D/g) && setFloor(e.target.value)
+                  }
                   onKeyPress={(e) =>
                     e.nativeEvent.key === "Enter" &&
                     e.target.nextSibling.focus()
@@ -178,7 +183,10 @@ export default function Delivery() {
                   className={s.inputHalf}
                   placeholder={t("apart")}
                   value={apart}
-                  onChange={(e) => setApart(e.target.value)}
+                  maxLength={"3"}
+                  onChange={(e) =>
+                    !e.target.value.match(/\D/g) && setApart(e.target.value)
+                  }
                   onKeyPress={(e) =>
                     e.nativeEvent.key === "Enter" &&
                     e.target.parentElement.nextSibling.focus()
@@ -195,15 +203,13 @@ export default function Delivery() {
               </div>
             </>
           )}
-          <input
+          <textarea
             name={"Comment"}
             className={s.commentInput}
             placeholder={t("comment")}
             value={comment}
+            autoComplete={"off"}
             onChange={(e) => setComment(e.target.value)}
-            // onKeyPress={(e) =>
-            //   e.nativeEvent.key === "Enter" && console.log("Enter")
-            // }
           />
           <div className={s.timeTitle}>{t("Delivery time")}:</div>
           <div

@@ -36,7 +36,7 @@
     bottom: 52px;
 }
 
-.boxDelivery input {
+.boxDelivery input, textarea {
     border-radius: 10px;
     border: solid 1px black;
     outline: none;
@@ -59,6 +59,7 @@
 .commentInput {
     width: 282px;
     height: 45px;
+    resize: none;
 }
 
 .promocodeInput {

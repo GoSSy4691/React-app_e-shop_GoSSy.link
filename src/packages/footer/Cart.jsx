@@ -96,14 +96,18 @@ export default function Cart() {
                     name={el.name}
                     cost={el.costOne}
                     style={s.button}
-                    text={<img alt={"add"} src={polygonBack} />}
+                    text={
+                      <img alt={"add"} src={polygonBack} draggable={false} />
+                    }
                   />
                   <div className={s.countFood}>{el.amount}</div>
                   <ButtonAdd
                     name={el.name}
                     cost={el.costOne}
                     style={s.button}
-                    text={<img alt={"add"} src={polygonForward} />}
+                    text={
+                      <img alt={"add"} src={polygonForward} draggable={false} />
+                    }
                   />
                 </div>
                 <div className={s.priceFood}>{el.costAll} ₽</div>

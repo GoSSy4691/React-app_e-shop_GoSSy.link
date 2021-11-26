@@ -1,5 +1,6 @@
 import s from "./CSS/cart.module.css";
 import patternCart from "./CSS/patternCart.module.css";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
@@ -12,53 +13,65 @@ import { ButtonAdd, ButtonDelete } from "../menu/ButtonAddDelete.jsx";
 import polygonBack from "../../files/img/polygonBack.svg";
 import polygonForward from "../../files/img/polygonForward.svg";
 
-export default function Cart(props) {
+export default function Cart() {
   const { t } = useTranslation();
   const selectedFood = useSelector((state) => state.cart.selectedFood);
   const isNeedDelivery = useSelector((state) => state.cart.isNeedDelivery);
-  const isUnpaidShow = useSelector((state) => state.admin.isUnpaidSomething);
-  const refCart = useDetectClickOut(props.setFooterShow);
+  const isUnpaidShow = useSelector((state) => state.user.isUnpaidSomething);
+  const isCartOpen = useSelector((state) => state.user.isCartShow);
   const dispatch = useDispatch();
+  const refCart = useDetectClickOut(
+    isCartOpen ? () => dispatch({ type: "CART_OPEN_CLOSE" }) : () => {}
+  );
   const cookies = new Cookies();
 
   function orderFoods() {
     if (!isNeedDelivery) {
-      props.setFooterShow("takeOut");
+      dispatch({ type: "SET_FOOTER_SHOW", payload: "takeOut" });
     } else {
       if (selectedFood.find((el) => el.delivery.isDelivery === false)) {
         dispatch({
           type: "ERROR_MESSAGE",
           payload: t("Can't deliver some kind of food"),
         });
-      } else props.setFooterShow("delivery");
+      } else {
+        dispatch({ type: "SET_FOOTER_SHOW", payload: "delivery" });
+      }
     }
   }
 
   //search unpaid order
-  if (!isUnpaidShow && cookies.get("Token")) {
-    zloiAPI
-      .getOrders(cookies.get("Token"))
-      .then((res) => {
-        let isFindUnpaid = !!res.data.data
-          .map((el) => el.status)
-          .find((el) => el === "accepted");
-        if (isFindUnpaid) {
-          dispatch({ type: "SET_UNPAID_SOMETHING" });
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
+  useEffect(() => {
+    if (!isUnpaidShow && cookies.get("Token")) {
+      zloiAPI
+        .getOrders(cookies.get("Token"))
+        .then((res) => {
+          let isFindUnpaid = !!res.data.data
+            .map((el) => el.status)
+            .find((el) => el === "accepted");
+          if (isFindUnpaid) {
+            dispatch({ type: "SET_UNPAID_SOMETHING", payload: true });
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isUnpaidShow]);
 
   return (
-    <div className={s.showCart} ref={refCart}>
+    <div
+      className={s.showCart}
+      ref={refCart}
+      style={isCartOpen ? null : { display: "none" }}
+    >
       <div className={s.unpaidOrdersLink}>
         {isUnpaidShow && (
           <NavLink
             exact
             to="/orders"
-            onClick={() => props.setFooterShow(false)}
+            onClick={() => dispatch({ type: "CART_OPEN_CLOSE" })}
           >
             {t("Show unpaid orders")}
           </NavLink>

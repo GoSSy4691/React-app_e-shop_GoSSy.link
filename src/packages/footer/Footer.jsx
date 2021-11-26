@@ -1,6 +1,5 @@
 import s from "./CSS/footer.module.css";
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Route } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Cart from "./Cart.jsx";
@@ -10,21 +9,20 @@ import shopCartIco from "../../files/img/shopCart.png";
 import loadingGoose from "../../files/img/loadingGoose.png";
 
 export default function Footer() {
+  const { t } = useTranslation();
   const itemsCount = useSelector((state) => state.cart.itemsCount);
   const userView = useSelector((state) => state.menu.userView);
-  const [footerShow, setFooterShow] = useState("");
-  const { t } = useTranslation();
+  const footerShow = useSelector((state) => state.user.footerShow);
+  const dispatch = useDispatch();
 
   return (
     <Route exact path="/">
-      {footerShow === "cart" && <Cart setFooterShow={setFooterShow} />}
-      {(footerShow === "delivery" || footerShow === "takeOut") && (
-        <Delivery footerShow={footerShow} setFooterShow={setFooterShow} />
-      )}
+      {footerShow === "cart" && <Cart />}
+      {(footerShow === "delivery" || footerShow === "takeOut") && <Delivery />}
       <button
         title={"Cart"}
         className={s.shopIcoButton}
-        onClick={() => setFooterShow("cart")}
+        onClick={() => dispatch({ type: "CART_OPEN_CLOSE" })}
       >
         <img
           alt={"CartImage"}

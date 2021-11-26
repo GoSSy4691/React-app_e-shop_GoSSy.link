@@ -6,10 +6,10 @@ import Cookies from "universal-cookie";
 import zloiAPI from "../../files/API/zloiAPI.js";
 import OrderContentDialog from "../dashboard/OrderContentDialog.jsx";
 
-import rejected from "../../files/img/payment/rejected.svg";
-import checking from "../../files/img/payment/checking.svg";
-import confirmed from "../../files/img/payment/confirmed.svg";
-import exitImg from "../../files/img/exit.svg";
+// import rejected from "../../files/img/payment/rejected.svg";
+// import checking from "../../files/img/payment/checking.svg";
+// import confirmed from "../../files/img/payment/confirmed.svg";
+// import exitImg from "../../files/img/exit.svg";
 
 export default function OrdersPage() {
   const { t } = useTranslation();
@@ -40,6 +40,7 @@ export default function OrdersPage() {
         setTitle("Your login doesn't have any order");
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [orders.length]);
 
   //repeated in OrdersDialog.jsx

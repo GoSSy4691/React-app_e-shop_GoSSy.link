@@ -24,6 +24,8 @@ export default function Login() {
     dispatch({ type: "SUCCESS_MESSAGE", payload: t("Log out confirmed") });
     dispatch({ type: "LOGOUT_CONFIRM" });
     dispatch({ type: "PROFILE_DIALOG_SHOW" });
+    dispatch({ type: "SET_UNPAID_SOMETHING", payload: false });
+    dispatch({ type: "REFRESH_AND_OPEN_ORDERS" });
   }
 
   function closeAndRefresh() {

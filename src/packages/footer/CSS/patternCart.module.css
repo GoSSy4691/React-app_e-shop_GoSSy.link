@@ -27,3 +27,45 @@
     box-shadow: 0 0 16px 4px rgba(0, 0, 0, 0.75);
     transform: translate(-50%, 5%);
 }
+
+.buttonsLine {
+    display: flex;
+    position: absolute;
+    bottom: 1%;
+    width: 310px;
+    justify-content: space-between;
+}
+
+.buttonsLine button {
+    color: black;
+    background: #747474;
+    border-radius: 10px;
+    padding: 0 8px;
+    height: 37px;
+    border: solid #1b1d23;
+}
+
+.backButton {
+
+}
+
+.backButton p {
+    font-size: 50px;
+    height: 10px;
+    line-height: 1px;
+}
+
+.buttonToPay {
+    font-size: 24px;
+    width: 250px;
+    text-decoration: none;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.buttonToPay p {
+    margin: 0;
+    width: 100%;
+}

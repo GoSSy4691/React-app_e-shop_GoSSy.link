@@ -6,6 +6,18 @@ let user = {
   headerStatus: cookies.get("Token") === undefined ? "Log in" : "Loading",
   isLoginShow: false,
   dialogState: "byPhone",
+  isUnpaidSomething: false,
+  isCartShow: false,
+  footerShow: "cart",
+  deliveryData: {
+    phone: "8(___)___-__-__",
+    street: "",
+    house: "",
+    floor: "",
+    apart: "",
+    comment: "",
+    promocode: "",
+  },
 };
 
 export const userReducer = (state = user, action) => {
@@ -26,6 +38,16 @@ export const userReducer = (state = user, action) => {
         headerStatus: "Log in",
         dialogState: "byPhone",
       };
+    case "CART_OPEN_CLOSE":
+      return { ...state, isCartShow: !state.isCartShow };
+    case "SET_FOOTER_SHOW":
+      return { ...state, footerShow: action.payload };
+    case "SAVE_DELIVERY_DATA":
+      return { ...state, deliveryData: action.payload };
+    case "SET_UNPAID_SOMETHING":
+      return action.payload !== state.isUnpaidSomething
+        ? { ...state, isUnpaidSomething: action.payload }
+        : state;
     default:
       return state;
   }

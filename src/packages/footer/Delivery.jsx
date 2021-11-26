@@ -1,6 +1,6 @@
 import s from "./CSS/delivery.module.css";
 import patternCart from "./CSS/patternCart.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
@@ -10,19 +10,25 @@ import zloiAPI from "../../files/API/zloiAPI.js";
 import yookassaWidget from "../../files/widgets/yookassa.js";
 import InputPhone from "../header/login/InputPhone.jsx";
 
-export default function Delivery(props) {
+export default function Delivery() {
   const selectedFood = useSelector((state) => state.cart.selectedFood);
-  const [phone, setPhone] = useState("8(___)___-__-__");
-  const [street, setStreet] = useState("");
-  const [house, setHouse] = useState("");
-  const [floor, setFloor] = useState("");
-  const [apart, setApart] = useState("");
-  const [comment, setComment] = useState("");
-  const [promocode, setPromocode] = useState("");
+  const footerShow = useSelector((state) => state.user.footerShow);
+  const isCartOpen = useSelector((state) => state.user.isCartShow);
+  const theOrderId = useSelector((state) => state.admin.theOrder.id);
+  const deliveryData = useSelector((state) => state.user.deliveryData);
+  const [phone, setPhone] = useState(deliveryData.phone);
+  const [street, setStreet] = useState(deliveryData.street);
+  const [house, setHouse] = useState(deliveryData.house);
+  const [floor, setFloor] = useState(deliveryData.floor);
+  const [apart, setApart] = useState(deliveryData.apart);
+  const [comment, setComment] = useState(deliveryData.comment);
+  const [promocode, setPromocode] = useState(deliveryData.promocode);
   const [isPromocodeRight, setPromocodeRight] = useState(true);
   const [isDeliveryNow, setDeliveryNow] = useState(true);
   const [isPaymentShow, setPaymentShow] = useState(false);
-  const refCart = useDetectClickOut(props.setFooterShow);
+  const refCart = useDetectClickOut(
+    isCartOpen ? () => dispatch({ type: "CART_OPEN_CLOSE" }) : () => {}
+  );
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const cookies = new Cookies();
@@ -52,16 +58,17 @@ export default function Delivery(props) {
   const [minutesState, setMinutesState] = useState(timeForSelect.minutes);
 
   function createOrder() {
-    setPaymentShow(true);
     if (cookies.get("Token") === undefined) {
       dispatch({ type: "ERROR_MESSAGE", payload: t("Please log in") });
     } else {
+      setPaymentShow(true);
       zloiAPI
         .createOrder(cookies.get("Token"), {
           menu: selectedFood.map((el) => ({ id: el.id, count: el.amount })),
           comment,
         })
         .then((res) => {
+          dispatch({ type: "SET_ORDER_CONTENT", id: res.data.id });
           yookassaWidget(res.data.confirmation_token).render("payment-form");
         })
         .catch((error) => {
@@ -87,16 +94,43 @@ export default function Delivery(props) {
     }
   }
 
+  function exitYookassa() {
+    zloiAPI
+      .deleteOrder(cookies.get("Token"), theOrderId)
+      .catch((error) => console.log(error));
+    setPaymentShow(false);
+  }
+
+  useEffect(() => {
+    let buffer = { phone, street, house, floor, apart, comment, promocode };
+    if (deliveryData !== buffer) {
+      dispatch({ type: "SAVE_DELIVERY_DATA", payload: buffer });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [phone, street, house, floor, apart, comment, promocode]);
+
   return (
-    <div
+    <DeliveryDiv
       className={s.boxDelivery}
       ref={refCart}
-      style={isPaymentShow ? { width: 400 } : null}
+      isPaymentShow={isPaymentShow}
+      isCartOpen={isCartOpen}
     >
-      <div id={"payment-form"} className={s.paymentForm} />
+      <div
+        id={"payment-form"}
+        className={s.paymentForm}
+        style={isPaymentShow ? null : { display: "none" }}
+      />
+      {isPaymentShow && (
+        <div className={patternCart.buttonsLine}>
+          <button className={patternCart.backButton} onClick={exitYookassa}>
+            <p>←</p>
+          </button>
+        </div>
+      )}
       {!isPaymentShow && (
         <>
-          {props.footerShow === "delivery" && (
+          {footerShow === "delivery" && (
             <>
               <div className={s.title}>{t("Delivery")}</div>
               <InputPhone
@@ -153,7 +187,7 @@ export default function Delivery(props) {
               </div>
             </>
           )}
-          {props.footerShow === "takeOut" && (
+          {footerShow === "takeOut" && (
             <>
               <div className={s.title}>{t("Take out")}</div>
               <div className={s.shopAddress}>
@@ -251,7 +285,7 @@ export default function Delivery(props) {
               <p>{t("Order_Noun")}</p>
               <p>{allFoodsPrice} ₽</p>
             </div>
-            {props.footerShow === "delivery" && (
+            {footerShow === "delivery" && (
               <div className={s.inlineDelivery}>
                 <p>{t("Delivery")}</p>
                 <p>{deliveryCalculate} ₽</p>
@@ -260,18 +294,28 @@ export default function Delivery(props) {
             <div className={s.inlineTotal}>
               <p>{t("Total")}</p>
               <p>
-                {props.footerShow === "delivery" &&
+                {footerShow === "delivery" &&
                   allFoodsPrice + deliveryCalculate + " ₽"}
-                {props.footerShow === "takeOut" && allFoodsPrice + " ₽"}
+                {footerShow === "takeOut" && allFoodsPrice + " ₽"}
               </p>
             </div>
           </div>
-          <button className={patternCart.buttonToOrder} onClick={createOrder}>
-            <p>{t("Order_Verb")}</p>
-          </button>
+          <div className={patternCart.buttonsLine}>
+            <button
+              className={patternCart.backButton}
+              onClick={() =>
+                dispatch({ type: "SET_FOOTER_SHOW", payload: "cart" })
+              }
+            >
+              <p>←</p>
+            </button>
+            <button className={patternCart.buttonToPay} onClick={createOrder}>
+              <p>{t("Order_Verb")}</p>
+            </button>
+          </div>
         </>
       )}
-    </div>
+    </DeliveryDiv>
   );
 }
 
@@ -301,4 +345,9 @@ const ToggleBtn = styled.button`
     outline: none;
     border-radius: 50%;
   }
+`;
+
+const DeliveryDiv = styled.div`
+  ${(props) => props.isPaymentShow && "width: 400px;"}
+  ${(props) => !props.isCartOpen && "display: none;"}
 `;

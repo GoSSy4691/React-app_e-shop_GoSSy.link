@@ -19,12 +19,18 @@
 }
 
 .shopAddress {
+    margin-top: 15px;
+    padding-right: 10px;
     width: 310px;
-    height: 65px;
+    height: 50px;
+    overflow-y: auto;
+    user-select: text;
 }
 
-.shopAddress p {
-    padding-top: 15px;
+.shopAddressList {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
 }
 
 .inline {

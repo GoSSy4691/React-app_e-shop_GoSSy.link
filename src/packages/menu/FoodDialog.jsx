@@ -27,7 +27,7 @@ export default function FoodDialog(props) {
           className={s.exitButtonSmall}
           onClick={() => props.setChosenFood(false)}
         >
-          <img alt={"exit"} src={exitImg} draggable="false"/>
+          <img alt={"exit"} src={exitImg} draggable="false" />
         </button>
         <div className={s.imgBox}>
           <GetImgFood imgName={props.chosenFood.icon} style={patternCSS.img} />
@@ -51,13 +51,14 @@ export default function FoodDialog(props) {
                 payload: {
                   name: props.chosenFood.name,
                   cost: props.chosenFood.cost,
-                  id: props.chosenFood.id
+                  id: props.chosenFood.id,
                 },
                 delivery: {
                   shopName: menu.shopName,
                   shopId: menu.shopId,
                   cost: menu.points[menu.shopIndex].delivery_cost,
                   isDelivery: menu.points[menu.shopIndex].is_delivering,
+                  address: menu.points[menu.shopIndex].address,
                 },
               })
             }

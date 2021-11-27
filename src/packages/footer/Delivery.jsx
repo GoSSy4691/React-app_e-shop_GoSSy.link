@@ -199,7 +199,12 @@ export default function Delivery() {
             <>
               <div className={s.title}>{t("Take out")}</div>
               <div className={s.shopAddress}>
-                <p>shop's address</p>
+                {selectedFood.map((el, index) => (
+                  <li key={index} className={s.shopAddressList}>
+                    <p>{el.delivery.shopName}</p>
+                    <p>{el.delivery.address}</p>
+                  </li>
+                ))}
               </div>
             </>
           )}

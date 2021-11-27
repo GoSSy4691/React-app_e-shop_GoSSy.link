@@ -11,7 +11,7 @@ export default class zloiAPI {
 
   static getCategory(id_point) {
     return axios.get("https://zloi.space/restaurant/api/menu/category", {
-      params: { id_point: id_point },
+      params: { "filter[id_point]": `eq(${id_point})` },
     });
   }
 
@@ -21,7 +21,7 @@ export default class zloiAPI {
         page: page,
         "per-page": per_page,
         expand: "category",
-        "category.id_point": id_point,
+        "filter[category.id_point]": `eq(${id_point})`,
       },
     });
   }

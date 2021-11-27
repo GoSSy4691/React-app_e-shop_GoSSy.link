@@ -83,6 +83,7 @@
     padding-right: 15px;
     text-align: justify;
     color: black;
+    user-select: text;
 }
 
 .nutritionBox {

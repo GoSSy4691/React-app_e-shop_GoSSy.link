@@ -16,7 +16,19 @@ export default function Delivery() {
   const isCartOpen = useSelector((state) => state.user.isCartShow);
   const theOrderId = useSelector((state) => state.admin.theOrder.id);
   const deliveryData = useSelector((state) => state.user.deliveryData);
-  const [phone, setPhone] = useState(deliveryData.phone);
+  const userData = useSelector((state) => state.user.userData);
+  const [phone, setPhone] = useState(
+    deliveryData.phone === "8(___)___-__-__" && userData?.phone
+      ? "8(" +
+          userData.phone.slice(2, 5) +
+          ")" +
+          userData.phone.slice(5, 8) +
+          "-" +
+          userData.phone.slice(8, 10) +
+          "-" +
+          userData.phone.slice(10, 12)
+      : deliveryData.phone
+  );
   const [street, setStreet] = useState(deliveryData.street);
   const [house, setHouse] = useState(deliveryData.house);
   const [floor, setFloor] = useState(deliveryData.floor);

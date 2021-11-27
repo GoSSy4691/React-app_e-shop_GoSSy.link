@@ -22,7 +22,7 @@ export default function OrderContentDialog(props) {
           type: "SUCCESS_MESSAGE",
           payload: "Order " + theOrder.id + " deleted",
         });
-        dispatch({ type: "REFRESH_AND_OPEN_ORDERS" });
+        dispatch({ type: "CLEAN_ORDERS_LIST" });
       })
       .catch((error) => {
         console.error(error);

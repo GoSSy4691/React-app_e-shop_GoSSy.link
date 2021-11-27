@@ -30,8 +30,8 @@ export const adminReducer = (state = adminStore, action) => {
         : { ...state, menu: action.payload };
     case "LOAD_ALL_ORDERS":
       return { ...state, orders: action.payload };
-    case "REFRESH_AND_OPEN_ORDERS":
-      return { ...state, orders: [], barShow: "orders" };
+    case "CLEAN_ORDERS_LIST":
+      return { ...state, orders: [] };
     case "SET_ORDER_CONTENT":
       return {
         ...state,

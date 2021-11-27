@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import Cookies from "universal-cookie";
 import useDetectClickOut from "../../files/useDetectClickOut.js";
-import zloiAPI from "../../files/API/zloiAPI.js";
+import searchUnpaid from "../../files/searchUnpaid.js";
 import { ButtonAdd, ButtonDelete } from "../menu/ButtonAddDelete.jsx";
 
 import polygonBack from "../../files/img/polygonBack.svg";
@@ -43,19 +43,7 @@ export default function Cart() {
   //search unpaid order
   useEffect(() => {
     if (!isUnpaidShow && cookies.get("Token")) {
-      zloiAPI
-        .getOrders(cookies.get("Token"))
-        .then((res) => {
-          let isFindUnpaid = !!res.data.data
-            .map((el) => el.status)
-            .find((el) => el === "accepted");
-          if (isFindUnpaid) {
-            dispatch({ type: "SET_UNPAID_SOMETHING", payload: true });
-          }
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+      searchUnpaid(dispatch, cookies.get("Token"));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isUnpaidShow]);

@@ -54,7 +54,7 @@ export default function PointsDialog() {
         </button>
         <button
           className={patternMenu.updateButton}
-          onClick={() => dispatch({ type: "REFRESH_AND_OPEN_ORDERS" })}
+          onClick={() => dispatch({ type: "CLEAN_ORDERS_LIST" })}
         >
           <img alt={"update"} src={updateSVG} draggable="false" />
         </button>

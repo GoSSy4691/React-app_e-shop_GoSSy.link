@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 import Cookies from "universal-cookie";
 import { useTranslation } from "react-i18next";
 import zloiAPI from "../../files/API/zloiAPI.js";
+import searchUnpaid from "../../files/searchUnpaid.js";
 import LogoImg from "./logoGoose/LogoImage.jsx";
 import Login from "../header/login/Login.jsx";
 import Settings from "../Settings.jsx";
@@ -25,6 +26,7 @@ export default function Header() {
       .then((res) => {
         dispatch({ type: "LOGIN_CONFIRM", payload: res.data.data[0] });
         dispatch({ type: "PROFILE_DIALOG_STATE", payload: "Profile" });
+        searchUnpaid(dispatch, cookies.get("Token"));
       })
       .catch((err) => {
         console.error(err.message);

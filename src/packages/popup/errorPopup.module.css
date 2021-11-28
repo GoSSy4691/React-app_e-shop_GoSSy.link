@@ -8,13 +8,19 @@
     color: white;
 }
 
-.error {
+.colorRed {
     background: rgba(130, 0, 0, 0.6);
     z-index: 3;
     /*animation: hideAnimation 0s ease-in 4s forwards;*/
 }
 
-.popupGreen {
+.colorYellow {
+    background: rgba(255, 244, 39, 0.6);
+    z-index: 3;
+    /*animation: hideAnimation 0s ease-in 4s forwards;*/
+}
+
+.colorGreen {
     background: rgba(19, 130, 0, 0.6);
     z-index: 3;
     /*animation: hideAnimation 0s ease-in 4s forwards;*/

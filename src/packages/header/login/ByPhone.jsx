@@ -23,26 +23,42 @@ export default function ByPhone() {
   function sendPhoneNumber() {
     let preparedPhone = phone.split("").filter((e) => !isNaN(Number(e)));
     preparedPhone = "+7" + preparedPhone.join("").slice(1);
-    dispatch({ type: "SUCCESS_MESSAGE", payload: t("Checking phone") });
+    dispatch({
+      type: "SHOW_MESSAGE",
+      payload: t("Checking phone"),
+      color: "green",
+    });
     zloiAPI
       .authByPhone(preparedPhone)
       .then(() => {
         setInputType("Code");
         setShowVYG(false);
-        dispatch({ type: "SUCCESS_MESSAGE", payload: t("Code sent") });
+        dispatch({
+          type: "SHOW_MESSAGE",
+          payload: t("Code sent"),
+          color: "green",
+        });
       })
       .catch((err) => {
-        dispatch({ type: "ERROR_MESSAGE", payload: err.message });
+        dispatch({ type: "SHOW_MESSAGE", payload: err.message, color: "red" });
       });
   }
 
   function sendCode() {
-    dispatch({ type: "SUCCESS_MESSAGE", payload: t("Checking code") });
+    dispatch({
+      type: "SHOW_MESSAGE",
+      payload: t("Checking code"),
+      color: "green",
+    });
     zloiAPI
       .authByCode(code)
       .then((res) => {
         console.log("Your token is " + res.data.token);
-        dispatch({ type: "SUCCESS_MESSAGE", payload: t("Code confirmed") });
+        dispatch({
+          type: "SHOW_MESSAGE",
+          payload: t("Code confirmed"),
+          color: "green",
+        });
         cookies.set("Token", res.data.token, { path: "/" });
         dispatch({ type: "LOGIN_CONFIRM", payload: res.data[0] });
         dispatch({ type: "PROFILE_DIALOG_SHOW" });
@@ -50,7 +66,7 @@ export default function ByPhone() {
         dispatch({ type: "LOAD_PROFILE" });
       })
       .catch((err) => {
-        dispatch({ type: "ERROR_MESSAGE", payload: err.message });
+        dispatch({ type: "SHOW_MESSAGE", payload: err.message, color: "red" });
       });
   }
 

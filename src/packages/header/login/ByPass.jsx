@@ -18,12 +18,20 @@ export default function ByPass() {
   const { t } = useTranslation();
 
   function getAnswerPass() {
-    dispatch({ type: "SUCCESS_MESSAGE", payload: t("Loading") });
+    dispatch({
+      type: "SHOW_MESSAGE",
+      payload: t("Loading"),
+      color: "green",
+    });
     zloiAPI
       .authByPassword(login, password)
       .then((res) => {
         console.log("You token is " + res.data.token);
-        dispatch({ type: "SUCCESS_MESSAGE", payload: t("Log in confirmed") });
+        dispatch({
+          type: "SHOW_MESSAGE",
+          payload: t("Log in confirmed"),
+          color: "green",
+        });
         cookies.set("Token", res.data.token, { path: "/" });
         dispatch({ type: "PROFILE_DIALOG_SHOW" });
         dispatch({ type: "LOAD_PROFILE" });
@@ -31,8 +39,9 @@ export default function ByPass() {
       .catch((err) => {
         console.error(err.message);
         dispatch({
-          type: "ERROR_MESSAGE",
+          type: "SHOW_MESSAGE",
           payload: t("login / password don't match"),
+          color: "red",
         });
       });
   }

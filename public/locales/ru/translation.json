@@ -95,6 +95,7 @@
   "Use digits and english letters": "Используйте цифры и англ буквы",
   "Fill in required fields": "Заполните все обязательные данные",
   "Click again to order without": "Нажмите еще раз, чтобы заказать без указания",
+  "Click again to remove this food": "Нажмите еще раз, чтобы подтвердить",
   "_unused": null,
   "_unusedStorage": {
     "Order confirmed": "Заказ оформлен"

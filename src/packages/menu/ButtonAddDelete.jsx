@@ -1,15 +1,19 @@
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 export function ButtonAdd(props) {
   const dispatch = useDispatch();
-  const addFood = (name, cost) => {
-    dispatch({ type: "ADD_FOOD", payload: { name, cost } });
-  };
 
   return (
     <button
       className={props.style}
-      onClick={() => addFood(props.name, props.cost)}
+      onClick={() =>
+        dispatch({
+          type: "ADD_FOOD",
+          payload: { name: props.name, cost: props.cost },
+        })
+      }
     >
       {props.text}
     </button>
@@ -18,14 +22,33 @@ export function ButtonAdd(props) {
 
 export function ButtonDelete(props) {
   const dispatch = useDispatch();
-  const deleteFood = (name, cost) => {
-    dispatch({ type: "DELETE_FOOD", payload: { name, cost } });
-  };
+  const { t } = useTranslation();
+  const [isRemovable, setRemovable] = useState(props.count !== 1);
+
+  useEffect(() => {
+    setRemovable(props.count !== 1);
+  }, [props.count]);
 
   return (
     <button
       className={props.style}
-      onClick={() => deleteFood(props.name, props.cost)}
+      onClick={
+        isRemovable
+          ? () => {
+              dispatch({
+                type: "DELETE_FOOD",
+                payload: { name: props.name, cost: props.cost },
+              });
+            }
+          : () => {
+              setRemovable(true);
+              dispatch({
+                type: "SHOW_MESSAGE",
+                payload: t("Click again to remove this food"),
+                color: "yellow",
+              });
+            }
+      }
     >
       {props.text}
     </button>

@@ -18,8 +18,9 @@ export default function ErrorPopup() {
         <div
           className={`
             ${s.errorLog} 
-            ${error.type === "red" && s.error}
-            ${error.type === "green" && s.popupGreen}
+            ${error.color === "red" && s.colorRed}
+            ${error.color === "yellow" && s.colorYellow}
+            ${error.color === "green" && s.colorGreen}
             `}
         >
           {error.message}

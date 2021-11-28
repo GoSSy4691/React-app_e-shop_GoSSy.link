@@ -19,14 +19,19 @@ export default function OrderContentDialog(props) {
       .deleteOrder(cookies.get("Token"), theOrder.id)
       .then(() => {
         dispatch({
-          type: "SUCCESS_MESSAGE",
+          type: "SHOW_MESSAGE",
           payload: "Order " + theOrder.id + " deleted",
+          color: "green",
         });
         dispatch({ type: "CLEAN_ORDERS_LIST" });
       })
       .catch((error) => {
         console.error(error);
-        dispatch({ type: "ERROR_MESSAGE", payload: "Delete order error" });
+        dispatch({
+          type: "SHOW_MESSAGE",
+          payload: "Delete order error",
+          color: "red",
+        });
       });
   }
 

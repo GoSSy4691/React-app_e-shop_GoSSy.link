@@ -21,7 +21,11 @@ export default function Login() {
   const { t } = useTranslation();
 
   function logoutBtn() {
-    dispatch({ type: "SUCCESS_MESSAGE", payload: t("Log out confirmed") });
+    dispatch({
+      type: "SHOW_MESSAGE",
+      payload: t("Log out confirmed"),
+      color: "green",
+    });
     dispatch({ type: "LOGOUT_CONFIRM" });
     dispatch({ type: "PROFILE_DIALOG_SHOW" });
     dispatch({ type: "SET_UNPAID_SOMETHING", payload: false });
@@ -30,11 +34,19 @@ export default function Login() {
 
   function closeAndRefresh() {
     if (cookies.get("Token") !== undefined) {
-      dispatch({ type: "SUCCESS_MESSAGE", payload: t("Token received") });
+      dispatch({
+        type: "SHOW_MESSAGE",
+        payload: t("Token received"),
+        color: "green",
+      });
       dispatch({ type: "PROFILE_DIALOG_SHOW" });
       dispatch({ type: "LOAD_PROFILE" });
     } else {
-      dispatch({ type: "ERROR_MESSAGE", payload: t("Didn't get token") });
+      dispatch({
+        type: "SHOW_MESSAGE",
+        payload: t("Didn't get token"),
+        color: "red",
+      });
       dispatch({ type: "PROFILE_DIALOG_STATE", payload: "byPhone" });
     }
   }
@@ -79,8 +91,9 @@ export default function Login() {
                         className={s.penEdit}
                         onClick={() =>
                           dispatch({
-                            type: "ERROR_MESSAGE",
+                            type: "SHOW_MESSAGE",
                             payload: t("Didn't work yet"),
+                            color: "red",
                           })
                         }
                       />

@@ -31,8 +31,9 @@ export default function Cart() {
     } else {
       if (selectedFood.find((el) => el.delivery.isDelivery === false)) {
         dispatch({
-          type: "ERROR_MESSAGE",
+          type: "SHOW_MESSAGE",
           payload: t("Can't deliver some kind of food"),
+          color: "red",
         });
       } else {
         dispatch({ type: "SET_FOOTER_SHOW", payload: "delivery" });
@@ -87,6 +88,7 @@ export default function Cart() {
                     text={
                       <img alt={"add"} src={polygonBack} draggable={false} />
                     }
+                    count={el.amount}
                   />
                   <div className={s.countFood}>{el.amount}</div>
                   <ButtonAdd

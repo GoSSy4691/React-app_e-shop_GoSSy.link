@@ -32,7 +32,11 @@ export default function OrdersPage() {
         })
         .catch((error) => {
           console.error(error);
-          dispatch({ type: "ERROR_MESSAGE", payload: "Loading orders error" });
+          dispatch({
+            type: "SHOW_MESSAGE",
+            payload: "Loading orders error",
+            color: "red",
+          });
           setTitle("Error");
         });
     } else {

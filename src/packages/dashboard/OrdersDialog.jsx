@@ -28,7 +28,11 @@ export default function PointsDialog() {
       .catch((error) => {
         console.error(error);
         setEmptyDialog("Error");
-        dispatch({ type: "ERROR_MESSAGE", payload: "Loading orders error" });
+        dispatch({
+          type: "SHOW_MESSAGE",
+          payload: "Loading orders error",
+          color: "red",
+        });
       });
   }
 

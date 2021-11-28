@@ -38,7 +38,11 @@ export default function InputPhone(props) {
   function enterEvent(e) {
     if (props.phone.indexOf("_") !== -1) {
       setPhoneWrong(true);
-      dispatch({ type: "ERROR_MESSAGE", payload: t("Wrong phone number") });
+      dispatch({
+        type: "SHOW_MESSAGE",
+        payload: t("Wrong phone number"),
+        color: "red",
+      });
     } else {
       props.doNext(e);
     }

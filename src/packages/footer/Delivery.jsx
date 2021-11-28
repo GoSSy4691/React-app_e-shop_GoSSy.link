@@ -80,7 +80,11 @@ export default function Delivery() {
   function createOrder() {
     //check user login and break
     if (cookies.get("Token") === undefined) {
-      dispatch({ type: "ERROR_MESSAGE", payload: t("Please log in") });
+      dispatch({
+        type: "SHOW_MESSAGE",
+        payload: t("Please log in"),
+        color: "red",
+      });
       return;
     }
     let checkPhone = Boolean(
@@ -99,8 +103,9 @@ export default function Delivery() {
         house: checkHouse,
       };
       dispatch({
-        type: "ERROR_MESSAGE",
+        type: "SHOW_MESSAGE",
         payload: t("Fill in required fields"),
+        color: "red",
       });
       setWrongInput(buffer);
       return;
@@ -109,10 +114,11 @@ export default function Delivery() {
       //check floor/apart and break
       if (checkFloor || checkApart) {
         dispatch({
-          type: "ERROR_MESSAGE",
+          type: "SHOW_MESSAGE",
           payload: `${t("Click again to order without")} 
           ${checkFloor ? " - " + t("floor") : ""} 
           ${checkApart ? " - " + t("apart") : ""}`,
+          color: "yellow",
         });
         setWrongInput({
           ...isWrongInput,
@@ -139,8 +145,9 @@ export default function Delivery() {
       .catch((error) => {
         console.error(error.response);
         dispatch({
-          type: "ERROR_MESSAGE",
+          type: "SHOW_MESSAGE",
           payload: t("Create order error"),
+          color: "red",
         });
       });
   }
@@ -152,8 +159,9 @@ export default function Delivery() {
     if (input.length <= 8) {
       if (input.toUpperCase().match(/[А-Я]/g)) {
         dispatch({
-          type: "ERROR_MESSAGE",
+          type: "SHOW_MESSAGE",
           payload: t("Use digits and english letters"),
+          color: "red",
         });
         setWrongInput({ ...isWrongInput, promocode: true });
       }

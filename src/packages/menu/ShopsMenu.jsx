@@ -15,7 +15,8 @@ export default function ShopsMenu() {
   const { t } = useTranslation();
 
   function getPoints() {
-    zloiAPI.getPoints()
+    zloiAPI
+      .getPoints()
       .then((res) => {
         dispatch({ type: "LOAD_POINTS", payload: res.data.data });
       })
@@ -37,7 +38,8 @@ export default function ShopsMenu() {
       });
     } else {
       dispatch({ type: "CHANGE_DISPLAY_NOW", payload: "Loading" });
-      zloiAPI.getCategory(shopId)
+      zloiAPI
+        .getCategory(shopId)
         .then((res) => {
           dispatch({
             type: "LOAD_CATEGORY",
@@ -46,9 +48,14 @@ export default function ShopsMenu() {
         })
         .catch((err) => {
           console.error(err);
-          dispatch({ type: "ERROR_MESSAGE", payload: t("Can't get category") });
+          dispatch({
+            type: "SHOW_MESSAGE",
+            payload: t("Can't get category"),
+            color: "red",
+          });
         });
-      zloiAPI.getMenu(1, 100, shopId)
+      zloiAPI
+        .getMenu(1, 100, shopId)
         .then((res) => {
           dispatch({
             type: "LOAD_MENU",
@@ -67,7 +74,9 @@ export default function ShopsMenu() {
       {userData?.login === "admin" && <AdminBar />}
       <div
         className={s.showRoom}
-        style={userData?.login === "admin" ? { margin: "0 60px 0 100px" } : null}
+        style={
+          userData?.login === "admin" ? { margin: "0 60px 0 100px" } : null
+        }
       >
         {(() => {
           switch (userView) {

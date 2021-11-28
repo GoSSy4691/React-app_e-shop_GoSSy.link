@@ -34,7 +34,7 @@ export default function Settings(props) {
                     borderRadius: "25px",
                     padding: "5px 5px",
                   }
-                : null
+                : {}
             }
           >
             {t("English")}
@@ -49,7 +49,7 @@ export default function Settings(props) {
                     borderRadius: "25px",
                     padding: "5px 5px",
                   }
-                : null
+                : {}
             }
           >
             {t("Russian")}

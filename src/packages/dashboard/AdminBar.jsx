@@ -42,7 +42,7 @@ export default function AdminBar() {
             alt={"openBar"}
             src={menuOpenSVG}
             className={s.barOpenBtn}
-            style={isBarOpen ? { transform: "rotate(90deg)" } : null}
+            style={isBarOpen ? { transform: "rotate(90deg)" } : {}}
           />
         </button>
         <button

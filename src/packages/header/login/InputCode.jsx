@@ -54,7 +54,7 @@ export default function InputPhone(props) {
       autoFocus
       ref={inputElement}
       className={props.className}
-      style={isCodeWrong ? { color: "red" } : null}
+      style={isCodeWrong ? { color: "red" } : {}}
       value={props.code}
       inputMode="numeric"
       onChange={(e) => codeChecker(e.nativeEvent.data)}

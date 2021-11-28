@@ -196,7 +196,7 @@ export default function Delivery() {
       <div
         id={"payment-form"}
         className={s.paymentForm}
-        style={isPaymentShow ? null : { display: "none" }}
+        style={isPaymentShow ? {} : { display: "none" }}
       />
       {isPaymentShow && (
         <div className={patternCart.buttonsLine}>
@@ -350,11 +350,11 @@ export default function Delivery() {
           <div className={s.timeTitle}>{t("Delivery time")}:</div>
           <div
             className={s.tomorrowTitle}
-            style={isDeliveryNow ? null : { color: "white" }}
+            style={isDeliveryNow ? {} : { color: "white" }}
           >
             <p
               style={
-                new Date().getHours() > hoursState ? null : { display: "none" }
+                new Date().getHours() > hoursState ? {} : { display: "none" }
               }
             >
               {t("Tomorrow")}
@@ -363,7 +363,7 @@ export default function Delivery() {
           <div className={s.timeInline}>
             <div
               className={s.asSoon}
-              style={isDeliveryNow ? { color: "white" } : null}
+              style={isDeliveryNow ? { color: "white" } : {}}
             >
               {t("As soon as possible")}
             </div>

@@ -34,7 +34,7 @@ export default function Footer() {
       </button>
       <div
         className={s.loadingDiv}
-        style={userView === "Loading" ? null : { display: "none" }}
+        style={userView === "Loading" ? {} : { display: "none" }}
       >
         <h3 className={s.nameOnTop}>{t("Loading")}</h3>
         <img

@@ -53,7 +53,7 @@ export default function Cart() {
     <div
       className={s.showCart}
       ref={refCart}
-      style={isCartOpen ? null : { display: "none" }}
+      style={isCartOpen ? {} : { display: "none" }}
     >
       <div className={s.unpaidOrdersLink}>
         {isUnpaidShow && (
@@ -76,7 +76,7 @@ export default function Cart() {
                 style={
                   !el.delivery.isDelivery && isNeedDelivery
                     ? { color: "red" }
-                    : null
+                    : {}
                 }
               >
                 <div className={s.foodName}>{el.name}</div>

@@ -62,7 +62,7 @@ export default function ByPass() {
         <input
           name={"Login"}
           className={s.loginInput}
-          style={isPassWrong ? { color: "red" } : null}
+          style={isPassWrong ? { color: "red" } : {}}
           autoFocus
           placeholder={t("Login")}
           value={login}
@@ -74,7 +74,7 @@ export default function ByPass() {
         <input
           name={"Password"}
           className={s.passwordInput}
-          style={isPassWrong ? { color: "red" } : null}
+          style={isPassWrong ? { color: "red" } : {}}
           placeholder={t("Password")}
           type={isPassShow ? "text" : "password"}
           value={password}

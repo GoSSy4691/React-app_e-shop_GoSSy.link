@@ -2,7 +2,7 @@ let cart = {
   itemsCount: 0,
   selectedFood: [],
   shopDelivery: [],
-  isNeedDelivery: false
+  isNeedDelivery: false,
 };
 
 export const cartReducer = (state = cart, action) => {
@@ -47,7 +47,9 @@ export const cartReducer = (state = cart, action) => {
       }
       return { ...state, itemsCount: state.itemsCount - 1 };
     case "CHANGE_DELIVERY":
-      return { ...state, isNeedDelivery: !state.isNeedDelivery };
+      return action.payload !== state.isNeedDelivery
+        ? { ...state, isNeedDelivery: action.payload }
+        : state;
     default:
       return state;
   }

@@ -65,10 +65,12 @@
 .switchText {
   display: flex;
   justify-content: space-evenly;
-  gap: 50px;
 }
 
 .switchText p {
+  height: 25px;
+  width: 155px;
   z-index: 5;
   margin: 0;
+  line-height: 25px;
 }

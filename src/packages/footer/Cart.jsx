@@ -103,13 +103,22 @@ export default function Cart() {
                 <div className={s.priceFood}>{el.costAll} ₽</div>
               </div>
             ))}
-            <DeliveryBtn
-              isNeedDelivery={isNeedDelivery}
-              onClick={() => dispatch({ type: "CHANGE_DELIVERY" })}
-            >
+            <DeliveryBtn isNeedDelivery={isNeedDelivery}>
               <div className={s.switchText}>
-                <p>{t("Take out")}</p>
-                <p>{t("Delivery")}</p>
+                <p
+                  onClick={() =>
+                    dispatch({ type: "CHANGE_DELIVERY", payload: false })
+                  }
+                >
+                  {t("Take out")}
+                </p>
+                <p
+                  onClick={() =>
+                    dispatch({ type: "CHANGE_DELIVERY", payload: true })
+                  }
+                >
+                  {t("Delivery")}
+                </p>
               </div>
             </DeliveryBtn>
             <button className={patternCart.buttonToOrder} onClick={orderFoods}>
@@ -130,15 +139,13 @@ const DeliveryBtn = styled.button`
   height: 25px;
   position: absolute;
   content: "41241";
-
-  // transform: translateX(-50%);
   bottom: 50px;
   right: 20px;
   cursor: pointer;
   border-radius: 5px;
   outline: none;
   background-color: #353b48;
-  // border: 3px solid white;
+  padding: 0;
 
   &::after {
     width: 155px;
@@ -147,7 +154,7 @@ const DeliveryBtn = styled.button`
     position: absolute;
     top: 0;
     will-change: transform;
-    transform: translate(${(props) => (props.isNeedDelivery ? -8 : -150)}px);
+    transform: translate(${(props) => (props.isNeedDelivery ? -7 : -152)}px);
     transition: transform 0.2s ease-out;
     background: white;
     border: 2px solid #7f8fa6;

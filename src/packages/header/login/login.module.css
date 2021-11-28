@@ -132,8 +132,9 @@
     border: none;
     font-size: 16px;
     align-self: flex-end;
-    margin: 23px 20px 0 0;
+    margin: 23px 10px 0 0;
     color: #E5E5E5;
+    background: #777777;
 }
 
 .loginInput{

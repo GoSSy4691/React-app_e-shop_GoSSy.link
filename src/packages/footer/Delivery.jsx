@@ -87,6 +87,12 @@ export default function Delivery() {
       });
       return;
     }
+    //check previous yookassa widget and break
+    if (theOrderId) {
+      setPaymentShow(true);
+      return;
+    }
+    //look up input data
     let checkPhone = Boolean(
       phone.split("").find((element) => element === "_")
     );
@@ -174,6 +180,7 @@ export default function Delivery() {
   function exitYookassa() {
     zloiAPI
       .deleteOrder(cookies.get("Token"), theOrderId)
+      .then(() => dispatch({ type: "SET_ORDER_CONTENT", id: "" }))
       .catch((error) => console.log(error));
     setPaymentShow(false);
   }

@@ -29,13 +29,21 @@ export default function Delivery() {
           userData.phone.slice(10, 12)
       : deliveryData.phone
   );
+  const [isWrongInput, setWrongInput] = useState({
+    phone: false,
+    street: false,
+    house: false,
+    floor: false,
+    apart: false,
+    promocode: false,
+    checkPass: false,
+  });
   const [street, setStreet] = useState(deliveryData.street);
   const [house, setHouse] = useState(deliveryData.house);
   const [floor, setFloor] = useState(deliveryData.floor);
   const [apart, setApart] = useState(deliveryData.apart);
   const [comment, setComment] = useState(deliveryData.comment);
   const [promocode, setPromocode] = useState(deliveryData.promocode);
-  const [isPromocodeRight, setPromocodeRight] = useState(true);
   const [isDeliveryNow, setDeliveryNow] = useState(true);
   const [isPaymentShow, setPaymentShow] = useState(false);
   const refCart = useDetectClickOut(
@@ -70,35 +78,84 @@ export default function Delivery() {
   const [minutesState, setMinutesState] = useState(timeForSelect.minutes);
 
   function createOrder() {
+    //check user login and break
     if (cookies.get("Token") === undefined) {
       dispatch({ type: "ERROR_MESSAGE", payload: t("Please log in") });
-    } else {
-      setPaymentShow(true);
-      zloiAPI
-        .createOrder(cookies.get("Token"), {
-          menu: selectedFood.map((el) => ({ id: el.id, count: el.amount })),
-          comment,
-        })
-        .then((res) => {
-          dispatch({ type: "SET_ORDER_CONTENT", id: res.data.id });
-          yookassaWidget(res.data.confirmation_token).render("payment-form");
-        })
-        .catch((error) => {
-          console.error(error.response);
-          dispatch({ type: "ERROR_MESSAGE", payload: t("Create order error") });
-        });
+      return;
     }
+    let checkPhone = Boolean(
+      phone.split("").find((element) => element === "_")
+    );
+    let checkStreet = street.length < 3;
+    let checkHouse = house.length === 0;
+    let checkFloor = floor.length === 0;
+    let checkApart = apart.length === 0;
+    //check necessary input and break (except floor/apart)
+    if (checkPhone || checkStreet || checkHouse) {
+      let buffer = {
+        ...isWrongInput,
+        phone: checkPhone,
+        street: checkStreet,
+        house: checkHouse,
+      };
+      dispatch({
+        type: "ERROR_MESSAGE",
+        payload: t("Fill in required fields"),
+      });
+      setWrongInput(buffer);
+      return;
+    }
+    if (!isWrongInput.checkPass) {
+      //check floor/apart and break
+      if (checkFloor || checkApart) {
+        dispatch({
+          type: "ERROR_MESSAGE",
+          payload: `${t("Click again to order without")} 
+          ${checkFloor ? " - " + t("floor") : ""} 
+          ${checkApart ? " - " + t("apart") : ""}`,
+        });
+        setWrongInput({
+          ...isWrongInput,
+          phone: false,
+          street: false,
+          house: false,
+          floor: checkFloor,
+          apart: checkApart,
+          checkPass: true,
+        });
+        return;
+      }
+    }
+    setPaymentShow(true);
+    zloiAPI
+      .createOrder(cookies.get("Token"), {
+        menu: selectedFood.map((el) => ({ id: el.id, count: el.amount })),
+        comment,
+      })
+      .then((res) => {
+        dispatch({ type: "SET_ORDER_CONTENT", id: res.data.id });
+        yookassaWidget(res.data.confirmation_token).render("payment-form");
+      })
+      .catch((error) => {
+        console.error(error.response);
+        dispatch({
+          type: "ERROR_MESSAGE",
+          payload: t("Create order error"),
+        });
+      });
   }
 
   function promocodeInput(input) {
-    setPromocodeRight(true);
+    if (isWrongInput.promocode) {
+      setWrongInput({ ...isWrongInput, promocode: false });
+    }
     if (input.length <= 8) {
       if (input.toUpperCase().match(/[А-Я]/g)) {
         dispatch({
           type: "ERROR_MESSAGE",
           payload: t("Use digits and english letters"),
         });
-        setPromocodeRight(false);
+        setWrongInput({ ...isWrongInput, promocode: true });
       }
       let filterLetter = input.toUpperCase().match(/[A-Z,1-9]/g);
       let checkedInput = filterLetter ? filterLetter.join("") : "";
@@ -147,17 +204,37 @@ export default function Delivery() {
               <div className={s.title}>{t("Delivery")}</div>
               <InputPhone
                 phone={phone}
-                setPhone={setPhone}
+                setPhone={(i) => {
+                  if (isWrongInput.phone) {
+                    setWrongInput({ ...isWrongInput, phone: false });
+                  }
+                  setPhone(i);
+                }}
                 doNext={(e) => e.target.nextSibling.focus()}
                 className={s.input}
+                style={
+                  isWrongInput.phone
+                    ? { boxShadow: "0 0 16px 4px red", color: "red" }
+                    : {}
+                }
               />
               <input
                 name={"Street"}
                 className={s.input}
+                style={
+                  isWrongInput.street
+                    ? { boxShadow: "0 0 16px 4px red", color: "red" }
+                    : {}
+                }
                 placeholder={t("street")}
                 value={street}
                 maxLength={"20"}
-                onChange={(e) => setStreet(e.target.value.toLowerCase())}
+                onChange={(e) => {
+                  if (isWrongInput.street) {
+                    setWrongInput({ ...isWrongInput, street: false });
+                  }
+                  setStreet(e.target.value.toLowerCase());
+                }}
                 onKeyPress={(e) =>
                   e.nativeEvent.key === "Enter" &&
                   e.target.nextElementSibling.firstChild.focus()
@@ -167,10 +244,20 @@ export default function Delivery() {
                 <input
                   name={"House"}
                   className={s.inputHalf}
+                  style={
+                    isWrongInput.house
+                      ? { boxShadow: "0 0 16px 4px red", color: "red" }
+                      : {}
+                  }
                   placeholder={t("house")}
                   value={house}
                   maxLength={"5"}
-                  onChange={(e) => setHouse(e.target.value.toLowerCase())}
+                  onChange={(e) => {
+                    if (isWrongInput.house) {
+                      setWrongInput({ ...isWrongInput, house: false });
+                    }
+                    setHouse(e.target.value.toLowerCase());
+                  }}
                   onKeyPress={(e) =>
                     e.nativeEvent.key === "Enter" &&
                     e.target.nextSibling.focus()
@@ -179,12 +266,24 @@ export default function Delivery() {
                 <input
                   name={"Floor"}
                   className={s.inputHalf}
+                  style={
+                    isWrongInput.floor
+                      ? { boxShadow: "0 0 16px 4px yellow" }
+                      : {}
+                  }
                   placeholder={t("floor")}
                   value={floor}
                   maxLength={"3"}
-                  onChange={(e) =>
-                    !e.target.value.match(/\D/g) && setFloor(e.target.value)
-                  }
+                  onChange={(e) => {
+                    if (isWrongInput.floor) {
+                      setWrongInput({
+                        ...isWrongInput,
+                        floor: false,
+                        checkPass: false,
+                      });
+                    }
+                    !e.target.value.match(/\D/g) && setFloor(e.target.value);
+                  }}
                   onKeyPress={(e) =>
                     e.nativeEvent.key === "Enter" &&
                     e.target.nextSibling.focus()
@@ -193,12 +292,24 @@ export default function Delivery() {
                 <input
                   name={"Apart"}
                   className={s.inputHalf}
+                  style={
+                    isWrongInput.apart
+                      ? { boxShadow: "0 0 16px 4px yellow" }
+                      : {}
+                  }
                   placeholder={t("apart")}
                   value={apart}
                   maxLength={"3"}
-                  onChange={(e) =>
-                    !e.target.value.match(/\D/g) && setApart(e.target.value)
-                  }
+                  onChange={(e) => {
+                    if (isWrongInput.apart) {
+                      setWrongInput({
+                        ...isWrongInput,
+                        apart: false,
+                        checkPass: false,
+                      });
+                    }
+                    !e.target.value.match(/\D/g) && setApart(e.target.value);
+                  }}
                   onKeyPress={(e) =>
                     e.nativeEvent.key === "Enter" &&
                     e.target.parentElement.nextSibling.focus()
@@ -289,7 +400,7 @@ export default function Delivery() {
                 name={"Promocode"}
                 className={s.promocodeInput}
                 style={
-                  isPromocodeRight ? null : { boxShadow: "0 1px 21px red" }
+                  isWrongInput.promocode ? { boxShadow: "0 1px 21px red" } : {}
                 }
                 placeholder={t("PROMOCODE")}
                 value={promocode}

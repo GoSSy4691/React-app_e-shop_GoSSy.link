@@ -45,8 +45,8 @@
     border: solid #1b1d23;
 }
 
-.backButton {
-
+.backButton p {
+    margin: 0;
 }
 
 .backButton p {

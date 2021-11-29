@@ -185,6 +185,15 @@ export default function Delivery() {
     setPaymentShow(false);
   }
 
+  function sortedHours() {
+    const array = [
+      0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+      21, 22, 23,
+    ];
+    const findIndex = array.indexOf(new Date().getHours());
+    return array.slice(findIndex).concat(array.slice(0, findIndex));
+  }
+
   useEffect(() => {
     let buffer = { phone, street, house, floor, apart, comment, promocode };
     if (deliveryData !== buffer) {
@@ -354,60 +363,58 @@ export default function Delivery() {
             autoComplete={"off"}
             onChange={(e) => setComment(e.target.value)}
           />
-          <div className={s.timeTitle}>{t("Delivery time")}:</div>
-          <div
-            className={s.tomorrowTitle}
-            style={isDeliveryNow ? {} : { color: "white" }}
-          >
+          <div className={s.timeTitle}>
+            <p>{t("Delivery time")}:</p>
             <p
               style={
-                new Date().getHours() > hoursState ? {} : { display: "none" }
+                !isDeliveryNow && new Date().getHours() > hoursState
+                  ? {}
+                  : { display: "none" }
               }
             >
               {t("Tomorrow")}
             </p>
           </div>
           <div className={s.timeInline}>
-            <div
-              className={s.asSoon}
-              style={isDeliveryNow ? { color: "white" } : {}}
+            <select
+              className={s.timeSelect}
+              defaultValue={t("Now")}
+              onChange={(e) =>
+                e.target.value === t("Now")
+                  ? setDeliveryNow(true)
+                  : setHoursState(Number(e.target.value)) ||
+                    setDeliveryNow(false)
+              }
             >
-              {t("As soon as possible")}
-            </div>
-            <ToggleBtn
-              isDeliveryNow={isDeliveryNow}
-              onClick={() => setDeliveryNow(!isDeliveryNow)}
-            />
-            <div className={s.timeDiv}>
-              <select
-                className={s.timeSelect}
-                value={hoursState}
-                disabled={isDeliveryNow}
-                onChange={(e) => setHoursState(Number(e.target.value))}
-              >
-                {[
-                  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
-                  18, 19, 20, 21, 22, 23,
-                ].map((i) => (
-                  <option key={i} value={i}>
-                    {i}
-                  </option>
-                ))}
-              </select>
-              &nbsp;:&nbsp;
-              <select
-                className={s.timeSelect}
-                value={minutesState}
-                disabled={isDeliveryNow}
-                onChange={(e) => setMinutesState(Number(e.target.value))}
-              >
-                {[0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55].map((i) => (
-                  <option key={i} value={i}>
-                    {i}
-                  </option>
-                ))}
-              </select>
-            </div>
+              <option>{t("Now")}</option>
+              {sortedHours().map((i) => (
+                <option key={i}>{i}</option>
+              ))}
+            </select>
+            <p
+              className={s.hoursMinutes}
+              style={!isDeliveryNow ? {} : { display: "none" }}
+            >
+              hr
+            </p>
+            <select
+              className={s.timeSelect}
+              value={minutesState}
+              style={!isDeliveryNow ? {} : { display: "none" }}
+              onChange={(e) => setMinutesState(Number(e.target.value))}
+            >
+              {[0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55].map((i) => (
+                <option key={i} value={i}>
+                  {i}
+                </option>
+              ))}
+            </select>
+            <p
+              className={s.hoursMinutes}
+              style={!isDeliveryNow ? {} : { display: "none" }}
+            >
+              min
+            </p>
           </div>
           <div className={s.footer}>
             <div className={s.inline}>
@@ -467,34 +474,6 @@ export default function Delivery() {
     </DeliveryDiv>
   );
 }
-
-const ToggleBtn = styled.button`
-  width: 59px;
-  height: 23px;
-  margin: 0 7px;
-  position: relative;
-  cursor: pointer;
-  border-radius: 25px;
-  outline: none;
-  background-color: #353b48;
-  border: 3px solid white;
-  align-self: center;
-
-  &::after {
-    width: 13px;
-    height: 13px;
-    content: "";
-    position: absolute;
-    top: 0;
-    will-change: transform;
-    transform: translate(${(props) => (props.isDeliveryNow ? -26 : 9)}px);
-    transition: transform 0.2s ease-out;
-    background: white;
-    border: 2px solid #7f8fa6;
-    outline: none;
-    border-radius: 50%;
-  }
-`;
 
 const DeliveryDiv = styled.div`
   ${(props) => props.isPaymentShow && "width: 400px;"}

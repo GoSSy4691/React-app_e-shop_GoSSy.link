@@ -76,6 +76,15 @@ export default function OrderContentDialog(props) {
                   <p style={{ width: 80 }}>{el.cost}</p>
                 </li>
               ))}
+              <p
+                style={{
+                  border: "solid 3px black",
+                  display: theOrder.comment ? "" : "none",
+                }}
+              >
+                {theOrder.comment && "User's comment:"}
+              </p>
+              <p>{theOrder.comment}</p>
             </div>
             <div className={patternDashboard.footerTheOrderDialog}>
               <button

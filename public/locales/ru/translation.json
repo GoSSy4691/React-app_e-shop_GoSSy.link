@@ -31,6 +31,8 @@
   "Tomorrow": "Завтра",
   "As soon as possible": "Как можно быстрее",
   "Now": "Сейчас",
+  "hr": "ч",
+  "min": "мин",
   "_login": null,
   "Login to your account": "Вход в учетную запись",
   "Please verify your profile in new window": "Подтвердите регистрацию в новом окне",

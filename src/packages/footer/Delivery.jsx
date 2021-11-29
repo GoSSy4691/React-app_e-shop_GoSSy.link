@@ -395,7 +395,7 @@ export default function Delivery() {
               className={s.hoursMinutes}
               style={!isDeliveryNow ? {} : { display: "none" }}
             >
-              hr
+              {t("hr")}
             </p>
             <select
               className={s.timeSelect}
@@ -413,7 +413,7 @@ export default function Delivery() {
               className={s.hoursMinutes}
               style={!isDeliveryNow ? {} : { display: "none" }}
             >
-              min
+              {t("min")}
             </p>
           </div>
           <div className={s.footer}>

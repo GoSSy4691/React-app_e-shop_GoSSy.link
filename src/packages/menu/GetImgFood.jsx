@@ -1,8 +1,9 @@
-import emptyImg from "../../files/img/noItem.svg";
+import s from "./CSS/getImgFood.module.css";
 import { useState } from "react";
+import emptyImg from "../../files/img/noItem.svg";
 
-const GetImgFood = (props) => {
-  const [loaded, setLoaded] = useState(false);
+export default function GetImgFood(props) {
+  const [isLoaded, setLoaded] = useState(false);
 
   function addressName(imgName) {
     if (imgName === null) return emptyImg;
@@ -13,14 +14,12 @@ const GetImgFood = (props) => {
   return (
     <img
       alt={"notLoaded"}
-      src={loaded ? addressName(props.imgName) : emptyImg}
-      className={props.style}
+      src={addressName(props.imgName)}
+      className={`${props.style} ${isLoaded ? {} : s.animated_background}`}
       onLoad={() => setLoaded(true)}
       onError={(event) => (event.target.src = emptyImg)}
       draggable="false"
       loading="lazy"
     />
   );
-};
-
-export default GetImgFood;
+}

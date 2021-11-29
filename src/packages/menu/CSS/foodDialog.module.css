@@ -33,7 +33,8 @@
     display: flex;
     flex-direction: column;
     position: relative;
-    background: #adb4b0;
+    /*background: #adb4b0;*/
+    background: #4a4c4c;
 }
 
 .imgBox span {
